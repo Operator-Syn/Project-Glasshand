@@ -72,7 +72,7 @@ These are working assumptions from the brief. Most are not approved architectura
 | Architecture | Model-agnostic boundary accepted ([ADR 0002](../decisions/0002_model_agnostic_decision_boundary.md)); modular decomposition proposed | The boundary is a requirement; the component split is still a design proposal. |
 | Execution model | Locally runnable where practical | Degree of offline operation unresolved. |
 | Project scale | Individual undergraduate development and research | Fixed constraint. |
-| Evaluation corpus | External datasets combined with self-collected captures | External dataset selection and licensing pending. |
+| Evaluation corpus | ScreenSpot-Pro, Windows subset (1,020 examples), combined with self-collected captures | Current candidate, not yet an accepted decision. The dataset card declares MIT; the screenshots remain subject to the application vendors' rights. |
 
 ## Repository Naming
 

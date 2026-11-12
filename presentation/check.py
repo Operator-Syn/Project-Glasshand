@@ -40,6 +40,7 @@ REQUIRED_PHRASES = (
     "DuckDB",
     "Proposal",
     "no implementation results yet",
+    "License: MIT",
 )
 FORBIDDEN_PHRASES = (
     "TODO",
@@ -47,6 +48,8 @@ FORBIDDEN_PHRASES = (
     "Lorem ipsum",
     "we achieved",
     "results show",
+    "License unresolved",
+    "More Information Needed",
 )
 
 
