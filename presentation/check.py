@@ -4,10 +4,10 @@ The checker is deliberately dependency-free. It verifies the structural
 contract that the Pages workflow relies on:
 
 1. The deck, token sheet, and favicon exist.
-2. The deck contains exactly 12 slide sections.
+2. The deck contains exactly 11 slide sections.
 3. The deck declares itself a proposal through its status meta tag.
 4. Required content phrases are present, so the deck cannot silently lose
-   the dataset, algorithm, or status statements during an edit.
+   the dataset, algorithm, license, or status statements during an edit.
 5. Placeholder or result-claiming phrases are absent, because this deck
    reports a proposal rather than completed experiments.
 6. Every relative link or asset reference resolves to a real file.
@@ -31,7 +31,7 @@ PAGE = ROOT / "index.html"
 TOKENS = ROOT / "tokens.css"
 FAVICON = ROOT / "favicon.svg"
 
-EXPECTED_SLIDES = 12
+EXPECTED_SLIDES = 11
 REQUIRED_PHRASES = (
     "Computer Vision",
     "ScreenSpot-Pro",
