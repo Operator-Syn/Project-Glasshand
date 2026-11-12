@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta name="description" content="Proposal deck: a model-agnostic, computer-vision-driven framework for Windows desktop automation, evaluated on ScreenSpot-Pro and analyzed with a CART decision tree.">
+  <meta name="status" content="proposal">
+  <title>Computer Vision–Driven Desktop Automation — CSC 172</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--top-h:3.6rem;--bar-h:4.2rem;--body-size:clamp(1.06rem,1.35vw,1.22rem);--body-leading:1.6}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--ink) var(--paper);scroll-padding-top:calc(var(--top-h) + 1rem);scroll-padding-bottom:calc(var(--bar-h) + 1.5rem)}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",Arial,Helvetica,sans-serif;font-size:var(--body-size);line-height:var(--body-leading);font-weight:450}
+    button{font:inherit;color:inherit}
+    button:focus-visible,a:focus-visible{outline:4px solid var(--blue);outline-offset:4px}
+    a{color:var(--blue);font-weight:700;text-decoration-thickness:2px;text-underline-offset:.12em}
+    a:hover{background:var(--yellow);color:var(--ink)}
+    h1,h2,h3,p{margin-top:0}
+    h1{font-size:clamp(3.6rem,9.6vw,8rem);line-height:.9;letter-spacing:-.045em;max-width:1000px;margin-bottom:1.5rem;font-weight:950}
+    h2{font-size:clamp(2.6rem,6.8vw,5.4rem);line-height:.95;letter-spacing:-.045em;margin-bottom:1.35rem;font-weight:950}
+    h3{font-size:clamp(1.2rem,1.6vw,1.5rem);line-height:1.3;letter-spacing:-.015em;margin-bottom:.65rem;font-weight:900}
+    .top{position:fixed;z-index:20;inset:0 0 auto;background:var(--paper);border-bottom:var(--line);display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.2rem;font-weight:900}
+    .brand{letter-spacing:.04em}
+    .top-right{display:flex;gap:1rem;align-items:center}
+    .progress{--track-width:clamp(6.5rem,10vw,9rem);position:relative;isolation:isolate;overflow:hidden;width:var(--track-width);height:16px;border:3px solid var(--ink);background:#fff}
+    .progress i{position:absolute;inset:0 auto 0 0;z-index:1;display:block;height:100%;background:var(--blue);width:0;transition:width .68s cubic-bezier(.16,1,.3,1)}
+    .progress::after{content:"";position:absolute;z-index:2;inset:0 auto 0 0;width:.75rem;background:var(--yellow);border-inline:2px solid var(--ink);box-shadow:3px 0 0 var(--ink);pointer-events:none;animation:progressScan 2.6s cubic-bezier(.4,0,.2,1) infinite alternate}
+    @keyframes progressScan{to{transform:translateX(calc(var(--track-width) - 1.125rem))}}
+    main{padding:0;display:block}
+    .slide{min-height:100svh;width:100%;margin:0;display:none;align-items:center;position:relative;overflow:visible;padding:calc(var(--top-h) + 1.4rem) clamp(1.1rem,6vw,6rem) calc(var(--bar-h) + 1rem)}
+    .slide.active{display:flex;animation:arrive .62s cubic-bezier(.16,1,.3,1) both}
+    @keyframes arrive{from{opacity:.55;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0)}}
+    .inner{width:100%;max-width:1180px;margin-inline:auto;position:relative;z-index:1;padding:.2rem 0}
+    .slide::after{content:attr(data-n);position:absolute;right:0;bottom:0;z-index:0;pointer-events:none;overflow:hidden;width:2.2em;height:.9em;font-size:min(44vh,30rem,40vw);line-height:.72;font-weight:950;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:3px rgba(23,23,23,.075);animation:markDrift 19s ease-in-out infinite}
+    @keyframes markDrift{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-12px,-16px,0)}}
+    .slide:first-child::after{content:none}
+    .slide.active .inner>*{animation:rise .55s cubic-bezier(.16,1,.3,1) both}
+    .slide.active .inner>*:nth-child(2){animation-delay:.06s}
+    .slide.active .inner>*:nth-child(3){animation-delay:.12s}
+    .slide.active .inner>*:nth-child(4){animation-delay:.18s}
+    .slide.active .inner>*:nth-child(5){animation-delay:.24s}
+    @keyframes rise{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:none}}
+    .slide.cover{padding:0}
+    .hero{width:100%;min-height:100svh;background:var(--blue);color:#fff;display:flex;align-items:center;padding:calc(var(--top-h) + 1.2rem) clamp(1.25rem,7vw,6rem) calc(var(--bar-h) + 2.2rem);position:relative;overflow:hidden}
+    .hero-inner{width:100%;max-width:1180px;margin-inline:auto;position:relative;z-index:1}
+    .hero h1{max-width:1050px}
+    .hero .lead{max-width:52rem}
+    .hero-note{margin:1.35rem 0 0;font-size:clamp(.9rem,1.1vw,1.05rem);font-weight:700;letter-spacing:.02em;color:#dfe4ff}
+    .eyebrow{font-size:.9rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.3rem}
+    .index{background:var(--yellow);display:inline-block;border:var(--line);padding:.3rem .6rem;margin-right:.5rem;box-shadow:3px 3px 0 var(--ink)}
+    .lead{font-size:clamp(1.2rem,2vw,1.7rem);line-height:1.5;max-width:68ch;font-weight:600}
+    .small{font-size:clamp(.94rem,1.05vw,1.02rem);line-height:1.6}
+    .tag{display:inline-block;background:var(--lime);color:var(--ink);border:2px solid var(--ink);padding:.35rem .6rem;font-weight:900;font-size:.9rem;transform:rotate(-2deg);margin-top:1.2rem}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .grid.two{grid-template-columns:repeat(2,1fr);gap:1.5rem}
+    .box{border:var(--line);box-shadow:var(--shadow);padding:1.05rem 1.15rem;background:#fff;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,filter .2s}
+    .box.lime{background:var(--lime)}
+    .box.pink{background:var(--pink)}
+    .box.yellow{background:var(--yellow)}
+    .box.blue{background:var(--blue);color:#fff}
+    .box.blue p,.box.blue .small{color:#eef1ff}
+    .box h3{margin-bottom:.5rem}
+    .box p:last-child,.box ul:last-child{margin-bottom:0}
+    @media(hover:hover){.box:hover{transform:translate(-3px,-3px);box-shadow:14px 14px 0 var(--ink);filter:saturate(1.06)}}
+    .box:active{transform:translate(3px,3px);box-shadow:5px 5px 0 var(--ink)}
+    .num{font-size:2.4rem;font-weight:950;letter-spacing:-.035em;line-height:1;margin-bottom:.35rem}
+    .pipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin:1.2rem 0 0}
+    .pipe{border:var(--line);box-shadow:5px 5px 0 var(--ink);background:#fff;padding:.9rem;min-height:7.2rem}
+    .pipe span{display:inline-grid;place-items:center;width:2rem;height:2rem;background:var(--yellow);border:3px solid var(--ink);font-weight:900;font-size:.9rem;margin-bottom:.55rem}
+    .pipe b{display:block;font-size:1.08rem;line-height:1.2;font-weight:900}
+    .pipe small{display:block;margin-top:.3rem;font-size:.9rem;line-height:1.45;color:var(--muted)}
+    .pipe:nth-child(2){background:var(--lime)}
+    .pipe:nth-child(4){background:var(--pink)}
+    .pipe:nth-child(5){background:var(--yellow)}
+    .pipe:nth-child(6){background:var(--blue);color:#fff}
+    .pipe:nth-child(6) small{color:#dfe4ff}
+    .split{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(1.4rem,3.5vw,2.6rem);align-items:start}
+    .split .grid{gap:.8rem}
+    .split .box{padding:.75rem .85rem}
+    .tree{margin:0;background:#fff;border:var(--line);box-shadow:var(--shadow);padding:1rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.7rem,.9vw,.88rem);line-height:1.55;overflow-x:auto;white-space:pre;tab-size:2}
+    .rq-list{display:grid;gap:1rem}
+    .rq-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.9rem;align-items:start;border:var(--line);box-shadow:var(--shadow);background:#fff;padding:1rem 1.15rem}
+    .rq{display:inline-block;padding:.05rem .4rem;background:var(--ink);color:var(--paper);font-size:.78rem;font-weight:900;letter-spacing:.08em;vertical-align:.12em}
+    .rq-item h3{margin-bottom:.35rem}
+    .rq-item p{margin:0;max-width:96ch}
+    .note{border:2px dashed var(--ink);padding:.9rem 1rem;margin-top:1.4rem;max-width:960px;background:rgba(255,255,255,.35)}
+    .list{padding-left:1.15rem;line-height:1.55}
+    .list li{margin-bottom:.35rem}
+    .kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+    .refs{margin:.4rem 0 0;padding:0;list-style:none;display:grid;gap:.6rem}
+    .refs li{position:relative;padding-left:1.9rem;text-indent:-1.9rem;font-size:clamp(.76rem,1vw,.92rem);line-height:1.5}
+    .refs li .used{display:inline-block;margin-left:.35rem;padding:.02rem .35rem;background:var(--lime);border:2px solid var(--ink);font-size:.68rem;font-weight:900;letter-spacing:.04em;text-indent:0;text-transform:uppercase;vertical-align:.08em}
+    .refs a{overflow-wrap:anywhere}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:rgba(23,23,23,.06);border:1px solid rgba(23,23,23,.12);padding:.05em .3em}
+    .controls{position:fixed;bottom:0;z-index:20;inset-inline:0;background:var(--paper);border-top:var(--line);padding:.65rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .controls button{display:inline-flex;align-items:center;gap:.35rem;background:var(--yellow);border:var(--line);box-shadow:3px 3px 0 var(--ink);padding:.55rem 1rem;font-weight:900;cursor:pointer}
+    .controls button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+    .controls button:disabled{opacity:.4;cursor:not-allowed}
+    .keys{display:inline-flex;align-items:center;gap:.3rem;font-size:.92rem;font-weight:800}
+    .foot{font-size:.9rem;font-weight:800;letter-spacing:.04em}
+    @media(max-width:980px){.split{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:760px){.slide{padding-inline:1rem}.grid,.grid.two{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr}.top{padding:.55rem .8rem}.top-right{gap:.5rem}.progress{--track-width:clamp(5rem,25vw,6.5rem)}.keys{display:none}.box{padding:1rem}.hero{padding:calc(var(--top-h) + 1rem) 1rem calc(var(--bar-h) + 1.8rem)}h2{font-size:clamp(2.1rem,9vw,3.2rem)}.lead{font-size:1.08rem}.slide::after{font-size:min(34vh,20rem,45vw)}}
+    @media(max-height:800px) and (min-width:761px){
+      h1{font-size:clamp(2.8rem,7.2vw,6rem)}
+      h2{font-size:clamp(2rem,4.8vw,3.8rem);margin-bottom:.9rem}
+      .lead{font-size:clamp(1rem,1.45vw,1.25rem);line-height:1.45}
+      .eyebrow{font-size:.8rem;margin-bottom:.9rem}
+      .slide{padding-top:calc(var(--top-h) + .7rem);padding-bottom:calc(var(--bar-h) + .6rem)}
+      .hero{padding-top:calc(var(--top-h) + .7rem);padding-bottom:calc(var(--bar-h) + .6rem)}
+      .pipeline{gap:.65rem;margin-top:.8rem}
+      .pipe{min-height:5.3rem;padding:.6rem .65rem}
+      .pipe span{width:1.5rem;height:1.5rem;font-size:.75rem;margin-bottom:.25rem}
+      .pipe b{font-size:.95rem}
+      .pipe small{font-size:.8rem;line-height:1.35}
+      .box{padding:.7rem .8rem}
+      .box h3{font-size:1.05rem;margin-bottom:.3rem}
+      .small{font-size:.86rem;line-height:1.45}
+      .note{margin-top:.9rem;padding:.55rem .7rem;font-size:.82rem;line-height:1.4}
+      .split .grid{gap:.55rem}
+      .split .box{padding:.55rem .65rem}
+      .tree{font-size:.68rem;padding:.7rem}
+      .refs{gap:.35rem}
+      .refs li{font-size:.72rem;line-height:1.35}
+      .rq-item{padding:.75rem .85rem}
+      .tag{font-size:.8rem;padding:.3rem .5rem;margin-top:.8rem}
+      .hero-note{font-size:.85rem;margin-top:.8rem}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.slide.active .inner>*{animation:none}}
+    @media print{.top,.controls{display:none}.slide{display:flex!important;min-height:auto;break-after:page;page-break-after:always;padding:1.2cm}.slide.cover{padding:0}.hero{min-height:auto;padding:1.2cm}.slide::after{display:none}.box{box-shadow:none}.inner{max-width:none}.slide.active .inner>*{animation:none}body{font-size:10pt}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">FIELD NOTES / CV-DA</div>
+    <div class="top-right">
+      <span id="count">01 / 12</span>
+      <div class="progress" role="progressbar" aria-label="Presentation progress" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1"><i id="bar"></i></div>
+    </div>
+  </header>
+
+  <main aria-live="polite">
+    <section class="slide cover active" data-n="01" aria-label="Slide 1 of 12" aria-hidden="false">
+      <div class="hero">
+        <div class="hero-inner">
+          <div class="eyebrow">CSC 172 · Intelligent Systems + Data Mining</div>
+          <h1>See the screen.<br>Find the target.<br><span style="color:var(--yellow)">Explain the miss.</span></h1>
+          <p class="lead">A model-agnostic framework for visual grounding and failure analysis on Windows desktop applications.</p>
+          <div class="tag">Proposal · no implementation results yet</div>
+          <p class="hero-note">ScreenSpot-Pro · Windows subset · CART decision tree</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="02" aria-label="Slide 2 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">02</span>The problem</div>
+        <h2>The screen is not an API.</h2>
+        <p class="lead">Desktop applications expose pixels, not structured intent. A model can decide what to do, but it cannot act until it can see the interface, locate the right control, and verify what changed.</p>
+        <div class="grid">
+          <article class="box lime"><div class="num">01</div><h3>Perceive</h3><p class="small">High-resolution screenshots, mixed DPI, small icons, and text at different scales.</p></article>
+          <article class="box pink"><div class="num">02</div><h3>Ground</h3><p class="small">Map a natural-language instruction to a target coordinate on the screen.</p></article>
+          <article class="box yellow"><div class="num">03</div><h3>Act, then verify</h3><p class="small">Click or type, then check whether the visible state actually changed.</p></article>
+        </div>
+        <div class="note small"><strong>Most benchmarks stop at grounding.</strong> This project treats grounding as a measurable component, not the whole claim.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="03" aria-label="Slide 3 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">03</span>Proposed architecture</div>
+        <h2>One loop,<br>three boundaries.</h2>
+        <p class="lead">The framework separates perception, decision, and execution. The decision layer is model-agnostic; Jev is the first adapter, not the architecture.</p>
+        <div class="pipeline">
+          <div class="pipe"><span>01</span><b>Capture</b><small>Windows screen or browser surface</small></div>
+          <div class="pipe"><span>02</span><b>Perceive</b><small>detection, OCR, element classification</small></div>
+          <div class="pipe"><span>03</span><b>Ground</b><small>instruction → target coordinate</small></div>
+          <div class="pipe"><span>04</span><b>Decide</b><small>model-agnostic action choice</small></div>
+          <div class="pipe"><span>05</span><b>Act</b><small>mouse and keyboard execution</small></div>
+          <div class="pipe"><span>06</span><b>Verify</b><small>visual state check</small></div>
+        </div>
+        <div class="note small"><strong>Vision-only inference.</strong> Browser-hosted applications are a first-class surface. The DOM and accessibility tree are evaluation baselines and an offline annotation oracle, not inputs. The loop runs 01 → 06, and verification feeds the next capture.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="04" aria-label="Slide 4 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">04</span>Research contributions</div>
+        <h2>Two questions,<br>one experimental foundation.</h2>
+        <div class="grid two">
+          <article class="box lime"><div class="kicker">Intelligent Systems · CV</div><h3>Can it see the target?</h3><p class="small">Measure grounding accuracy on high-resolution Windows screenshots. Break results down by application, element type, and interface condition.</p><p class="small"><strong>Methods:</strong> detection, OCR, visual grounding, robustness.</p></article>
+          <article class="box pink"><div class="kicker">Data Mining · DM</div><h3>Why does it miss?</h3><p class="small">Analyze the labeled grounding records. Find co-occurring failure conditions and fit an interpretable model that generalizes across applications.</p><p class="small"><strong>Methods:</strong> association rules, CART, grouped validation.</p></article>
+        </div>
+        <div class="note small"><strong>One combined paper.</strong> The contributions remain distinguishable by their questions, methods, and results; the run records are shared.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="05" aria-label="Slide 5 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">05</span>Evaluation data</div>
+        <h2>ScreenSpot-Pro,<br>narrowed to Windows.</h2>
+        <p class="lead">A high-resolution GUI grounding benchmark: 1,581 examples across 23 professional applications and three operating systems. The Windows subset contains 1,020 examples, matching the framework's target platform.</p>
+        <div class="grid">
+          <article class="box"><h3>What it gives</h3><p class="small">Instruction, screenshot, and ground-truth target box. Icon and text targets, including buttons, menu items, and controls.</p></article>
+          <article class="box lime"><h3>Why it fits</h3><p class="small">Professional interfaces, small targets, high resolution. A hard test of grounding rather than an easy toy set.</p></article>
+          <article class="box pink"><h3>What it does not give</h3><p class="small">No browser tasks, no action sequences, no state transitions. Static screenshots only.</p></article>
+        </div>
+        <div class="note small"><strong>License is unresolved on the dataset card.</strong> Confirm research use before submission. The full benchmark spans Windows, macOS, and Linux; this study uses the Windows subset.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="06" aria-label="Slide 6 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">06</span>Research questions</div>
+        <h2>Two questions.</h2>
+        <p class="lead">The first asks whether the perception layer works. The second asks what its failures mean.</p>
+        <div class="rq-list">
+          <article class="rq-item"><span class="rq">RQ1</span><div><h3>Grounding</h3><p class="small">How accurately can a model-agnostic, vision-only pipeline ground natural-language instructions to GUI targets on high-resolution Windows screenshots, and how does accuracy vary by application, element type, and interface condition?</p></div></article>
+          <article class="rq-item"><span class="rq">RQ2</span><div><h3>Failure analysis</h3><p class="small">Which visual and interface conditions co-occur with grounding failure, and can a shallow CART decision tree describe those conditions and generalize across unseen applications?</p></div></article>
+        </div>
+        <div class="note small"><strong>RQ1 is the CV contribution; RQ2 is the DM contribution.</strong> Both use the same labeled grounding requests.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="07" aria-label="Slide 7 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">07</span>Method</div>
+        <h2>One row per request.</h2>
+        <p class="lead">Each grounding request becomes a record: instruction, screenshot, target box, predicted point, model, application, element type, and outcome. Labels are correct, mislocalized, not found, or ambiguous.</p>
+        <div class="grid two">
+          <article class="box"><h3>Primary metric</h3><p class="small"><strong>Point-in-box accuracy</strong> on the Windows subset. Secondary: distance to target, per-application accuracy, per-element-type accuracy.</p></article>
+          <article class="box lime"><h3>Validation</h3><p class="small"><strong>Grouped cross-validation by application.</strong> Report per-application results, not only the pooled average.</p></article>
+          <article class="box yellow"><h3>Records</h3><p class="small"><strong>JSONL</strong> source of truth → <strong>DuckDB</strong> query and feature assembly → <strong>Parquet</strong> derived tables. Arrow only as an in-memory handoff.</p></article>
+          <article class="box pink"><h3>Sample target</h3><p class="small">At least <strong>500 labeled requests</strong> and <strong>100 observed failures</strong> before fitting models. A planning heuristic, not a formal power calculation.</p></article>
+        </div>
+        <div class="note small"><strong>No random row splits.</strong> No leakage from ground-truth target geometry into predictive features.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="08" aria-label="Slide 8 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">08</span>Primary algorithm</div>
+        <h2>A tree that<br>explains the miss.</h2>
+        <div class="split">
+          <div>
+            <p class="lead">CART is the primary analysis model because it produces readable rules, not just a score.</p>
+            <div class="grid two">
+              <article class="box lime"><h3>Interpretable</h3><p class="small">Each root-to-leaf path is a conjunction of conditions that leads to a success or failure.</p></article>
+              <article class="box yellow"><h3>Mixed features</h3><p class="small">Numeric and categorical predictors without manual pre-binning.</p></article>
+              <article class="box pink"><h3>Interactions</h3><p class="small">Small predicted target × icon type × low OCR confidence.</p></article>
+              <article class="box"><h3>Controlled</h3><p class="small">Depth 3–5, cost-complexity pruning, grouped validation.</p></article>
+            </div>
+          </div>
+          <pre class="tree">predicted target area &lt; 0.1%?
+├── yes → element type = icon?
+│         ├── yes → OCR confidence &lt; 0.6?
+│         │         ├── yes → FAILURE
+│         │         └── no  → PASS
+│         └── no  → PASS
+└── no  → PASS</pre>
+        </div>
+        <div class="note small" style="margin-top:1.2rem"><strong>Descriptive paths, predictive test.</strong> Grouped validation checks whether the learned conditions generalize; features must be available before the ground-truth box is consulted.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="09" aria-label="Slide 9 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">09</span>Supporting analyses</div>
+        <h2>The tree is primary.<br>The rest triangulate.</h2>
+        <div class="grid two">
+          <article class="box lime"><h3>Association rules</h3><p class="small"><strong>Descriptive co-occurrence.</strong> Report support, confidence, and lift for conditions such as small target + icon + low OCR confidence. Not a second predictor.</p></article>
+          <article class="box yellow"><h3>Random forest</h3><p class="small"><strong>Accuracy benchmark and feature importance.</strong> Check whether the same features dominate under an ensemble. Not per-request rules.</p></article>
+          <article class="box"><h3>Logistic regression</h3><p class="small"><strong>Linear baseline.</strong> Test whether the tree's non-linear interactions actually buy predictive performance.</p></article>
+          <article class="box pink"><h3>Clustering</h3><p class="small"><strong>Exploratory profiles.</strong> Describe failure subgroups and check whether tree leaves align with natural clusters. Not predictive.</p></article>
+        </div>
+        <div class="note small"><strong>One main algorithm, clearly labeled supporting analyses.</strong> No ensemble is presented as the primary model.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="10" aria-label="Slide 10 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">10</span>Scope</div>
+        <h2>Be precise<br>about the claim.</h2>
+        <div class="grid two">
+          <article class="box lime"><h3>Will claim</h3><ul class="list small"><li>A model-agnostic, vision-only grounding pipeline.</li><li>Measured accuracy on the Windows subset of ScreenSpot-Pro.</li><li>Interpretable failure conditions with grouped validation.</li><li>A reproducible record schema for later work.</li></ul></article>
+          <article class="box pink"><h3>Will not claim</h3><ul class="list small"><li>Full autonomous computer use.</li><li>Live Windows control or end-to-end task success.</li><li>Browser coverage from ScreenSpot-Pro.</li><li>Causal effects or generalization beyond the benchmark.</li></ul></article>
+        </div>
+        <div class="note small"><strong>Known risks.</strong> License unresolved · no browser tasks · static screenshots do not test capture or DPI · single-tree instability · small sample · ground-truth leakage if post-hoc features enter the predictor.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="11" aria-label="Slide 11 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">11</span>Sequence</div>
+        <h2>Proposed,<br>not fixed.</h2>
+        <p class="lead">The roadmap is a proposal. Phases can overlap, change, or be removed as the research teaches us something.</p>
+        <div class="pipeline">
+          <div class="pipe"><span>01</span><b>Foundations</b><small>scope, literature, dataset, questions</small></div>
+          <div class="pipe"><span>02</span><b>Design</b><small>architecture, interfaces, record schema</small></div>
+          <div class="pipe"><span>03</span><b>Build</b><small>capture, perception, grounding, adapters</small></div>
+          <div class="pipe"><span>04</span><b>Evaluate</b><small>grouped runs, CART, supplements</small></div>
+          <div class="pipe"><span>05</span><b>Write</b><small>paper, figures, presentation</small></div>
+          <div class="pipe"><span>06</span><b>Defend</b><small>review, revise, present</small></div>
+        </div>
+        <div class="note small"><strong>No dates are assigned.</strong> Completion requires evidence, not a calendar. The detailed phase plans live in <code>docs/timeline/phases/</code>.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-n="12" aria-label="Slide 12 of 12" aria-hidden="true">
+      <div class="inner">
+        <div class="eyebrow"><span class="index">12</span>References</div>
+        <h2>References</h2>
+        <ol class="refs">
+          <li>Li, K., Meng, Z., Lin, H., Luo, Z., Tian, Y., Ma, J., Huang, Z., &amp; Chua, T.-S. (2025). <em>ScreenSpot-Pro: GUI Grounding for Professional High-Resolution Computer Use</em>. arXiv:2504.07981. <a href="https://arxiv.org/abs/2504.07981">arxiv.org/abs/2504.07981</a> <span class="used">slides 5–6</span></li>
+          <li>Cheng, K., Sun, Q., Chu, Y., Xu, F., Li, Y., Zhang, J., &amp; Wu, Z. (2024). <em>SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents</em>. arXiv:2401.10935. <a href="https://arxiv.org/abs/2401.10935">arxiv.org/abs/2401.10935</a> <span class="used">slide 5</span></li>
+          <li>Molnar, C. (2022). <em>Interpretable Machine Learning: A Guide for Making Black Box Models Explainable</em> (2nd ed.). <a href="https://christophm.github.io/interpretable-ml-book/">christophm.github.io/interpretable-ml-book</a> <span class="used">slide 8</span></li>
+          <li>James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2021). <em>An Introduction to Statistical Learning: with Applications in R</em> (2nd ed.). Springer. <a href="https://www.statlearning.com/">statlearning.com</a> <span class="used">slide 8</span></li>
+          <li>Grinsztajn, L., Oyallon, E., &amp; Varoquaux, G. (2022). <em>Why do tree-based models still outperform deep learning on typical tabular data?</em> NeurIPS Datasets and Benchmarks. <a href="https://arxiv.org/abs/2207.08815">arxiv.org/abs/2207.08815</a> <span class="used">slide 8</span></li>
+          <li>Breiman, L. (2001). Random Forests. <em>Machine Learning, 45</em>(1), 5–32. <a href="https://doi.org/10.1023/A:1010933404324">doi.org/10.1023/A:1010933404324</a> <span class="used">slide 9</span></li>
+          <li>Han, J., Kamber, M., &amp; Pei, J. (2022). <em>Data Mining: Concepts and Techniques</em> (4th ed.). Morgan Kaufmann. <span class="used">slide 9</span></li>
+        </ol>
+        <div class="note small"><strong>Proposal deck.</strong> No experimental results are reported. Dataset: <a href="https://huggingface.co/datasets/likaixin/ScreenSpot-Pro">huggingface.co/datasets/likaixin/ScreenSpot-Pro</a>.</div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Presentation controls">
+    <button id="prev" type="button" aria-label="Previous slide">← Back</button>
+    <span class="keys" aria-hidden="true">← → · Space · swipe</span>
+    <span class="foot" id="label">START</span>
+    <button id="next" type="button" aria-label="Next slide">Next →</button>
+  </nav>
+
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll('.slide')];
+      const labels = ['START', 'THE PROBLEM', 'ARCHITECTURE', 'CONTRIBUTIONS', 'DATASET', 'QUESTIONS', 'METHOD', 'CART', 'SUPPLEMENTS', 'SCOPE', 'ROADMAP', 'REFERENCES'];
+      let current = 0;
+      const count = document.querySelector('#count');
+      const bar = document.querySelector('#bar');
+      const label = document.querySelector('#label');
+      const prev = document.querySelector('#prev');
+      const next = document.querySelector('#next');
+      const progress = document.querySelector('.progress');
+
+      function show(n) {
+        current = Math.max(0, Math.min(slides.length - 1, n));
+        slides.forEach((s, i) => {
+          s.classList.toggle('active', i === current);
+          s.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+        });
+        count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+        bar.style.width = `${(current + 1) / slides.length * 100}%`;
+        label.textContent = labels[current] || '';
+        prev.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+        progress.setAttribute('aria-valuenow', String(current + 1));
+        try { history.replaceState(null, '', `#${current + 1}`); } catch (_) {}
+      }
+
+      prev.addEventListener('click', () => show(current - 1));
+      next.addEventListener('click', () => show(current + 1));
+
+      document.addEventListener('keydown', (e) => {
+        if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(current + 1); }
+        if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(current - 1); }
+        if (e.key === 'Home') { e.preventDefault(); show(0); }
+        if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+      });
+
+      const SWIPE_THRESHOLD = 100;
+      const SWIPE_DOMINANCE = 1.35;
+      let touchStart = null;
+      document.addEventListener('touchstart', (e) => {
+        const target = e.target;
+        if (e.touches.length !== 1 || (target.closest && target.closest('a, button, input, textarea, select, [contenteditable="true"]'))) {
+          touchStart = null;
+          return;
+        }
+        const touch = e.changedTouches[0];
+        touchStart = { x: touch.clientX, y: touch.clientY };
+      }, { passive: true });
+      document.addEventListener('touchend', (e) => {
+        if (!touchStart || e.changedTouches.length !== 1) { touchStart = null; return; }
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - touchStart.x;
+        const dy = touch.clientY - touchStart.y;
+        touchStart = null;
+        if (Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy) * SWIPE_DOMINANCE) {
+          show(current + (dx < 0 ? 1 : -1));
+        }
+      }, { passive: true });
+      document.addEventListener('touchcancel', () => { touchStart = null; }, { passive: true });
+
+      window.addEventListener('hashchange', () => {
+        const n = Number(location.hash.slice(1));
+        if (n > 0 && n <= slides.length && n - 1 !== current) show(n - 1);
+      });
+
+      const hash = Number(location.hash.slice(1));
+      if (hash > 0 && hash <= slides.length) current = hash - 1;
+      show(current);
+    })();
+  </script>
+</body>
+</html>

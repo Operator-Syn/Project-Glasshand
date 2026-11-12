@@ -1,0 +1,16 @@
+/* Shared design tokens for the proposal deck.
+ *
+ * Loaded by presentation/index.html. Keep this file to custom properties
+ * only; layout, typography, and slide furniture belong in the deck itself.
+ */
+:root{
+  --paper:#f4f0e8;
+  --ink:#171717;
+  --blue:#2d45c8;
+  --lime:#c7f36b;
+  --pink:#ff8eaa;
+  --yellow:#ffd447;
+  --muted:#3a3a3a;
+  --line:4px solid var(--ink);
+  --shadow:11px 11px 0 var(--ink);
+}
