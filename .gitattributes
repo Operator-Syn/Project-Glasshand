@@ -1,0 +1,6 @@
+# Notebooks are stored stripped: the clean filter removes cell outputs and execution
+# counts on the way into git, and the textconv driver renders a readable diff instead of
+# raw JSON. The filter command itself is registered per clone by
+# scripts/setup_notebook_filters.py — git keeps filter commands in .git/config, which
+# cannot be committed.
+*.ipynb filter=nbstripout diff=ipynb
