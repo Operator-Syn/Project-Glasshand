@@ -1,6 +1,6 @@
 # Data Mining Subject
 
-**Status:** Draft — candidate scope and questions. Not yet grounded in literature or approved by an adviser. The analysis dataset does not exist yet; it depends on records produced in phase 09.
+**Status:** Draft — candidate scope and questions. Not yet grounded in literature or approved by an adviser. The candidate evaluation corpus has been downloaded and characterized (927 requests over 16 applications; see the [EDA notebook](../../notebooks/EDA_Beira_John-Ronan.ipynb)), but the failure records this subject actually analyses do not exist yet: they depend on runs produced in phase 09.
 
 ## Focus
 
