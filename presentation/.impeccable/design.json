@@ -1,0 +1,582 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-19T11:16:55+08:00",
+  "title": "Design System: Glasshand Proposal Deck",
+  "extensions": {
+    "colorMeta": {
+      "phosphor": {
+        "role": "primary",
+        "displayName": "Phosphor Green",
+        "canonical": "#8aff5a",
+        "tonalRamp": [
+          "#1b3d12",
+          "#2f5a1f",
+          "#43782b",
+          "#5a9a38",
+          "#72bd45",
+          "#8aff5a",
+          "#b4ff92",
+          "#ddffcf"
+        ]
+      },
+      "amber": {
+        "role": "secondary",
+        "displayName": "Proposal Amber",
+        "canonical": "#ffb000",
+        "tonalRamp": [
+          "#3d2a00",
+          "#664700",
+          "#996b00",
+          "#cc8f00",
+          "#ffb000",
+          "#ffc233",
+          "#ffd166",
+          "#ffe599"
+        ]
+      },
+      "void": {
+        "role": "neutral",
+        "displayName": "Void Glass",
+        "canonical": "#050806",
+        "tonalRamp": [
+          "#050806",
+          "#0a0f0c",
+          "#101811",
+          "#162117",
+          "#1c2a1d",
+          "#233323",
+          "#2a3d2a",
+          "#334a33"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Phosphor Cream",
+        "canonical": "#eef3e8",
+        "tonalRamp": [
+          "#3a3d39",
+          "#5c605a",
+          "#7e837b",
+          "#a0a59d",
+          "#c7ccc3",
+          "#eef3e8",
+          "#f5f8f1",
+          "#fbfdf9"
+        ]
+      },
+      "lead": {
+        "role": "neutral",
+        "displayName": "Lead Paper",
+        "canonical": "#d6e2d7",
+        "tonalRamp": [
+          "#3e4240",
+          "#5a5f5b",
+          "#767b76",
+          "#929792",
+          "#aeb3ae",
+          "#d6e2d7",
+          "#e3ece4",
+          "#f2f7f3"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Telemetry Green",
+        "canonical": "#7f9a86",
+        "tonalRamp": [
+          "#1f261f",
+          "#334033",
+          "#475947",
+          "#5b705b",
+          "#6f866f",
+          "#7f9a86",
+          "#9fb5a4",
+          "#c2d1c6"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Circuit Line",
+        "canonical": "#1f3a29",
+        "tonalRamp": [
+          "#0a120d",
+          "#101b14",
+          "#16261b",
+          "#1f3a29",
+          "#2f5a3d",
+          "#437853",
+          "#6b9c78",
+          "#a9c6b1"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The cover thesis: six short desktop lines, naturally wrapping sentences below 900px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Slide titles; uppercase, tight, and balanced."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose, descriptions, and research questions at a 66ch measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Chrome, field labels, state tags, and panel headers."
+      }
+    },
+    "shadows": [
+      {
+        "name": "panel-inset",
+        "value": "inset 0 0 40px rgba(0,0,0,0.5)",
+        "purpose": "A neutral inward falloff inside terminal panels; no drop shadows."
+      }
+    ],
+    "motion": [
+      {
+        "name": "crt-blink",
+        "value": "blink 1.2s steps(2,end) infinite",
+        "purpose": "Cursor and pending-state blink."
+      },
+      {
+        "name": "crt-roll",
+        "value": "roll 9s linear infinite",
+        "purpose": "Slow refresh band behind the deck."
+      },
+      {
+        "name": "slide-in",
+        "value": "slideIn .5s cubic-bezier(.16,1,.3,1) both",
+        "purpose": "Content slide entrance."
+      },
+      {
+        "name": "crt-on",
+        "value": "crtOn .7s cubic-bezier(.16,1,.3,1) both",
+        "purpose": "Cover-only power-on transition."
+      },
+      {
+        "name": "ghost-drift",
+        "value": "ghostDrift 26s ease-in-out infinite",
+        "purpose": "Slow drift of the ghost GLASSHAND wordmark behind the deck."
+      },
+      {
+        "name": "vignette-breathe",
+        "value": "vignetteBreathe 8s ease-in-out infinite",
+        "purpose": "Breathing opacity on the fixed CRT vignette."
+      },
+      {
+        "name": "dot-pulse",
+        "value": "dotPulse 3.2s ease-in-out infinite",
+        "purpose": "Brand status dot and small terminal indicators."
+      },
+      {
+        "name": "seg-pulse",
+        "value": "segPulse 2.4s ease-in-out infinite",
+        "purpose": "Current slide segment in the top navigation."
+      },
+      {
+        "name": "slide-sweep",
+        "value": "slideSweep 7s linear infinite",
+        "purpose": "Atmospheric scan line sweeping behind the reading column."
+      },
+      {
+        "name": "row-scan",
+        "value": "rowScan 6s linear infinite",
+        "purpose": "Low-opacity scan moving through row groups."
+      },
+      {
+        "name": "state-pulse",
+        "value": "statePulse 3.6s ease-in-out infinite",
+        "purpose": "State tags breathe without changing their text."
+      },
+      {
+        "name": "number-pulse",
+        "value": "numberPulse 4.5s ease-in-out infinite",
+        "purpose": "Large readout numbers breathe gently."
+      },
+      {
+        "name": "signal-flow",
+        "value": "signalFlow 4.6s linear infinite",
+        "purpose": "Signal beam crossing the six-stage pipeline."
+      },
+      {
+        "name": "node-blink",
+        "value": "nodeBlink 3.2s steps(2,end) infinite",
+        "purpose": "Sequenced status light on each pipeline node."
+      },
+      {
+        "name": "channel-scan",
+        "value": "channelScan 7s linear infinite",
+        "purpose": "Scan through each contribution channel."
+      },
+      {
+        "name": "prompt-blink",
+        "value": "promptBlink 1.8s steps(2,end) infinite",
+        "purpose": "Blinking terminal prompt before each research question."
+      },
+      {
+        "name": "query-scan",
+        "value": "queryScan 7s linear infinite",
+        "purpose": "Scan through each research-question block."
+      },
+      {
+        "name": "panel-scan",
+        "value": "panelScan 7s linear infinite",
+        "purpose": "Scan through terminal panels and claim columns."
+      },
+      {
+        "name": "boot-line",
+        "value": "bootLine .12s steps(1,end) both",
+        "purpose": "System-check rows appear as whole lines on a deliberately uneven cadence, with brief processing pauses; it stays repeatable."
+      },
+      {
+        "name": "boot-bar",
+        "value": "bootSegment .12s steps(1,end) both + barPulse 1.7s ease-in-out infinite",
+        "purpose": "Each progress segment fills when its stage row appears; the bar then pulses in sequence."
+      },
+      {
+        "name": "boot-scan",
+        "value": "bootScan 4.2s linear infinite",
+        "purpose": "Refresh scan inside the boot terminal."
+      },
+      {
+        "name": "signal-bars",
+        "value": "signalBars 1.4s ease-in-out infinite",
+        "purpose": "Boot header signal bars."
+      },
+      {
+        "name": "console-type",
+        "value": "16ms per character",
+        "purpose": "Boot console output typing."
+      },
+      {
+        "name": "boot-mask",
+        "value": "bootMask .5s ease .04s both",
+        "purpose": "Holds the first paint black before the cover reveals; the check begins as the mask clears."
+      },
+      {
+        "name": "loop-trace",
+        "value": "loopTrace 2.8s linear infinite",
+        "purpose": "An amber trace runs along the actual forward arrows and the return path, without entering the node boxes."
+      },
+      {
+        "name": "flow-scan",
+        "value": "flowScan 3.6s linear infinite",
+        "purpose": "A low-opacity scan crosses contribution flows and data strips."
+      },
+      {
+        "name": "shot-scan",
+        "value": "recordScan 1.8s linear both",
+        "purpose": "The application-window field scans for the target during the record sequence."
+      },
+      {
+        "name": "coverage-shimmer",
+        "value": "coverageShimmer 3.5s linear infinite",
+        "purpose": "Windows coverage bar shimmer."
+      },
+      {
+        "name": "target-pulse",
+        "value": "targetPulse 2.8s ease-in-out infinite",
+        "purpose": "Target box shifts between amber and phosphor."
+      },
+      {
+        "name": "evidence-pulse",
+        "value": "evidenceRun 3.8s linear infinite",
+        "purpose": "A marker travels down each evidence chain."
+      },
+      {
+        "name": "tri-dash",
+        "value": "triDash 4s linear infinite",
+        "purpose": "Dashed supporting-analysis links move."
+      },
+      {
+        "name": "scope-run",
+        "value": "scopeRun 6.5s ease-in-out infinite",
+        "purpose": "A marker travels across in-scope steps and stops at the boundary."
+      },
+      {
+        "name": "artifact-scan",
+        "value": "flowScan 4.8s linear infinite",
+        "purpose": "A scan crosses the artifact chain."
+      },
+      {
+        "name": "boot-row-scan",
+        "value": "bootRowScan 3.6s linear infinite",
+        "purpose": "A second scan band travels down the system-check rows."
+      },
+      {
+        "name": "boot-status",
+        "value": "bootStatus 2.6s steps(2,end) infinite",
+        "purpose": "Status tags flicker in sequence after the log completes."
+      },
+      {
+        "name": "console-cursor",
+        "value": "cursorBlink .9s steps(2,end) infinite",
+        "purpose": "Blinking block cursor after the terminal prompt."
+      },
+      {
+        "name": "boot-segment",
+        "value": "bootSegment .12s steps(1,end) both",
+        "purpose": "Bar segments fill one at a time on the same uneven cadence as the system-check rows."
+      },
+      {
+        "name": "node-select-scan",
+        "value": "nodeScan 1.6s linear 1",
+        "purpose": "A single scan travels through the selected card; after it completes, the next stage is selected."
+      },
+      {
+        "name": "boundary-lock",
+        "value": "boundaryLock .45s steps(2,end)",
+        "purpose": "The selected stage locks to its boundary group with a short amber-to-phosphor outline flash."
+      },
+      {
+        "name": "readout-in",
+        "value": "readoutIn .28s ease",
+        "purpose": "The stage readout shifts into place when the selection changes."
+      },
+      {
+        "name": "pipeline-relay",
+        "value": "relayTravel .62s cubic-bezier(.22,.8,.24,1) both",
+        "purpose": "A phosphor hand cursor crosses the gap between the outgoing and incoming cards."
+      },
+      {
+        "name": "node-arrive",
+        "value": "nodeArrive .42s ease",
+        "purpose": "The incoming card lands with a border and fill flash."
+      },
+      {
+        "name": "node-leave",
+        "value": "nodeLeave .62s ease both",
+        "purpose": "The outgoing card decays to neutral as the relay leaves."
+      },
+      {
+        "name": "relay-hand",
+        "value": "relayHand .62s steps(1,end) both",
+        "purpose": "The open hand cursor is visible for the first part of the relay."
+      },
+      {
+        "name": "relay-click",
+        "value": "relayClick .62s steps(1,end) both",
+        "purpose": "The hand switches to the pressed click state as it lands."
+      },
+      {
+        "name": "relay-press",
+        "value": "relayPress .62s cubic-bezier(.22,.8,.24,1) both",
+        "purpose": "The click hand compresses at the target before the incoming card activates."
+      },
+      {
+        "name": "relay-wobble",
+        "value": "relayWobble .62s ease-in-out both",
+        "purpose": "The hand tilts and settles with the direction of travel."
+      },
+      {
+        "name": "relay-think",
+        "value": "relayThink 1s ease-in-out infinite",
+        "purpose": "The hand waits over the outgoing card with a subtle sway."
+      },
+      {
+        "name": "think-pulse",
+        "value": "thinkPulse 1s steps(2,end) infinite",
+        "purpose": "The loading dots pulse while the next stage is chosen."
+      },
+      {
+        "name": "record-cursor",
+        "value": "left/top .9s cubic-bezier(.22,.8,.24,1)",
+        "purpose": "The hand moves to the target control during the screenshot state."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-height",
+        "value": "800px"
+      },
+      {
+        "name": "mobile",
+        "value": "600px"
+      },
+      {
+        "name": "stack",
+        "value": "900px"
+      },
+      {
+        "name": "pipeline",
+        "value": "1100px"
+      }
+    ],
+    "motionPolicy": {
+      "reducedMotion": "not-honored",
+      "reason": "Presentation surface, not a general-purpose web UI; motion is part of the CRT-phosphor identity and the explanation.",
+      "fallback": "Print stylesheet renders a static white-paper deck."
+    },
+    "motionThesis": {
+      "focalMoment": "The pipeline signal and stage readout; the system check is the authored replay moment.",
+      "continuity": "Progress segments and previous/next controls move between slides; the fixed CRT atmosphere stays continuous.",
+      "feedback": "Node selection updates the stage readout; boot replay restarts the boot lines; record Replay restarts the record sequence.",
+      "budget": "Transform, opacity, border, and background-position on the active slide; fixed atmosphere behind the reading column; no layout animation."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Square terminal control used for previous/next navigation.",
+      "html": "<button class=\"ds-btn\">[ Next → ]</button>",
+      "css": ".ds-btn{appearance:none;border:1px solid var(--line-strong,#2f5a3d);background:transparent;color:var(--phosphor,#8aff5a);padding:8px 13px;font:500 11px/1.2 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s,border-color .2s}.ds-btn:hover{background:var(--phosphor,#8aff5a);color:var(--void,#050806);border-color:var(--phosphor,#8aff5a)}.ds-btn:focus-visible{outline:2px solid var(--amber,#ffb000);outline-offset:4px}"
+    },
+    {
+      "name": "Terminal Panel",
+      "kind": "card",
+      "refersTo": "panel-terminal",
+      "description": "A square window for the system check or record schema.",
+      "html": "<section class=\"ds-panel\"><header class=\"ds-panel-head\"><span>SYSTEM CHECK / <b>GLASSHAND</b></span><span>CSC 172 / 2026</span></header><div class=\"ds-panel-body\">glasshand / system check<br>01 / capture <b>[ PLANNED ]</b></div></section>",
+      "css": ".ds-panel{border:1px solid var(--line,#1f3a29);background:var(--panel,#07100a);color:var(--body,#c7d5c9);box-shadow:inset 0 0 40px rgba(0,0,0,.5)}.ds-panel-head{display:flex;justify-content:space-between;gap:16px;padding:9px 12px;border-bottom:1px solid var(--line,#1f3a29);font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#7f9a86)}.ds-panel-head b{color:var(--amber,#ffb000);font-weight:500}.ds-panel-body{padding:13px 14px;font:400 13px/1.7 'JetBrains Mono',monospace}.ds-panel-body b{color:var(--phosphor,#8aff5a);font-weight:500}"
+    },
+    {
+      "name": "Pipeline Node",
+      "kind": "custom",
+      "description": "One selectable stage in the six-stage perception and action loop; selecting it updates the stage readout.",
+      "html": "<button class=\"ds-node is-active\" type=\"button\" aria-pressed=\"true\"><span class=\"ds-node-id\">A.03</span><b>GROUND</b><small>Instruction → target coordinate</small></button>",
+      "css": ".ds-node{position:relative;appearance:none;display:block;width:100%;text-align:left;border:1px solid var(--line,#1f3a29);background:rgba(7,16,10,.78);padding:11px 10px;min-height:122px;color:var(--cream,#eef3e8);cursor:pointer;transition:background .25s,border-color .25s,transform .25s}.ds-node .ds-node-id{display:block;margin-bottom:6px;font:400 9px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--muted,#7f9a86)}.ds-node b{display:block;margin-bottom:6px;font:600 23px/1 'Saira Condensed',sans-serif;text-transform:uppercase;color:var(--phosphor,#8aff5a)}.ds-node small{display:block;font:400 11px/1.4 'JetBrains Mono',monospace;color:var(--body,#c7d5c9)}.ds-node::after{content:'';position:absolute;right:8px;top:8px;width:5px;height:5px;background:var(--phosphor,#8aff5a);animation:nodeBlink 3.2s steps(2,end) infinite}.ds-node:hover,.ds-node:focus-visible,.ds-node.is-active{border-color:var(--phosphor,#8aff5a);background:rgba(138,255,90,.06);transform:translateY(-2px)}"
+    },
+    {
+      "name": "Progress Bar",
+      "kind": "custom",
+      "refersTo": "progress-segment",
+      "description": "Eleven clickable segments that jump to a slide, mark the current slide, and keep a visually hidden aria-valuenow progressbar in sync.",
+      "html": "<nav class=\"ds-progress\" aria-label=\"Jump to slide\"><button type=\"button\" class=\"on current\" aria-label=\"Go to slide 1\" aria-current=\"step\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 2\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 3\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 4\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 5\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 6\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 7\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 8\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 9\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 10\"></button><button type=\"button\" class=\"\" aria-label=\"Go to slide 11\"></button></nav>",
+      "css": ".ds-progress{display:flex;align-items:center;gap:3px}.ds-progress button{appearance:none;border:0;padding:0;width:7px;height:10px;background:var(--line,#1f3a29);cursor:pointer;transition:background .3s,transform .3s}.ds-progress button.on{background:var(--phosphor,#8aff5a)}.ds-progress button.current{background:var(--amber,#ffb000);animation:segPulse 2.4s ease-in-out infinite}.ds-progress button:hover{background:var(--cream,#eef3e8);transform:scaleY(1.25)}.ds-progress button:focus-visible{outline:2px solid var(--amber,#ffb000);outline-offset:3px}"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "description": "The proposal-state badge used on the cover.",
+      "html": "<span class=\"ds-chip\">Proposal / no implementation results yet</span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--amber,#ffb000);color:var(--amber,#ffb000);padding:6px 9px;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;background:rgba(5,8,6,.45)}.ds-chip::before{content:'';width:5px;height:5px;background:var(--amber,#ffb000)}"
+    },
+    {
+      "name": "Query Block",
+      "kind": "custom",
+      "description": "A research question presented as a terminal query.",
+      "html": "<article class=\"ds-query\"><header><b>RQ1 / Grounding</b><span>Perception</span></header><p>&gt; How accurately can a model-agnostic, vision-only pipeline ground natural-language instructions to GUI targets?</p></article>",
+      "css": ".ds-query{border:1px solid var(--line,#1f3a29);background:rgba(7,16,10,.78);padding:16px 18px;color:var(--body,#c7d5c9)}.ds-query header{display:flex;justify-content:space-between;gap:16px;margin-bottom:7px;font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#7f9a86)}.ds-query header b{color:var(--amber,#ffb000);font-weight:500}.ds-query p{margin:0;font:400 16px/1.6 'JetBrains Mono',monospace}.ds-query p::before{content:'> ';color:var(--phosphor,#8aff5a);animation:promptBlink 1.8s steps(2,end) infinite}"
+    },
+    {
+      "name": "Favicon",
+      "kind": "custom",
+      "description": "32×32 CRT reticle favicon: phosphor frame, crosshair, amber target pixel, and a boot-status strip.",
+      "html": "<img class=\"ds-favicon\" src=\"favicon.svg\" width=\"32\" height=\"32\" alt=\"Glasshand CRT reticle\">",
+      "css": ".ds-favicon{display:block;width:32px;height:32px;image-rendering:auto}"
+    },
+    {
+      "name": "Panel Action",
+      "kind": "button",
+      "description": "Small terminal-panel header control used for [ RUN ] on the cover.",
+      "html": "<button class=\"ds-panel-action\" type=\"button\">[ RUN ]</button>",
+      "css": ".ds-panel-action{appearance:none;border:1px solid var(--line-strong,#2f5a3d);background:transparent;color:var(--phosphor,#8aff5a);padding:2px 6px;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s,border-color .2s}.ds-panel-action:hover,.ds-panel-action:focus-visible{background:var(--phosphor,#8aff5a);color:var(--void,#050806);border-color:var(--phosphor,#8aff5a)}"
+    },
+    {
+      "name": "Diagram Surface",
+      "kind": "custom",
+      "description": "Square instrument panels for the stage loop with a stop marker, the instruction-to-screenshot-to-ground-truth record format, the CART supporting-analysis check map, the analysis-order rail, and the in-scope/out-of-scope strip. A diagram must carry a relationship already in the slide.",
+      "html": "<section class=\"ds-diagram\"><header class=\"ds-diagram-head\"><span>INFERENCE LOOP</span><span>PIXELS ONLY</span></header><div class=\"ds-diagram-body\">PERCEIVE → GROUND → ACT + VERIFY</div></section>",
+      "css": ".ds-diagram{border:1px solid var(--line,#1f3a29);background:var(--panel,#07100a);color:var(--body,#c7d5c9)}.ds-diagram-head{display:flex;justify-content:space-between;gap:16px;padding:9px 12px;border-bottom:1px solid var(--line,#1f3a29);font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#7f9a86)}.ds-diagram-body{padding:14px;font:400 11px/1.6 'JetBrains Mono',monospace;color:var(--phosphor,#8aff5a)}"
+    },
+    {
+      "name": "Boot Console",
+      "kind": "form",
+      "description": "Optional terminal prompt at the bottom of the cover system check; commands are help, status, whoami, target, run, and clear. Not required for navigation. The check lines stay hidden until the replay starts.",
+      "html": "<form class=\"ds-boot-console\"><span>root@glasshand:~$</span><input type=\"text\" placeholder=\"help\" aria-label=\"Terminal command\"><button type=\"submit\">[ EXEC ]</button></form>",
+      "css": ".ds-boot-console{display:flex;align-items:center;gap:6px;margin-top:8px;border-top:1px solid var(--line,#1f3a29);padding-top:7px;font:400 12px/1.4 'JetBrains Mono',monospace}.ds-boot-console span{color:var(--phosphor,#8aff5a);white-space:nowrap}.ds-boot-console input{flex:1;min-width:0;border:0;border-bottom:1px solid var(--line-strong,#2f5a3d);background:transparent;color:var(--cream,#eef3e8);font:inherit;outline:none}.ds-boot-console input:focus{border-bottom-color:var(--phosphor,#8aff5a)}.ds-boot-console button{border:1px solid var(--line-strong,#2f5a3d);background:transparent;color:var(--phosphor,#8aff5a);padding:2px 5px;font:500 11px/1.2 'JetBrains Mono',monospace;letter-spacing:.08em;cursor:pointer}"
+    },
+    {
+      "name": "Channel Flow",
+      "kind": "custom",
+      "description": "Three equal chips joined by arrows under each contribution channel. CV reads Pixels to Target to Accuracy; DM reads Records to Conditions to CART. Summary, not a second claim.",
+      "html": "<div class=\"ds-channel-flow\"><span>Pixels</span><i>→</i><span>Target</span><i>→</i><span class=\"end\">Accuracy</span></div>",
+      "css": ".ds-channel-flow{display:flex;align-items:center;gap:6px;margin-top:14px;border-top:1px solid var(--line,#1f3a29);padding-top:11px;font:500 11px/1.3 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}.ds-channel-flow span{flex:1;text-align:center;border:1px solid var(--line-strong,#2f5a3d);padding:5px;color:var(--body,#c7d5c9);background:rgba(5,8,6,.45)}.ds-channel-flow i{color:var(--phosphor,#8aff5a);font-style:normal;font-size:12px}.ds-channel-flow .end{color:var(--phosphor,#8aff5a);border-color:var(--phosphor,#8aff5a)}"
+    },
+    {
+      "name": "Evidence Panel",
+      "kind": "custom",
+      "description": "Right-column panel on the questions slide. Three short evidence chains: RQ1 point-in-box accuracy, RQ2 CART failure conditions, and grouped-by-application validation. A marker travels down each chain.",
+      "html": "<div class=\"ds-evidence\"><div class=\"ds-evidence-head\"><span>Evidence</span><span>Per question</span></div><div class=\"ds-chain\"><span>RQ1</span><b>Point-in-box accuracy</b><small>application / element / condition</small></div><div class=\"ds-chain amber\"><span>RQ2</span><b>CART failure conditions</b><small>grouped by application</small></div><div class=\"ds-chain shared\"><span>Both</span><b>Grouped by application</b><small>report per application, not pooled</small></div></div>",
+      "css": ".ds-evidence{border:1px solid var(--line,#1f3a29);background:rgba(7,16,10,.78);font:400 11px/1.4 'JetBrains Mono',monospace;color:var(--muted,#7f9a86)}.ds-evidence-head{display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--line,#1f3a29);color:var(--phosphor,#8aff5a);font-size:12px;letter-spacing:.12em;text-transform:uppercase}.ds-chain{position:relative;padding:10px 12px 10px 24px;border-top:1px solid var(--line,#1f3a29)}.ds-chain::before{content:'';position:absolute;left:8px;top:12px;bottom:12px;border-left:1px solid var(--line-strong,#2f5a3d)}.ds-chain span,.ds-chain small{display:block;text-transform:uppercase;letter-spacing:.08em;font-size:10px}.ds-chain b{display:block;color:var(--phosphor,#8aff5a);font-size:11px;letter-spacing:.04em;text-transform:uppercase}.ds-chain.amber b{color:var(--amber,#ffb000)}.ds-chain.shared b{color:var(--cream,#eef3e8)}"
+    },
+    {
+      "name": "Data Strip",
+      "kind": "custom",
+      "description": "Full-width row of 1px cells or chips for contribution outputs, question basis, analysis order, and the artifact chain. A low-opacity scan crosses the strip.",
+      "html": "<div class=\"ds-strip\"><div><span>CV output</span><b>Point-in-box accuracy</b><small>application / element / condition</small></div><div><span>DM output</span><b>CART failure conditions</b><small>grouped by application</small></div></div>",
+      "css": ".ds-strip{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line,#1f3a29);border:1px solid var(--line,#1f3a29);font:400 11px/1.35 'JetBrains Mono',monospace;color:var(--muted,#7f9a86)}.ds-strip div{padding:9px 11px;background:var(--void,#050806)}.ds-strip span,.ds-strip small{display:block;text-transform:uppercase;letter-spacing:.08em}.ds-strip b{display:block;color:var(--phosphor,#8aff5a);font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:500}.ds-strip div:last-child b{color:var(--amber,#ffb000)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Phosphor Terminal",
+    "overview": "The deck uses a CRT terminal world: near-black glass, phosphor and amber status colors, monospace telemetry, and a system-check panel on the cover. The visual language stays behind the argument. Motion is part of the presentation: the cover runs a short system check, the loop carries a moving packet, and the dataset and analysis diagrams scan continuously. The print stylesheet is the static fallback.",
+    "keyCharacteristics": [
+      "Near-black glass with phosphor green and amber status roles.",
+      "A fixed CRT atmosphere: scanlines, vignette, rolling band, and a ghost GLASSHAND wordmark.",
+      "Square, rule-based panels; no rounded cards and no hard offset shadows.",
+      "Display type for the argument; monospace for data, labels, and terminal copy.",
+      "Rows, readouts, and a six-stage pipeline instead of a uniform card grid.",
+      "Ongoing loops: scanline sweep, pipeline signal, status lights, row and panel scans, and a breathing CRT vignette.",
+      "Interactive state: progress segments jump to slides, pipeline nodes select a stage, boot replay reruns the log, and record Replay restarts the record sequence.",
+      "No reduced-motion path: motion is part of the presentation, not optional chrome.",
+      "Diagrams use 1px instrument strokes, mono labels, phosphor for active/primary, and amber for boundaries or pending states.",
+      "Cover intro is sequenced: black mask, CRT power-on, with the initial system check starting as the power-on settles; returning to the cover restarts it immediately. The boot console is optional.",
+      "No pointer-following cursor or reticle: the deck is presented, not browsed.",
+      "Diagram surfaces: loop, record format, evidence map, analysis order, scope strip, and artifact chain. Each carries a relationship already stated in the slide.",
+      "Proposal-only language: PLANNED marks a specified stage; OPEN marks work not yet evidenced.",
+      "Ongoing motion: loop packet, pipeline beam, rail dot, dataset scan, evidence pulses, scope marker, and artifact scan."
+    ],
+    "rules": [
+      {
+        "name": "The Phosphor Rarity Rule",
+        "body": "Phosphor is a state, not a surface. Use it for active, measured, or verified things; let cream and body carry the reading. If phosphor is scattered as decoration, the signal dies.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Screen Rule",
+        "body": "The ghost wordmark, scanlines, rolling band, and vignette are one atmospheric layer. Never add a second competing effect, a neon glow, or a gradient text treatment.",
+        "section": "colors"
+      },
+      {
+        "name": "The Data in Mono Rule",
+        "body": "Monospace is for data, labels, code, and terminal copy. It is not a costume for every line of prose; the display face carries the argument.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Eyebrow Rule",
+        "body": "A heading carries its own weight. Course, status, and slide context live in the fixed top bar, not in a small kicker above the heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Glass Rule",
+        "body": "If an element needs a shadow to separate itself, the rule or spacing is wrong. Fix the structure, not the depth.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Presentation Motion Rule",
+        "body": "Motion is part of the argument and the charm. Do not add a prefers-reduced-motion kill switch, do not freeze the CRT loops, and do not treat this deck as a general-purpose web interface. Keep loops slow, low-opacity, and behind or around the reading line; animate opacity, transforms, borders, and background scans rather than layout.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep phosphor for active/measured/verified states and amber for proposal/open states.",
+      "Do label every state with text ([ PLANNED ], [ OPEN ]), not color alone.",
+      "Do use a diagram when a slide has a structural relationship (loop, record format, evidence chain, analysis order, or scope) and a side column is empty; the diagram must carry the argument.",
+      "Do label every diagram with its boundary or state in text, not color alone.",
+      "Do sequence the cover intro: black mask, CRT power-on, with the initial system check starting as the power-on settles; returning to the cover restarts it immediately. The console is optional and must never be required for navigation.",
+      "Do keep loops slow and low-opacity; a scan may pass through a component, but it must never move the reading line."
+    ],
+    "donts": [
+      "Don't add a metric, application name, result, or claim inside a diagram that is not already on the slide.",
+      "Don't add a prefers-reduced-motion path or freeze the CRT loops.",
+      "Don't add pointer-following reticles or custom cursor effects. This deck is presented, not browsed.",
+      "Don't fill white space with decorative cards or invented labels. If the content has no relationship to draw, leave the breathing room."
+    ]
+  }
+}
