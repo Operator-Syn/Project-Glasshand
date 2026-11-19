@@ -1,16 +1,32 @@
-/* Shared design tokens for the proposal deck.
+/* Design tokens for the Glasshand proposal deck.
  *
  * Loaded by presentation/index.html. Keep this file to custom properties
  * only; layout, typography, and slide furniture belong in the deck itself.
+ *
+ * The world is a CRT-phosphor terminal: near-black glass, green and amber
+ * status, a faint chromatic fringe, and square panels. The palette is
+ * deliberately small so status and hierarchy stay legible at projector scale.
  */
 :root{
-  --paper:#f4f0e8;
-  --ink:#171717;
-  --blue:#2d45c8;
-  --lime:#c7f36b;
-  --pink:#ff8eaa;
-  --yellow:#ffd447;
-  --muted:#3a3a3a;
-  --line:4px solid var(--ink);
-  --shadow:11px 11px 0 var(--ink);
+  --void:#050806;
+  --panel:#07100a;
+  --panel-2:#0a160d;
+  --phosphor:#8aff5a;
+  --phosphor-dim:#4f9b52;
+  --amber:#ffb000;
+  --cream:#eef3e8;
+  --body:#c7d5c9;
+  --muted:#7f9a86;
+  --line:#1f3a29;
+  --line-2:#2f5a3d;
+  --alert:#ff5a4d;
+  --cyan:#35e7ff;
+  --mag:#ff2e88;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --display:"Saira Condensed",Arial,sans-serif;
+  --top-h:3.4rem;
+  --bar-h:4.1rem;
+  --gutter:clamp(1.1rem,5vw,5.5rem);
+  --measure:68ch;
+  --ease:cubic-bezier(.16,1,.3,1);
 }
