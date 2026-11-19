@@ -2,7 +2,7 @@
 
 This directory is the project's persistent, human-readable knowledge base. It records what the project is, what has been decided, what is still unknown, and in what order the work is proposed to happen.
 
-The repository contains no implementation at this stage. Most documents therefore describe plans, proposals, and open questions rather than finished work.
+Most documents describe plans, proposals, and open questions rather than finished work. The repository also contains a working notebook environment and an exploratory analysis of the candidate evaluation corpus. Nothing of the perception pipeline, the decision layer, or the experimental evaluation exists yet, and no phase has been approved.
 
 ## Navigation
 
@@ -15,6 +15,8 @@ The repository contains no implementation at this stage. Most documents therefor
 | [decisions/](decisions/) | Which choices have been made, and which are only proposals? | [README.md](decisions/README.md) |
 | [references/](references/) | Which external sources have actually been collected? | [README.md](references/README.md) |
 | [timeline/](timeline/) | In what order is the work proposed, and what does each phase cover? | [README.md](timeline/README.md) |
+
+Work that is not documentation lives outside this knowledge base by design: the importable package in [`src/isdm/`](../src/isdm/), the notebook workspace in [`notebooks/`](../notebooks/), and the tests in [`tests/`](../tests/). This index deliberately does not catalogue them.
 
 ## Reading Paths
 
