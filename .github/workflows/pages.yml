@@ -33,10 +33,16 @@ jobs:
       - name: Validate presentation
         run: python presentation/check.py
 
+      - name: Stage deck
+        run: |
+          mkdir -p _site
+          cp presentation/index.html presentation/tokens.css presentation/favicon.svg _site/
+          cp -R presentation/assets _site/
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: presentation
+          path: _site
 
   deploy:
     if: github.event_name != 'pull_request'
