@@ -30,9 +30,10 @@ Run commands from the repository root unless a step says otherwise.
    Done when you can name the branch, the overlapping local changes, and the untracked files that matter.
 
 2. **Read the applicable instructions.**
-   Read `AGENTS.md` or `CLAUDE.md` first if either exists. Neither exists in the initialization checkout.
+   Read `AGENTS.md` or `CLAUDE.md` first if either exists; neither exists today.
    Otherwise read `README.md`, `docs/README.md`, and `docs/overview/project.md`.
-   Done when you can state the documentation conventions and the project's current scope.
+   Before touching a notebook or a setup script, read its tree's conventions in `notebooks/README.md` and `scripts/README.md`; both carry binding rules that this skill does not restate.
+   Done when you can state the documentation conventions, the notebook conventions, and the project's current scope.
 
 3. **Open the map and load only the task's sources.**
    Use [the repository map](references/repository-map.md).
@@ -44,7 +45,8 @@ Run commands from the repository root unless a step says otherwise.
    ADRs under `docs/decisions/` are binding until superseded.
    Phase documents and architecture notes are proposals.
    Source code and tests, when they exist, are evidence of current behavior.
-   If `src/` and `tests/` still contain no source, say so and do not infer an implementation from a phase plan.
+   If `src/isdm/` and `tests/` hold nothing but scaffolding, or an expected package is missing, say so and do not infer an implementation from a phase plan.
+   The notebook-support package and its tests do exist; the perception, decision, and execution layers do not.
    Done when every statement you will act on is labeled decision, plan, implemented behavior, or unverified.
 
 5. **Surface unresolved conflicts.**
@@ -70,6 +72,7 @@ Run commands from the repository root unless a step says otherwise.
 - **Jev is a baseline adapter, not the contract.** Keep the model boundary model-agnostic.
 - **One combined paper.** The CV and DM contributions stay distinguishable inside it.
 - **Roadmap phase 00 is project definition**, not the repository-initialization task.
+- **Workspaces are created on first write.** `data/`, `runs/`, `results/` and `models/` carry no placeholder files, so a clone legitimately lacks them and the checker reports them as deferred rather than missing. `notebooks/README.md` governs the notebook tree: cells configure and call `src/isdm/`, committed notebooks stay output-free, and generated artifacts go to `runs/`.
 
 ## When to update this skill
 
@@ -91,7 +94,7 @@ Run commands from the repository root unless a step says otherwise.
 
 From the repository root:
 
-- `python .agents/skills/onboarding/scripts/check_repository_map.py` — validates that every literal path indexed in the map exists and that every required project document is indexed. It reads tracked files when available and falls back to the working tree when the repository has no commits.
+- `python .agents/skills/onboarding/scripts/check_repository_map.py` — validates that every literal path indexed in the map exists and that every required project document is indexed. It reads tracked files when available and falls back to the working tree when the repository has no commits. Indexed workspaces that are created on first write are reported as warnings, not errors.
 - `git diff --check` — checks tracked diffs for whitespace errors. It does not cover untracked files; inspect those separately.
 
 The checker does not validate prose accuracy, links inside other documents, or implementation behavior. No dependency installation or application run is required.
