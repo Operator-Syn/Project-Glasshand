@@ -6,11 +6,13 @@ contract that the Pages workflow relies on:
 1. The deck, token sheet, and favicon exist.
 2. The deck contains exactly 11 slide sections.
 3. The deck declares itself a proposal through its status meta tag.
-4. Required content phrases are present, so the deck cannot silently lose
+4. The favicon stays inside the CRT-phosphor palette (void, phosphor, amber).
+5. The presentation does not add a reduced-motion kill switch; motion is part of the surface.
+6. Required content phrases are present, so the deck cannot silently lose
    the dataset, algorithm, license, or status statements during an edit.
-5. Placeholder or result-claiming phrases are absent, because this deck
+7. Placeholder or result-claiming phrases are absent, because this deck
    reports a proposal rather than completed experiments.
-6. Every relative link or asset reference resolves to a real file.
+8. Every relative link or asset reference resolves to a real file.
 
 Run from any directory:
 
@@ -51,6 +53,7 @@ FORBIDDEN_PHRASES = (
     "License unresolved",
     "More Information Needed",
 )
+FAVICON_COLORS = ("#050806", "#8aff5a", "#ffb000")
 
 
 class DeckParser(HTMLParser):
@@ -89,6 +92,23 @@ def check_required_files() -> None:
             raise SystemExit(f"{path} is missing")
 
 
+def check_favicon() -> None:
+    """Keep the favicon inside the CRT-phosphor palette."""
+    text = FAVICON.read_text(encoding="utf-8")
+    missing = [color for color in FAVICON_COLORS if color not in text]
+    if missing:
+        raise SystemExit("Favicon is outside the CRT palette: " + ", ".join(missing))
+
+
+def check_motion_policy() -> None:
+    """Reject a reduced-motion kill switch on this presentation surface."""
+    if "prefers-reduced-motion" in PAGE.read_text(encoding="utf-8"):
+        raise SystemExit(
+            "The presentation must not include a reduced-motion kill switch; "
+            "motion is part of the CRT-phosphor surface. See DESIGN.md."
+        )
+
+
 def check_deck(parser: DeckParser) -> None:
     """Validate slide count, proposal status, and content phrases."""
     if parser.slides != EXPECTED_SLIDES:
@@ -124,6 +144,8 @@ def check_local_references(parser: DeckParser) -> None:
 def main() -> None:
     """Run the full validation sequence and report one success line."""
     check_required_files()
+    check_favicon()
+    check_motion_policy()
     parser = DeckParser()
     parser.feed(PAGE.read_text(encoding="utf-8"))
     parser.close()
