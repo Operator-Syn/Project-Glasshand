@@ -1,0 +1,72 @@
+{
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T06:08:51.553Z",
+        "reason": "Computed 79.2px at 1440; clamp max is 5.8rem. The detector overestimates this display headline."
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T06:08:51.556Z",
+        "reason": "CRT scanline field is the chosen visual world; it is a fixed atmospheric layer, not decorative page chrome."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T06:21:12.198Z",
+        "reason": "Fluid presentation typography uses intermediate clamp endpoints; DESIGN.md documents the role anchors, not every presentation step."
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(17, 17, 17)",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T06:21:12.202Z",
+        "reason": "Print-only ink for the white print stylesheet; not a screen color."
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(153, 153, 153)",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T06:21:12.206Z",
+        "reason": "Print-only neutral rule for the white print stylesheet; not a screen color."
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(0,0,0,.22)",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T06:21:59.295Z",
+        "reason": "Neutral black scanline opacity in the CRT atmosphere; not a brand color."
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T15:05:47.094Z",
+        "reason": "The only marquee findings are the 1px pipeline signal beam and the shared-bus data pulse. They are decorative, pointer-events:none, and carry no content; the traveling signal is part of the chosen CRT presentation motion."
+      }
+    ]
+  }
+}
