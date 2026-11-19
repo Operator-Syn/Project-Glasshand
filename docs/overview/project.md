@@ -72,7 +72,7 @@ These are working assumptions from the brief. Most are not approved architectura
 | Architecture | Model-agnostic boundary accepted ([ADR 0002](../decisions/0002_model_agnostic_decision_boundary.md)); modular decomposition proposed | The boundary is a requirement; the component split is still a design proposal. |
 | Execution model | Locally runnable where practical | Degree of offline operation unresolved. |
 | Project scale | Individual undergraduate development and research | Fixed constraint. |
-| Evaluation corpus | ScreenSpot-Pro, Windows subset (1,020 examples), combined with self-collected captures | Current candidate, not yet an accepted decision. The dataset card declares MIT; the screenshots remain subject to the application vendors' rights. |
+| Evaluation corpus | ScreenSpot-Pro, Windows subset — 927 requests across 16 applications in the released annotations (verified 19 November 2026), combined with self-collected captures | Candidate, not yet an accepted decision. The dataset card declares MIT; the screenshots remain subject to the application vendors' rights. |
 
 ## Repository Naming
 
@@ -80,7 +80,10 @@ The repository directory is `intelligent_system_data_mining_final_project`, whic
 
 ## Non-Claims
 
-- No implementation, dataset, model integration, or experiment exists.
+- No perception pipeline, model integration, or experiment exists. The candidate evaluation corpus
+  has been downloaded and characterized: see
+  [`notebooks/EDA_Beira_John-Ronan.ipynb`](../../notebooks/EDA_Beira_John-Ronan.ipynb).
+  That analysis measures the corpus; it reports no grounding result.
 - No phase in the roadmap has been approved or completed.
 - No capability listed above has been demonstrated.
 
