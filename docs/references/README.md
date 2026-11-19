@@ -1,6 +1,6 @@
 # References
 
-**Status:** Pending — no sources have been collected. This directory is intentionally empty apart from this index.
+**Status:** Pending — no source has been read and summarized to the standard below. One source is relied on by the analysis and is recorded here as consulted only.
 
 ## Purpose
 
@@ -21,6 +21,21 @@ Author(s) (Year). Title. Venue/Publisher. Identifier or URL. Accessed YYYY-MM-DD
 Supports: <claim or question>
 Notes: <what the source actually shows, and its limits>
 ```
+
+## Consulted, not yet summarized
+
+Sources the project currently depends on that have **not** been read in full, so they are not entries
+in the sense defined above. Recorded so a reader knows what is already in use and what still needs a
+proper summary.
+
+- Li, K., Meng, Z., Lin, H., Luo, Z., Tian, Y., Ma, J., Huang, Z., & Chua, T.-S. (2025).
+  *ScreenSpot-Pro: GUI Grounding for Professional High-Resolution Computer Use.* arXiv:2504.07981.
+  https://doi.org/10.48550/arXiv.2504.07981 — abstract read 2026-11-19; dataset card
+  `likaixin/ScreenSpot-Pro` (MIT) read and downloaded 2026-11-19.
+  Supports: the candidate evaluation corpus and its difficulty claim (best published model 18.9%).
+  Notes: only the abstract and the released annotation files have been examined. The full paper,
+  its method, and its evaluation protocol have not been summarized, so no claim in this repository
+  may rest on its body.
 
 ## Search Areas for Phase 01
 
