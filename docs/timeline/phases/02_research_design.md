@@ -76,3 +76,4 @@ Fix the questions, the data, the protocol, and the measurements before building.
 - 2026-11-11 — Created as a proposed phase during repository initialization.
 - 2026-11-11 — External dataset sourcing added, so the corpus does not depend only on self-collected captures.
 - 2026-11-11 — Browser-hosted applications included in the evaluation target and condition matrix.
+- 2026-11-19 — Candidate corpus evaluated for shape and label compatibility: ScreenSpot-Pro Windows subset, 927 requests over 16 applications, one target per screenshot, 11 duplicated screens. Recorded in the [EDA notebook](../../../notebooks/EDA_Beira_John-Ronan.ipynb). No dataset decision taken.
