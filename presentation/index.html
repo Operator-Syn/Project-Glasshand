@@ -3,299 +3,1200 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f0e8">
-  <meta name="description" content="Proposal deck: a model-agnostic, computer-vision-driven framework for Windows desktop automation, evaluated on ScreenSpot-Pro and analyzed with a CART decision tree.">
+  <meta name="theme-color" content="#050806">
+  <meta name="description" content="Proposal deck: a model-agnostic Computer Vision framework for Windows desktop automation, evaluated on ScreenSpot-Pro and analyzed with a CART decision tree.">
   <meta name="status" content="proposal">
   <title>Computer Vision–Driven Desktop Automation — CSC 172</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="tokens.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root{--top-h:3.6rem;--bar-h:4.2rem;--body-size:clamp(1.06rem,1.35vw,1.22rem);--body-leading:1.6}
+    /* ------------------------------------------------------------------
+       Base and browser surfaces
+       ------------------------------------------------------------------ */
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--ink) var(--paper);scroll-padding-top:calc(var(--top-h) + 1rem);scroll-padding-bottom:calc(var(--bar-h) + 1.5rem)}
-    body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",Arial,Helvetica,sans-serif;font-size:var(--body-size);line-height:var(--body-leading);font-weight:450}
-    button{font:inherit;color:inherit}
-    button:focus-visible,a:focus-visible{outline:4px solid var(--blue);outline-offset:4px}
-    a{color:var(--blue);font-weight:700;text-decoration-thickness:2px;text-underline-offset:.12em}
-    a:hover{background:var(--yellow);color:var(--ink)}
-    h1,h2,h3,p{margin-top:0}
-    h1{font-size:clamp(3.6rem,9.6vw,8rem);line-height:.9;letter-spacing:-.045em;max-width:1000px;margin-bottom:1.5rem;font-weight:950}
-    h2{font-size:clamp(2.6rem,6.8vw,5.4rem);line-height:.95;letter-spacing:-.045em;margin-bottom:1.35rem;font-weight:950}
-    h3{font-size:clamp(1.2rem,1.6vw,1.5rem);line-height:1.3;letter-spacing:-.015em;margin-bottom:.65rem;font-weight:900}
-    .top{position:fixed;z-index:20;inset:0 0 auto;background:var(--paper);border-bottom:var(--line);display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.2rem;font-weight:900}
-    .brand{letter-spacing:.04em}
-    .top-right{display:flex;gap:1rem;align-items:center}
-    .progress{--track-width:clamp(6.5rem,10vw,9rem);position:relative;isolation:isolate;overflow:hidden;width:var(--track-width);height:16px;border:3px solid var(--ink);background:#fff}
-    .progress i{position:absolute;inset:0 auto 0 0;z-index:1;display:block;height:100%;background:var(--blue);width:0;transition:width .68s cubic-bezier(.16,1,.3,1)}
-    .progress::after{content:"";position:absolute;z-index:2;inset:0 auto 0 0;width:.75rem;background:var(--yellow);border-inline:2px solid var(--ink);box-shadow:3px 0 0 var(--ink);pointer-events:none;animation:progressScan 2.6s cubic-bezier(.4,0,.2,1) infinite alternate}
-    @keyframes progressScan{to{transform:translateX(calc(var(--track-width) - 1.125rem))}}
-    main{padding:0;display:block}
-    .slide{min-height:100svh;width:100%;margin:0;display:none;align-items:center;position:relative;overflow:visible;padding:calc(var(--top-h) + 1.4rem) clamp(1.1rem,6vw,6rem) calc(var(--bar-h) + 1rem)}
-    .slide.active{display:flex;animation:arrive .62s cubic-bezier(.16,1,.3,1) both}
-    @keyframes arrive{from{opacity:.55;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0)}}
-    .inner{width:100%;max-width:1180px;margin-inline:auto;position:relative;z-index:1;padding:.2rem 0}
-    .slide::after{content:attr(data-n);position:absolute;right:0;bottom:0;z-index:0;pointer-events:none;overflow:hidden;width:2.2em;height:.9em;font-size:min(44vh,30rem,40vw);line-height:.72;font-weight:950;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:3px rgba(23,23,23,.075);animation:markDrift 19s ease-in-out infinite}
-    @keyframes markDrift{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-12px,-16px,0)}}
-    .slide:first-child::after{content:none}
-    .slide.active .inner>*{animation:rise .55s cubic-bezier(.16,1,.3,1) both}
-    .slide.active .inner>*:nth-child(2){animation-delay:.06s}
-    .slide.active .inner>*:nth-child(3){animation-delay:.12s}
-    .slide.active .inner>*:nth-child(4){animation-delay:.18s}
-    .slide.active .inner>*:nth-child(5){animation-delay:.24s}
-    @keyframes rise{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:none}}
-    .slide.cover{padding:0}
-    .hero{width:100%;min-height:100svh;background:var(--blue);color:#fff;display:flex;align-items:center;padding:calc(var(--top-h) + 1.2rem) clamp(1.25rem,7vw,6rem) calc(var(--bar-h) + 2.2rem);position:relative;overflow:hidden}
-    .hero-inner{width:100%;max-width:1180px;margin-inline:auto;position:relative;z-index:1}
-    .hero h1{max-width:1050px}
-    .hero .lead{max-width:52rem}
-    .hero-note{margin:1.35rem 0 0;font-size:clamp(.9rem,1.1vw,1.05rem);font-weight:700;letter-spacing:.02em;color:#dfe4ff}
-    .eyebrow{font-size:.9rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.3rem}
-    .index{background:var(--yellow);display:inline-block;border:var(--line);padding:.3rem .6rem;margin-right:.5rem;box-shadow:3px 3px 0 var(--ink)}
-    .lead{font-size:clamp(1.2rem,2vw,1.7rem);line-height:1.5;max-width:68ch;font-weight:600}
-    .small{font-size:clamp(.94rem,1.05vw,1.02rem);line-height:1.6}
-    .tag{display:inline-block;background:var(--lime);color:var(--ink);border:2px solid var(--ink);padding:.35rem .6rem;font-weight:900;font-size:.9rem;transform:rotate(-2deg);margin-top:1.2rem}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-    .grid.two{grid-template-columns:repeat(2,1fr);gap:1.5rem}
-    .box{border:var(--line);box-shadow:var(--shadow);padding:1.05rem 1.15rem;background:#fff;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,filter .2s}
-    .box.lime{background:var(--lime)}
-    .box.pink{background:var(--pink)}
-    .box.yellow{background:var(--yellow)}
-    .box.blue{background:var(--blue);color:#fff}
-    .box.blue p,.box.blue .small{color:#eef1ff}
-    .box h3{margin-bottom:.5rem}
-    .box p:last-child,.box ul:last-child{margin-bottom:0}
-    @media(hover:hover){.box:hover{transform:translate(-3px,-3px);box-shadow:14px 14px 0 var(--ink);filter:saturate(1.06)}}
-    .box:active{transform:translate(3px,3px);box-shadow:5px 5px 0 var(--ink)}
-    .num{font-size:2.4rem;font-weight:950;letter-spacing:-.035em;line-height:1;margin-bottom:.35rem}
-    .pipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin:1.2rem 0 0}
-    .pipe{border:var(--line);box-shadow:5px 5px 0 var(--ink);background:#fff;padding:.9rem;min-height:7.2rem}
-    .pipe span{display:inline-grid;place-items:center;width:2rem;height:2rem;background:var(--yellow);border:3px solid var(--ink);font-weight:900;font-size:.9rem;margin-bottom:.55rem}
-    .pipe b{display:block;font-size:1.08rem;line-height:1.2;font-weight:900}
-    .pipe small{display:block;margin-top:.3rem;font-size:.9rem;line-height:1.45;color:var(--muted)}
-    .pipe:nth-child(2){background:var(--lime)}
-    .pipe:nth-child(4){background:var(--pink)}
-    .pipe:nth-child(5){background:var(--yellow)}
-    .pipe:nth-child(6){background:var(--blue);color:#fff}
-    .pipe:nth-child(6) small{color:#dfe4ff}
-    .split{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(1.4rem,3.5vw,2.6rem);align-items:start}
-    .split .grid{gap:.8rem}
-    .split .box{padding:.75rem .85rem}
-    .tree{margin:0;background:#fff;border:var(--line);box-shadow:var(--shadow);padding:1rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.7rem,.9vw,.88rem);line-height:1.55;overflow-x:auto;white-space:pre;tab-size:2}
-    .rq-list{display:grid;gap:1rem}
-    .rq-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.9rem;align-items:start;border:var(--line);box-shadow:var(--shadow);background:#fff;padding:1rem 1.15rem}
-    .rq{display:inline-block;padding:.05rem .4rem;background:var(--ink);color:var(--paper);font-size:.78rem;font-weight:900;letter-spacing:.08em;vertical-align:.12em}
-    .rq-item h3{margin-bottom:.35rem}
-    .rq-item p{margin:0;max-width:96ch}
-    .note{border:2px dashed var(--ink);padding:.9rem 1rem;margin-top:1.4rem;max-width:960px;background:rgba(255,255,255,.35)}
-    .list{padding-left:1.15rem;line-height:1.55}
-    .list li{margin-bottom:.35rem}
-    .kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
-    .refs{margin:.4rem 0 0;padding:0;list-style:none;display:grid;gap:.6rem}
-    .refs li{position:relative;padding-left:1.9rem;text-indent:-1.9rem;font-size:clamp(.76rem,1vw,.92rem);line-height:1.5}
-    .refs li .used{display:inline-block;margin-left:.35rem;padding:.02rem .35rem;background:var(--lime);border:2px solid var(--ink);font-size:.68rem;font-weight:900;letter-spacing:.04em;text-indent:0;text-transform:uppercase;vertical-align:.08em}
-    .refs a{overflow-wrap:anywhere}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:rgba(23,23,23,.06);border:1px solid rgba(23,23,23,.12);padding:.05em .3em}
-    .controls{position:fixed;bottom:0;z-index:20;inset-inline:0;background:var(--paper);border-top:var(--line);padding:.65rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-    .controls button{display:inline-flex;align-items:center;gap:.35rem;background:var(--yellow);border:var(--line);box-shadow:3px 3px 0 var(--ink);padding:.55rem 1rem;font-weight:900;cursor:pointer}
-    .controls button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
-    .controls button:disabled{opacity:.4;cursor:not-allowed}
-    .keys{display:inline-flex;align-items:center;gap:.3rem;font-size:.92rem;font-weight:800}
-    .foot{font-size:.9rem;font-weight:800;letter-spacing:.04em}
-    @media(max-width:980px){.split{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:760px){.slide{padding-inline:1rem}.grid,.grid.two{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr}.top{padding:.55rem .8rem}.top-right{gap:.5rem}.progress{--track-width:clamp(5rem,25vw,6.5rem)}.keys{display:none}.box{padding:1rem}.hero{padding:calc(var(--top-h) + 1rem) 1rem calc(var(--bar-h) + 1.8rem)}h2{font-size:clamp(2.1rem,9vw,3.2rem)}.lead{font-size:1.08rem}.slide::after{font-size:min(34vh,20rem,45vw)}}
-    @media(max-height:800px) and (min-width:761px){
-      h1{font-size:clamp(2.8rem,7.2vw,6rem)}
-      h2{font-size:clamp(2rem,4.8vw,3.8rem);margin-bottom:.9rem}
-      .lead{font-size:clamp(1rem,1.45vw,1.25rem);line-height:1.45}
-      .eyebrow{font-size:.8rem;margin-bottom:.9rem}
-      .slide{padding-top:calc(var(--top-h) + .7rem);padding-bottom:calc(var(--bar-h) + .6rem)}
-      .hero{padding-top:calc(var(--top-h) + .7rem);padding-bottom:calc(var(--bar-h) + .6rem)}
-      .pipeline{gap:.65rem;margin-top:.8rem}
-      .pipe{min-height:5.3rem;padding:.6rem .65rem}
-      .pipe span{width:1.5rem;height:1.5rem;font-size:.75rem;margin-bottom:.25rem}
-      .pipe b{font-size:.95rem}
-      .pipe small{font-size:.8rem;line-height:1.35}
-      .box{padding:.7rem .8rem}
-      .box h3{font-size:1.05rem;margin-bottom:.3rem}
-      .small{font-size:.86rem;line-height:1.45}
-      .note{margin-top:.9rem;padding:.55rem .7rem;font-size:.82rem;line-height:1.4}
-      .split .grid{gap:.55rem}
-      .split .box{padding:.55rem .65rem}
-      .tree{font-size:.68rem;padding:.7rem}
-      .refs{gap:.35rem}
-      .refs li{font-size:.72rem;line-height:1.35}
-      .rq-item{padding:.75rem .85rem}
-      .tag{font-size:.8rem;padding:.3rem .5rem;margin-top:.8rem}
-      .hero-note{font-size:.85rem;margin-top:.8rem}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--phosphor-dim) var(--void)}
+    body{
+      margin:0;background:var(--void);color:var(--cream);
+      font-family:var(--mono);font-size:clamp(16px,1.1vw,17px);line-height:1.65;font-weight:400;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+      overflow-x:hidden;
     }
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.slide.active .inner>*{animation:none}}
-    @media print{.top,.controls{display:none}.slide{display:flex!important;min-height:auto;break-after:page;page-break-after:always;padding:1.2cm}.slide.cover{padding:0}.hero{min-height:auto;padding:1.2cm}.slide::after{display:none}.box{box-shadow:none}.inner{max-width:none}.slide.active .inner>*{animation:none}body{font-size:10pt}}
+    ::selection{background:var(--phosphor);color:var(--void)}
+    :focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+    ::-webkit-scrollbar{width:10px;height:10px}
+    ::-webkit-scrollbar-track{background:var(--void)}
+    ::-webkit-scrollbar-thumb{background:var(--line-2);border:2px solid var(--void)}
+    a{color:var(--phosphor);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
+    a:hover{background:var(--phosphor);color:var(--void);text-decoration:none}
+    button{font:inherit;color:inherit}
+    h1,h2,h3,p{margin-top:0}
+    h1,h2{font-family:var(--display);font-weight:600;text-transform:uppercase;text-wrap:balance;color:var(--cream)}
+    h1{font-size:clamp(3.1rem,5.5vw,5.8rem);line-height:.88;letter-spacing:-.02em;margin:0 0 1.2rem;max-width:11ch}
+    h2{font-size:clamp(2.4rem,4.6vw,4.6rem);line-height:.94;letter-spacing:-.02em;margin:0 0 1.1rem;max-width:18ch;text-wrap:balance}
+    h3{font-family:var(--mono);font-size:clamp(.95rem,1.1vw,1.08rem);line-height:1.3;letter-spacing:.02em;text-transform:uppercase;font-weight:700;color:var(--cream);margin:0 0 .45rem}
+    p{max-width:var(--measure);color:var(--body);margin:0 0 1rem}
+    .phosphor{color:var(--phosphor)}
+    .amber{color:var(--amber)}
+    .lead{font-size:clamp(1.05rem,1.35vw,1.32rem);line-height:1.55;color:#d6e2d7;max-width:66ch;margin-bottom:1.2rem}
+    .small{font-size:clamp(.86rem,.95vw,.96rem);line-height:1.6;color:var(--body)}
+    .muted{color:var(--muted)}
+    .boot-mask{
+      position:fixed;inset:0;z-index:9999;background:var(--void);pointer-events:none;
+      animation:bootMask .5s var(--ease) .04s both;
+    }
+    @keyframes bootMask{0%,50%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+
+    /* ------------------------------------------------------------------
+       CRT atmosphere
+       The ghost, scanlines, roll, and vignette are fixed behind the deck.
+       They never cover the content, so body copy keeps its contrast.
+       ------------------------------------------------------------------ */
+    .crt-ghost{
+      position:fixed;left:-4vw;top:4vh;z-index:0;pointer-events:none;user-select:none;
+      font-family:var(--display);font-size:clamp(12rem,22vw,24rem);line-height:.8;letter-spacing:-.02em;
+      color:transparent;-webkit-text-stroke:1px rgba(138,255,90,.10);
+      text-shadow:4px 0 rgba(255,46,136,.04),-4px 0 rgba(53,231,255,.04);
+      white-space:nowrap;transition:opacity .7s var(--ease);
+    }
+    body:not([data-slide="1"]) .crt-ghost{opacity:.45}
+    .crt-roll{
+      position:fixed;left:0;right:0;top:-180px;height:180px;z-index:2;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(138,255,90,.05),transparent);
+      animation:roll 9s linear infinite;
+    }
+    @keyframes roll{to{transform:translateY(120vh)}}
+    .crt-scanlines{
+      position:fixed;inset:0;z-index:3;pointer-events:none;
+      background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);
+      opacity:.5;
+    }
+    .crt-vignette{
+      position:fixed;inset:0;z-index:3;pointer-events:none;
+      background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.72) 100%);
+      box-shadow:inset 0 0 160px rgba(0,0,0,.85);
+    }
+    .crt-edge{position:fixed;inset:12px;z-index:3;border:1px solid rgba(138,255,90,.12);pointer-events:none}
+
+    /* ------------------------------------------------------------------
+       Fixed terminal chrome
+       ------------------------------------------------------------------ */
+    .top{
+      position:fixed;inset:0 0 auto;z-index:30;height:var(--top-h);
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;
+      padding:0 var(--gutter);border-bottom:1px solid var(--line);
+      background:rgba(5,8,6,.94);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+    }
+    .brand{display:flex;align-items:center;gap:.55rem;color:var(--phosphor);font-weight:700;letter-spacing:.1em;white-space:nowrap}
+    .brand .dot{width:6px;height:6px;background:var(--phosphor)}
+    .brand .slash{color:var(--line-2)}
+    .top-mid{color:var(--muted);letter-spacing:.16em;white-space:nowrap}
+    .top-mid b{color:var(--amber);font-weight:500}
+    .top-right{display:flex;align-items:center;gap:1rem}
+    #count{color:var(--cream);font-size:12px;letter-spacing:.08em;white-space:nowrap}
+    .progress{display:flex;align-items:center;gap:3px}
+    .progress .seg{appearance:none;border:0;padding:0;display:block;width:7px;height:10px;background:var(--line);cursor:pointer;transition:background .3s var(--ease),transform .3s var(--ease),opacity .3s var(--ease)}
+    .progress .seg.on{background:var(--phosphor)}
+    .progress .seg.current{background:var(--amber);animation:segPulse 2.4s ease-in-out infinite}
+    .progress .seg:hover{background:var(--cream);transform:scaleY(1.25)}
+    .progress .seg:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+    .controls{
+      position:fixed;inset:auto 0 0;z-index:30;height:var(--bar-h);
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;
+      padding:0 var(--gutter);border-top:1px solid var(--line);
+      background:rgba(5,8,6,.94);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    }
+    .controls button{
+      appearance:none;border:1px solid var(--line-2);background:transparent;color:var(--phosphor);
+      padding:.5rem .8rem;font-size:11px;letter-spacing:.1em;cursor:pointer;
+      transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+    }
+    .controls button:hover:not(:disabled){background:var(--phosphor);color:var(--void);border-color:var(--phosphor)}
+    .controls button:disabled{opacity:.28;cursor:not-allowed}
+    .control-mid{display:flex;align-items:center;justify-content:center;gap:1.5rem;min-width:0}
+    .keys{color:var(--muted);font-size:10px;white-space:nowrap}
+    #label{color:var(--amber);font-size:12px;letter-spacing:.14em;white-space:nowrap}
+    #label::before{content:"// ";color:var(--muted)}
+
+    /* ------------------------------------------------------------------
+       Slide frame and entrances
+       ------------------------------------------------------------------ */
+    main{position:relative;z-index:10}
+    .slide{
+      min-height:100svh;width:100%;margin:0;display:none;align-items:center;position:relative;
+      padding:calc(var(--top-h) + 1.8rem) var(--gutter) calc(var(--bar-h) + 1.5rem);
+    }
+    .slide.active{display:flex}
+    .slide.active .inner{animation:slideIn .5s var(--ease) both}
+    @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .slide.cover{padding:0;align-items:stretch}
+    .slide.cover.active .cover-inner{animation:crtOn .55s var(--ease) both}
+    @keyframes crtOn{
+      0%{opacity:0;filter:brightness(2.2) blur(3px);clip-path:inset(0 0 100% 0)}
+      45%{opacity:1;filter:brightness(1.25) blur(.6px);clip-path:inset(0)}
+      100%{opacity:1;filter:none;clip-path:inset(0)}
+    }
+    .inner{width:min(100%,1180px);margin:0 auto;position:relative;z-index:10}
+    .cover-inner{
+      width:min(100%,1240px);margin:0 auto;min-height:100svh;position:relative;z-index:10;
+      display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,4rem);align-items:center;
+      padding:calc(var(--top-h) + 1.6rem) var(--gutter) calc(var(--bar-h) + 1.6rem);
+    }
+    .cover-copy{min-width:0}
+    .cover-line{display:block}
+    .cover-copy .lead{max-width:52ch}
+    .cover-status{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1rem;margin-top:1rem}
+    .status-chip{
+      display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--amber);color:var(--amber);
+      padding:.35rem .55rem;font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:rgba(5,8,6,.45);
+    }
+    .status-chip::before{content:"";width:5px;height:5px;background:var(--amber)}
+    .status-line{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+    /* ------------------------------------------------------------------
+       Boot panel: the cover's demonstration of the loop
+       ------------------------------------------------------------------ */
+    .boot-panel{
+      position:relative;align-self:center;border:1px solid rgba(138,255,90,.42);
+      background:rgba(6,12,8,.9);box-shadow:inset 0 0 40px rgba(0,0,0,.5);overflow:hidden;
+    }
+    .boot-panel::before{
+      content:"";position:absolute;left:0;right:0;top:0;height:18%;z-index:0;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(138,255,90,.10),transparent);
+      animation:bootScan 4.2s linear infinite;
+    }
+    .boot-panel::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px);
+    }
+    @keyframes bootScan{0%{transform:translateY(-120%)}100%{transform:translateY(650%)}}
+    .boot-signal{display:inline-flex;align-items:flex-end;gap:2px;height:10px}
+    .boot-signal i{display:block;width:2px;background:var(--phosphor);animation:signalBars 1.4s ease-in-out infinite;transform-origin:bottom}
+    .boot-signal i:nth-child(1){height:4px;animation-delay:0s}
+    .boot-signal i:nth-child(2){height:7px;animation-delay:.12s}
+    .boot-signal i:nth-child(3){height:5px;animation-delay:.24s}
+    .boot-signal i:nth-child(4){height:10px;animation-delay:.36s}
+    @keyframes signalBars{0%,100%{transform:scaleY(.4);opacity:.5}50%{transform:scaleY(1);opacity:1}}
+    .panel-head{
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;
+      padding:.55rem .75rem;border-bottom:1px solid var(--line);
+      font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+    }
+    .panel-head b{color:var(--amber);font-weight:500}
+    .panel-actions{display:flex;align-items:center;gap:.6rem;min-width:0}
+    .panel-head button{
+      appearance:none;border:1px solid var(--line-2);background:transparent;color:var(--phosphor);
+      padding:.15rem .35rem;font:inherit;font-size:12px;line-height:1.2;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;cursor:pointer;
+      transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+    }
+    .panel-head button:hover,.panel-head button:focus-visible{background:var(--phosphor);color:var(--void);border-color:var(--phosphor)}
+    .panel-head button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+    .boot-panel .panel-head,.panel > .panel-head{position:relative;z-index:2}
+    .boot-body{padding:.8rem .9rem 1rem;position:relative;z-index:1;font-size:clamp(.78rem,.88vw,.86rem);line-height:1.7}
+    .boot-body::before{
+      content:"";position:absolute;left:0;right:0;top:0;height:14%;z-index:2;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(138,255,90,.08),transparent);
+      animation:bootRowScan 3.6s linear infinite;
+    }
+    @keyframes bootRowScan{0%{transform:translateY(-150%)}100%{transform:translateY(820%)}}
+    .boot-line{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px dotted rgba(127,154,134,.18);padding:.2rem 0;opacity:0}
+    .boot-panel.booted .boot-line{opacity:1}
+    .boot-line b{font-weight:500;color:var(--phosphor)}
+    .boot-line.pending b{color:var(--amber)}
+    .boot-line.cmd{color:var(--phosphor);margin-bottom:.3rem}
+    .boot-console{display:flex;align-items:center;gap:.4rem;margin-top:.5rem;border-top:1px solid var(--line);padding-top:.45rem}
+    .boot-console .prompt{color:var(--phosphor);white-space:nowrap;font-size:.78rem}
+    .boot-console .prompt::after{content:"▌";margin-left:.12rem;color:var(--phosphor);animation:cursorBlink .9s steps(2,end) infinite}
+    @keyframes cursorBlink{0%,45%{opacity:1}46%,100%{opacity:0}}
+    .boot-command{
+      flex:1;min-width:0;appearance:none;border:0;border-bottom:1px solid var(--line-2);
+      background:var(--void);color:var(--cream);font:inherit;font-size:.78rem;padding:.1rem .05rem;caret-color:var(--phosphor);
+    }
+    .boot-command:focus{outline:none;border-bottom-color:var(--phosphor)}
+    .boot-console button{
+      appearance:none;border:1px solid var(--line-2);background:transparent;color:var(--phosphor);
+      padding:.12rem .3rem;font:inherit;font-size:11px;line-height:1.2;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+      transition:background .2s var(--ease),color .2s var(--ease);
+    }
+    .boot-console button:hover,.boot-console button:focus-visible{background:var(--phosphor);color:var(--void);border-color:var(--phosphor)}
+    .console-out{margin:.35rem 0 0;min-height:1.15em;font-size:.78rem;line-height:1.4;color:var(--muted);white-space:pre-wrap}
+    .console-out:empty{display:none}
+    .console-out b{color:var(--phosphor);font-weight:500}
+    .boot-bar{display:flex;gap:2px;margin-top:.55rem}
+    .boot-bar i{display:block;position:relative;height:6px;flex:1;background:rgba(138,255,90,.14);opacity:.8;overflow:hidden}
+    .boot-bar i::after{content:"";position:absolute;inset:0;background:var(--phosphor);transform:scaleX(0);transform-origin:left}
+    .boot-panel.booted .boot-bar i::after{transform:scaleX(1)}
+    .boot-panel.is-running .boot-bar i::after{animation:bootSegment .12s steps(1,end) both;animation-delay:var(--bar-d,0s)}
+    @keyframes bootSegment{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+    .boot-bar i:nth-child(1){--bar-d:.08s}
+    .boot-bar i:nth-child(2){--bar-d:.17s}
+    .boot-bar i:nth-child(3){--bar-d:.31s}
+    .boot-bar i:nth-child(4){--bar-d:.38s}
+    .boot-bar i:nth-child(5){--bar-d:.52s}
+    .boot-bar i:nth-child(6){--bar-d:.59s;background:rgba(255,176,0,.16);opacity:.6}
+    .boot-bar i:nth-child(7){--bar-d:.74s;background:rgba(255,176,0,.08);border:1px dashed var(--line)}
+    .boot-bar i:nth-child(8){--bar-d:.81s;background:transparent;border:1px dashed var(--line)}
+    .boot-bar i:nth-child(6)::after,.boot-bar i:nth-child(7)::after,.boot-bar i:nth-child(8)::after{background:var(--amber)}
+
+    /* ------------------------------------------------------------------
+       Content primitives
+       Rows and readouts replace the old card grid; panels are reserved for
+       terminal windows (boot log, schema).
+       ------------------------------------------------------------------ */
+    .rows{border-top:1px solid var(--line)}
+    .row{
+      display:grid;grid-template-columns:3.2rem minmax(7rem,.7fr) minmax(0,1.3fr) auto;gap:1rem;
+      align-items:start;padding:.85rem 0;border-bottom:1px solid var(--line);
+    }
+    .row .n{font-family:var(--display);font-size:1.5rem;line-height:1;color:var(--phosphor);letter-spacing:.02em}
+    .row h3{margin:0 0 .25rem}
+    .row p{margin:0;max-width:66ch;font-size:.9rem;line-height:1.55}
+    .row .state{font-size:11px;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;white-space:nowrap;padding-top:.2rem}
+    .readout{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:.95rem 0}
+    .readout div{padding:.75rem .8rem;border-right:1px solid var(--line)}
+    .readout div:last-child{border-right:0}
+    .readout b{display:block;font-family:var(--display);font-size:clamp(2rem,3.4vw,3.4rem);line-height:.9;letter-spacing:-.02em;color:var(--phosphor);font-weight:600}
+    .readout span{display:block;margin-top:.35rem;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    .pipeline{display:grid;grid-template-columns:repeat(6,1fr);gap:.55rem;margin:1.2rem 0 0}
+    .node{position:relative;appearance:none;display:block;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;border:1px solid var(--line);background:rgba(7,16,10,.78);padding:.7rem .65rem;min-height:7.6rem;overflow:hidden}
+    .node > *{position:relative;z-index:1}
+    .node .id{display:block;margin-bottom:.35rem;font-size:11px;letter-spacing:.12em;color:var(--muted)}
+    .node b{display:block;margin-bottom:.35rem;font-family:var(--display);font-size:clamp(1.05rem,1.4vw,1.45rem);line-height:1;text-transform:uppercase;color:var(--cream);font-weight:600}
+    .node small{display:block;font-size:.76rem;line-height:1.4;color:var(--body)}
+    .boundaries{display:grid;grid-template-columns:3fr 1fr 2fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1rem}
+    .boundaries div{background:rgba(5,8,6,.85);padding:.55rem .7rem;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    .boundaries b{display:block;margin-bottom:.2rem;color:var(--cream);font-weight:500}
+    .channels{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1rem}
+    .channel{border-top:1px solid var(--line-2);padding-top:.8rem;transition:background .25s var(--ease)}
+    .channel:hover{background:rgba(138,255,90,.025)}
+    .channel .ch-head{display:flex;justify-content:space-between;gap:1rem;margin-bottom:.55rem;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .channel .ch-head b{color:var(--phosphor);font-weight:500}
+    .channel:nth-child(2) .ch-head b{color:var(--amber)}
+    .channel h3{font-family:var(--display);font-size:clamp(1.6rem,2.2vw,2.2rem);line-height:1;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:.55rem}
+    .channel p{font-size:.9rem;line-height:1.55;margin-bottom:.55rem}
+    .channel ul{list-style:none;padding:0;margin:0;font-size:.8rem;line-height:1.6;color:var(--muted)}
+    .channel li::before{content:"+ ";color:var(--phosphor)}
+    .channel:nth-child(2) li::before{content:"+ ";color:var(--amber)}
+    .channel-flow{position:relative;display:flex;align-items:center;gap:.4rem;margin-top:.9rem;border-top:1px solid var(--line);padding-top:.7rem;overflow:hidden}
+    .channel-flow::after{content:"";position:absolute;top:0;bottom:0;left:0;width:18%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(138,255,90,.16),transparent);animation:flowScan 3.6s linear infinite}
+    .channel:nth-child(2) .channel-flow::after{background:linear-gradient(90deg,transparent,rgba(255,176,0,.16),transparent);animation-delay:-1.2s}
+    .channel-flow span{flex:1;text-align:center;border:1px solid var(--line-2);padding:.35rem .3rem;font-size:11px;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--body);background:rgba(5,8,6,.45)}
+    .channel-flow i{font-style:normal;color:var(--phosphor);font-size:12px;line-height:1}
+    .channel:nth-child(2) .channel-flow i{color:var(--amber)}
+    .channel-flow span:last-child{color:var(--phosphor);border-color:var(--phosphor)}
+    .channel:nth-child(2) .channel-flow span:last-child{color:var(--amber);border-color:var(--amber)}
+    .queries{display:grid;gap:.8rem;margin-top:1.1rem}
+    .questions-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.75fr);gap:1.2rem;align-items:start;margin-top:1.1rem}
+    .questions-grid .queries{margin-top:0}
+    .evidence-panel{display:flex;flex-direction:column;align-self:stretch}
+    .evidence-chain{position:relative;padding:.65rem 0 .7rem 1rem;border-top:1px solid var(--line)}
+    .evidence-chain::before{content:"";position:absolute;left:0;top:.8rem;bottom:.8rem;border-left:1px solid var(--line-2)}
+    .evidence-chain::after{content:"";position:absolute;left:-2px;top:.8rem;width:5px;height:5px;background:var(--amber);animation:evidenceRun 3.8s linear infinite}
+    .evidence-chain span{display:block;font-size:11px;line-height:1.35;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .evidence-chain b{display:block;margin:.1rem 0;font-size:12px;line-height:1.3;letter-spacing:.04em;text-transform:uppercase;color:var(--phosphor);font-weight:500}
+    .evidence-chain small{display:block;font-size:11px;line-height:1.4;letter-spacing:.02em;color:var(--muted)}
+    .evidence-chain.amber b{color:var(--amber)}
+    .evidence-chain.shared b{color:var(--cream)}
+    @keyframes evidenceRun{0%{top:.8rem;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% - .8rem);opacity:0}}
+    .question-basis{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1rem;overflow:hidden}
+    .question-basis div{background:rgba(5,8,6,.9);padding:.55rem .65rem}
+    .question-basis span{display:block;font-size:11px;line-height:1.35;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .question-basis b{display:block;margin:.1rem 0;font-size:12px;line-height:1.3;letter-spacing:.04em;text-transform:uppercase;color:var(--cream);font-weight:500}
+    .question-basis small{display:block;font-size:11px;line-height:1.4;color:var(--muted)}
+    .question-basis::after{content:"";position:absolute;top:0;bottom:0;left:0;width:14%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(138,255,90,.1),transparent);animation:flowScan 4.6s linear infinite}
+    .channel-output{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1rem;overflow:hidden}
+    .channel-output div{background:rgba(5,8,6,.9);padding:.55rem .65rem}
+    .channel-output span{display:block;font-size:11px;line-height:1.35;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .channel-output b{display:block;margin:.1rem 0;font-size:12px;line-height:1.3;letter-spacing:.04em;text-transform:uppercase;color:var(--phosphor);font-weight:500}
+    .channel-output div:last-child b{color:var(--amber)}
+    .channel-output small{display:block;font-size:11px;line-height:1.4;color:var(--muted)}
+    .channel-output::after{content:"";position:absolute;top:0;bottom:0;left:0;width:14%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(138,255,90,.1),transparent);animation:flowScan 4.6s linear infinite}
+    .check-rail{position:relative;display:flex;align-items:center;gap:.4rem;margin-top:.8rem;border-top:1px solid var(--line);padding-top:.6rem;font-size:11px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);overflow:hidden;flex-wrap:wrap}
+    .check-rail span{border:1px solid var(--line-2);padding:.28rem .4rem;background:rgba(5,8,6,.45);color:var(--body)}
+    .check-rail span:first-child,.check-rail span:last-child{color:var(--phosphor);border-color:var(--phosphor)}
+    .check-rail i{font-style:normal;color:var(--amber);font-size:12px;animation:arrowPulse 2.6s ease-in-out infinite}
+    .check-rail::after{content:"";position:absolute;top:0;bottom:0;left:0;width:18%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(138,255,90,.12),transparent);animation:flowScan 4.4s linear infinite}
+    .query{border:1px solid var(--line);background:rgba(7,16,10,.78);padding:1rem 1.1rem;transition:background .25s var(--ease),border-color .25s var(--ease)}
+    .query:hover{border-color:var(--line-2);background:rgba(7,16,10,.92)}
+    .query-head{display:flex;justify-content:space-between;gap:1rem;margin-bottom:.45rem;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    .query-head b{color:var(--amber);font-weight:500}
+    .query p{margin:0;max-width:75ch;font-size:clamp(.92rem,1.1vw,1.02rem);line-height:1.6}
+    .query p::before{content:"> ";color:var(--phosphor)}
+    .split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:1.4rem;align-items:start}
+    .panel{border:1px solid var(--line);background:rgba(7,16,10,.82);box-shadow:inset 0 0 32px rgba(0,0,0,.28)}
+    .panel .panel-head{padding:.55rem .75rem}
+    .schema{width:100%;border-collapse:collapse;font-size:.78rem;line-height:1.45}
+    .schema th,.schema td{text-align:left;padding:.42rem .55rem;border-bottom:1px solid var(--line);vertical-align:top}
+    .schema th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+    .schema td:first-child{color:var(--phosphor);white-space:nowrap}
+    .schema td:last-child{color:var(--body)}
+    .methods{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.2rem;margin-top:.2rem}
+    .method{border-top:1px solid var(--line);padding-top:.55rem}
+    .method h3{margin-bottom:.3rem}
+    .method p{margin:0;font-size:.82rem;line-height:1.55}
+    .reasons .row{grid-template-columns:2.4rem minmax(0,1fr)}
+    .slide[data-n="08"] .reasons{display:grid;grid-template-columns:1fr 1fr;column-gap:2rem;border-top:1px solid var(--line)}
+    .claims{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:1rem}
+    .claim h3{font-family:var(--display);font-size:clamp(1.6rem,2.2vw,2.2rem);line-height:1;text-transform:uppercase;margin-bottom:.6rem}
+    .claim:first-child h3{color:var(--phosphor)}
+    .claim:last-child h3{color:var(--amber)}
+    .claim ul{list-style:none;padding:0;margin:0}
+    .claim li{position:relative;padding-left:1.1rem;margin-bottom:.45rem;font-size:.88rem;line-height:1.5;color:var(--body)}
+    .claim:first-child li::before{content:"+";position:absolute;left:0;color:var(--phosphor)}
+    .claim:last-child li::before{content:"-";position:absolute;left:0;color:var(--amber)}
+    .risks{margin-top:1.1rem;border:1px solid var(--line);padding:.65rem .8rem;font-size:.78rem;line-height:1.55;color:var(--muted);transition:border-color .25s var(--ease)}
+    .risks:hover{border-color:var(--line-2)}
+    .risks b{color:var(--amber);font-weight:500}
+    .note{margin-top:1rem;border:1px solid var(--line);padding:.65rem .8rem;background:rgba(7,16,10,.65);font-size:.8rem;line-height:1.55;color:var(--muted)}
+    .note b{color:var(--amber);font-weight:500}
+    .note.warn{border-color:rgba(255,176,0,.4)}
+    .dataset h2{max-width:26ch}
+    .dataset .lead{max-width:76ch;font-size:clamp(1rem,1.2vw,1.18rem);line-height:1.5;margin-bottom:.8rem}
+    .dataset .readout{margin:.6rem 0}
+    .dataset .readout div{padding:.7rem}
+    .dataset .readout b{font-size:clamp(1.9rem,3vw,3rem)}
+    .dataset .row{grid-template-columns:2.6rem minmax(6.5rem,.65fr) minmax(0,1.45fr) auto;padding:.55rem 0}
+    .dataset .row p{font-size:.84rem;line-height:1.5}
+    .dataset .note{margin-top:.45rem;padding:.42rem .65rem;font-size:.76rem;line-height:1.5}
+    .refs{list-style:none;padding:0;margin:.6rem 0 0;counter-reset:ref}
+    .refs li{position:relative;padding-left:2rem;padding-bottom:.35rem;margin-bottom:.35rem;border-bottom:1px solid rgba(31,58,41,.6);font-size:clamp(.8rem,.86vw,.86rem);line-height:1.42;color:var(--body)}
+    .refs li::before{position:absolute;left:0;top:0;counter-increment:ref;content:"[" counter(ref) "]";color:var(--muted);font-size:.8rem}
+    .refs a{overflow-wrap:anywhere}
+    .refs .used{display:inline-block;margin-left:.35rem;vertical-align:.08em;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);border:1px solid var(--line);padding:.08rem .22rem;white-space:nowrap}
+
+    /* ------------------------------------------------------------------
+       Diagram surfaces
+       The loop, the dataset record, and the contribution checks turn the
+       slide's argument into a second reading surface. Each is built from
+       1px instrument strokes, mono labels, and one signal color.
+       ------------------------------------------------------------------ */
+    .problem-grid,.dataset-body,.support-grid{display:grid;gap:1.2rem;align-items:start}
+    .problem-grid{grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr)}
+    .dataset-body{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+    .support-grid{grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);align-items:stretch}
+    .problem-copy,.dataset-body .rows{min-width:0}
+    .problem-copy .row{grid-template-columns:3.2rem minmax(0,1fr) auto}
+    .dataset-body .row{grid-template-columns:2.6rem minmax(0,1fr) auto}
+    .support-grid .row{grid-template-columns:3.2rem minmax(0,1fr) auto}
+    .loop-panel,.record-panel,.tri-panel{display:flex;flex-direction:column;align-self:stretch}
+    .loop-panel{align-self:center;justify-content:flex-start}
+
+    .loop-svg,.tri-svg{display:block;width:100%;height:auto;padding:.45rem .55rem .55rem}
+    .loop-svg text,.tri-svg text{font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
+    .loop-node{fill:rgba(7,16,10,.92);stroke:var(--line-2);stroke-width:1}
+    .loop-step{fill:var(--muted);font-size:10px}
+    .loop-label{fill:var(--cream);font-size:12px;font-weight:700}
+    .loop-sub{fill:var(--muted);font-size:11px}
+    .loop-link,.loop-return{fill:none;stroke:var(--phosphor);stroke-width:3}
+    .loop-return{stroke-dasharray:none}
+    .loop-trace{fill:none;stroke:var(--amber);stroke-width:2;stroke-linecap:butt;stroke-dasharray:5 17;animation:loopTrace 2.8s linear infinite}
+    @keyframes loopTrace{to{stroke-dashoffset:-22}}
+    .loop-cut{stroke:var(--amber);stroke-width:1;stroke-dasharray:3 4;animation:cutMove 3s linear infinite}
+    .loop-cut-label{fill:var(--amber);font-size:10.5px;paint-order:stroke;stroke:var(--panel);stroke-width:4;stroke-linejoin:round}
+    .loop-legend{fill:var(--muted);font-size:10.5px}
+    .loop-legend.amber{fill:var(--amber)}
+
+    .record-panel{padding-bottom:.05rem;align-self:start}
+    .record-head-right{display:flex;align-items:center;gap:.55rem}
+    .record-flow{
+      display:flex;flex-direction:column;gap:0;
+      margin:.45rem .75rem 0;
+    }
+    .record-step{
+      display:grid;grid-template-columns:6.7rem minmax(0,1fr);align-items:center;gap:.8rem;
+      min-height:0;border:0;border-top:1px solid var(--line);background:none;padding:.42rem 0;
+      opacity:.58;transition:opacity .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease);
+    }
+    .record-step.is-current{opacity:1;background:rgba(138,255,90,.035);border-color:var(--line-2)}
+    .record-step.is-current span{color:var(--amber)}
+    .record-step.is-current b{color:var(--phosphor)}
+    .record-step span{display:block;font-size:11px;line-height:1.35;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .record-step b{display:block;font-size:12px;line-height:1.3;letter-spacing:.04em;text-transform:uppercase;color:var(--phosphor);font-weight:500;text-align:right}
+    .record-value{text-align:right}
+    .record-value small{display:block;margin-top:.12rem;font-size:11px;line-height:1.35;letter-spacing:.02em;text-transform:none;color:var(--muted)}
+    .record-step-screen{display:block;padding:.5rem 0}
+    .record-step-screen > span{display:block;margin-bottom:.3rem}
+    .record-window{position:relative;display:flex;flex-direction:column;height:6.2rem;padding:.5rem;border:1px solid var(--line);background:rgba(5,8,6,.72);overflow:hidden;transition:border-color .3s var(--ease)}
+    .record-window-bar{display:flex;align-items:center;gap:.22rem;padding:.5rem;border-bottom:1px solid var(--line);background:rgba(138,255,90,.035)}
+    .record-window-bar i{display:block;width:4px;height:4px;background:var(--muted);border-radius:50%}
+    .record-window-bar span{margin-left:auto;font-size:10px;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--body)}
+    .record-window-body{display:grid;grid-template-columns:24% minmax(0,1fr);flex:1;min-height:0}
+    .record-window-side{display:flex;flex-direction:column;gap:.32rem;padding:.42rem .35rem;border-right:1px solid var(--line)}
+    .record-window-side i{display:block;height:3px;background:var(--line-2)}
+    .record-window-side i:nth-child(2){width:72%}
+    .record-window-side i:nth-child(3){width:84%}
+    .record-window-side i:nth-child(4){width:48%}
+    .record-window-canvas{position:relative;padding:.48rem .5rem}
+    .record-window-line{display:block;width:42%;height:4px;margin-bottom:.3rem;background:var(--line-2)}
+    .record-window-line.short{width:28%}
+    .record-control{position:absolute;left:58%;top:53%;width:20%;height:18%;border:1px solid var(--line-2);background:rgba(138,255,90,.07)}
+    .record-target{position:absolute;left:58%;top:53%;width:20%;height:18%;border:2px solid var(--amber);background:rgba(255,176,0,.06);opacity:0;transform:scale(.92);transition:opacity .28s var(--ease),transform .28s var(--ease);z-index:2}
+    .record-target b{position:absolute;left:0;top:-.95rem;padding:0 .2rem;background:rgba(7,16,10,.95);font-size:11px;line-height:1.2;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);font-weight:500;white-space:nowrap}
+    .record-window.is-targeted .record-target{opacity:1;transform:none;animation:targetPulse 2.2s ease-in-out infinite}
+    .record-scan{position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--phosphor),transparent);opacity:0;pointer-events:none}
+    .record-window.is-scanning .record-scan{animation:recordScan 1.8s linear both;opacity:1}
+    .record-cursor{position:absolute;left:8%;top:18%;width:26px;height:26px;opacity:0;transform:rotate(10deg);transition:left .9s cubic-bezier(.22,.8,.24,1),top .9s cubic-bezier(.22,.8,.24,1),opacity .25s var(--ease);pointer-events:none;z-index:3}
+    .record-window.is-scanning .record-cursor,.record-window.is-targeted .record-cursor{left:68%;top:62%;opacity:1}
+    .record-target-crop{display:block;width:6.8rem;height:1.3rem;margin:.25rem 0 0 auto;position:relative;border:1px solid var(--line-2);background:rgba(5,8,6,.75)}
+    .record-target-crop i{position:absolute;left:32%;top:26%;width:36%;height:48%;border:2px solid var(--amber);background:rgba(255,176,0,.08)}
+    .record-step.is-current .record-target-crop i{animation:targetPulse 2.2s ease-in-out infinite}
+    .record-arrow{display:none}
+    .coverage{margin:.45rem .65rem .5rem;border-top:1px solid var(--line);padding-top:.35rem}
+    .coverage-head{display:flex;justify-content:space-between;gap:.5rem;font-size:11px;line-height:1.4;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .coverage-head b{color:var(--phosphor);font-weight:500}
+    .coverage-bar{display:flex;height:6px;border:1px solid var(--line-2);margin-top:.3rem}
+    .coverage-bar i{display:block;width:64.5%;background:linear-gradient(90deg,var(--phosphor),rgba(138,255,90,.55),var(--phosphor));background-size:200% 100%;animation:coverageShimmer 3.5s linear infinite}
+    .coverage-bar span{display:block;flex:1;background:var(--line)}
+    .coverage-scale{display:flex;justify-content:space-between;gap:.5rem;margin-top:.25rem;font-size:11px;line-height:1.4;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+    .tri-panel{display:flex;flex-direction:column}
+    .tri-svg{flex:1}
+    .tri-link{fill:none;stroke:var(--line-2);stroke-width:1;stroke-dasharray:2 4;animation:triDash 4s linear infinite}
+    .tri-link:nth-of-type(2){animation-delay:.8s}
+    .tri-link:nth-of-type(3){animation-delay:1.6s}
+    .tri-link:nth-of-type(4){animation-delay:2.4s}
+    .tri-satellite{fill:rgba(7,16,10,.92);stroke:var(--line-2);stroke-width:1}
+    .tri-primary{fill:rgba(138,255,90,.06);stroke:var(--phosphor);stroke-width:1.4;animation:triPulse 3.6s ease-in-out infinite}
+    .tri-label{fill:var(--cream);font-size:10.5px;font-weight:700}
+    .tri-role{fill:var(--muted);font-size:10.5px}
+    .tri-primary-label{fill:var(--phosphor);font-size:16px;font-weight:700}
+    .tri-primary-role{fill:var(--phosphor)}
+    .tri-legend{display:flex;justify-content:space-between;gap:.4rem;margin:0 .65rem .65rem;border-top:1px solid var(--line);padding-top:.45rem;font-size:11px;line-height:1.4;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+    .tri-legend span{display:flex;align-items:center;gap:.35rem}
+    .tri-legend i{display:block;width:5px;height:5px;background:var(--phosphor)}
+    .tri-legend span:nth-child(2) i{background:var(--line-2)}
+    @keyframes triPulse{0%,100%{stroke-opacity:1}50%{stroke-opacity:.55}}
+
+    .scope-map{margin-top:1rem;border:1px solid var(--line);background:rgba(7,16,10,.72)}
+    .scope-head{display:flex;justify-content:space-between;gap:1rem;padding:.5rem .7rem;border-bottom:1px solid var(--line);font-size:11px;line-height:1.4;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .scope-head b{color:var(--amber);font-weight:500}
+    .scope-track{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 3rem repeat(2,minmax(0,1fr));gap:1px;background:var(--line);overflow:hidden}
+    .scope-track::after{content:"";position:absolute;top:0;left:0;width:5px;height:5px;background:var(--amber);z-index:2;pointer-events:none;animation:scopeRun 6.5s ease-in-out infinite}
+    .scope-node{background:rgba(5,8,6,.94);padding:.5rem .6rem;min-height:3.6rem}
+    .scope-node span,.scope-node small{display:block;font-size:11px;line-height:1.35;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .scope-node b{display:block;margin:.1rem 0;font-size:12px;line-height:1.3;letter-spacing:.04em;text-transform:uppercase;color:var(--cream);font-weight:500}
+    .scope-node.in{border-top:1px solid var(--phosphor)}
+    .scope-node.out{border-top:1px dashed var(--amber)}
+    .scope-node.out b{color:var(--amber)}
+    .scope-cut{position:relative;display:flex;align-items:center;justify-content:center;background:rgba(5,8,6,.94)}
+    .scope-cut::before{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:1px dashed var(--amber);animation:boundaryPulse 3.8s ease-in-out infinite}
+    .artifact-chain{position:relative;display:flex;align-items:center;gap:.45rem;margin-top:.8rem;border-top:1px solid var(--line);padding-top:.6rem;font-size:11px;line-height:1.35;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);overflow:hidden;flex-wrap:wrap}
+    .artifact-chain span{border:1px solid var(--line-2);padding:.28rem .4rem;background:rgba(5,8,6,.45);color:var(--body)}
+    .artifact-chain span:last-child{color:var(--phosphor);border-color:var(--phosphor)}
+    .artifact-chain i{font-style:normal;color:var(--amber);font-size:12px;animation:arrowPulse 2.6s ease-in-out infinite}
+    .artifact-chain::after{content:"";position:absolute;top:0;bottom:0;left:0;width:18%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(138,255,90,.12),transparent);animation:flowScan 4.8s linear infinite}
+    .scope-cut span{position:relative;z-index:1;padding:.25rem 0;background:var(--void);writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;line-height:1.3;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+    @keyframes boundaryPulse{0%,100%{opacity:1}50%{opacity:.45}}
+
+    /* ------------------------------------------------------------------
+       Authored motion
+       The deck is a presentation surface, not a general web UI. Motion is
+       part of the argument: the screen refreshes, signals travel, and the
+       boot log can be replayed. None of these loops are reduced or disabled;
+       the presentation is the product.
+       ------------------------------------------------------------------ */
+    @keyframes ghostDrift{
+      0%,100%{transform:translate3d(0,0,0)}
+      50%{transform:translate3d(-1.2%,-.8%,0)}
+    }
+    @keyframes cutMove{to{stroke-dashoffset:-14}}
+    @keyframes flowScan{0%{transform:translateX(-110%)}100%{transform:translateX(620%)}}
+    @keyframes shotScan{0%{transform:translateY(-110%)}100%{transform:translateY(420%)}}
+    @keyframes recordScan{0%{transform:translateY(0);opacity:0}10%{opacity:1}88%{opacity:1}100%{transform:translateY(calc(6.2rem - 2px));opacity:0}}
+    @keyframes arrowPulse{0%,100%{opacity:.55}50%{opacity:1}}
+    @keyframes coverageShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    @keyframes triDash{to{stroke-dashoffset:-12}}
+    @keyframes scopeRun{0%{left:0;opacity:0}8%{opacity:1}55%{left:58%;opacity:1}65%,100%{left:58%;opacity:0}}
+    @keyframes targetPulse{0%,100%{border-color:var(--amber);opacity:.85}50%{border-color:var(--phosphor);opacity:1}}
+    .crt-ghost{animation:ghostDrift 26s ease-in-out infinite}
+
+    @keyframes vignetteBreathe{0%,100%{opacity:.92}50%{opacity:1}}
+    .crt-vignette{animation:vignetteBreathe 8s ease-in-out infinite}
+
+    @keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.35}}
+    .brand .dot{animation:dotPulse 3.2s ease-in-out infinite}
+
+    @keyframes segPulse{
+      0%,100%{opacity:1;transform:scaleY(1)}
+      50%{opacity:.55;transform:scaleY(.72)}
+    }
+
+    @keyframes slideSweep{0%{transform:translateY(0)}100%{transform:translateY(100vh)}}
+    .slide::before{
+      content:"";position:absolute;left:0;right:0;top:0;height:1px;z-index:5;pointer-events:none;
+      background:linear-gradient(90deg,transparent,rgba(138,255,90,.5),transparent);opacity:0;
+    }
+    .slide.active::before{opacity:.45;animation:slideSweep 7s linear infinite}
+
+    @keyframes rowScan{0%{transform:translateY(-40%)}100%{transform:translateY(420%)}}
+    .rows{position:relative;overflow:hidden}
+    .rows::after{
+      content:"";position:absolute;left:0;right:0;top:0;height:35%;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(138,255,90,.055),transparent);
+      animation:rowScan 6s linear infinite;
+    }
+    .row{transition:background .25s var(--ease)}
+    .row:hover{background:rgba(138,255,90,.035)}
+    @keyframes statePulse{0%,100%{opacity:.72}50%{opacity:1}}
+    .row .state{animation:statePulse 3.6s ease-in-out infinite}
+    .readout div{transition:background .25s var(--ease)}
+    .readout div:hover{background:rgba(138,255,90,.04)}
+    @keyframes numberPulse{0%,100%{opacity:1}50%{opacity:.86}}
+    .readout b{animation:numberPulse 4.5s ease-in-out infinite}
+
+    /* The pipeline is a live signal path: a beam crosses the row while
+       each node's status light blinks in sequence. Nodes are controls, so
+       hovering or selecting one updates the readout below the boundary. */
+    @keyframes signalFlowA{0%{left:0}100%{left:100%}}
+    @keyframes signalFlowB{0%{left:-100%}100%{left:0}}
+    .pipeline{position:relative}
+    .pipeline-beams{position:absolute;left:0;right:0;top:-.55rem;height:1px;overflow:hidden;pointer-events:none;z-index:2}
+    .pipeline-beams i{position:absolute;top:0;width:30%;height:1px;background:linear-gradient(90deg,transparent,var(--phosphor),transparent)}
+    .pipeline-beams i:first-child{animation:signalFlowA 3s linear infinite}
+    .pipeline-beams i:last-child{animation:signalFlowB 3s linear infinite}
+    .pipeline-relay{position:absolute;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;opacity:0;pointer-events:none;z-index:3}
+    .pipeline-relay::before{content:"";position:absolute;right:5px;top:50%;width:96px;height:3px;transform-origin:right center;transform:translateY(-50%) rotate(var(--relay-angle,0deg));background:linear-gradient(90deg,transparent,rgba(255,176,0,.62))}
+    .pipeline-relay img{position:absolute;left:50%;top:50%;width:30px;height:30px;transform:translate(-50%,-50%) rotate(var(--relay-tilt,0deg));opacity:0;pointer-events:none}
+    .pipeline-relay.is-running{animation:relayTravel .62s cubic-bezier(.22,.8,.24,1) both;will-change:transform,opacity}
+    .pipeline-relay.is-running .relay-hand{animation:relayHand .62s steps(1,end) both,relayWobble .62s ease-in-out both}
+    .pipeline-relay.is-running .relay-click{animation:relayClick .62s steps(1,end) both,relayPress .62s cubic-bezier(.22,.8,.24,1) both}
+    .pipeline-relay.is-thinking{opacity:1;transform:translate3d(var(--relay-x1),var(--relay-y1),0);animation:none}
+    .pipeline-relay.is-thinking::before{opacity:0}
+    .pipeline-relay.is-thinking .relay-hand{opacity:1;animation:relayThink 1s ease-in-out infinite}
+    .pipeline-relay.is-thinking .relay-click{opacity:0;animation:none}
+    .pipeline-relay.is-thinking::after{content:"···";position:absolute;left:50%;bottom:calc(100% + 2px);transform:translateX(-50%);font:12px/1 var(--mono);letter-spacing:.12em;color:var(--amber);opacity:.9;animation:thinkPulse 1s steps(2,end) infinite}
+    @keyframes relayTravel{0%{transform:translate3d(var(--relay-x1),var(--relay-y1),0);opacity:0}12%{opacity:1}90%{opacity:1}100%{transform:translate3d(var(--relay-x2),var(--relay-y2),0);opacity:0}}
+    @keyframes relayHand{0%,72%{opacity:1}72.01%,100%{opacity:0}}
+    @keyframes relayClick{0%,72%{opacity:0}72.01%,100%{opacity:1}}
+    @keyframes relayPress{0%,74%{transform:translate(-50%,-50%) rotate(var(--relay-tilt,0deg)) scale(1)}82%{transform:translate(-50%,-50%) rotate(var(--relay-tilt,0deg)) scale(.86)}90%,100%{transform:translate(-50%,-50%) rotate(var(--relay-tilt,0deg)) scale(1)}}
+    @keyframes relayWobble{0%{transform:translate(-50%,-50%) rotate(calc(var(--relay-tilt,0deg) - 3deg))}55%{transform:translate(-50%,-50%) rotate(calc(var(--relay-tilt,0deg) + 3deg))}100%{transform:translate(-50%,-50%) rotate(var(--relay-tilt,0deg))}}
+    @keyframes relayThink{0%,100%{opacity:.7;transform:translate(-50%,-50%) rotate(calc(var(--relay-tilt,0deg) - 3deg))}50%{opacity:1;transform:translate(-50%,-50%) rotate(calc(var(--relay-tilt,0deg) + 3deg))}}
+    @keyframes thinkPulse{0%,100%{opacity:.35}50%{opacity:1}}
+    @keyframes nodeBlink{0%,55%,100%{opacity:1}65%,90%{opacity:.2}}
+    .node::after{
+      content:"";position:absolute;right:.5rem;top:.5rem;width:5px;height:5px;background:var(--line-2);
+      animation:nodeBlink 3.2s steps(2,end) infinite;animation-delay:var(--d,0s);
+    }
+    .node:nth-child(1)::after{--d:0s}
+    .node:nth-child(2)::after{--d:.3s}
+    .node:nth-child(3)::after{--d:.6s}
+    .node:nth-child(4)::after{--d:.9s}
+    .node:nth-child(5)::after{--d:1.2s}
+    .node:nth-child(6)::after{--d:1.5s}
+    .node.is-active::after{background:var(--phosphor)}
+    .node:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-color:var(--phosphor)}
+    .node.is-active{border-color:var(--phosphor);background:rgba(138,255,90,.06);transform:translateY(-2px);animation:nodeArrive .42s var(--ease),nodeAdvance 1.6s linear 1}
+    .node.is-leaving{border-color:var(--phosphor);background:rgba(138,255,90,.06);transform:translateY(-2px);animation:nodeLeave .62s var(--ease) both;pointer-events:none}
+    .node.is-active::before{content:"";position:absolute;left:0;right:0;top:0;height:18%;z-index:0;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(138,255,90,.14),transparent);animation:nodeScan 1.6s linear 1}
+    @keyframes nodeScan{0%{transform:translateY(-120%)}100%{transform:translateY(620%)}}
+    @keyframes nodeArrive{0%{border-color:var(--line);background:rgba(7,16,10,.78);transform:translateY(0)}65%{border-color:var(--phosphor);background:rgba(138,255,90,.1);transform:translateY(-3px)}100%{border-color:var(--phosphor);background:rgba(138,255,90,.06);transform:translateY(-2px)}}
+    @keyframes nodeLeave{0%{border-color:var(--phosphor);background:rgba(138,255,90,.06);transform:translateY(-2px)}100%{border-color:var(--line);background:rgba(7,16,10,.78);transform:translateY(0)}}
+    /* Sentinel animation with the same duration as the scan; its end event advances the sequence. */
+    @keyframes nodeAdvance{0%{outline-offset:0}100%{outline-offset:0}}
+    .node.is-active b{color:var(--phosphor)}
+    .boundaries div{transition:background .25s var(--ease),outline-color .25s var(--ease)}
+    .boundaries div.is-linked{outline:1px solid var(--phosphor);outline-offset:-1px;background:rgba(138,255,90,.055);animation:boundaryLock .45s steps(2,end)}
+    .boundaries div.is-linked b{color:var(--phosphor)}
+    @keyframes boundaryLock{0%{outline-color:var(--amber)}100%{outline-color:var(--phosphor)}}
+    .pipeline-readout.is-refreshed{animation:readoutIn .28s var(--ease)}
+    @keyframes readoutIn{0%{opacity:.35;transform:translateX(-6px)}100%{opacity:1;transform:none}}
+    .pipeline-readout{
+      margin:.75rem 0 0;border-top:1px solid var(--line);padding-top:.5rem;
+      font-size:11px;line-height:1.5;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    }
+    .pipeline-readout b{color:var(--phosphor);font-weight:500}
+
+    @keyframes channelScan{0%{transform:translateY(-40%)}100%{transform:translateY(420%)}}
+    .channel{position:relative;overflow:hidden}
+    .channel::after{
+      content:"";position:absolute;left:0;right:0;top:0;height:30%;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(138,255,90,.05),transparent);
+      animation:channelScan 7s linear infinite;
+    }
+    .channel:nth-child(2)::after{animation-delay:1.4s}
+
+    @keyframes promptBlink{0%,55%,100%{opacity:1}65%,90%{opacity:.2}}
+    .query p::before{animation:promptBlink 1.8s steps(2,end) infinite}
+    @keyframes queryScan{0%{transform:translateY(-40%)}100%{transform:translateY(420%)}}
+    .query{position:relative;overflow:hidden}
+    .query::after{
+      content:"";position:absolute;left:0;right:0;top:0;height:28%;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(138,255,90,.05),transparent);
+      animation:queryScan 7s linear infinite;
+    }
+    .query:nth-child(2)::after{animation-delay:1.3s}
+
+    .panel{position:relative;overflow:hidden}
+    @keyframes panelScan{0%{transform:translateY(-40%)}100%{transform:translateY(420%)}}
+    .panel::after{
+      content:"";position:absolute;left:0;right:0;top:0;height:30%;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(138,255,90,.05),transparent);
+      animation:panelScan 7s linear infinite;
+    }
+    .schema tbody tr{transition:background .2s var(--ease)}
+    .schema tbody tr:hover{background:rgba(138,255,90,.04)}
+    .method{transition:border-color .25s var(--ease)}
+    .method:hover{border-color:var(--phosphor)}
+
+    .claims{position:relative;overflow:hidden}
+    .claims::after{
+      content:"";position:absolute;left:0;right:0;top:0;height:26%;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(138,255,90,.05),transparent);
+      animation:panelScan 8s linear infinite;
+    }
+    .claim li{transition:color .2s var(--ease),transform .2s var(--ease)}
+    .claim li:hover{color:var(--cream);transform:translateX(2px)}
+    .refs li{transition:background .2s var(--ease),transform .2s var(--ease)}
+    .refs li:hover{background:rgba(138,255,90,.035);transform:translateX(2px)}
+    .refs{position:relative}
+    .refs::after{
+      content:"";position:absolute;left:0;right:0;top:0;height:24%;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(138,255,90,.04),transparent);
+      animation:panelScan 8s linear infinite;
+    }
+
+    @keyframes bootLine{
+      0%{opacity:0;transform:translateY(3px)}
+      100%{opacity:1;transform:none}
+    }
+    .boot-panel.is-running .boot-line{animation:bootLine .12s steps(1,end) both}
+    .boot-panel.is-running .boot-line:nth-child(2){animation-delay:.08s}
+    .boot-panel.is-running .boot-line:nth-child(3){animation-delay:.17s}
+    .boot-panel.is-running .boot-line:nth-child(4){animation-delay:.31s}
+    .boot-panel.is-running .boot-line:nth-child(5){animation-delay:.38s}
+    .boot-panel.is-running .boot-line:nth-child(6){animation-delay:.52s}
+    .boot-panel.is-running .boot-line:nth-child(7){animation-delay:.59s}
+    .boot-panel.is-running .boot-line:nth-child(8){animation-delay:.74s}
+    .boot-panel.is-running .boot-line:nth-child(9){animation-delay:.81s}
+    @keyframes bootStatus{0%,100%{opacity:1}50%{opacity:.55}}
+    .boot-panel.booted .boot-line b{animation:bootStatus 2.6s steps(2,end) infinite}
+    .boot-line:nth-child(2) b{animation-delay:.08s}
+    .boot-line:nth-child(3) b{animation-delay:.16s}
+    .boot-line:nth-child(4) b{animation-delay:.24s}
+    .boot-line:nth-child(5) b{animation-delay:.32s}
+    .boot-line:nth-child(6) b{animation-delay:.4s}
+    .boot-line:nth-child(7) b{animation-delay:.48s}
+    .boot-line:nth-child(8) b{animation-delay:.56s}
+    .boot-line:nth-child(9) b{animation-delay:.64s}
+    @keyframes barPulse{0%,100%{opacity:.8}50%{opacity:.3}}
+    .boot-bar i{animation:barPulse 1.7s ease-in-out infinite}
+    .boot-bar i:nth-child(2){animation-delay:.08s}
+    .boot-bar i:nth-child(3){animation-delay:.16s}
+    .boot-bar i:nth-child(4){animation-delay:.24s}
+    .boot-bar i:nth-child(5){animation-delay:.32s}
+    .boot-bar i:nth-child(6){animation-delay:.4s}
+
+    /* ------------------------------------------------------------------
+       Responsive structure
+       ------------------------------------------------------------------ */
+    @media(max-width:1100px){
+      .pipeline{grid-template-columns:repeat(3,1fr)}
+      .node{min-height:6.4rem}
+      .contrib-heading{max-width:none;text-wrap:pretty}
+    }
+    @media(max-width:900px){
+      .top-mid{display:none}
+      .cover-inner{grid-template-columns:1fr;min-height:auto;gap:1.5rem;padding-top:calc(var(--top-h) + 1rem);padding-bottom:calc(var(--bar-h) + 1rem)}
+      .cover-copy h1{max-width:none}
+      .cover-line{display:inline}
+      .cover-line br{display:none}
+      .slide h2{max-width:none;text-wrap:pretty}
+      .boot-panel{width:100%;max-width:560px;margin:0 auto}
+      .channels,.claims,.split,.methods{grid-template-columns:1fr}
+      .slide[data-n="08"] .reasons{grid-template-columns:1fr}
+      .questions-grid,.question-basis,.channel-output{grid-template-columns:1fr}
+      .problem-grid,.dataset-body,.support-grid{grid-template-columns:1fr}
+      .loop-panel,.record-panel,.tri-panel{width:100%;max-width:560px}
+      .loop-panel{margin-inline:auto}
+      .scope-track{grid-template-columns:1fr}
+      .scope-track::after{display:none}
+      .scope-cut{min-height:2rem}
+      .scope-cut span{writing-mode:horizontal-tb;transform:none;padding:.15rem .3rem}
+      .readout{grid-template-columns:repeat(2,1fr)}
+      .readout div:nth-child(2){border-right:0}
+      .readout div:nth-child(3),.readout div:nth-child(4){border-top:1px solid var(--line)}
+      .boundaries{grid-template-columns:1fr}
+      .row{grid-template-columns:2.4rem minmax(0,1fr)}
+      .row .state{grid-column:2;padding-top:0}
+      .row p{grid-column:2}
+      .reasons .row{grid-template-columns:2.4rem minmax(0,1fr)}
+    }
+    @media(max-width:600px){
+      :root{--top-h:3rem;--bar-h:3.6rem;--gutter:1rem}
+      .crt-ghost{display:none}
+      body{font-size:15px}
+      h1{font-size:clamp(2.7rem,13vw,4.4rem)}
+      h2{font-size:clamp(2rem,10vw,3.2rem)}
+      .keys,#count{display:none}
+      .progress .seg{width:5px;height:8px}
+      .controls button{padding:.45rem .55rem;font-size:11px}
+      .readout{grid-template-columns:1fr}
+      .readout div{border-right:0;border-bottom:1px solid var(--line)}
+      .readout div:last-child{border-bottom:0}
+      .pipeline{grid-template-columns:1fr}
+      .node{min-height:auto}
+      .record-flow{grid-template-columns:1fr;gap:.3rem}
+      .record-arrow{transform:rotate(90deg);justify-self:start;padding-left:.5rem}
+      .record-step{min-height:auto}
+      .refs li{padding-left:1.7rem}
+      .refs .used{margin-left:.25rem}
+    }
+    @media(max-height:800px) and (min-width:901px){
+      :root{--top-h:3rem;--bar-h:3.6rem}
+      h1{font-size:clamp(2.9rem,5.3vw,5.3rem)}
+      h2{font-size:clamp(2rem,3.7vw,3.7rem);margin-bottom:.8rem}
+      .lead{font-size:clamp(.98rem,1.15vw,1.12rem);line-height:1.5;margin-bottom:.8rem}
+      .slide{padding-top:calc(var(--top-h) + 1rem);padding-bottom:calc(var(--bar-h) + .8rem)}
+      .cover-inner{padding-top:calc(var(--top-h) + .8rem);padding-bottom:calc(var(--bar-h) + .8rem)}
+      .pipeline{gap:.4rem;margin-top:.8rem}
+      .node{min-height:6rem;padding:.5rem .45rem}
+      .node b{font-size:1.08rem}
+      .node small{font-size:.74rem}
+      .row{padding:.55rem 0}
+      .row .n{font-size:1.2rem}
+      .row p{font-size:.82rem;line-height:1.45}
+      .readout b{font-size:clamp(1.7rem,2.6vw,2.6rem)}
+      .dataset .rows{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;border-top:0}
+      .dataset-body .rows{display:block;gap:0}
+      .dataset .note{margin-top:.5rem}
+      .dataset .row{display:grid;grid-template-columns:2rem minmax(0,1fr) auto;grid-template-rows:auto auto;gap:.2rem .4rem;border-top:1px solid var(--line);border-bottom:0;padding:.55rem 0}
+      .dataset .row .n{grid-row:1;grid-column:1;font-size:1.2rem}
+      .dataset .row div{display:contents}
+      .dataset .row h3{grid-row:1;grid-column:2;margin:0}
+      .dataset .row p{grid-row:2;grid-column:2 / 4;font-size:.8rem;line-height:1.45}
+      .dataset .row .state{grid-row:1;grid-column:3;padding-top:0}
+      .dataset-body .row{padding:.42rem 0}
+      .query{padding:.75rem .85rem}
+      .query p{font-size:.9rem;line-height:1.5}
+      .tree{font-size:.76rem;padding:.7rem}
+      .refs li{font-size:.8rem;line-height:1.4}
+      .note{padding:.5rem .65rem;font-size:.76rem;line-height:1.45;margin-top:.7rem}
+      .boot-body{font-size:.78rem;line-height:1.6}
+      .channel h3,.claim h3{font-size:1.5rem}
+      .record-panel .panel-head{padding:.4rem .65rem}
+      .record-flow{margin:.3rem .65rem 0}
+      .record-step{padding:.3rem 0}
+      .record-value small{display:none}
+      .record-step-screen{padding:.35rem 0}
+      .record-step-screen > span{margin-bottom:.2rem}
+      .record-window{height:3.6rem;padding:.26rem}
+      .record-window-bar{padding:.18rem .3rem}
+      .record-window-bar span{font-size:10px}
+      .record-window-canvas{padding:.26rem}
+      .record-step{padding:.22rem 0}
+      .record-step-screen{padding:.26rem 0}
+      .record-step-screen > span{margin-bottom:.16rem}
+      .record-target-crop{width:4.8rem;height:.95rem;margin-top:.1rem}
+      .record-target b{top:-.7rem;font-size:10px}
+      .record-cursor{width:18px;height:18px}
+      .coverage{margin:.22rem .65rem .18rem;padding-top:.24rem}
+      .dataset .note{padding:.4rem .6rem;font-size:.72rem;line-height:1.35;margin-top:.5rem}
+    }
+    @media print{
+      .top,.controls,.crt-ghost,.crt-roll,.crt-scanlines,.crt-vignette,.crt-edge,.boot-mask,.panel-head button{display:none!important}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      body{background:#fff;color:#000;font-size:10pt}
+      body *{color:#111!important;background:transparent!important;border-color:#999!important;text-shadow:none!important;box-shadow:none!important}
+      .slide{display:flex!important;min-height:auto;break-after:page;page-break-after:always;padding:1.2cm;color:#111!important}
+      .slide .inner{max-width:none}
+      .panel,.row,.note,.readout,.node,.query,.risks,.refs li{border-color:#999!important;background:#fff!important}
+      a{color:#000!important}
+      .slide.active .inner,.slide.cover.active .cover-inner{animation:none}
+    }
   </style>
 </head>
-<body>
+<body data-slide="1">
+  <div class="boot-mask" aria-hidden="true"></div>
+  <div class="crt-ghost" aria-hidden="true">GLASSHAND</div>
+  <div class="crt-roll" aria-hidden="true"></div>
+  <div class="crt-scanlines" aria-hidden="true"></div>
+  <div class="crt-vignette" aria-hidden="true"></div>
+  <div class="crt-edge" aria-hidden="true"></div>
+
   <header class="top">
-    <div class="brand">FIELD NOTES / CV-DA</div>
+    <div class="brand"><span class="dot"></span>GLASSHAND <span class="slash">/</span> CSC 172</div>
+    <div class="top-mid">CSC 172 <b>//</b> PROPOSAL</div>
     <div class="top-right">
       <span id="count">01 / 11</span>
-      <div class="progress" role="progressbar" aria-label="Presentation progress" aria-valuemin="1" aria-valuemax="11" aria-valuenow="1"><i id="bar"></i></div>
+      <nav class="progress" aria-label="Jump to slide">
+        <button type="button" class="seg on current" aria-label="Go to slide 1: Start" aria-current="step"></button>
+        <button type="button" class="seg" aria-label="Go to slide 2: The problem"></button>
+        <button type="button" class="seg" aria-label="Go to slide 3: Architecture"></button>
+        <button type="button" class="seg" aria-label="Go to slide 4: Contributions"></button>
+        <button type="button" class="seg" aria-label="Go to slide 5: Dataset"></button>
+        <button type="button" class="seg" aria-label="Go to slide 6: Research questions"></button>
+        <button type="button" class="seg" aria-label="Go to slide 7: Method"></button>
+        <button type="button" class="seg" aria-label="Go to slide 8: CART"></button>
+        <button type="button" class="seg" aria-label="Go to slide 9: Supporting analyses"></button>
+        <button type="button" class="seg" aria-label="Go to slide 10: Scope"></button>
+        <button type="button" class="seg" aria-label="Go to slide 11: References"></button>
+      </nav>
+      <div id="progress-status" class="sr-only" role="progressbar" aria-label="Presentation progress" aria-valuemin="1" aria-valuemax="11" aria-valuenow="1"></div>
     </div>
   </header>
 
   <main aria-live="polite">
     <section class="slide cover active" data-n="01" aria-label="Slide 1 of 11" aria-hidden="false">
-      <div class="hero">
-        <div class="hero-inner">
-          <div class="eyebrow">CSC 172 · Intelligent Systems + Data Mining</div>
-          <h1>See the screen.<br>Find the target.<br><span style="color:var(--yellow)">Explain the miss.</span></h1>
+      <div class="cover-inner">
+        <div class="cover-copy">
+          <h1><span class="cover-line">See the <br>screen.</span> <span class="cover-line phosphor">Find the <br>target.</span> <span class="cover-line amber">Measure the <br>failure.</span></h1>
           <p class="lead">A model-agnostic framework for visual grounding and failure analysis on Windows desktop applications.</p>
-          <div class="tag">Proposal · no implementation results yet</div>
-          <p class="hero-note">ScreenSpot-Pro · Windows subset · CART decision tree</p>
+          <div class="cover-status">
+            <span class="status-chip">Proposal / no implementation results yet</span>
+            <span class="status-line">Computer Vision / Windows desktop / ScreenSpot-Pro</span>
+          </div>
         </div>
+
+        <aside class="boot-panel" aria-label="Proposal system check">
+          <div class="panel-head"><span>SYSTEM CHECK / <b>GLASSHAND</b></span><span class="panel-actions"><span class="boot-signal" aria-hidden="true"><i></i><i></i><i></i><i></i></span><button id="boot-replay" type="button" aria-label="Replay boot sequence">[ RUN ]</button><span>CSC 172 / 2026</span></span></div>
+          <div class="boot-body">
+            <div class="boot-line cmd">glasshand / system check</div>
+            <div class="boot-line"><span>01 / capture</span><b>[ PLANNED ]</b></div>
+            <div class="boot-line"><span>02 / perceive</span><b>[ PLANNED ]</b></div>
+            <div class="boot-line"><span>03 / ground</span><b>[ PLANNED ]</b></div>
+            <div class="boot-line"><span>04 / decide</span><b>[ PLANNED ]</b></div>
+            <div class="boot-line"><span>05 / act</span><b>[ PLANNED ]</b></div>
+            <div class="boot-line pending"><span>06 / verify</span><b>[ OPEN ]</b></div>
+            <div class="boot-line pending"><span>07 / evidence</span><b>[ OPEN ]</b></div>
+            <div class="boot-line pending"><span>08 / report</span><b>[ OPEN ]</b></div>
+            <div class="boot-bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <form class="boot-console" id="boot-console">
+              <span class="prompt" aria-hidden="true">glasshand&gt;</span>
+              <input class="boot-command" id="boot-command" name="command" type="text" autocomplete="off" spellcheck="false" aria-label="Terminal command">
+              <button type="submit" aria-label="Run terminal command">[ EXEC ]</button>
+            </form>
+            <p class="console-out" id="console-out" aria-live="polite"></p>
+            <span class="sr-only" id="console-announce" aria-live="polite"></span>
+          </div>
+        </aside>
       </div>
     </section>
 
     <section class="slide" data-n="02" aria-label="Slide 2 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">02</span>The problem</div>
         <h2>The screen is not an API.</h2>
-        <p class="lead">Desktop applications expose pixels, not structured intent. A model can decide what to do, but it cannot act until it can see the interface, locate the right control, and verify what changed.</p>
-        <div class="grid">
-          <article class="box lime"><div class="num">01</div><h3>Perceive</h3><p class="small">High-resolution screenshots, mixed DPI, small icons, and text at different scales.</p></article>
-          <article class="box pink"><div class="num">02</div><h3>Ground</h3><p class="small">Map a natural-language instruction to a target coordinate on the screen.</p></article>
-          <article class="box yellow"><div class="num">03</div><h3>Act, then verify</h3><p class="small">Click or type, then check whether the visible state actually changed.</p></article>
+        <div class="problem-grid">
+          <div class="problem-copy">
+            <p class="lead">Desktop applications expose pixels, not structured intent. A model can decide what to do, but it cannot act until it can see the interface, locate the right control, and verify what changed.</p>
+            <div class="rows">
+              <div class="row"><span class="n">01</span><div><h3>Perceive</h3><p>High-resolution screenshots, mixed DPI, small icons, and text at different scales.</p></div></div>
+              <div class="row"><span class="n">02</span><div><h3>Ground</h3><p>Map a natural-language instruction to a target coordinate on the screen.</p></div></div>
+              <div class="row"><span class="n">03</span><div><h3>Act, then verify</h3><p>Click or type, then check whether the visible state actually changed.</p></div></div>
+            </div>
+          </div>
+          <aside class="panel loop-panel" role="img" aria-label="Three-stage closed loop: perceive pixels, ground a target, then act and verify state. A dashed benchmark cut after grounding marks where most benchmarks stop; a return path shows the full project loop.">
+            <div class="panel-head"><span>Inference loop</span><span>Pixels only</span></div>
+            <svg class="loop-svg" viewBox="0 0 400 220" aria-hidden="true">
+              <defs>
+                <marker id="loop-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto">
+                  <path d="M0 0 L8 4 L0 8 Z" fill="#8aff5a"/>
+                </marker>
+              </defs>
+              <rect class="loop-node" x="20" y="24" width="100" height="54"/>
+              <text class="loop-step" x="28" y="39">01</text>
+              <text class="loop-label" x="70" y="47" text-anchor="middle">PERCEIVE</text>
+              <text class="loop-sub" x="70" y="63" text-anchor="middle">pixels</text>
+              <rect class="loop-node" x="150" y="24" width="100" height="54"/>
+              <text class="loop-step" x="158" y="39">02</text>
+              <text class="loop-label" x="200" y="47" text-anchor="middle">GROUND</text>
+              <text class="loop-sub" x="200" y="63" text-anchor="middle">target</text>
+              <rect class="loop-node" x="280" y="24" width="100" height="54"/>
+              <text class="loop-step" x="288" y="39">03</text>
+              <text class="loop-label" x="334" y="44" text-anchor="middle">ACT +</text>
+              <text class="loop-label" x="334" y="58" text-anchor="middle">VERIFY</text>
+              <text class="loop-sub" x="334" y="72" text-anchor="middle">state check</text>
+              <path class="loop-link" d="M122 51 H146" marker-end="url(#loop-arrow)"/>
+              <path class="loop-link" d="M252 51 H276" marker-end="url(#loop-arrow)"/>
+              <path class="loop-return" d="M334 80 V150 H70 V84" marker-end="url(#loop-arrow)"/>
+              <path class="loop-trace" d="M122 51 H138 M252 51 H268 M334 80 V150 H70 V92"/>
+              <path class="loop-cut" d="M265 6 V36"/>
+              <path class="loop-cut" d="M265 66 V96"/>
+              <text class="loop-cut-label" x="265" y="110" text-anchor="middle">STOP HERE</text>
+              <circle cx="27" cy="201" r="3" fill="#8aff5a"/>
+              <text class="loop-legend" x="38" y="205">PROJECT LOOP</text>
+              <path d="M215 201 H235" stroke="#ffb000" stroke-width="1" stroke-dasharray="3 4"/>
+              <text class="loop-legend amber" x="244" y="205">BENCHMARKS STOP</text>
+            </svg>
+          </aside>
         </div>
-        <div class="note small"><strong>Most benchmarks stop at grounding.</strong> This project treats grounding as a measurable component, not the whole claim.</div>
       </div>
     </section>
 
     <section class="slide" data-n="03" aria-label="Slide 3 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">03</span>Proposed architecture</div>
-        <h2>One loop,<br>three boundaries.</h2>
+        <h2>The pipeline has three boundaries.</h2>
         <p class="lead">The framework separates perception, decision, and execution. The decision layer is model-agnostic; Jev is the first adapter, not the architecture.</p>
         <div class="pipeline">
-          <div class="pipe"><span>01</span><b>Capture</b><small>Windows screen or browser surface</small></div>
-          <div class="pipe"><span>02</span><b>Perceive</b><small>detection, OCR, element classification</small></div>
-          <div class="pipe"><span>03</span><b>Ground</b><small>instruction → target coordinate</small></div>
-          <div class="pipe"><span>04</span><b>Decide</b><small>model-agnostic action choice</small></div>
-          <div class="pipe"><span>05</span><b>Act</b><small>mouse and keyboard execution</small></div>
-          <div class="pipe"><span>06</span><b>Verify</b><small>visual state check</small></div>
+          <button class="node" type="button" data-stage="A.01" data-name="Capture" data-detail="Windows screen or browser surface" data-boundary="perception" aria-pressed="false"><span class="id">A.01</span><b>Capture</b><small>Windows screen or browser surface</small></button>
+          <button class="node" type="button" data-stage="A.02" data-name="Perceive" data-detail="Detection, OCR, element classification" data-boundary="perception" aria-pressed="false"><span class="id">A.02</span><b>Perceive</b><small>Detection, OCR, element classification</small></button>
+          <button class="node" type="button" data-stage="A.03" data-name="Ground" data-detail="Instruction to target coordinate" data-boundary="perception" aria-pressed="false"><span class="id">A.03</span><b>Ground</b><small>Instruction → target coordinate</small></button>
+          <button class="node" type="button" data-stage="A.04" data-name="Decide" data-detail="Model-agnostic action choice" data-boundary="decision" aria-pressed="false"><span class="id">A.04</span><b>Decide</b><small>Model-agnostic action choice</small></button>
+          <button class="node" type="button" data-stage="A.05" data-name="Act" data-detail="Mouse and keyboard execution" data-boundary="execution" aria-pressed="false"><span class="id">A.05</span><b>Act</b><small>Mouse and keyboard execution</small></button>
+          <button class="node" type="button" data-stage="A.06" data-name="Verify" data-detail="Visual state check" data-boundary="execution" aria-pressed="false"><span class="id">A.06</span><b>Verify</b><small>Visual state check</small></button>
+          <div class="pipeline-beams" aria-hidden="true"><i></i><i></i></div>
+          <div class="pipeline-relay" aria-hidden="true"><img class="relay-hand" src="assets/cursor-hand.svg" alt=""><img class="relay-click" src="assets/cursor-hand-click.svg" alt=""></div>
         </div>
+        <div class="boundaries">
+          <div data-boundary="perception"><b>Perception / A.01–A.03</b>Capture, detection, OCR, grounding</div>
+          <div data-boundary="decision"><b>Decision / A.04</b>Model-agnostic boundary</div>
+          <div data-boundary="execution"><b>Execution / A.05–A.06</b>Act, then verify the change</div>
+        </div>
+        <p class="pipeline-readout" id="pipeline-readout" aria-live="polite"><b>Select a stage</b> — click a card to inspect its boundary.</p>
       </div>
     </section>
 
     <section class="slide" data-n="04" aria-label="Slide 4 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">04</span>Research contributions</div>
-        <h2>Two questions,<br>one experimental foundation.</h2>
-        <div class="grid two">
-          <article class="box lime"><div class="kicker">Intelligent Systems · CV</div><h3>Can it see the target?</h3><p class="small">Measure grounding accuracy on high-resolution Windows screenshots. Break results down by application, element type, and interface condition.</p><p class="small"><strong>Methods:</strong> detection, OCR, visual grounding, robustness.</p></article>
-          <article class="box pink"><div class="kicker">Data Mining · DM</div><h3>Why does it miss?</h3><p class="small">Analyze the labeled grounding records. Find co-occurring failure conditions and fit an interpretable model that generalizes across applications.</p><p class="small"><strong>Methods:</strong> association rules, CART, grouped validation.</p></article>
+        <h2 class="contrib-heading">CV measures accuracy. DM models failure.</h2>
+        <div class="channels">
+          <div class="channel">
+            <div class="ch-head"><span>Computer Vision</span><b>CV</b></div>
+            <h3>Can it see the target?</h3>
+            <p>Measure grounding accuracy on high-resolution Windows screenshots. Break results down by application, element type, and interface condition.</p>
+            <ul><li>Detection</li><li>OCR</li><li>Visual grounding</li><li>Robustness</li></ul>
+            <div class="channel-flow" aria-label="CV measurement flow: pixels to target to accuracy">
+              <span>Pixels</span><i>→</i><span>Target</span><i>→</i><span>Accuracy</span>
+            </div>
+          </div>
+          <div class="channel">
+            <div class="ch-head"><span>Data Mining</span><b>DM</b></div>
+            <h3>Why does it miss?</h3>
+            <p>Analyze the labeled grounding records. Find co-occurring failure conditions and fit an interpretable model that generalizes across applications.</p>
+            <ul><li>Association rules</li><li>CART</li><li>Grouped validation</li></ul>
+            <div class="channel-flow" aria-label="Data Mining explanation flow: records to conditions to CART">
+              <span>Records</span><i>→</i><span>Conditions</span><i>→</i><span>CART</span>
+            </div>
+          </div>
         </div>
-        <div class="note small"><strong>One combined paper.</strong> The contributions remain distinguishable by their questions, methods, and results; the run records are shared.</div>
+        <div class="channel-output" aria-label="Outputs of the two contribution channels">
+          <div><span>CV output</span><b>Point-in-box accuracy</b><small>application / element / condition</small></div>
+          <div><span>DM output</span><b>CART failure conditions</b><small>grouped by application</small></div>
+        </div>
       </div>
     </section>
 
-    <section class="slide" data-n="05" aria-label="Slide 5 of 11" aria-hidden="true">
+    <section class="slide dataset" data-n="05" aria-label="Slide 5 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">05</span>Evaluation data</div>
-        <h2>ScreenSpot-Pro,<br>narrowed to Windows.</h2>
+        <h2>Windows subset: 1,020 examples.</h2>
         <p class="lead">A high-resolution GUI grounding benchmark: 1,581 examples across 23 professional applications and three operating systems. The Windows subset contains 1,020 examples, matching the framework's target platform.</p>
-        <div class="grid">
-          <article class="box"><h3>What it gives</h3><p class="small">Instruction, screenshot, and ground-truth target box. Icon and text targets, including buttons, menu items, and controls.</p></article>
-          <article class="box lime"><h3>Why it fits</h3><p class="small">Professional interfaces, small targets, high resolution. A hard test of grounding rather than an easy toy set.</p></article>
-          <article class="box pink"><h3>What it does not give</h3><p class="small">No browser tasks, no action sequences, no state transitions. Static screenshots only.</p></article>
+        <div class="readout">
+          <div><b>1,581</b><span>Total examples</span></div>
+          <div><b>1,020</b><span>Windows subset</span></div>
+          <div><b>23</b><span>Applications</span></div>
+          <div><b>3</b><span>Operating systems</span></div>
         </div>
-        <div class="note small"><strong>License: MIT.</strong> The dataset card and the project repository declare MIT. The screenshots depict proprietary applications, so the dataset license does not grant rights to the applications themselves. The full benchmark spans Windows, macOS, and Linux; this study uses the Windows subset.</div>
+        <div class="dataset-body">
+          <div class="rows">
+            <div class="row"><span class="n">+</span><div><h3>What it gives</h3><p>Instruction, screenshot, and ground-truth target box. Icon and text targets, including buttons, menu items, and controls.</p></div><span class="state">Input</span></div>
+            <div class="row"><span class="n">!</span><div><h3>Why it fits</h3><p>Professional interfaces, small targets, high resolution. A hard test of grounding rather than an easy toy set.</p></div><span class="state">Fit</span></div>
+            <div class="row"><span class="n">-</span><div><h3>What it does not give</h3><p>No browser tasks, no action sequences, no state transitions. Static screenshots only.</p></div><span class="state">Limit</span></div>
+          </div>
+          <aside class="panel record-panel" role="group" aria-label="ScreenSpot-Pro record format: a natural-language instruction, a high-resolution screenshot with a target box, and the Windows coverage of 1,020 of 1,581 examples.">
+            <div class="panel-head"><span>Record format</span><span class="record-head-right"><span>ScreenSpot-Pro</span><button type="button" data-record-replay aria-label="Replay record format sequence">Replay</button></span></div>
+            <div class="record-flow">
+              <div class="record-step" data-record-step="instruction">
+                <span>01 / Instruction</span>
+                <div class="record-value"><b>Natural language</b><small>“Activate the target control.”</small></div>
+              </div>
+              <div class="record-step record-step-screen" data-record-step="screenshot">
+                <span>02 / Screenshot</span>
+                <div class="record-window" aria-hidden="true">
+                  <div class="record-window-bar"><i></i><i></i><i></i><span>application window</span></div>
+                  <div class="record-window-body">
+                    <div class="record-window-side"><i></i><i></i><i></i><i></i></div>
+                    <div class="record-window-canvas">
+                      <span class="record-window-line"></span>
+                      <span class="record-window-line short"></span>
+                      <span class="record-control"></span>
+                      <span class="record-target"><b>target</b></span>
+                      <img class="record-cursor" src="assets/cursor-hand-click.svg" alt="">
+                    </div>
+                  </div>
+                  <span class="record-scan"></span>
+                </div>
+              </div>
+              <div class="record-step" data-record-step="target">
+                <span>03 / Target</span>
+                <div class="record-value"><b>Ground-truth box</b><span class="record-target-crop" aria-hidden="true"><i></i></span></div>
+              </div>
+            </div>
+            <div class="coverage">
+              <div class="coverage-head"><span>Windows coverage</span><b>1,020 / 1,581</b></div>
+              <div class="coverage-bar"><i></i><span></span></div>
+              <div class="coverage-scale"><span>Windows subset</span><span>Other OS</span></div>
+            </div>
+          </aside>
+        </div>
+        <div class="note"><b>License: MIT.</b> The dataset card and the project repository declare MIT. The screenshots depict proprietary applications, so the dataset license does not grant rights to the applications themselves. The full benchmark spans Windows, macOS, and Linux; this study uses the Windows subset.</div>
       </div>
     </section>
 
     <section class="slide" data-n="06" aria-label="Slide 6 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">06</span>Research questions</div>
-        <h2>Two questions.</h2>
-        <p class="lead">The first asks whether the perception layer works. The second asks what its failures mean.</p>
-        <div class="rq-list">
-          <article class="rq-item"><span class="rq">RQ1</span><div><h3>Grounding</h3><p class="small">How accurately can a model-agnostic, vision-only pipeline ground natural-language instructions to GUI targets on high-resolution Windows screenshots, and how does accuracy vary by application, element type, and interface condition?</p></div></article>
-          <article class="rq-item"><span class="rq">RQ2</span><div><h3>Failure analysis</h3><p class="small">Which visual and interface conditions co-occur with grounding failure, and can a shallow CART decision tree describe those conditions and generalize across unseen applications?</p></div></article>
+        <h2>The questions and their evidence.</h2>
+        <p class="lead">RQ1 measures grounding accuracy. RQ2 models the conditions that predict failure.</p>
+        <div class="questions-grid">
+          <div class="queries">
+            <article class="query">
+              <div class="query-head"><b>RQ1 / Grounding</b><span>Perception</span></div>
+              <p>How accurately can a model-agnostic, vision-only pipeline ground natural-language instructions to GUI targets on high-resolution Windows screenshots, and how does accuracy vary by application, element type, and interface condition?</p>
+            </article>
+            <article class="query">
+              <div class="query-head"><b>RQ2 / Failure analysis</b><span>Data Mining</span></div>
+              <p>Which visual and interface conditions co-occur with grounding failure, and can a shallow CART decision tree describe those conditions and generalize across unseen applications?</p>
+            </article>
+          </div>
+          <aside class="panel evidence-panel" aria-label="Evidence for each research question">
+            <div class="panel-head"><span>Evidence</span><span>Per question</span></div>
+            <div class="evidence-chain">
+              <span>RQ1</span>
+              <b>Point-in-box accuracy</b>
+              <small>application / element / condition</small>
+            </div>
+            <div class="evidence-chain amber">
+              <span>RQ2</span>
+              <b>CART failure conditions</b>
+              <small>grouped by application</small>
+            </div>
+            <div class="evidence-chain shared">
+              <span>Both</span>
+              <b>Grouped by application</b>
+              <small>report per application, not pooled</small>
+            </div>
+          </aside>
+        </div>
+        <div class="question-basis" aria-label="Operational definitions for both questions">
+          <div><span>Unit</span><b>One grounding request</b><small>instruction + screenshot + target</small></div>
+          <div><span>Labels</span><b>Four outcomes</b><small>correct / mislocalized / not found / ambiguous</small></div>
+          <div><span>Validation</span><b>Grouped by application</b><small>report per application, not pooled</small></div>
         </div>
       </div>
     </section>
 
     <section class="slide" data-n="07" aria-label="Slide 7 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">07</span>Method</div>
         <h2>One row per request.</h2>
         <p class="lead">Each grounding request becomes a record: instruction, screenshot, target box, predicted point, model, application, element type, and outcome. Labels are correct, mislocalized, not found, or ambiguous.</p>
-        <div class="grid two">
-          <article class="box"><h3>Primary metric</h3><p class="small"><strong>Point-in-box accuracy</strong> on the Windows subset. Secondary: distance to target, per-application accuracy, per-element-type accuracy.</p></article>
-          <article class="box lime"><h3>Validation</h3><p class="small"><strong>Grouped cross-validation by application.</strong> Report per-application results, not only the pooled average.</p></article>
-          <article class="box yellow"><h3>Records</h3><p class="small"><strong>JSONL</strong> source of truth → <strong>DuckDB</strong> query and feature assembly → <strong>Parquet</strong> derived tables. Arrow only as an in-memory handoff.</p></article>
-          <article class="box pink"><h3>Sample target</h3><p class="small">At least <strong>500 labeled requests</strong> and <strong>100 observed failures</strong> before fitting models. A planning heuristic, not a formal power calculation.</p></article>
+        <div class="split">
+          <div class="panel">
+            <div class="panel-head"><span>Record schema / JSONL</span><span>One row</span></div>
+            <table class="schema">
+              <thead><tr><th>Field</th><th>Content</th></tr></thead>
+              <tbody>
+                <tr><td>instruction</td><td>Natural-language task</td></tr>
+                <tr><td>screenshot</td><td>Screen or browser surface</td></tr>
+                <tr><td>target box</td><td>Ground-truth rectangle</td></tr>
+                <tr><td>predicted point</td><td>Model output coordinate</td></tr>
+                <tr><td>model</td><td>Adapter identity</td></tr>
+                <tr><td>application</td><td>Grouping key</td></tr>
+                <tr><td>element type</td><td>Icon, text, control</td></tr>
+                <tr><td>outcome</td><td>Correct, mislocalized, not found, ambiguous</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <div class="methods">
+              <div class="method"><h3>Primary metric</h3><p><strong>Point-in-box accuracy</strong> on the Windows subset. Secondary: distance to target, per-application accuracy, per-element-type accuracy.</p></div>
+              <div class="method"><h3>Validation</h3><p><strong>Grouped cross-validation by application.</strong> Report per-application results, not only the pooled average.</p></div>
+              <div class="method"><h3>Records</h3><p><strong>JSONL</strong> source of truth → <strong>DuckDB</strong> query and feature assembly → <strong>Parquet</strong> derived tables. Arrow only as an in-memory handoff.</p></div>
+              <div class="method"><h3>Sample target</h3><p>At least <strong>500 labeled requests</strong> and <strong>100 observed failures</strong> before fitting models. The target is a planning heuristic; it is not a formal power calculation.</p></div>
+            </div>
+            <div class="note warn"><b>Rows are grouped by application.</b> Ground-truth target geometry does not enter the predictor.</div>
+          </div>
         </div>
-        <div class="note small"><strong>No random row splits.</strong> No leakage from ground-truth target geometry into predictive features.</div>
       </div>
     </section>
 
     <section class="slide" data-n="08" aria-label="Slide 8 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">08</span>Primary algorithm</div>
-        <h2>A tree that<br>explains the miss.</h2>
-        <div class="split">
-          <div>
-            <p class="lead">CART is the primary analysis model because it produces readable rules, not just a score.</p>
-            <div class="grid two">
-              <article class="box lime"><h3>Interpretable</h3><p class="small">Each root-to-leaf path is a conjunction of conditions that leads to a success or failure.</p></article>
-              <article class="box yellow"><h3>Mixed features</h3><p class="small">Numeric and categorical predictors without manual pre-binning.</p></article>
-              <article class="box pink"><h3>Interactions</h3><p class="small">Small predicted target × icon type × low OCR confidence.</p></article>
-              <article class="box"><h3>Controlled</h3><p class="small">Depth 3–5, cost-complexity pruning, grouped validation.</p></article>
-            </div>
-          </div>
-          <pre class="tree">predicted target area &lt; 0.1%?
-├── yes → element type = icon?
-│         ├── yes → OCR confidence &lt; 0.6?
-│         │         ├── yes → FAILURE
-│         │         └── no  → PASS
-│         └── no  → PASS
-└── no  → PASS</pre>
+        <h2>CART describes failure conditions.</h2>
+        <p class="lead">CART is the primary analysis model because it produces readable rules, not just a score.</p>
+        <div class="rows reasons">
+          <div class="row"><span class="n">01</span><div><h3>Interpretable</h3><p>Each root-to-leaf path is a conjunction of conditions that leads to a success or failure.</p></div></div>
+          <div class="row"><span class="n">02</span><div><h3>Mixed features</h3><p>Numeric and categorical predictors without manual pre-binning.</p></div></div>
+          <div class="row"><span class="n">03</span><div><h3>Interactions</h3><p>Small predicted target × icon type × low OCR confidence.</p></div></div>
+          <div class="row"><span class="n">04</span><div><h3>Controlled</h3><p>Depth 3–5, cost-complexity pruning, grouped validation.</p></div></div>
         </div>
-        <div class="note small" style="margin-top:1.2rem"><strong>Descriptive paths, predictive test.</strong> Grouped validation checks whether the learned conditions generalize; features must be available before the ground-truth box is consulted.</div>
+        <div class="note"><b>The rules describe; grouped validation tests.</b> Features must be available before the ground-truth box is consulted.</div>
       </div>
     </section>
 
     <section class="slide" data-n="09" aria-label="Slide 9 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">09</span>Supporting analyses</div>
-        <h2>The tree is primary.<br>The rest triangulate.</h2>
-        <div class="grid two">
-          <article class="box lime"><h3>Association rules</h3><p class="small"><strong>Descriptive co-occurrence.</strong> Report support, confidence, and lift for conditions such as small target + icon + low OCR confidence. Not a second predictor.</p></article>
-          <article class="box yellow"><h3>Random forest</h3><p class="small"><strong>Accuracy benchmark and feature importance.</strong> Check whether the same features dominate under an ensemble. Not per-request rules.</p></article>
-          <article class="box"><h3>Logistic regression</h3><p class="small"><strong>Linear baseline.</strong> Test whether the tree's non-linear interactions actually buy predictive performance.</p></article>
-          <article class="box pink"><h3>Clustering</h3><p class="small"><strong>Exploratory profiles.</strong> Describe failure subgroups and check whether tree leaves align with natural clusters. Not predictive.</p></article>
+        <h2>CART is primary; four checks.</h2>
+        <div class="support-grid">
+          <div class="rows">
+            <div class="row"><span class="n">A</span><div><h3>Association rules</h3><p><strong>Descriptive co-occurrence.</strong> Report support, confidence, and lift for conditions such as small target + icon + low OCR confidence. Not a second predictor.</p></div><span class="state">Descriptive</span></div>
+            <div class="row"><span class="n">B</span><div><h3>Random forest</h3><p><strong>Accuracy benchmark and feature importance.</strong> Check whether the same features dominate under an ensemble. Not per-request rules.</p></div><span class="state">Benchmark</span></div>
+            <div class="row"><span class="n">C</span><div><h3>Logistic regression</h3><p><strong>Linear baseline.</strong> Test whether the tree's non-linear interactions actually buy predictive performance.</p></div><span class="state">Baseline</span></div>
+            <div class="row"><span class="n">D</span><div><h3>Clustering</h3><p><strong>Exploratory profiles.</strong> Describe failure subgroups and check whether tree leaves align with natural clusters. Not predictive.</p></div><span class="state">Exploratory</span></div>
+            <div class="check-rail" role="img" aria-label="Analysis order: fit CART, read rules, compare baselines, report by application.">
+              <span>Fit CART</span><i>→</i><span>Read rules</span><i>→</i><span>Compare</span><i>→</i><span>Report by app</span>
+            </div>
+          </div>
+          <aside class="panel tri-panel" role="img" aria-label="CART is the primary model. Four supporting analyses check it as cross-checks, not model inputs: association rules describe, random forest benchmarks, logistic regression is a linear baseline, and clustering explores failure subgroups.">
+            <div class="panel-head"><span>Supporting analyses</span><span>CART primary</span></div>
+            <svg class="tri-svg" viewBox="0 0 400 260" aria-hidden="true">
+              <path class="tri-link" d="M79 63 L200 132"/>
+              <path class="tri-link" d="M321 63 L200 132"/>
+              <path class="tri-link" d="M79 221 L200 132"/>
+              <path class="tri-link" d="M321 221 L200 132"/>
+              <rect class="tri-satellite" x="20" y="15" width="118" height="48"/>
+              <text class="tri-label" x="79" y="35" text-anchor="middle">A / ASSOCIATION</text>
+              <text class="tri-role" x="79" y="51" text-anchor="middle">DESCRIBE</text>
+              <rect class="tri-satellite" x="262" y="15" width="118" height="48"/>
+              <text class="tri-label" x="321" y="35" text-anchor="middle">B / RANDOM FOREST</text>
+              <text class="tri-role" x="321" y="51" text-anchor="middle">BENCHMARK</text>
+              <rect class="tri-satellite" x="20" y="197" width="118" height="48"/>
+              <text class="tri-label" x="79" y="217" text-anchor="middle">C / LOGISTIC</text>
+              <text class="tri-role" x="79" y="233" text-anchor="middle">BASELINE</text>
+              <rect class="tri-satellite" x="262" y="197" width="118" height="48"/>
+              <text class="tri-label" x="321" y="217" text-anchor="middle">D / CLUSTERS</text>
+              <text class="tri-role" x="321" y="233" text-anchor="middle">EXPLORE</text>
+              <rect class="tri-primary" x="145" y="99" width="110" height="66"/>
+              <text class="tri-primary-label" x="200" y="128" text-anchor="middle">CART</text>
+              <text class="tri-role tri-primary-role" x="200" y="146" text-anchor="middle">PRIMARY</text>
+            </svg>
+            <div class="tri-legend"><span><i></i>Primary / CART</span><span><i></i>Supporting / A–D</span><span>Dashed = check</span></div>
+          </aside>
         </div>
-        <div class="note small"><strong>One main algorithm, clearly labeled supporting analyses.</strong> No ensemble is presented as the primary model.</div>
       </div>
     </section>
 
     <section class="slide" data-n="10" aria-label="Slide 10 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">10</span>Scope</div>
-        <h2>Be precise<br>about the claim.</h2>
-        <div class="grid two">
-          <article class="box lime"><h3>Will claim</h3><ul class="list small"><li>A model-agnostic, vision-only grounding pipeline.</li><li>Measured accuracy on the Windows subset of ScreenSpot-Pro.</li><li>Interpretable failure conditions with grouped validation.</li><li>A reproducible record schema for later work.</li></ul></article>
-          <article class="box pink"><h3>Will not claim</h3><ul class="list small"><li>Full autonomous computer use.</li><li>Live Windows control or end-to-end task success.</li><li>Browser coverage from ScreenSpot-Pro.</li><li>Causal effects or generalization beyond the benchmark.</li></ul></article>
+        <h2>The claim stops at failure conditions.</h2>
+        <div class="claims">
+          <div class="claim">
+            <h3>Will claim</h3>
+            <ul><li>A model-agnostic, vision-only grounding pipeline.</li><li>Measured accuracy on the Windows subset of ScreenSpot-Pro.</li><li>Interpretable failure conditions with grouped validation.</li><li>A reproducible record schema for later work.</li></ul>
+          </div>
+          <div class="claim">
+            <h3>Will not claim</h3>
+            <ul><li>Full autonomous computer use.</li><li>Live Windows control or end-to-end task success.</li><li>Browser coverage from ScreenSpot-Pro.</li><li>Causal effects or generalization beyond the benchmark.</li></ul>
+          </div>
         </div>
-        <div class="note small"><strong>Known risks.</strong> Screenshot rights remain with application vendors · no browser tasks · static screenshots do not test capture or DPI · single-tree instability · small sample · ground-truth leakage if post-hoc features enter the predictor.</div>
+        <div class="risks"><b>Known risks.</b> Screenshot rights remain with application vendors · no browser tasks · static screenshots do not test capture or DPI · single-tree instability · small sample · ground-truth leakage if post-hoc features enter the predictor.</div>
+        <div class="scope-map" role="img" aria-label="Scope: benchmark evidence, grounding accuracy, and failure conditions are in scope; live control and full autonomy are outside the claim.">
+          <div class="scope-head"><span>In scope / out of scope</span><span>Benchmark evidence <b>≠</b> live control</span></div>
+          <div class="scope-track">
+            <div class="scope-node in"><span>01</span><b>Benchmark</b><small>ScreenSpot-Pro / Windows</small></div>
+            <div class="scope-node in"><span>02</span><b>Grounding</b><small>accuracy</small></div>
+            <div class="scope-node in"><span>03</span><b>Failure conditions</b><small>grouped validation</small></div>
+            <div class="scope-cut"><span>Boundary</span></div>
+            <div class="scope-node out"><span>04</span><b>Live control</b><small>not claimed</small></div>
+            <div class="scope-node out"><span>05</span><b>Autonomy</b><small>not claimed</small></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="slide" data-n="11" aria-label="Slide 11 of 11" aria-hidden="true">
       <div class="inner">
-        <div class="eyebrow"><span class="index">11</span>References</div>
-        <h2>References</h2>
+        <h2>References.</h2>
         <ol class="refs">
           <li>Li, K., Meng, Z., Lin, H., Luo, Z., Tian, Y., Ma, J., Huang, Z., &amp; Chua, T.-S. (2025). <em>ScreenSpot-Pro: GUI Grounding for Professional High-Resolution Computer Use</em>. arXiv:2504.07981. <a href="https://arxiv.org/abs/2504.07981">arxiv.org/abs/2504.07981</a> <span class="used">slides 5–6</span></li>
           <li>Cheng, K., Sun, Q., Chu, Y., Xu, F., Li, Y., Zhang, J., &amp; Wu, Z. (2024). <em>SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents</em>. arXiv:2401.10935. <a href="https://arxiv.org/abs/2401.10935">arxiv.org/abs/2401.10935</a> <span class="used">slide 5</span></li>
@@ -305,70 +1206,419 @@
           <li>Breiman, L. (2001). Random Forests. <em>Machine Learning, 45</em>(1), 5–32. <a href="https://doi.org/10.1023/A:1010933404324">doi.org/10.1023/A:1010933404324</a> <span class="used">slide 9</span></li>
           <li>Han, J., Kamber, M., &amp; Pei, J. (2022). <em>Data Mining: Concepts and Techniques</em> (4th ed.). Morgan Kaufmann. <span class="used">slide 9</span></li>
         </ol>
-        <div class="note small"><strong>Proposal deck.</strong> No experimental results are reported. Dataset: <a href="https://huggingface.co/datasets/likaixin/ScreenSpot-Pro">huggingface.co/datasets/likaixin/ScreenSpot-Pro</a>.</div>
+        <div class="artifact-chain" role="img" aria-label="Planned artifact chain: ScreenSpot-Pro to JSONL records to DuckDB to Parquet to CART.">
+          <span>ScreenSpot-Pro</span><i>→</i><span>JSONL</span><i>→</i><span>DuckDB</span><i>→</i><span>Parquet</span><i>→</i><span>CART</span>
+        </div>
+        <div class="note"><b>Proposal deck.</b> No experimental results are reported. Dataset: <a href="https://huggingface.co/datasets/likaixin/ScreenSpot-Pro">huggingface.co/datasets/likaixin/ScreenSpot-Pro</a>.</div>
       </div>
     </section>
   </main>
 
   <nav class="controls" aria-label="Presentation controls">
-    <button id="prev" type="button" aria-label="Previous slide">← Back</button>
-    <span class="keys" aria-hidden="true">← → · Space · swipe</span>
-    <span class="foot" id="label">START</span>
-    <button id="next" type="button" aria-label="Next slide">Next →</button>
+    <button id="prev" type="button" aria-label="Previous slide">[ ← Prev ]</button>
+    <div class="control-mid">
+      <span class="keys" aria-hidden="true">← → · Space · Swipe</span>
+      <span id="label">START</span>
+    </div>
+    <button id="next" type="button" aria-label="Next slide">[ Next → ]</button>
   </nav>
 
   <script>
+    /* Slide controller: one active section, hash-linked, keyboard and swipe. */
     (() => {
       const slides = [...document.querySelectorAll('.slide')];
       const labels = ['START', 'THE PROBLEM', 'ARCHITECTURE', 'CONTRIBUTIONS', 'DATASET', 'QUESTIONS', 'METHOD', 'CART', 'SUPPLEMENTS', 'SCOPE', 'REFERENCES'];
+      const segments = [...document.querySelectorAll('.progress .seg')];
       let current = 0;
       const count = document.querySelector('#count');
-      const bar = document.querySelector('#bar');
       const label = document.querySelector('#label');
       const prev = document.querySelector('#prev');
       const next = document.querySelector('#next');
-      const progress = document.querySelector('.progress');
+      const progressStatus = document.querySelector('#progress-status');
+      let coverBootTimer;
+      let coverHasBooted = false;
+      let startPipelineAutoplay = () => {};
+      let stopPipelineAutoplay = () => {};
+      let startRecordLoop = () => {};
+      let stopRecordLoop = () => {};
 
       function show(n) {
         current = Math.max(0, Math.min(slides.length - 1, n));
-        slides.forEach((s, i) => {
-          s.classList.toggle('active', i === current);
-          s.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === current);
+          slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
         });
         count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-        bar.style.width = `${(current + 1) / slides.length * 100}%`;
+        segments.forEach((segment, i) => {
+          segment.classList.toggle('on', i <= current);
+          segment.classList.toggle('current', i === current);
+          if (i === current) segment.setAttribute('aria-current', 'step');
+          else segment.removeAttribute('aria-current');
+        });
         label.textContent = labels[current] || '';
         prev.disabled = current === 0;
         next.disabled = current === slides.length - 1;
-        progress.setAttribute('aria-valuenow', String(current + 1));
+        progressStatus.setAttribute('aria-valuenow', String(current + 1));
+        document.body.dataset.slide = String(current + 1);
+        clearTimeout(coverBootTimer);
+        if (current === 0) {
+          if (bootPanel) {
+            bootPanel.classList.remove('booted', 'is-running');
+            clearTimeout(bootTimer);
+          }
+          scheduleCoverBoot(coverHasBooted ? 40 : 350);
+        }
+        if (current === 2) startPipelineAutoplay();
+        else stopPipelineAutoplay();
+        if (current === 4) startRecordLoop();
+        else stopRecordLoop();
         try { history.replaceState(null, '', `#${current + 1}`); } catch (_) {}
       }
 
       prev.addEventListener('click', () => show(current - 1));
       next.addEventListener('click', () => show(current + 1));
+      segments.forEach((segment, i) => segment.addEventListener('click', () => show(i)));
 
-      document.addEventListener('keydown', (e) => {
-        if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(current + 1); }
-        if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(current - 1); }
-        if (e.key === 'Home') { e.preventDefault(); show(0); }
-        if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+      const bootPanel = document.querySelector('.boot-panel');
+      const bootReplay = document.querySelector('#boot-replay');
+      let bootTimer;
+      let consoleCancel = () => {};
+      function replayBoot() {
+        if (!bootPanel) return;
+        consoleCancel();
+        bootPanel.classList.remove('is-running');
+        void bootPanel.offsetWidth;
+        bootPanel.classList.add('booted', 'is-running');
+        clearTimeout(bootTimer);
+        bootTimer = setTimeout(() => bootPanel.classList.remove('is-running'), 2200);
+      }
+      if (bootPanel && bootReplay) bootReplay.addEventListener('click', replayBoot);
+
+      function scheduleCoverBoot(delay = 900) {
+        clearTimeout(coverBootTimer);
+        coverBootTimer = setTimeout(() => {
+          if (current === 0 && bootPanel && !bootPanel.classList.contains('is-running')) replayBoot();
+        }, delay);
+      }
+
+      const coverInner = document.querySelector('.cover-inner');
+      if (coverInner) {
+        coverInner.addEventListener('animationend', (event) => {
+          if (event.animationName === 'crtOn' && current === 0) scheduleCoverBoot(80);
+        });
+      }
+
+      const bootForm = document.querySelector('#boot-console');
+      const bootCommand = document.querySelector('#boot-command');
+      const consoleOut = document.querySelector('#console-out');
+      const consoleAnnounce = document.querySelector('#console-announce');
+      if (bootForm && bootCommand && consoleOut) {
+        let typeTimer;
+        let commandHistory = [];
+        let historyIndex = 0;
+        consoleCancel = () => {
+          clearInterval(typeTimer);
+          consoleOut.textContent = '';
+          if (consoleAnnounce) consoleAnnounce.textContent = '';
+        };
+        const typeOutput = (text) => {
+          clearInterval(typeTimer);
+          consoleOut.textContent = '';
+          if (consoleAnnounce) consoleAnnounce.textContent = text;
+          let index = 0;
+          typeTimer = setInterval(() => {
+            consoleOut.textContent = text.slice(0, ++index);
+            if (index >= text.length) clearInterval(typeTimer);
+          }, 16);
+        };
+        const runCommand = (raw) => {
+          const command = (raw || '').trim().toLowerCase();
+          if (command) {
+            commandHistory.push(command);
+            historyIndex = commandHistory.length;
+          }
+          switch (command) {
+            case '':
+              typeOutput('ready.');
+              break;
+            case 'help':
+              typeOutput('run · status · whoami · target · clear');
+              break;
+            case 'whoami':
+              typeOutput('John-Ronan Beira');
+              break;
+            case 'status':
+              typeOutput('proposal / no implementation results yet');
+              break;
+            case 'target':
+              typeOutput('pixels in -> target coordinate out');
+              break;
+            case 'run':
+              replayBoot();
+              typeOutput('boot sequence replayed.');
+              break;
+            case 'clear':
+              consoleCancel();
+              if (consoleAnnounce) consoleAnnounce.textContent = 'console cleared.';
+              break;
+            default:
+              typeOutput(`unknown command: ${command}. try help.`);
+          }
+        };
+        bootForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          runCommand(bootCommand.value);
+          bootCommand.value = '';
+        });
+        bootCommand.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            historyIndex = Math.max(0, historyIndex - 1);
+            bootCommand.value = commandHistory[historyIndex] || '';
+          }
+          if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            historyIndex = Math.min(commandHistory.length, historyIndex + 1);
+            bootCommand.value = commandHistory[historyIndex] || '';
+          }
+        });
+      }
+
+      const nodes = [...document.querySelectorAll('.node[data-stage]')];
+      const pipelineReadout = document.querySelector('#pipeline-readout');
+      const pipeline = document.querySelector('.pipeline');
+      const pipelineRelay = document.querySelector('.pipeline-relay');
+      const boundaryBoxes = [...document.querySelectorAll('.boundaries [data-boundary]')];
+      if (nodes.length && pipelineReadout && pipeline && pipelineRelay) {
+        let pipelineAuto = false;
+        let pipelineFallbackTimer;
+        let pipelineRelayTimer;
+        let pipelineThinkTimer;
+        let pipelineRelayToken = 0;
+        let pipelineIndex = 0;
+        let pipelineActive = null;
+        const relayMs = 620;
+        const thinkMs = 500;
+
+        const paintReadout = (node) => {
+          const stage = node.dataset.stage || '';
+          const name = (node.dataset.name || '').toUpperCase();
+          const detail = node.dataset.detail || '';
+          pipelineReadout.replaceChildren();
+          const stageLabel = document.createElement('b');
+          stageLabel.textContent = `${stage} / ${name}`;
+          pipelineReadout.append(stageLabel, document.createTextNode(` — ${detail}`));
+          pipelineReadout.classList.remove('is-refreshed');
+          void pipelineReadout.offsetWidth;
+          pipelineReadout.classList.add('is-refreshed');
+        };
+
+        const activateNode = (node, fromAuto = false) => {
+          clearTimeout(pipelineFallbackTimer);
+          pipelineRelayToken += 1;
+          pipelineRelay.classList.remove('is-running');
+          nodes.forEach((candidate) => {
+            const active = candidate === node;
+            candidate.classList.toggle('is-active', active);
+            candidate.classList.remove('is-leaving', 'is-thinking');
+            candidate.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+          node.classList.remove('is-active');
+          void node.offsetWidth;
+          node.classList.add('is-active');
+          pipelineActive = node;
+          const boundary = node.dataset.boundary;
+          boundaryBoxes.forEach((box) => {
+            box.classList.toggle('is-linked', box.dataset.boundary === boundary);
+          });
+          paintReadout(node);
+          if (!fromAuto) pipelineIndex = nodes.indexOf(node);
+          if (pipelineAuto) pipelineFallbackTimer = setTimeout(advancePipeline, 1600);
+        };
+
+        const cancelRelay = () => {
+          pipelineRelayToken += 1;
+          clearTimeout(pipelineRelayTimer);
+          clearTimeout(pipelineThinkTimer);
+          pipelineRelay.classList.remove('is-running', 'is-thinking');
+        };
+
+        const placeRelay = (from, to) => {
+          const base = pipeline.getBoundingClientRect();
+          const start = from.getBoundingClientRect();
+          const end = to.getBoundingClientRect();
+          const x1 = start.left + start.width / 2 - base.left;
+          const y1 = start.top + start.height / 2 - base.top;
+          const x2 = end.left + end.width / 2 - base.left;
+          const y2 = end.top + end.height / 2 - base.top;
+          pipelineRelay.style.setProperty('--relay-x1', `${x1}px`);
+          pipelineRelay.style.setProperty('--relay-y1', `${y1}px`);
+          pipelineRelay.style.setProperty('--relay-x2', `${x2}px`);
+          pipelineRelay.style.setProperty('--relay-y2', `${y2}px`);
+          const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+          const horizontal = Math.abs(x2 - x1) >= Math.abs(y2 - y1);
+          const tilt = horizontal ? (x2 >= x1 ? 13 : -13) : (y2 >= y1 ? 7 : -7);
+          pipelineRelay.style.setProperty('--relay-angle', `${angle}deg`);
+          pipelineRelay.style.setProperty('--relay-tilt', `${tilt}deg`);
+        };
+
+        const runRelay = (from, to, fromAuto = false) => {
+          cancelRelay();
+          clearTimeout(pipelineFallbackTimer);
+          const token = pipelineRelayToken;
+          placeRelay(from, to);
+          nodes.forEach((candidate) => {
+            candidate.classList.remove('is-active');
+            candidate.setAttribute('aria-pressed', 'false');
+            if (candidate !== from) candidate.classList.remove('is-leaving');
+          });
+          from.classList.add('is-leaving');
+          pipelineActive = from;
+          pipelineRelay.classList.remove('is-running', 'is-thinking');
+          void pipelineRelay.offsetWidth;
+          pipelineRelay.classList.add('is-running');
+          pipelineRelayTimer = setTimeout(() => {
+            if (token !== pipelineRelayToken) return;
+            pipelineRelay.classList.remove('is-running');
+            from.classList.remove('is-leaving');
+            activateNode(to, fromAuto);
+          }, relayMs);
+        };
+
+        const startThinking = (from, to) => {
+          cancelRelay();
+          clearTimeout(pipelineFallbackTimer);
+          const token = pipelineRelayToken;
+          placeRelay(from, to);
+          pipelineRelay.classList.remove('is-running');
+          pipelineRelay.classList.add('is-thinking');
+          pipelineThinkTimer = setTimeout(() => {
+            if (token !== pipelineRelayToken) return;
+            pipelineRelay.classList.remove('is-thinking');
+            selectNode(to, true);
+          }, thinkMs);
+        };
+
+        const selectNode = (node, fromAuto = false) => {
+          if (!node) return;
+          if (!pipelineActive || pipelineActive === node) {
+            cancelRelay();
+            activateNode(node, fromAuto);
+            return;
+          }
+          runRelay(pipelineActive, node, fromAuto);
+        };
+
+        const advancePipeline = () => {
+          if (!pipelineAuto) return;
+          if (pipelineRelay.classList.contains('is-thinking') || pipelineRelay.classList.contains('is-running')) return;
+          clearTimeout(pipelineFallbackTimer);
+          const from = pipelineActive;
+          if (!from) return;
+          pipelineIndex = (pipelineIndex + 1) % nodes.length;
+          startThinking(from, nodes[pipelineIndex]);
+        };
+
+        startPipelineAutoplay = () => {
+          pipelineAuto = true;
+          pipelineIndex = 0;
+          pipelineActive = null;
+          clearTimeout(pipelineFallbackTimer);
+          cancelRelay();
+          nodes.forEach((node) => node.classList.remove('is-active', 'is-leaving'));
+          activateNode(nodes[0], true);
+        };
+        stopPipelineAutoplay = () => {
+          pipelineAuto = false;
+          clearTimeout(pipelineFallbackTimer);
+          cancelRelay();
+        };
+        nodes.forEach((node, index) => {
+          node.addEventListener('click', () => selectNode(node));
+          // The sentinel animation ends exactly when the scan completes; the timer is only a fallback.
+          node.addEventListener('animationend', (event) => {
+            if (event.animationName !== 'nodeAdvance' || !node.classList.contains('is-active')) return;
+            clearTimeout(pipelineFallbackTimer);
+            advancePipeline();
+          });
+          node.addEventListener('keydown', (event) => {
+            if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+            event.preventDefault();
+            const direction = event.key === 'ArrowRight' ? 1 : -1;
+            const next = nodes[(index + direction + nodes.length) % nodes.length];
+            next.focus();
+          });
+        });
+      }
+
+      const recordPanel = document.querySelector('.record-panel');
+      if (recordPanel) {
+        const recordSteps = [...recordPanel.querySelectorAll('[data-record-step]')];
+        const recordWindow = recordPanel.querySelector('.record-window');
+        const recordReplay = recordPanel.querySelector('[data-record-replay]');
+        const recordDurations = [900, 1900, 900];
+        let recordAuto = false;
+        let recordTimer;
+        let recordIndex = 0;
+        const setRecordState = (index) => {
+          recordIndex = index;
+          recordSteps.forEach((step, stepIndex) => {
+            step.classList.toggle('is-current', stepIndex === index);
+          });
+          recordWindow.classList.toggle('is-active', index > 0);
+          recordWindow.classList.toggle('is-scanning', index === 1);
+          recordWindow.classList.toggle('is-targeted', index > 0);
+        };
+        const runRecordState = () => {
+          if (!recordAuto) return;
+          setRecordState(recordIndex);
+          clearTimeout(recordTimer);
+          recordTimer = setTimeout(() => {
+            if (!recordAuto) return;
+            recordIndex = (recordIndex + 1) % recordSteps.length;
+            runRecordState();
+          }, recordDurations[recordIndex]);
+        };
+        startRecordLoop = () => {
+          recordAuto = true;
+          recordIndex = 0;
+          clearTimeout(recordTimer);
+          runRecordState();
+        };
+        stopRecordLoop = () => {
+          recordAuto = false;
+          clearTimeout(recordTimer);
+          recordSteps.forEach((step) => step.classList.remove('is-current'));
+          recordWindow.classList.remove('is-active', 'is-scanning', 'is-targeted');
+        };
+        if (recordReplay) recordReplay.addEventListener('click', startRecordLoop);
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
+        const target = event.target;
+        if (target.closest && target.closest('button, a, input, textarea, select, [contenteditable="true"]')) return;
+        if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); show(current + 1); }
+        if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); show(current - 1); }
+        if (event.key === 'Home') { event.preventDefault(); show(0); }
+        if (event.key === 'End') { event.preventDefault(); show(slides.length - 1); }
       });
 
       const SWIPE_THRESHOLD = 100;
       const SWIPE_DOMINANCE = 1.35;
       let touchStart = null;
-      document.addEventListener('touchstart', (e) => {
-        const target = e.target;
-        if (e.touches.length !== 1 || (target.closest && target.closest('a, button, input, textarea, select, [contenteditable="true"]'))) {
+      document.addEventListener('touchstart', (event) => {
+        const target = event.target;
+        if (event.touches.length !== 1 || (target.closest && target.closest('a, button, input, textarea, select, [contenteditable="true"]'))) {
           touchStart = null;
           return;
         }
-        const touch = e.changedTouches[0];
+        const touch = event.changedTouches[0];
         touchStart = { x: touch.clientX, y: touch.clientY };
       }, { passive: true });
-      document.addEventListener('touchend', (e) => {
-        if (!touchStart || e.changedTouches.length !== 1) { touchStart = null; return; }
-        const touch = e.changedTouches[0];
+      document.addEventListener('touchend', (event) => {
+        if (!touchStart || event.changedTouches.length !== 1) { touchStart = null; return; }
+        const touch = event.changedTouches[0];
         const dx = touch.clientX - touchStart.x;
         const dy = touch.clientY - touchStart.y;
         touchStart = null;
@@ -386,6 +1636,7 @@
       const hash = Number(location.hash.slice(1));
       if (hash > 0 && hash <= slides.length) current = hash - 1;
       show(current);
+      coverHasBooted = true;
     })();
   </script>
 </body>
