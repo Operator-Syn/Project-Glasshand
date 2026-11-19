@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+"""Pre-commit hook: block on ruff errors, shout about formatting drift.
+
+Installed per clone by ``scripts/setup_git_hooks.py`` (git keeps hook wiring in
+``.git/config``, which cannot be committed). Python rather than shell so the same file
+runs on Linux, macOS and Windows.
+
+Behaviour:
+
+- ``ruff check`` over the repository: any error stops the commit with ruff's own output,
+  because a lint error is a defect, not a matter of taste.
+- ``ruff format --check`` as a **warning only**: it lists the files that would change and
+  the command to fix them, then lets the commit through. Formatting drift is worth
+  seeing on every commit but not worth blocking a thesis mid-sentence.
+- A missing ruff aborts the commit. A linter that silently does not run is worse than no
+  hook, because it reports success it did not earn.
+
+Bypass with ``git commit --no-verify`` when you mean it.
+"""
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+BANNER = "=" * 72
+
+
+def repo_root() -> Path:
+    """Return the top level of the current git work tree."""
+    result = subprocess.run(
+        ["git", "rev-parse", "--show-toplevel"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        print("pre-commit: not inside a git work tree", file=sys.stderr)
+        raise SystemExit(1)
+    return Path(result.stdout.strip())
+
+
+def find_ruff(root: Path) -> list[str] | None:
+    """Return the command prefix that runs ruff, or None when it is unavailable.
+
+    The project environment wins over whatever is on PATH: a globally installed ruff
+    may not know this project's configuration or plugins.
+    """
+    executables = (
+        root / ".venv" / "bin" / "ruff",  # POSIX
+        root / ".venv" / "Scripts" / "ruff.exe",  # Windows
+    )
+    for candidate in executables:
+        if candidate.exists():
+            return [str(candidate)]
+    interpreters = (
+        root / ".venv" / "bin" / "python",  # POSIX
+        root / ".venv" / "Scripts" / "python.exe",  # Windows
+    )
+    for interpreter in interpreters:
+        if not interpreter.exists():
+            continue
+        probe = subprocess.run(
+            [str(interpreter), "-m", "ruff", "--version"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if probe.returncode == 0:
+            return [str(interpreter), "-m", "ruff"]
+    return None
+
+
+def run(command: list[str], root: Path) -> subprocess.CompletedProcess:
+    """Run a command from the repository root, capturing its output."""
+    return subprocess.run(
+        command,
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
+def main() -> int:
+    """Lint the repository and return the exit status git should honour."""
+    root = repo_root()
+    ruff = find_ruff(root)
+    if ruff is None:
+        print(BANNER, file=sys.stderr)
+        print("pre-commit BLOCKED: ruff is not available", file=sys.stderr)
+        print("  run 'uv sync' in the repository, or install ruff, then retry", file=sys.stderr)
+        print(BANNER, file=sys.stderr)
+        return 1
+
+    lint = run([*ruff, "check", ".", "--output-format=concise"], root)
+    if lint.returncode != 0:
+        print(BANNER, file=sys.stderr)
+        print("pre-commit BLOCKED: ruff found errors", file=sys.stderr)
+        print(BANNER, file=sys.stderr)
+        sys.stderr.write(lint.stdout)
+        sys.stderr.write(lint.stderr)
+        print(file=sys.stderr)
+        print("fix them, then 'git add' the changes and commit again.", file=sys.stderr)
+        print("to commit anyway: git commit --no-verify", file=sys.stderr)
+        return lint.returncode
+
+    # Formatting is advisory: report it on every commit, never block on it. Scoped to
+    # real Python files — `ruff format` would rewrite notebook JSON, which races an open
+    # kernel and churns diffs for no gain in a Jupyter-first repository.
+    formatting = run([*ruff, "format", "--check", "src", "scripts"], root)
+    if formatting.returncode != 0:
+        print(BANNER, file=sys.stderr)
+        print("pre-commit WARNING: formatting drift (not blocking)", file=sys.stderr)
+        print(BANNER, file=sys.stderr)
+        sys.stderr.write(formatting.stdout)
+        sys.stderr.write(formatting.stderr)
+        print(file=sys.stderr)
+        print("apply it with: uv run ruff format .", file=sys.stderr)
+        print(BANNER, file=sys.stderr)
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
