@@ -27,9 +27,13 @@ Any number reported from an experiment must be reconstructable from stored recor
 | Location | Holds | Does not hold |
 |---|---|---|
 | `data/` | Source images, annotations, dataset versions. | Run outputs. |
-| `experiments/` | Configurations and run records. | Derived tables or figures. |
+| `runs/` | Generated artifacts: executed notebooks, figures, exports. Git-ignored and reproducible by re-running the notebook. | Source inputs, or anything a decision cites as evidence. |
 | `results/` | Metrics tables, aggregates, figures derived from records. | Source inputs. |
 | `models/` | Weights, checkpoints, model metadata. | Run records. |
+
+No directory in this repository is kept alive by a placeholder file. Each one is created when
+something first writes into it, so a fresh clone contains only tracked files — an absent
+`results/` or `models/` means nothing has been produced yet, not that the checkout is broken.
 
 ## Record Format and Retention
 
