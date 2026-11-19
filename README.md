@@ -2,7 +2,9 @@
 
 Research project for a model-agnostic framework that perceives and operates Windows desktop applications under the control of an AI decision model.
 
-**Status:** Repository initialization — planning and documentation only. No application code, tests, datasets, models, or experimental results exist in this repository yet.
+**Status:** Research foundation — knowledge base, a uv-backed notebook workspace, and an
+exploratory analysis of the candidate evaluation corpus. The perception pipeline, model
+integration, and experimental results do not exist yet.
 
 ## Purpose
 
@@ -30,16 +32,22 @@ The two contributions form one combined paper ([ADR 0004](docs/decisions/0004_on
 
 | Path | Responsibility | State |
 |---|---|---|
-| `src/` | Future application source code | Empty workspace |
-| `tests/` | Future automated tests | Empty workspace |
-| `data/` | Research datasets and annotations | Empty workspace |
-| `experiments/` | Experiment configurations and run records | Empty workspace |
-| `results/` | Evaluation outputs and derived figures | Empty workspace |
-| `models/` | Model-related artifacts and local checkpoints | Empty workspace |
+| `src/isdm/` | Notebook-support package: repository paths, environment report, dataset fetch, and the EDA analysis modules | Initialized |
+| `notebooks/` | Jupyter workspace managed by `uv`: environment check and the ScreenSpot-Pro EDA | Initialized |
+| `tests/` | Automated tests for the package and for notebook/module sync | Initialized |
+| `data/` | Research datasets and annotations (downloaded, never committed) | Created on first write |
+| `results/` | Evaluation outputs and derived figures | Created on first write |
+| `models/` | Model-related artifacts and local checkpoints | Created on first write |
 | `presentation/` | Proposal deck and GitHub Pages entry point | Initialized |
 | `docs/` | Project knowledge base | Initialized |
 
-The workspaces are placeholders for later phases. Their existence does not authorize implementation.
+The `experiments/` workspace was removed once the notebook workspace replaced it: run
+configurations now live beside the notebooks that produce them. Downloaded data and generated
+artifacts are git-ignored; see [`notebooks/README.md`](notebooks/README.md) for the setup and
+execution commands.
+
+Most of these workspaces hold nothing yet and are created when something first writes into
+them. Their existence does not authorize implementation.
 
 ## Presentation
 
