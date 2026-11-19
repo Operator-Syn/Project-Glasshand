@@ -1,6 +1,6 @@
 # Development Roadmap
 
-**Status:** Current — a proposal. No phase is approved, in progress, or complete.
+**Status:** Current — a proposal. No phase is approved or complete. One input to phase 02 has been exercised: the candidate evaluation corpus was downloaded and characterized in the [EDA notebook](../../notebooks/EDA_Beira_John-Ronan.ipynb).
 
 ## Purpose
 
@@ -82,3 +82,4 @@ Phases 05–08 may overlap in practice: grounding can be prototyped against capt
 - 2026-11-11 — Created the roadmap during repository initialization. All phases marked Proposed. Capture moved ahead of perception; interaction separated from capture and paired with verification.
 - 2026-11-11 — Recorded the project owner's scope decisions: general Windows applications with games de-prioritized, Jev as baseline only, and two separate papers ([ADR 0003](../decisions/0003_two_papers.md)).
 - 2026-11-11 — Paper structure revised to one combined paper ([ADR 0004](../decisions/0004_one_combined_paper.md)), superseding the two-paper decision; browser-hosted applications made first-class.
+- 2026-11-19 — Recorded that phase 02's external-dataset activity has begun: the ScreenSpot-Pro Windows subset was fetched and characterized, and the workspace gained a notebook environment. No phase status changed and no candidate is accepted.
