@@ -1,0 +1,50 @@
+[project]
+name = "isdm"
+version = "0.1.0"
+description = "Notebook workspace for the ScreenSpot-Pro EDA and the Data Mining analysis"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "ipykernel>=6.29",
+    "jupyterlab>=4.2",
+    "matplotlib>=3.9",
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "pillow>=10.4",
+    "scipy>=1.13",
+    "seaborn>=0.13",
+    "tabulate>=0.9",
+]
+
+[dependency-groups]
+# nbstripout backs the committed Git filter; nbconvert runs notebooks headlessly
+dev = [
+    "nbconvert>=7.16",
+    "nbstripout>=0.9.1",
+    "pytest>=8.0",
+    "ruff>=0.7",
+]
+
+[build-system]
+# src-layout package: `uv sync` installs this editable, so notebooks, tests and scripts
+# import the same modules instead of each carrying a copy of the logic.
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/isdm"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "notebooks", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# matplotlib.use("Agg") must run before pyplot is imported, so those imports cannot sit
+# at the top of the file.
+"src/isdm/viz/figures.py" = ["E402"]
+# The assignment dictates the exact setup cell: imports in a fixed order, including
+# `scipy.stats`, which the cell must contain even though the tests now live in the
+# modules. Both findings are reproduced verbatim rather than reformatted.
+"notebooks/EDA_Beira_John-Ronan.ipynb" = ["I001", "F401"]
