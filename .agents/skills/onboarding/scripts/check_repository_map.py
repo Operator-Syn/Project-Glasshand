@@ -24,6 +24,11 @@ EXACT_DOCS = {
     "docs/decisions/README.md",
     "docs/references/README.md",
     "docs/timeline/README.md",
+    # Workspace convention documents. They sit outside docs/, but each carries binding
+    # conventions for its own tree, so an unindexed one is the same gap as an unindexed
+    # knowledge-base document.
+    "notebooks/README.md",
+    "scripts/README.md",
 }
 DOC_PREFIXES = (
     "docs/overview/",
@@ -37,11 +42,18 @@ PATH_ROOTS = (
     "src/",
     "tests/",
     "data/",
-    "experiments/",
     "results/",
     "models/",
+    "notebooks/",
+    "scripts/",
     ".agents/",
 )
+
+# Workspaces that are created on first write rather than checked into Git. The repository
+# deliberately carries no placeholder files, so a clone legitimately does not have these
+# directories yet; reporting them as missing would fail every fresh checkout. They are still
+# indexed in the map so the intended home of generated output is documented.
+DEFERRED_WORKSPACES = {"data/", "runs/", "results/", "models/"}
 IGNORED_PARTS = {
     ".git",
     ".agents",
@@ -133,7 +145,7 @@ def main() -> int:
         return 2
     for label, path in (("SKILL.md", SKILL_PATH), ("repository map", MAP_PATH)):
         if not path.is_file():
-            errors.append(f"missing onboarding file: {path}")
+            errors.append(f"missing onboarding file: {label} ({path})")
     if errors:
         print("\n".join(errors), file=sys.stderr)
         return 1
@@ -156,7 +168,11 @@ def main() -> int:
     tokens = set(TOKEN_RE.findall(map_text))
     paths = sorted(token for token in tokens if is_path_token(token))
     for entry in paths:
-        if not (root / entry).exists():
+        if (root / entry).exists():
+            continue
+        if entry in DEFERRED_WORKSPACES:
+            warnings.append(f"deferred workspace not created yet: {entry}")
+        else:
             errors.append(f"indexed path does not exist: {entry}")
 
     tracked = git_paths(root, "ls-files", "-z")
