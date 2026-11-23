@@ -2,7 +2,7 @@
 
 This directory is the project's persistent, human-readable knowledge base. It records what the project is, what has been decided, what is still unknown, and in what order the work is proposed to happen.
 
-Most documents describe plans, proposals, and open questions rather than finished work. The repository also contains a working notebook environment and an exploratory analysis of the candidate evaluation corpus. Nothing of the perception pipeline, the decision layer, or the experimental evaluation exists yet, and no phase has been approved.
+Most documents describe plans, proposals, and open questions rather than finished work. The repository contains a working notebook environment, an EDA of the ScreenSpot-Pro Windows corpus, and a static OCR grounding analysis with CART-based failure analysis on all 1,020 requests. Live capture, desktop action, closed-loop verification, and decision-model integration remain unimplemented; no roadmap phase has been approved.
 
 ## Navigation
 
@@ -10,7 +10,7 @@ Most documents describe plans, proposals, and open questions rather than finishe
 |---|---|---|
 | [overview/](overview/) | What is this project, what is in scope, and what do its terms mean? | [project.md](overview/project.md) |
 | [architecture/](architecture/) | How might the system be divided into components, and where are the boundaries? | [components.md](architecture/components.md) |
-| [research/](research/) | What is each research subject asking, and how do the two contributions differ? | [intelligent_systems.md](research/intelligent_systems.md) |
+| [research/](research/) | What evidence, questions, and methods guide the study? | [combined_paper_outline.md](research/combined_paper_outline.md) |
 | [experiments/](experiments/) | How must experiments be recorded, and what is still undefined about measurement? | [reproducibility.md](experiments/reproducibility.md) |
 | [decisions/](decisions/) | Which choices have been made, and which are only proposals? | [README.md](decisions/README.md) |
 | [references/](references/) | Which external sources have actually been collected? | [README.md](references/README.md) |
