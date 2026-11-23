@@ -194,19 +194,19 @@ Everything is square. Borders are 1px; panels have no radius. The only clipped f
 - **Budget:** Transform, opacity, border, and background-position on the active slide; the fixed atmosphere stays behind the reading column. No layout animation.
 - **Policy:** `prefers-reduced-motion` is intentionally absent. This is a presentation surface; motion is part of the identity and the explanation. The print stylesheet is the static fallback.
 
-### Channel Flow
-- **Shape:** Three equal chips joined by arrows; the final chip carries the channel accent. A low-opacity scan crosses the row.
-- **Use:** CV `Pixels → Target → Accuracy`; DM `Records → Conditions → CART`. These summarize the channel's direction; they are not a second claim.
-- **Placement:** Below the channel list on Contributions, aligned across both columns.
+### Evidence flow
+- **Shape:** Two equal stages joined by arrows; the second stage carries the channel accent. A low-opacity scan crosses the row.
+- **Use:** `Request → Grounding outcome → Failure conditions → CART`. Both stages use the same request-level records.
+- **Placement:** Below the two connected stages on the integrated-study slide.
 
 ### Evidence Panel
-- **Shape:** Square panel beside the two research questions.
-- **Content:** Three short chains: `RQ1 → Point-in-box accuracy`, `RQ2 → CART failure conditions`, `Both → Grouped by application`. A small marker travels down each chain.
-- **Rule:** The panel states how each question is evidenced; it does not add a result.
+- **Shape:** Square panel beside the single integrated research question.
+- **Content:** Two short steps: `Grounding outcome → Point-in-box accuracy`, then `Failure conditions → CART analysis`. A small marker travels down the chain.
+- **Rule:** The panel states how the single research question is answered; it does not add a result.
 
 ### Data Strip
 - **Shape:** Full-width row of 1px cells or chips, separated by rules.
-- **Use:** Contribution outputs, question basis, analysis order, and the artifact chain. A low-opacity scan crosses the strip.
+- **Use:** The evidence chain, question basis, analysis order, and the artifact chain. A low-opacity scan crosses the strip.
 - **Rule:** Use a strip when the content is a sequence or a set of definitions. Do not use it for generic calls to action.
 
 ### Diagrams
