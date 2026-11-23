@@ -121,6 +121,45 @@ Before submitting, restart the kernel and run all cells in JupyterLab and confir
 errors. The submitted copy is the executed notebook plus its HTML export; the repository copy stays
 output-free so diffs show code.
 
+## The grounding and failure analysis
+
+`01-grounding-cart.ipynb` is the integrated analysis of a text-anchored grounding baseline
+(RapidOCR + Tesseract, bilingual English/Chinese matching) and the conditions associated with
+its request-level outcomes. CART models are evaluated with application-grouped validation; the
+same corpus and outcomes support both the grounding metrics and the failure analysis.
+
+The notebook consumes records produced by the runner, so the expensive OCR pass is not
+inside a notebook cell:
+
+```bash
+uv run python scripts/run_grounding.py --n 1020 \
+  --output runs/grounding/records_all.jsonl
+uv run python scripts/summarize_grounding.py \
+  --records runs/grounding/records_all.jsonl
+```
+
+The 300-request balanced pilot is `--per-type 150` with
+`--output runs/grounding/records_300.jsonl`; it is a secondary check, not the main run.
+The notebook prefers `records_all.jsonl` when it exists.
+
+It needs the system `tesseract` binary, plus the `rapidocr-onnxruntime` and `scikit-learn`
+project dependencies. `runs/` is git-ignored; the JSONL records and OCR cache stay local.
+The full corpus takes roughly 1.5–2 hours on the first pass; the pilot is ~35–40 minutes.
+The summary script writes `runs/grounding/results_summary.md` with the outcome counts,
+per-application accuracy, near-miss rates and the CART metrics and rules.
+
+### Windows notes
+
+- Install Tesseract (the UB Mannheim build is the usual Windows option) and add its folder to
+  `PATH`. If it is not on `PATH`, set `TESSERACT_CMD` to the full executable path before
+  starting Jupyter or the script:
+  `set TESSERACT_CMD=C:\Program Files\Tesseract-OCR\tesseract.exe`.
+- `uv sync` installs RapidOCR, ONNX Runtime and scikit-learn as normal Windows wheels. The
+  OCR cache and JSONL records are written as UTF-8, so the Chinese OCR text survives.
+- `nbconvert --to html` needs no LaTeX. Only the EDA PDF export needs MiKTeX or TeX Live.
+- The data folder is the same relative path on both systems:
+  `data/screenspot_pro_windows/`.
+
 ## Git filter
 
 `.gitattributes` routes `*.ipynb` through a clean filter, so outputs and execution counts never reach a
