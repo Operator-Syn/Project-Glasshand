@@ -61,11 +61,13 @@ A record is never edited to reverse its decision. Write a new record and mark th
 
 | Record | Title | Status |
 |---|---|---|
-| [0001](0001_two_subjects_shared_foundation.md) | Two research subjects share one experimental foundation | Accepted |
+| [0001](0001_two_subjects_shared_foundation.md) | Two research subjects share one experimental foundation | Historical; course mapping only |
 | [0002](0002_model_agnostic_decision_boundary.md) | Model-agnostic decision boundary | Accepted |
 | [0003](0003_two_papers.md) | Two separate papers | Superseded by 0004 |
-| [0004](0004_one_combined_paper.md) | One combined paper | Accepted |
+| [0004](0004_one_combined_paper.md) | One combined paper with distinguishable contributions | Superseded by 0010 |
+| [0010](0010_integrated_study_narrative.md) | One integrated study and narrative | Accepted |
 | [0005](0005_analysis_unit.md) | Grounding request as the unit of analysis | Accepted |
 | [0006](0006_accessibility_boundary.md) | Accessibility boundary | Accepted |
 | [0007](0007_record_format.md) | Record format and retention | Superseded by 0008 |
 | [0008](0008_duckdb_parquet.md) | DuckDB and Parquet for the analysis layer | Accepted |
+| [0009](0009_december_baseline_scope.md) | December static-baseline scope | Accepted; follow 0010 for narrative framing |
