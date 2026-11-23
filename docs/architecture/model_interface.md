@@ -1,6 +1,9 @@
 # Proposed Model Interface
 
-**Status:** Proposed — a boundary concept only. The boundary itself is accepted ([ADR 0002](../decisions/0002_model_agnostic_decision_boundary.md)); this document's contents remain proposals. No adapter exists, and the capabilities of the baseline model (Jev) have not been documented.
+**Status:** Proposed — a boundary concept only. The boundary itself is accepted
+([ADR 0002](../decisions/0002_model_agnostic_decision_boundary.md)); this document's contents
+remain proposals. No adapter exists. Public capability notes for Jev were added 2026-11-21;
+the official API schema and access constraints remain unconfirmed.
 
 ## Purpose
 
@@ -59,9 +62,27 @@ Retry policy is not part of the adapter.
 
 Every decision record must retain enough information to reproduce the model's input and identify its exact version: adapter identity, model identifier and version, parameters, prompt or observation serialization, and raw response. Non-deterministic models cannot be replayed exactly; the record must say so rather than imply reproducibility it does not have.
 
+## Jev Capability Notes (2026-11-21)
+
+Public sources indicate that Jev is TypeSafe AI's System One decision model: it consumes a
+state plus typed questions (yes/no, multiple choice, ordered score) and returns probabilities.
+It selects among supplied options rather than emitting free-form coordinates. Jev-Vision adds
+image input and selects among 2–26 options; a controller maps the chosen option to a GUI
+coordinate. The Browser Use integration uses a structured element table, not raw screenshots.
+An open-source CPU implementation speaks the same wire format.
+
+For this project, Jev is a **candidate selector / decision adapter**, not a GUI grounder. It is
+future work; the December OCR pilot does not evaluate it.
+
+- TypeSafe Jev documentation: <https://docs.typesafe.ai/introduction>
+- Browser Use × TypeSafe: <https://github.com/browser-use/jev-ultrafast>
+- Open-source CPU implementation: <https://github.com/feder-cr/jev>
+- Jev-Vision-2B: <https://huggingface.co/IntelligenceLab/Jev-Vision-2B>
+
 ## Open Questions
 
-1. What interface does Jev actually expose?
+1. What is Jev's official API schema, access model and pricing? Public capability notes above
+   are not a substitute for the vendor contract.
 2. Is the action schema fixed across models, or negotiated per adapter?
 3. How are free-form model outputs converted into validated actions without hiding parse failures?
 4. Where do prompts live — adapter, configuration, or experiment record?
