@@ -1,6 +1,6 @@
 # 0004 — One Combined Paper
 
-**Status:** Accepted
+**Status:** Superseded by [ADR 0010](0010_integrated_study_narrative.md)
 **Date:** 2026-11-11
 **Supersedes:** [0003](0003_two_papers.md)
 **Source:** Project owner decision during repository initialization.
@@ -35,3 +35,4 @@ Produce one combined paper with two clearly separated contributions: a computer-
 ## Revision Notes
 
 - 2026-11-11 — Recorded from the project owner's decision; supersedes ADR 0003.
+- 2026-11-22 — Superseded for narrative structure by [ADR 0010](0010_integrated_study_narrative.md); this record remains as historical context.
