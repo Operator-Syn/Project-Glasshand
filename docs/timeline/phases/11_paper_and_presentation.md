@@ -1,14 +1,14 @@
 # Phase 11 — Paper Preparation, Refinement, and Presentation
 
-**Status:** Proposed · **Depends on:** Phases 09, 10 · **Related:** [Research subjects](../../research/) · [References](../../references/README.md)
+**Status:** Proposed · **Depends on:** Phases 09, 10 · **Related:** [Integrated paper outline](../../research/combined_paper_outline.md) · [References](../../references/README.md)
 
 ## Overview
 
-Produce one combined paper with two distinguishable contributions — a CV-focused perception evaluation and a DM-focused failure analysis — from the same experimental foundation. Writing is treated as a verification step: every claim must be traceable to a result, a record, or a cited source.
+Present one integrated study of GUI grounding: measure request-level outcomes for the baseline, then examine and predict failure conditions from those same records. Writing is a verification step: every claim must be traceable to a result, a record, or a cited source.
 
 ## Objectives
 
-- Draft the combined paper with both contributions clearly separated and claims limited to the evidence.
+- Draft one continuous research narrative, with the grounding evaluation and failure analysis connected through the shared corpus and claims limited to the evidence.
 - Produce figures directly from results, not from hand-edited numbers.
 - Refresh related work against the final contribution.
 - Prepare the defense, demonstration, and reproducibility appendix.
@@ -17,7 +17,7 @@ Produce one combined paper with two distinguishable contributions — a CV-focus
 ## Proposed Activities
 
 - Build a claims-evidence matrix before drafting.
-- Outline the two contributions separately, then integrate them into one narrative.
+- Organize the outline around one research question, one request-level unit of analysis, and the evidence chain from grounding outcomes to failure conditions.
 - Generate figures from result files with documented transformations.
 - Write limitations before writing conclusions.
 - Conduct internal review and revise for overclaiming.
@@ -39,7 +39,7 @@ Produce one combined paper with two distinguishable contributions — a CV-focus
 ## Evaluation or Completion Signals
 
 - Every claim in the paper has a source: a result file, a record, or a citation.
-- Both contributions remain identifiable, and each claim traces to its own result.
+- The narrative explains how the grounding metrics and failure analysis answer the same research question, and every claim traces to its evidence.
 - Advisers have reviewed the draft.
 - The demonstration reproduces a recorded run.
 - Limitations match the tested conditions.
@@ -47,7 +47,6 @@ Produce one combined paper with two distinguishable contributions — a CV-focus
 ## Open Questions
 
 - Which venue is targeted for the combined paper?
-- How should space be balanced between the CV and DM contributions?
 - How much implementation detail belongs in the paper?
 - What is the artifact archival plan?
 - How are negative or inconclusive results presented?
@@ -62,11 +61,12 @@ Produce one combined paper with two distinguishable contributions — a CV-focus
 
 - **Risk:** claims exceed the evidence under deadline pressure.
 - **Risk:** late reruns invalidate figures.
-- **Risk:** the two contributions blur together in one narrative.
+- **Risk:** the narrative may lose the link between measured grounding outcomes and the analysis of their failure conditions.
 - **Assumption:** results are stable enough to write up.
 
 ## Revision Notes
 
 - 2026-11-11 — Created as a proposed phase during repository initialization.
 - 2026-11-11 — Two-paper structure recorded ([ADR 0003](../../decisions/0003_two_papers.md)); single-paper option rejected.
-- 2026-11-11 — Revised to one combined paper ([ADR 0004](../../decisions/0004_one_combined_paper.md)); the two-paper decision is superseded.
+- 2026-11-11 — Revised to one paper ([ADR 0004](../../decisions/0004_one_combined_paper.md)); the two-paper decision is superseded.
+- 2026-11-22 — Updated to one integrated research narrative under [ADR 0010](../../decisions/0010_integrated_study_narrative.md).
