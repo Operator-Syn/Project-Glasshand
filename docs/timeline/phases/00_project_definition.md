@@ -4,13 +4,13 @@
 
 ## Overview
 
-Turn the project brief into an explicit, reviewed scope. The brief states the intent and the planning assumptions; this phase decides where the boundary actually sits, which capabilities belong to which subject, and what the project will not attempt.
+Turn the project brief into an explicit, reviewed scope. The brief states the intent and planning assumptions; this phase decides the evaluation boundary, the capabilities the project will and will not attempt, and the evidence needed to support its claims.
 
 ## Objectives
 
 - Confirm the problem statement and intended capabilities.
 - Define the evaluation target: general Windows applications, including browser-hosted applications as a first-class surface, with games and protected surfaces de-prioritized.
-- Separate the Intelligent Systems and Data Mining contributions at the level of claims.
+- Define one research question and one set of claims that connect grounding outcomes to the conditions associated with failure.
 - Record constraints: solo effort, Windows 10/11, local execution where practical.
 - Replace the working title and repository naming ambiguity with a decision or an explicit deferral.
 
@@ -19,7 +19,7 @@ Turn the project brief into an explicit, reviewed scope. The brief states the in
 - Review the brief against the overview document and correct discrepancies.
 - Enumerate boundary cases: browser-hosted applications, elevated windows, multi-monitor setups, non-English interfaces, and games (de-prioritized).
 - Draft an in-scope and out-of-scope list, with a reason for each exclusion.
-- Define what counts as a research contribution versus supporting engineering.
+- Distinguish measured research claims from supporting engineering and proposed capabilities.
 - Confirm assumptions with both advisers and record their responses.
 - Update [project.md](../../overview/project.md) and [glossary.md](../../overview/glossary.md).
 
@@ -31,12 +31,12 @@ Turn the project brief into an explicit, reviewed scope. The brief states the in
 ## Potential Deliverables
 
 - Revised project definition and glossary.
-- A scope decision record covering the evaluation target and subject boundaries.
+- A scope decision record covering the evaluation target, evidence, and claim boundaries.
 - A list of deferred capabilities with the condition that would reopen them.
 
 ## Evaluation or Completion Signals
 
-- Every capability in the brief maps to a subject or is explicitly deferred.
+- Every capability in the brief is included in the integrated study or explicitly deferred.
 - No unresolved "is this in scope" question blocks research design.
 - Both advisers have reviewed the scope statement.
 
@@ -55,7 +55,7 @@ Turn the project brief into an explicit, reviewed scope. The brief states the in
 ## Risks and Assumptions
 
 - **Risk:** scope grows to cover every desktop capability. Mitigation: an explicit deferred list.
-- **Risk:** the two subjects drift into overlapping claims. Mitigation: written contribution boundaries.
+- **Risk:** grounding outcomes and failure conditions are analyzed without a clear link. Mitigation: keep the request-level unit and evidence chain explicit.
 - **Assumption:** the brief's platform and language choices survive review. To be validated.
 
 ## Revision Notes
