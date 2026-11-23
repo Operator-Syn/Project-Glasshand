@@ -4,15 +4,15 @@
 
 ## Working Title
 
-**Computer Vision–Driven Desktop Automation Framework for AI Decision Models.**
+**Visual Grounding and Failure Analysis for Windows Desktop Automation.**
 
-The title is descriptive, not final. A permanent project name has not been chosen; the repository directory name reflects an earlier, Data Mining–only framing of the work.
+The title is descriptive, not final. A permanent project name has not been chosen; the repository directory name predates the current project framing.
 
 ## Problem
 
 Desktop applications present their interfaces as pixels. A decision model that can only read structured APIs or text cannot operate them; a model that reasons over screenshots must first solve detection, text extraction, and localization. Those perception problems are difficult to separate from the decision problem when the whole loop is evaluated end to end.
 
-This project proposes to build the perception and execution layer as a reusable, model-agnostic framework, then study it from two angles: the accuracy and robustness of visual perception, and the patterns that explain when visual grounding fails.
+This project studies GUI grounding as one connected problem: how accurately an OCR-based method locates an instructed target, and which request conditions are associated with its successes and failures. A reusable, model-agnostic perception and execution framework remains the longer-term goal; the current evidence comes from a static screenshot baseline.
 
 ## Intended Capabilities
 
@@ -20,22 +20,17 @@ This project proposes to build the perception and execution layer as a reusable,
 |---|---|---|
 | GUI element detection and classification | Locate interactive and informative elements in a screen image and assign types. | Core perception measurement. |
 | Optical character recognition | Extract visible text with positions. | Supplies text for grounding and state checks. |
-| Visual grounding | Map a natural-language target to a screen coordinate or element. | Central failure surface for both subjects. |
+| Visual grounding | Map a natural-language target to a screen coordinate or element. | Central outcome measured and analyzed in the study. |
 | Visual state verification | Compare the screen before and after an action to confirm an expected change. | Turns open-loop actions into a closed loop. |
 | Model-agnostic decision integration | Accept action decisions from an interchangeable external model. | Allows model comparison without rewriting the pipeline. |
 | Closed-loop desktop interaction | Execute actions and feed the resulting state back to the decision layer. | Produces the episodes that experiments analyze. |
-| Reproducible experiment recording | Capture every input, decision, action, and outcome needed to reconstruct a run. | Shared foundation for both subjects. |
+| Reproducible experiment recording | Capture every input, decision, action, and outcome needed to reconstruct a run. | Preserves the evidence needed to reproduce and analyze outcomes. |
 
-No capability in this table has been implemented.
+The live capture, action, verification, and model-integration capabilities in this table remain unimplemented. The current static grounding analysis is documented in the notebooks.
 
-## Research Subjects
+## Research Framing
 
-| Subject | Primary focus | Contribution boundary |
-|---|---|---|
-| Intelligent Systems | Computer vision: GUI detection, OCR, visual grounding, and the robustness of visual perception strategies. | Evaluates perception and grounding accuracy under controlled conditions. |
-| Data Mining | Analysis of the experiment records produced by the perception pipeline: grounding-failure patterns, association analysis, and interpretable failure prediction. | Explains and predicts failures from recorded data; does not build the perception pipeline. |
-
-The subjects share one pipeline and one record format. Their questions, methods, and claims remain separate and are documented in [research/](../research/). The two contributions form one combined paper ([ADR 0004](../decisions/0004_one_combined_paper.md)).
+The study follows one request-level evidence path: score whether the baseline grounds each instructed target, then examine the same records for conditions associated with failure and test whether those conditions generalize across applications. It is one question, one corpus, and one narrative; course-specific mapping is kept in internal subject notes, not in project-facing materials. See [ADR 0010](../decisions/0010_integrated_study_narrative.md).
 
 ## Scope
 
@@ -72,28 +67,32 @@ These are working assumptions from the brief. Most are not approved architectura
 | Architecture | Model-agnostic boundary accepted ([ADR 0002](../decisions/0002_model_agnostic_decision_boundary.md)); modular decomposition proposed | The boundary is a requirement; the component split is still a design proposal. |
 | Execution model | Locally runnable where practical | Degree of offline operation unresolved. |
 | Project scale | Individual undergraduate development and research | Fixed constraint. |
-| Evaluation corpus | ScreenSpot-Pro, Windows subset — 927 requests across 16 applications in the released annotations (verified 19 November 2026), combined with self-collected captures | Candidate, not yet an accepted decision. The dataset card declares MIT; the screenshots remain subject to the application vendors' rights. |
+| Evaluation corpus | ScreenSpot-Pro, Windows subset — 1,020 requests across 17 applications. The release labels MATLAB as `macos`, but its screenshots show Windows; the cleaning log corrects those 93 rows. The reported analysis uses this benchmark subset, not self-collected captures. | The dataset card declares MIT, while screenshots remain subject to application vendors' rights. |
 
 ## Repository Naming
 
-The repository directory is `intelligent_system_data_mining_final_project`, which reflects the Data Mining subject only. The project covers both subjects and a shared framework. Renaming the repository is outside Phase 0 scope and is recorded as an open question.
+The repository directory is `intelligent_system_data_mining_final_project`, a legacy name that predates the current project framing. Renaming the repository is outside Phase 0 scope and is recorded as an open question.
 
 ## Non-Claims
 
-- No perception pipeline, model integration, or experiment exists. The candidate evaluation corpus
-  has been downloaded and characterized: see
-  [`notebooks/EDA_Beira_John-Ronan.ipynb`](../../notebooks/EDA_Beira_John-Ronan.ipynb).
-  That analysis measures the corpus; it reports no grounding result.
+- No capture, execution, verification, closed-loop pipeline, or Jev integration exists.
+- The ScreenSpot-Pro Windows subset has been downloaded and characterized: see the
+  [EDA notebook](../../notebooks/EDA_Beira_John-Ronan.ipynb).
+- The static OCR grounding baseline and CART failure analysis have been run on all 1,020
+  Windows requests; the 300-request balanced pilot is only a secondary comparison. See the
+  [grounding notebook](../../notebooks/01-grounding-cart.ipynb). These results cover static
+  screenshots, not live computer use.
 - No phase in the roadmap has been approved or completed.
-- No capability listed above has been demonstrated.
+- The static baseline demonstrates screenshot-based text grounding only; it does not implement
+  the live capture, action, verification, or model-integration capabilities listed above.
 
 ## Open Questions
 
 1. Which concrete applications represent the target, across native and browser surfaces?
-2. Which external datasets are suitable, and how should they be combined with self-collected captures?
+2. Which additional datasets, if any, would improve coverage without changing the current corpus's scope or evaluation unit?
 3. Does "locally runnable where practical" forbid hosted models, or only require a local execution path?
 4. What privacy rules apply to captured screens and derived records?
-5. Should the repository be renamed to match the combined scope?
+5. Should the repository be renamed to match the current project scope?
 
 ## Related
 
