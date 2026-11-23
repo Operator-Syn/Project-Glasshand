@@ -311,8 +311,9 @@ def position_usage(series: pd.Series, terms: Iterable[str]) -> pd.Series:
     localisation difficulty from textual spoon-feeding.
 
     Matching is on word boundaries, which is not cosmetic: a plain substring search counts
-    "centerline", "Extend", "Blend" and "desktop" as position words because they contain
-    "center", "end" or "top", which roughly doubles the result on this corpus.
+    "centerline" (contains "center"), "stop" (contains "top"), "Linear" / "nearby" (contain
+    "near"), "corners" (contains "corner") and "desktop" (contains "top") as position words,
+    which roughly doubles the result on this corpus.
     """
     pattern = r"\b(?:" + "|".join(re.escape(term) for term in terms) + r")\b"
     return series.str.lower().str.contains(pattern, regex=True)
