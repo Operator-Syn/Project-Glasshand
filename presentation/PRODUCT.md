@@ -16,11 +16,11 @@ The primary audience is the CSC 172 instructor and classmates reviewing a final-
 
 ## Product Purpose
 
-The deck proposes a model-agnostic, computer-vision-driven framework for Windows desktop automation. It explains the problem, the six-stage loop, the combined Intelligent Systems and Data Mining contributions, the ScreenSpot-Pro dataset, the research questions, the record schema, and CART as the primary analysis algorithm. It is a proposal: no implementation results are reported.
+The deck presents one study of GUI grounding in the context of a proposed model-agnostic Windows desktop automation framework. It explains the problem, the six-stage loop, the ScreenSpot-Pro corpus, one integrated research question, the request-level record schema, and how grounding outcomes support the CART failure analysis. It remains a proposal deck and does not report measured results.
 
 ## Positioning
 
-One combined paper with two distinguishable contributions: a CV-focused grounding evaluation and a Data Mining failure analysis built from the same labeled grounding records. The deck is explicit about the vision-only inference boundary, the model-agnostic decision layer, the Windows subset, and the limits of a static benchmark.
+One integrated study: measure grounding outcomes on the Windows subset, then analyze failure conditions from the same request-level records. Course-specific mapping stays in internal notes; the deck follows one question and one evidence chain. It is explicit about the vision-only inference boundary, the model-agnostic decision layer, and the limits of a static benchmark.
 
 ## Operating Context
 
@@ -28,7 +28,7 @@ Presented in CSC 172 and published as a static GitHub Pages site. The deck runs 
 
 ## Capabilities and Constraints
 
-- 11 slides: cover, problem, architecture, contributions, dataset, research questions, method, CART, supporting analyses, scope, references.
+- 11 slides: cover, problem, architecture, integrated study, dataset, research question, method, CART, supporting analyses, scope, references.
 - Static HTML/CSS/JS; no framework, no build step, no server-side code.
 - Proposal-only. No experimental results, measured performance, or completed implementation claims.
 - ScreenSpot-Pro: 1,581 total examples, 1,020 Windows examples, 23 professional applications, 3 operating systems.
@@ -37,8 +37,8 @@ Presented in CSC 172 and published as a static GitHub Pages site. The deck runs 
 - License: MIT for the dataset and project repository; screenshot rights remain with application vendors.
 - Required content and forbidden placeholder phrases are enforced by `presentation/check.py`.
 - Must keep keyboard navigation, swipe navigation, visible focus, and a print stylesheet. Motion is intentionally not reduced on this presentation surface.
-- Ongoing motion and interaction: scanline sweep, pipeline signal and status lights, the phosphor hand relay between cards, system-check replay, loop packet, contribution scans, dataset scan, the record-format state cycle and its `Replay`, evidence pulses, scope marker, artifact-chain scan, and the auto-advancing pipeline sequence.
-- Two contribution flows: CV `Pixels → Target → Accuracy`; DM `Records → Conditions → CART`.
+- Ongoing motion and interaction: scanline sweep, pipeline signal and status lights, the phosphor hand relay between cards, system-check replay, loop packet, evidence-flow scans, dataset scan, the record-format state cycle and its `Replay`, evidence pulses, scope marker, artifact-chain scan, and the auto-advancing pipeline sequence.
+- One integrated evidence flow: `Instruction + Screenshot → Grounding Outcome → Failure Conditions → CART Analysis`. The analysis uses the same request-level records as the grounding metrics.
 - Cover system check: optional `help`, `status`, `whoami`, `target`, `run`, and `clear` commands. It is a presentation affordance, not a required navigation path.
 - Diagram surfaces: three-stage loop with a stop marker, dataset record format, supporting-analysis check map, evidence panel, question basis, analysis-order rail, scope strip, and artifact chain.
 
@@ -49,18 +49,18 @@ The project name is Glasshand; the deck is for CSC 172. The deck is academic, di
 ## Evidence on Hand
 
 - `docs/overview/project.md` — authoritative project definition.
-- `docs/research/intelligent_systems.md`, `docs/research/data_mining.md` — contribution boundaries.
-- `docs/decisions/0001`–`0008` — scope, model boundary, combined paper, analysis unit, accessibility boundary, data layer.
+- `docs/research/intelligent_systems.md`, `docs/research/data_mining.md` — internal course-mapping notes; do not expose their split in the deck.
+- `docs/decisions/0001`–`0010` — scope, model boundary, integrated study narrative, analysis unit, accessibility boundary, and data layer.
 - `docs/experiments/reproducibility.md`, `docs/experiments/evaluation_questions.md` — record format and measurement questions.
 - Existing `presentation/index.html` — prior paper/ink deck and content source.
-- No implementation, experiment results, model outputs, or measured performance exist.
+- This proposal deck does not present the separate static OCR baseline results documented in the research notebook.
 
 ## Product Principles
 
 1. Proposal truth over presentation polish. Never make the deck look like it has results it does not have.
 2. Show the mechanism. The six-stage loop and the grounding record are the argument, not decoration.
 3. One primary algorithm, clearly labeled supporting analyses. CART owns the explanatory claim.
-4. Separate the CV and DM contributions without splitting the shared evidence.
+4. Keep the evidence chain visible: grounding outcomes lead into the analysis of failure conditions.
 5. Make the deck navigable, reproducible, and honest at every viewport.
 
 ## Accessibility & Inclusion
