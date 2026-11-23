@@ -1,6 +1,6 @@
 # Development Roadmap
 
-**Status:** Current — a proposal. No phase is approved or complete. One input to phase 02 has been exercised: the candidate evaluation corpus was downloaded and characterized in the [EDA notebook](../../notebooks/EDA_Beira_John-Ronan.ipynb).
+**Status:** Current — a proposal. No phase is approved or complete. The ScreenSpot-Pro Windows corpus has been downloaded and characterized, and the static OCR grounding and failure analysis has been run on all 1,020 requests. These results inform the proposed research design and evaluation phases; they do not change phase status.
 
 ## Purpose
 
@@ -31,7 +31,7 @@ Order the project's work so that each phase has a defensible reason to come befo
 
 | # | Phase | Focus | Depends on | Status |
 |---|---|---|---|---|
-| 00 | [Project definition](phases/00_project_definition.md) | Scope, boundaries, subject definitions | — | Proposed |
+| 00 | [Project definition](phases/00_project_definition.md) | Scope, study question, project boundaries | — | Proposed |
 | 01 | [Research foundations](phases/01_research_foundations.md) | Literature, prior art, gap | 00 | Proposed |
 | 02 | [Research design](phases/02_research_design.md) | Questions, datasets, protocol, metrics | 00, 01 | Proposed |
 | 03 | [Architecture planning](phases/03_architecture_planning.md) | Components, contracts, decisions | 00–02 | Proposed |
@@ -40,9 +40,9 @@ Order the project's work so that each phase has a defensible reason to come befo
 | 06 | [Text and grounding](phases/06_text_and_grounding.md) | OCR and target localization | 02, 04, 05 | Proposed |
 | 07 | [Model integration](phases/07_model_integration.md) | Adapter contract and baseline model | 03, 04, 05 | Proposed |
 | 08 | [Interaction and verification](phases/08_interaction_and_verification.md) | Execution, feedback, closed loop | 04–07 | Proposed |
-| 09 | [Experimental evaluation](phases/09_experimental_evaluation.md) | Controlled CV experiments | 02, 05–08 | Proposed |
-| 10 | [Failure pattern mining](phases/10_failure_pattern_mining.md) | Data Mining analysis | 02, 09 | Proposed |
-| 11 | [Paper and presentation](phases/11_paper_and_presentation.md) | Combined paper, refinement, defense | 09, 10 | Proposed |
+| 09 | [Experimental evaluation](phases/09_experimental_evaluation.md) | Grounding outcomes and benchmark evaluation | 02, 05–08 | Proposed |
+| 10 | [Failure pattern mining](phases/10_failure_pattern_mining.md) | Failure conditions from request-level outcomes | 02, 09 | Proposed |
+| 11 | [Paper and presentation](phases/11_paper_and_presentation.md) | Integrated study, refinement, defense | 09, 10 | Proposed |
 
 ## Dependencies and Reordering
 
@@ -61,13 +61,13 @@ Phases 05–08 may overlap in practice: grounding can be prototyped against capt
 | Literature review and research foundations | 01 |
 | Research questions, datasets, experimental design | 02 |
 | Architecture and interface planning | 03 |
-| Computer vision perception development | 05 |
+| Grounding method and outcome evaluation | 05, 06, 09 |
 | OCR and visual grounding | 06 |
 | Windows desktop capture and interaction | 04 (capture), 08 (interaction) |
 | Model-agnostic decision integration (Jev first) | 07 |
 | Visual feedback and interaction verification | 08 |
-| Controlled experiments and CV evaluation | 09 |
-| Data Mining and failure pattern analysis | 10 |
+| Grounding outcome and failure-condition analysis | 09, 10 |
+| Failure-pattern analysis | 10 |
 | Research paper preparation and presentation | 11 |
 
 ## Roadmap-Level Open Questions
@@ -82,4 +82,4 @@ Phases 05–08 may overlap in practice: grounding can be prototyped against capt
 - 2026-11-11 — Created the roadmap during repository initialization. All phases marked Proposed. Capture moved ahead of perception; interaction separated from capture and paired with verification.
 - 2026-11-11 — Recorded the project owner's scope decisions: general Windows applications with games de-prioritized, Jev as baseline only, and two separate papers ([ADR 0003](../decisions/0003_two_papers.md)).
 - 2026-11-11 — Paper structure revised to one combined paper ([ADR 0004](../decisions/0004_one_combined_paper.md)), superseding the two-paper decision; browser-hosted applications made first-class.
-- 2026-11-19 — Recorded that phase 02's external-dataset activity has begun: the ScreenSpot-Pro Windows subset was fetched and characterized, and the workspace gained a notebook environment. No phase status changed and no candidate is accepted.
+- 2026-11-22 — Updated the proposed phase descriptions to match one integrated study under [ADR 0010](../decisions/0010_integrated_study_narrative.md). The full-corpus static grounding run is evidence, not a change in roadmap phase status.
