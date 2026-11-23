@@ -1,6 +1,11 @@
 # Data Mining Subject
 
-**Status:** Draft — candidate scope and questions. Not yet grounded in literature or approved by an adviser. The candidate evaluation corpus has been downloaded and characterized (927 requests over 16 applications; see the [EDA notebook](../../notebooks/EDA_Beira_John-Ronan.ipynb)), but the failure records this subject actually analyses do not exist yet: they depend on runs produced in phase 09.
+**Status:** Internal course-mapping note — candidate questions remain draft and adviser review
+is pending. The shared corpus is characterized (1,020 requests over 17 applications; see the
+[EDA notebook](../../notebooks/EDA_Beira_John-Ronan.ipynb)). The static OCR grounding and CART
+analysis uses the full 1,020-request run; the 300 balanced requests are a secondary pilot (see the
+[grounding notebook](../../notebooks/01-grounding-cart.ipynb)). Live capture and execution records
+remain future work. Project-facing materials follow [ADR 0010](../decisions/0010_integrated_study_narrative.md).
 
 ## Focus
 
@@ -8,7 +13,7 @@ Discovering and explaining patterns in visual grounding failures using the exper
 
 ## Contribution Boundary
 
-This subject does not build the perception pipeline and does not claim perception accuracy as its result. Its evidence is the association between recorded conditions, visual context, and grounding outcomes, with an emphasis on interpretability rather than raw predictive score. Its contribution forms the Data Mining-focused part of the single combined paper ([ADR 0004](../decisions/0004_one_combined_paper.md)).
+This subject does not build the perception pipeline and does not claim perception accuracy as its result. Its evidence is the association between recorded conditions, visual context, and grounding outcomes, with an emphasis on interpretability rather than raw predictive score. This internal note maps course-specific expectations; the project-facing study does not divide its questions, methods, or results by course ([ADR 0010](../decisions/0010_integrated_study_narrative.md)).
 
 ## Candidate Research Questions
 
@@ -48,7 +53,7 @@ Method selection depends on the unit of analysis, sample size, and label quality
 
 ## Pending
 
-- Records to analyze.
+- The static OCR baseline and failure-analysis records exist for the full 1,020-request benchmark; live capture and execution records are pending.
 - Feature definitions derived from capture metadata, element geometry, text, and confidence.
 - Label quality assessment and inter-annotation agreement.
 - Class-imbalance strategy.
@@ -56,7 +61,7 @@ Method selection depends on the unit of analysis, sample size, and label quality
 
 ## Related
 
-- [Intelligent Systems subject](intelligent_systems.md)
+- [Intelligent Systems internal course-mapping note](intelligent_systems.md)
 - [Evaluation questions](../experiments/evaluation_questions.md)
 - [Phase 02 — Research design](../timeline/phases/02_research_design.md)
 - [Phase 10 — Failure pattern mining](../timeline/phases/10_failure_pattern_mining.md)
