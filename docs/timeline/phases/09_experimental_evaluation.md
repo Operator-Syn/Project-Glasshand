@@ -1,15 +1,15 @@
-# Phase 09 — Controlled Experiments and CV Evaluation
+# Phase 09 — Grounding Outcome Evaluation
 
-**Status:** Proposed · **Depends on:** Phases 02, 05, 06, 07, 08 · **Related:** [Reproducibility](../../experiments/reproducibility.md) · [Evaluation questions](../../experiments/evaluation_questions.md) · [Intelligent Systems subject](../../research/intelligent_systems.md)
+**Status:** Proposed · **Depends on:** Phases 02, 05, 06, 07, 08 · **Related:** [Reproducibility](../../experiments/reproducibility.md) · [Evaluation questions](../../experiments/evaluation_questions.md) · [Integrated study outline](../../research/combined_paper_outline.md)
 
 ## Overview
 
-Run the designed experiments and produce the evidence for the Intelligent Systems contribution. The output is not a single accuracy figure but a condition-by-condition account of where perception works, where it fails, and how confidently that can be claimed.
+Evaluate grounding on the benchmark and produce request-level outcomes for the integrated study. The reported result is not just an aggregate accuracy: it includes breakdowns by application and target type, failure conditions, and limits on what the static screenshot evidence supports.
 
 ## Objectives
 
 - Execute the experiment matrix defined in phase 02.
-- Measure perception and grounding metrics with uncertainty.
+- Measure grounding outcomes and report uncertainty where the design supports it.
 - Ablate components and conditions.
 - Attribute failures to stages.
 - Verify reproducibility from records.
@@ -19,7 +19,7 @@ Run the designed experiments and produce the evidence for the Intelligent System
 - Run a pilot to validate the protocol and estimate variance.
 - Execute the full matrix with fixed configurations.
 - Compute metrics with confidence intervals and per-condition breakdowns.
-- Compare strategies and baselines under identical inputs.
+- Compare grounding strategies under identical inputs.
 - Perform error analysis with examples.
 - Re-run a sample from records to test reproduction.
 - Archive results and update the evaluation report.
@@ -27,8 +27,7 @@ Run the designed experiments and produce the evidence for the Intelligent System
 ## Dependencies
 
 - Phase 02 protocol, metrics, and dataset.
-- Phases 05, 06, 08 implementations.
-- Phase 07 for end-to-end task results.
+- Static baseline and evaluation harness; live pipeline phases apply only to future live-interaction claims.
 
 ## Potential Deliverables
 
@@ -68,4 +67,4 @@ Run the designed experiments and produce the evidence for the Intelligent System
 
 ## Revision Notes
 
-- 2026-11-11 — Created as a proposed phase during repository initialization. No revisions yet.
+- 2026-11-22 — Reframed as evaluation of grounding outcomes within one integrated study under [ADR 0010](../../decisions/0010_integrated_study_narrative.md).
