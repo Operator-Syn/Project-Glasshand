@@ -1,10 +1,10 @@
-# Phase 10 — Data Mining and Failure Pattern Analysis
+# Phase 10 — Failure Condition Analysis
 
-**Status:** Proposed · **Depends on:** Phases 02, 09 · **Related:** [Data Mining subject](../../research/data_mining.md) · [Evaluation questions](../../experiments/evaluation_questions.md)
+**Status:** Proposed · **Depends on:** Phases 02, 09 · **Related:** [Integrated study outline](../../research/combined_paper_outline.md) · [Evaluation questions](../../experiments/evaluation_questions.md)
 
 ## Overview
 
-Analyze the records produced by the perception experiments to discover which conditions and visual features associate with grounding failure, and whether failure is predictable in an interpretable way.
+Analyze the request-level records from grounding evaluation to identify conditions associated with failure and test whether those conditions predict outcomes across held-out applications. This analysis uses the same corpus and outcomes as the grounding metrics.
 
 ## Objectives
 
@@ -26,8 +26,7 @@ Analyze the records produced by the perception experiments to discover which con
 
 ## Dependencies
 
-- Phase 09 records, with acceptable label quality.
-- Phase 02 unit-of-analysis decision.
+- Phase 09 request-level outcomes and the Phase 02 unit-of-analysis decision.
 
 ## Potential Deliverables
 
@@ -67,4 +66,4 @@ Analyze the records produced by the perception experiments to discover which con
 
 ## Revision Notes
 
-- 2026-11-11 — Created as a proposed phase during repository initialization. No revisions yet.
+- 2026-11-22 — Reframed failure analysis as a connected stage of the integrated study under [ADR 0010](../../decisions/0010_integrated_study_narrative.md).
