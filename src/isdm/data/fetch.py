@@ -45,6 +45,15 @@ RESOLVE = f"https://huggingface.co/datasets/{REPO_ID}/resolve/{REVISION}/"
 TREE = f"https://huggingface.co/api/datasets/{REPO_ID}/tree/{REVISION}/"
 USER_AGENT = "screenspot-eda-fetch/1.0"
 
+# The release files MATLAB under a macOS name — `matlab_macos.json`, `images/matlab_mac/`,
+# `"platform": "macos"`, ids prefixed `matlab_macos_` — and there is no
+# `matlab_windows.json`. The captures are Windows: sampled screenshots show a Windows 10
+# taskbar, right-hand window controls, and a `D:\annotation` working directory in the
+# MATLAB folder pane, and the paper's own table lists MATLAB as a Windows application.
+# The platform label is therefore corrected in cleaning, not here; this constant only
+# includes the file in the download.
+EXTRA_ANNOTATION_FILES = ("matlab_macos",)
+
 # The Hub tree API serves at most 100 entries per response and silently defaults to 50,
 # which truncates any application directory holding more screenshots than that.
 PAGE_SIZE = 100
@@ -179,9 +188,13 @@ def fetch_annotations(dest: Path) -> list[str]:
     paths = sorted(
         entry["path"]
         for entry in http_json(f"{TREE}annotations?expand=true&limit={PAGE_SIZE}")
-        if entry["type"] == "file" and entry["path"].endswith("_windows.json")
+        if entry["type"] == "file"
+        and (
+            entry["path"].endswith("_windows.json")
+            or any(entry["path"].endswith(f"{name}.json") for name in EXTRA_ANNOTATION_FILES)
+        )
     )
-    print(f"      {len(paths)} windows annotation files")
+    print(f"      {len(paths)} annotation files")
 
     for path in paths:
         http_download(RESOLVE + path, dest / path)
