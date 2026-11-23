@@ -950,30 +950,31 @@
 
     <section class="slide" data-n="04" aria-label="Slide 4 of 11" aria-hidden="true">
       <div class="inner">
-        <h2 class="contrib-heading">CV measures accuracy. DM models failure.</h2>
+        <h2 class="contrib-heading">Grounding outcomes lead to failure analysis.</h2>
+        <p class="lead">One request-level study: measure where the text-anchored baseline lands, then use those same outcomes to examine when it misses.</p>
         <div class="channels">
           <div class="channel">
-            <div class="ch-head"><span>Computer Vision</span><b>CV</b></div>
-            <h3>Can it see the target?</h3>
-            <p>Measure grounding accuracy on high-resolution Windows screenshots. Break results down by application, element type, and interface condition.</p>
-            <ul><li>Detection</li><li>OCR</li><li>Visual grounding</li><li>Robustness</li></ul>
-            <div class="channel-flow" aria-label="CV measurement flow: pixels to target to accuracy">
-              <span>Pixels</span><i>→</i><span>Target</span><i>→</i><span>Accuracy</span>
+            <div class="ch-head"><span>Stage 1 / Grounding</span><b>01</b></div>
+            <h3>Does the point land in the target?</h3>
+            <p>Evaluate point-in-box accuracy on high-resolution Windows screenshots, with results broken down by application and target type.</p>
+            <ul><li>OCR ensemble</li><li>Bilingual matching</li><li>Point-in-box outcome</li></ul>
+            <div class="channel-flow" aria-label="Grounding evaluation flow: instruction and screenshot to target point to outcome">
+              <span>Request</span><i>→</i><span>Target point</span><i>→</i><span>Outcome</span>
             </div>
           </div>
           <div class="channel">
-            <div class="ch-head"><span>Data Mining</span><b>DM</b></div>
-            <h3>Why does it miss?</h3>
-            <p>Analyze the labeled grounding records. Find co-occurring failure conditions and fit an interpretable model that generalizes across applications.</p>
-            <ul><li>Association rules</li><li>CART</li><li>Grouped validation</li></ul>
-            <div class="channel-flow" aria-label="Data Mining explanation flow: records to conditions to CART">
-              <span>Records</span><i>→</i><span>Conditions</span><i>→</i><span>CART</span>
+            <div class="ch-head"><span>Stage 2 / Failure conditions</span><b>02</b></div>
+            <h3>When does grounding fail?</h3>
+            <p>Analyze the same request records with CART and application-grouped validation to describe conditions associated with failure.</p>
+            <ul><li>Request conditions</li><li>CART</li><li>Grouped validation</li></ul>
+            <div class="channel-flow" aria-label="Failure analysis flow: grounding outcomes to request conditions to CART analysis">
+              <span>Outcomes</span><i>→</i><span>Conditions</span><i>→</i><span>CART</span>
             </div>
           </div>
         </div>
-        <div class="channel-output" aria-label="Outputs of the two contribution channels">
-          <div><span>CV output</span><b>Point-in-box accuracy</b><small>application / element / condition</small></div>
-          <div><span>DM output</span><b>CART failure conditions</b><small>grouped by application</small></div>
+        <div class="channel-output" aria-label="Connected evidence from the study">
+          <div><span>Shared unit</span><b>One grounding request</b><small>instruction / screenshot / target / outcome</small></div>
+          <div><span>Evidence chain</span><b>Grounding outcome → failure conditions</b><small>same corpus, grouped by application</small></div>
         </div>
       </div>
     </section>
@@ -1036,39 +1037,30 @@
 
     <section class="slide" data-n="06" aria-label="Slide 6 of 11" aria-hidden="true">
       <div class="inner">
-        <h2>The questions and their evidence.</h2>
-        <p class="lead">RQ1 measures grounding accuracy. RQ2 models the conditions that predict failure.</p>
+        <h2>One question, one evidence chain.</h2>
+        <p class="lead">How accurately does a text-anchored baseline ground GUI targets in high-resolution Windows screenshots, and which request conditions are associated with its failures?</p>
         <div class="questions-grid">
           <div class="queries">
             <article class="query">
-              <div class="query-head"><b>RQ1 / Grounding</b><span>Perception</span></div>
-              <p>How accurately can a model-agnostic, vision-only pipeline ground natural-language instructions to GUI targets on high-resolution Windows screenshots, and how does accuracy vary by application, element type, and interface condition?</p>
-            </article>
-            <article class="query">
-              <div class="query-head"><b>RQ2 / Failure analysis</b><span>Data Mining</span></div>
-              <p>Which visual and interface conditions co-occur with grounding failure, and can a shallow CART decision tree describe those conditions and generalize across unseen applications?</p>
+              <div class="query-head"><b>Research question</b><span>Grounding and failure conditions</span></div>
+              <p>Measure point-in-box outcomes for each request, then use those same records to examine failure conditions and test whether a shallow CART model generalizes across held-out applications.</p>
             </article>
           </div>
-          <aside class="panel evidence-panel" aria-label="Evidence for each research question">
-            <div class="panel-head"><span>Evidence</span><span>Per question</span></div>
+          <aside class="panel evidence-panel" aria-label="Evidence chain for the integrated research question">
+            <div class="panel-head"><span>Evidence chain</span><span>Same request records</span></div>
             <div class="evidence-chain">
-              <span>RQ1</span>
+              <span>01 / Outcome</span>
               <b>Point-in-box accuracy</b>
-              <small>application / element / condition</small>
+              <small>application / target type / condition</small>
             </div>
             <div class="evidence-chain amber">
-              <span>RQ2</span>
-              <b>CART failure conditions</b>
-              <small>grouped by application</small>
-            </div>
-            <div class="evidence-chain shared">
-              <span>Both</span>
-              <b>Grouped by application</b>
-              <small>report per application, not pooled</small>
+              <span>02 / Analysis</span>
+              <b>Failure conditions with CART</b>
+              <small>validated by held-out application</small>
             </div>
           </aside>
         </div>
-        <div class="question-basis" aria-label="Operational definitions for both questions">
+        <div class="question-basis" aria-label="Operational definitions for the research question">
           <div><span>Unit</span><b>One grounding request</b><small>instruction + screenshot + target</small></div>
           <div><span>Labels</span><b>Four outcomes</b><small>correct / mislocalized / not found / ambiguous</small></div>
           <div><span>Validation</span><b>Grouped by application</b><small>report per application, not pooled</small></div>
@@ -1112,7 +1104,7 @@
 
     <section class="slide" data-n="08" aria-label="Slide 8 of 11" aria-hidden="true">
       <div class="inner">
-        <h2>CART describes failure conditions.</h2>
+        <h2>CART tests the failure analysis.</h2>
         <p class="lead">CART is the primary analysis model because it produces readable rules, not just a score.</p>
         <div class="rows reasons">
           <div class="row"><span class="n">01</span><div><h3>Interpretable</h3><p>Each root-to-leaf path is a conjunction of conditions that leads to a success or failure.</p></div></div>
