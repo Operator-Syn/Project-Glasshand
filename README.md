@@ -1,14 +1,15 @@
-# Computer Vision–Driven Desktop Automation Framework
+# GUI Grounding and Failure Analysis for Desktop Automation
 
 Research project for a model-agnostic framework that perceives and operates Windows desktop applications under the control of an AI decision model.
 
-**Status:** Research foundation — knowledge base, a uv-backed notebook workspace, and an
-exploratory analysis of the candidate evaluation corpus. The perception pipeline, model
-integration, and experimental results do not exist yet.
+**Status:** Research foundation — knowledge base, a uv-backed notebook workspace, an EDA of
+the ScreenSpot-Pro Windows corpus, and a static OCR grounding analysis with CART-based failure
+analysis on the full 1,020-request corpus. Live capture, desktop execution, closed-loop
+verification, and model integration remain unimplemented.
 
 ## Purpose
 
-The framework is intended to connect four concerns that are usually studied separately:
+The framework is intended to connect four parts of one desktop interaction workflow:
 
 1. **Visual perception** — detecting and classifying GUI elements from screen images.
 2. **Text and grounding** — reading on-screen text with OCR and mapping a natural-language target to a screen location.
@@ -17,23 +18,16 @@ The framework is intended to connect four concerns that are usually studied sepa
 
 The decision layer is deliberately model-agnostic. Jev is the baseline decision model named in the brief — a comparison point, not a fixed commitment — and its interface and capabilities have not yet been documented.
 
-## Research Context
+## Research Focus
 
-The project supports two undergraduate research subjects that share one experimental foundation:
-
-| Subject | Primary focus |
-|---|---|
-| Intelligent Systems | Computer vision: GUI detection, OCR, visual grounding, and the robustness of visual perception strategies. |
-| Data Mining | Analysis of the experiment records produced by the perception pipeline: discovery of grounding-failure patterns, association analysis, and interpretable failure prediction. |
-
-The two contributions form one combined paper ([ADR 0004](docs/decisions/0004_one_combined_paper.md)), with each contribution kept distinguishable by its questions, methods, and results.
+This is one study of GUI grounding: evaluate how a text-anchored baseline locates instructed targets in Windows screenshots, then use the same request-level outcomes to examine and predict when grounding fails. The corpus, measurements, and failure analysis form one continuous account; course-specific mapping stays in internal notes (see [ADR 0010](docs/decisions/0010_integrated_study_narrative.md)).
 
 ## Repository Map
 
 | Path | Responsibility | State |
 |---|---|---|
-| `src/isdm/` | Notebook-support package: repository paths, environment report, dataset fetch, and the EDA analysis modules | Initialized |
-| `notebooks/` | Jupyter workspace managed by `uv`: environment check and the ScreenSpot-Pro EDA | Initialized |
+| `src/isdm/` | Notebook-support package: paths, environment, dataset fetch, EDA, OCR grounding baseline, evaluation harness, and CART failure models | Initialized |
+| `notebooks/` | Jupyter workspace managed by `uv`: environment check, ScreenSpot-Pro EDA, and the integrated grounding and failure analysis | Initialized |
 | `tests/` | Automated tests for the package and for notebook/module sync | Initialized |
 | `data/` | Research datasets and annotations (downloaded, never committed) | Created on first write |
 | `results/` | Evaluation outputs and derived figures | Created on first write |
@@ -53,12 +47,12 @@ them. Their existence does not authorize implementation.
 
 The proposal deck lives in [`presentation/`](presentation/index.html). It is a single-page HTML deck with keyboard and swipe navigation. The GitHub Pages workflow in [`.github/workflows/pages.yml`](.github/workflows/pages.yml) validates and publishes the `presentation/` directory; see [`presentation/README.md`](presentation/README.md) for local preview and publishing steps.
 
-The deck is a proposal. It reports no implementation results and makes no claims beyond the planning documents.
+The deck is proposal-only and does not present the static OCR baseline results documented in the research notebook.
 
 ## Start Here
 
 - [docs/README.md](docs/README.md) — knowledge-base entry point, navigation, and documentation conventions.
-- [docs/overview/project.md](docs/overview/project.md) — vision, scope, research subjects, and planning assumptions.
+- [docs/overview/project.md](docs/overview/project.md) — project definition, scope, and planning assumptions.
 - [docs/timeline/README.md](docs/timeline/README.md) — proposed development roadmap and phase index.
 
 ## Planning Assumptions
@@ -67,4 +61,6 @@ The target platform is Windows 10/11, the primary language is Python, and the pr
 
 ## Non-Claims
 
-The roadmap in `docs/timeline/` is a proposal. No phase, capability, metric, or result described in this repository has been validated, implemented, or approved.
+The roadmap in `docs/timeline/` is a proposal. The EDA and the full-corpus static OCR grounding
+analysis are implemented and reported; live capture, desktop execution, closed-loop verification,
+Jev integration, and the proposed automation framework remain unimplemented. No phase is approved.
