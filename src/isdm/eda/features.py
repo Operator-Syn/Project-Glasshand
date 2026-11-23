@@ -146,7 +146,26 @@ def clean_requests(
             "character counts are derived from this string; whitespace is not content",
         )
 
-    # Change 2: a coordinate outside the screen rectangle. Clamp it to the first valid
+    # Change 2: a platform label contradicted by the captures themselves. The release
+    # files MATLAB as `macos` in the record, the filename and the image directory, and
+    # ships no `matlab_windows.json`. Sampled screenshots show a Windows 10 taskbar,
+    # right-hand window controls and a `D:\annotation` working directory, and the paper's
+    # application table lists MATLAB as Windows, so the label is wrong for these rows.
+    mislabelled = cleaned["application"].eq("matlab") & cleaned["platform"].ne("windows")
+    if mislabelled.any():
+        affected = int(mislabelled.sum())
+        cleaned.loc[mislabelled, "platform"] = "windows"
+        record(
+            f"{affected} MATLAB records labelled platform=macos "
+            "(also filename and image directory)",
+            "corrected platform to windows",
+            "platform, 1 column",
+            affected,
+            "sampled captures show a Windows 10 taskbar and a D:\\ path; the paper lists MATLAB "
+            "as Windows",
+        )
+
+    # Change 3: a coordinate outside the screen rectangle. Clamp it to the first valid
     # pixel; the target itself is unambiguous, only the corner is off by one.
     off_screen = cleaned["bbox_y1"] < 0
     if off_screen.any():
