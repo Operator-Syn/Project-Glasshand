@@ -35,13 +35,13 @@ FAVICON = ROOT / "favicon.svg"
 
 EXPECTED_SLIDES = 11
 REQUIRED_PHRASES = (
-    "Computer Vision",
+    "GUI grounding",
     "ScreenSpot-Pro",
     "1,020",
     "CART",
     "DuckDB",
     "Proposal",
-    "no implementation results yet",
+    "One request-level study",
     "License: MIT",
 )
 FORBIDDEN_PHRASES = (
