@@ -1,6 +1,13 @@
 # Evaluation Questions
 
-**Status:** Pending — a register of unresolved measurement questions. No metric has been selected or defined.
+**Status:** Partially resolved for the December OCR pilot; the full-pipeline questions remain
+pending.
+
+**Pilot note (2026-11-21).** The static OCR baseline uses the grounding request as the unit,
+strict point-in-box as the primary metric, labels `correct` / `mislocalized` / `not_found`, and
+grouped validation by application. Items 1, 2, 4 and 10 are resolved for this pilot; item 3 is
+partially addressed (OCR coverage, matcher choice and target type); the remaining items stay
+open for the capture and execution pipeline.
 
 ## Purpose
 
