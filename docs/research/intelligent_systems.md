@@ -1,14 +1,18 @@
 # Intelligent Systems Subject
 
-**Status:** Draft — candidate scope and questions. Not yet grounded in literature or approved by an adviser. Literature review is proposed in [phase 01](../timeline/phases/01_research_foundations.md); research questions are to be settled in [phase 02](../timeline/phases/02_research_design.md).
+**Status:** Internal course-mapping note — candidate questions remain draft and adviser review
+is pending. The project-facing study and its current question are documented in the
+[integrated outline](combined_paper_outline.md) and [ADR 0010](../decisions/0010_integrated_study_narrative.md).
+The static OCR baseline and CART analysis have been run on the full 1,020-request corpus; the
+300-request balanced pilot is a secondary check. The full perception pipeline remains future work.
 
-## Focus
+## Study focus
 
-Computer vision for desktop automation: detecting GUI elements, reading text, and grounding instructions to screen locations, with attention to how these degrade under realistic variation.
+GUI grounding for desktop automation: locating instructed targets in screenshots and analyzing the conditions associated with request-level outcomes. This is an internal course-mapping note; the project-facing research question and narrative are defined in [ADR 0010](../decisions/0010_integrated_study_narrative.md) and the [integrated outline](combined_paper_outline.md).
 
 ## Contribution Boundary
 
-This subject owns the perception and grounding evaluation. It does not claim the decision model, the interaction mechanism, or the Data Mining analysis. Its evidence comes from controlled experiments over the shared pipeline. Its contribution forms the CV-focused part of the single combined paper; the Data Mining subject supplies the analysis part from the same runs ([ADR 0004](../decisions/0004_one_combined_paper.md)).
+This internal note maps course-specific expectations. Project-facing materials follow the integrated question and narrative in [ADR 0010](../decisions/0010_integrated_study_narrative.md); the note does not define separate questions, methods, or claims for the public study.
 
 ## Candidate Research Questions
 
@@ -27,7 +31,7 @@ These are placeholders to be tested against the literature, not settled question
 - Report per-condition breakdowns, not only means.
 - Keep held-out applications or screens separate from development data.
 - Measure intrinsic perception metrics separately from end-to-end task outcomes.
-- Record failures with enough context for the Data Mining subject to analyze them.
+- Record failures with enough context for the shared request-level failure analysis.
 
 ## Accessibility Boundary
 
@@ -48,15 +52,15 @@ Uses the capture, perception, and grounding components described in [the compone
 ## Pending
 
 - Literature grounding for every candidate question.
-- External dataset selection, licensing, and domain match.
+- The corpus has been characterized and a full-corpus static OCR/CART run has been completed; licensing and domain match are recorded in the EDA notebook.
 - Element taxonomy and annotation scheme.
-- Dataset composition and size.
-- Metric definitions and thresholds.
-- Baseline implementation details for native and browser surfaces.
+- Dataset composition and size are documented in the EDA; the reported grounding run uses all 1,020 Windows requests.
+- Metric definitions and thresholds: point-in-box, `correct` / `mislocalized` / `not_found`.
+- Text-anchored OCR baseline implemented; the broader live perception and browser-surface pipeline remains future work.
 
 ## Related
 
-- [Data Mining subject](data_mining.md)
+- [Data Mining internal course-mapping note](data_mining.md)
 - [Evaluation questions](../experiments/evaluation_questions.md)
 - [Phase 05 — Perception](../timeline/phases/05_perception_pipeline.md)
 - [Phase 06 — Text and grounding](../timeline/phases/06_text_and_grounding.md)
