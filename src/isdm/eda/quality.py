@@ -38,19 +38,29 @@ def requests_vs_annotations(frame: pd.DataFrame, annotation_dir: Path) -> pd.Dat
     every later number, which is why the function reports the difference instead of only
     an equality flag.
     """
-    # 1. Count the records each raw file declares.
+    # 1. Count the records each raw file declares, and how many of its ids reached the
+    #    merged table. Membership is tested by id rather than inferred from the filename,
+    #    because a file's name is not evidence of which requests it contributes — the
+    #    release files MATLAB as `matlab_macos.json` while its records are Windows.
+    known_ids = set(frame["id"])
     per_file = []
-    for path in sorted(annotation_dir.glob("*_windows.json")):
+    for path in sorted(annotation_dir.glob("*.json")):
         records = json.loads(path.read_text())
-        per_file.append({"file": path.name, "records": len(records)})
+        if not isinstance(records, list):
+            continue
+        identifiers = [record["id"] for record in records]
+        per_file.append(
+            {
+                "file": path.name,
+                "records": len(identifiers),
+                "in_merged_csv": sum(1 for identifier in identifiers if identifier in known_ids),
+            }
+        )
 
     table = pd.DataFrame(per_file).sort_values("records", ascending=False)
 
     # 2. Attach the merged total to every row so a caller can print both numbers side by side.
     table["merged_total"] = len(frame)
-    table["in_merged_csv"] = frame["id"].str.split("_windows_").str[0].value_counts().reindex(
-        table["file"].str.replace("_windows.json", "", regex=False)
-    ).fillna(0).astype(int).to_numpy()
 
     # 3. A file whose raw count differs from its contribution to the merged table means
     #    the merge either dropped records or duplicated them.
