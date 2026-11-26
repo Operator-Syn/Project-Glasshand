@@ -77,11 +77,7 @@ def extract_cjk(text: object) -> str:
 
 def tokenize(text: object, drop_stopwords: bool = True) -> list[str]:
     """Return English/alphanumeric tokens, optionally removing function words."""
-    tokens = [
-        token
-        for token in normalize_text(text).split()
-        if _ASCII_TOKEN.match(token)
-    ]
+    tokens = [token for token in normalize_text(text).split() if _ASCII_TOKEN.match(token)]
     if drop_stopwords:
         tokens = [token for token in tokens if token not in STOPWORDS]
     return tokens
@@ -136,20 +132,12 @@ def score_candidate(
     coverage = overlap / len(query)
     precision = overlap / len(candidate)
     f1 = 2 * overlap / (len(query) + len(candidate))
-    fuzzy = difflib.SequenceMatcher(
-        None, query_norm, candidate_norm, autojunk=False
-    ).ratio()
+    fuzzy = difflib.SequenceMatcher(None, query_norm, candidate_norm, autojunk=False).ratio()
     contains = 1.0 if (candidate <= query or query <= candidate) else 0.0
 
     # Precision keeps a long descriptive OCR line from beating a short exact label
     # such as "Create File" inside a 20-word sentence.
-    score = (
-        0.35 * coverage
-        + 0.25 * f1
-        + 0.10 * fuzzy
-        + 0.15 * contains
-        + 0.15 * precision
-    )
+    score = 0.35 * coverage + 0.25 * f1 + 0.10 * fuzzy + 0.15 * contains + 0.15 * precision
     confidence_factor = 0.95 + 0.05 * max(0.0, min(1.0, float(confidence) / 100.0))
     return float(score * confidence_factor)
 
@@ -169,12 +157,8 @@ def score_cjk(query_cjk: str, candidate_cjk: str) -> float:
     overlap = len(query & candidate)
     coverage = overlap / len(query)
     f1 = 2 * overlap / (len(query) + len(candidate))
-    fuzzy = difflib.SequenceMatcher(
-        None, query_cjk, candidate_cjk, autojunk=False
-    ).ratio()
-    contains = 1.0 if (
-        query_cjk in candidate_cjk or candidate_cjk in query_cjk
-    ) else 0.0
+    fuzzy = difflib.SequenceMatcher(None, query_cjk, candidate_cjk, autojunk=False).ratio()
+    contains = 1.0 if (query_cjk in candidate_cjk or candidate_cjk in query_cjk) else 0.0
     return float(0.50 * fuzzy + 0.30 * f1 + 0.10 * coverage + 0.10 * contains)
 
 
@@ -230,9 +214,7 @@ def match_instruction(
         return empty
 
     query_tokens = tuple(
-        token
-        for token in tokenize(instruction)
-        if token not in application_tokens(application)
+        token for token in tokenize(instruction) if token not in application_tokens(application)
     )
     query_norm = " ".join(query_tokens)
     query_cjk = extract_cjk(instruction_cn or "")
@@ -253,9 +235,7 @@ def match_instruction(
             if query_tokens
             else 0.0
         )
-        chinese_scores.append(
-            score_cjk(query_cjk, row.cand_cjk) if query_cjk else 0.0
-        )
+        chinese_scores.append(score_cjk(query_cjk, row.cand_cjk) if query_cjk else 0.0)
 
     english = np.asarray(english_scores, dtype=float)
     chinese = np.asarray(chinese_scores, dtype=float)
