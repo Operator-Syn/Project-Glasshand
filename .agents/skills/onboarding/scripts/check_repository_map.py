@@ -53,7 +53,7 @@ PATH_ROOTS = (
 # deliberately carries no placeholder files, so a clone legitimately does not have these
 # directories yet; reporting them as missing would fail every fresh checkout. They are still
 # indexed in the map so the intended home of generated output is documented.
-DEFERRED_WORKSPACES = {"data/", "runs/", "results/", "models/"}
+DEFERRED_WORKSPACES = {"data/", "runs/"}
 IGNORED_PARTS = {
     ".git",
     ".agents",
