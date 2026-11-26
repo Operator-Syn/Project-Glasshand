@@ -249,18 +249,22 @@ def instruction_summary(frame: pd.DataFrame, text_column: str = "instruction") -
     """
     words = frame["instruction_words"]
     characters = frame["instruction_chars"]
-    return pd.DataFrame(
-        {
-            "words": [words.median(), words.mean(), words.min(), words.max()],
-            "characters": [
-                characters.median(),
-                characters.mean(),
-                characters.min(),
-                characters.max(),
-            ],
-        },
-        index=["median", "mean", "min", "max"],
-    ).round(2).assign(single_word_instructions=int((words == 1).sum()))
+    return (
+        pd.DataFrame(
+            {
+                "words": [words.median(), words.mean(), words.min(), words.max()],
+                "characters": [
+                    characters.median(),
+                    characters.mean(),
+                    characters.min(),
+                    characters.max(),
+                ],
+            },
+            index=["median", "mean", "min", "max"],
+        )
+        .round(2)
+        .assign(single_word_instructions=int((words == 1).sum()))
+    )
 
 
 def top_terms(
