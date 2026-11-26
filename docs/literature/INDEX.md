@@ -1,8 +1,12 @@
 # Literature index
 
-46 PDFs across five clusters, plus one book that has no open copy. Each row gives the file, the
+63 PDFs across five clusters, plus one book that has no open copy. Each row gives the file, the
 citation with a resolvable DOI, the licence printed on the copy held, and the paper section it
 supports.
+
+The PDFs themselves are git-ignored ([`README.md`](README.md)); this index and
+[`manifest.tsv`](manifest.tsv) are the tracked record, and `uv run python scripts/fetch_literature.py`
+rebuilds the files.
 
 Every filename carries the first author printed on page one of the PDF, not the author a search
 snippet attributed it to. Four files were renamed after that check: Pandora is Nushi, not Chung;
@@ -34,6 +38,9 @@ layer, and the first page carries the title recorded here.
 | `lu2024_omniparser.pdf` | Lu, Y. et al. (2024). *OmniParser for Pure Vision Based GUI Agent.* https://doi.org/10.48550/arXiv.2408.00203 | arXiv non-exclusive | §2 pixel-only screen parsing as the alternative to text anchoring |
 | `xie2025_scaling-computer-use-grounding.pdf` | Xie, T. et al. (2025). *Scaling Computer-Use Grounding via User Interface Decomposition and Synthesis.* https://doi.org/10.48550/arXiv.2505.13227 | arXiv non-exclusive | §2 separating text matching from visual reasoning as grounding capabilities |
 | `wu2021_screen-parsing.pdf` | Wu, J. et al. (2021). *Screen Parsing: Towards Reverse Engineering of UI Models from Screenshots.* UIST 2021. https://doi.org/10.1145/3472749.3474763 | ACM copyright; arXiv copy held | §2 the HCI lineage of recovering UI structure from pixels |
+| `deka2017_rico-dataset.pdf` | Deka, B. et al. (2017). *Rico: A Mobile App Dataset for Building Data-Driven Design Applications.* UIST 2017. https://doi.org/10.1145/3126594.3126651 | ACM copyright notice on the PDF | §2 the dataset lineage that supplied privileged view hierarchies |
+| `bunian2021_vins-ui-search.pdf` | Bunian, S. et al. (2021). *VINS: Visual Search for Mobile User Interface Design.* CHI 2021. https://doi.org/10.1145/3411764.3445762 | not stated on the copy | §2 hierarchy-derived labels are weak: mAP 48.08 against 74.15 on human-annotated boxes |
+| `li2021_screen2vec.pdf` | Li, T. J.-J. et al. (2021). *Screen2Vec: Semantic Embedding of GUI Screens and GUI Components.* CHI 2021. https://doi.org/10.1145/3411764.3445049 | not stated on the copy | §2 the TextOnly precursor of a text-anchored representation |
 
 ## 02-ocr-and-text — engines, detectors and the small-text problem
 
@@ -46,6 +53,11 @@ layer, and the first page carries the title recorded here.
 | `zeng2023_mixnet.pdf` | Zeng, Y.-X. et al. (2023). *MixNet: Toward Accurate Detection of Challenging Scene Text in the Wild.* https://doi.org/10.48550/arXiv.2308.12817 | CC BY-NC-ND 4.0 | §4.2 why neighbouring small labels merge or vanish |
 | `zhang2021_screen-recognition.pdf` | Zhang, X. et al. (2021). *Screen Recognition: Creating Accessibility Metadata for Mobile Applications from Pixels.* CHI 2021. https://doi.org/10.1145/3411764.3445186 | CC BY 4.0 | §4.1 precedent for pixel-only UI parsing; the icon-without-text gap |
 | `smith2007_tesseract-ocr.pdf` | Smith, R. (2007). *An Overview of the Tesseract OCR Engine.* ICDAR 2007. https://doi.org/10.1109/ICDAR.2007.4376991 | IEEE copyright; no licence stated on the copy | §4.2 why PSM 3 and PSM 11 diverge on sparse screenshots |
+| `boubehziz2025_ocr-resolution-impact.pdf` | Boubehziz, T. et al. (2025). *Assessing the Impact of Image Resolution on OCR Transcription Accuracy.* LangArc-2025 @ JCDL. https://doi.org/10.12794/langarc2543322 | not stated on the copy | §4.1 measured CER collapse for a Tesseract pipeline under downsampling |
+| `wang2020_textzoom-super-resolution.pdf` | Wang, W. et al. (2020). *Scene Text Image Super-Resolution in the Wild.* ECCV 2020. https://doi.org/10.1007/978-3-030-58607-2_38 | arXiv non-exclusive | §4.1 paired low- and high-resolution captures: 35.7% vs 81.2% recognition |
+| `akyon2022_sahi-slicing.pdf` | Akyon, F. C. et al. (2022). *Slicing Aided Hyper Inference and Fine-tuning for Small Object Detection.* ICIP 2022. https://doi.org/10.1109/ICIP46576.2022.9897990 | arXiv non-exclusive | §4.1 whole-image inference at a fixed input resolution is where small targets are lost |
+| `becker2026_sliced-inference-resolution.pdf` | Becker, S. et al. (2026). *When Does Sliced Inference Pay Off? Resolution, Tiling and Dense Fusion for Small Object Detection.* arXiv:2611.12657. No DOI. | arXiv non-exclusive | §4.1 the ~6-pixel floor in the network input, and the honest caveat that resolution beats tiling |
+| `meethal2023_cascaded-zoom-in.pdf` | Meethal, A. et al. (2023). *Cascaded Zoom-in Detector for High Resolution Aerial Images.* CVPRW 2023. https://doi.org/10.1109/CVPRW59228.2023.00198 | CC BY-NC-SA 4.0 | §4.1 rescaling corrupts the features of small objects |
 
 ## 03-computer-use-agents — the task-level frame this paper does not compete on
 
@@ -74,6 +86,7 @@ layer, and the first page carries the title recorded here.
 | `nushi2018_pandora-system-failure.pdf` | Nushi, B., Kamar, E., & Horvitz, E. (2018). *Towards Accountable AI: Hybrid Human-Machine Analyses for Characterizing System Failure.* https://doi.org/10.48550/arXiv.1809.07424 | arXiv non-exclusive | §4.4 the closest published precedent: interpretable decision trees that summarise conditions of failure, chosen for interpretability |
 | `singla2021_failures-robust-features.pdf` | Singla, S. et al. (2021). *Understanding Failures of Deep Networks via Robust Feature Extraction.* https://doi.org/10.48550/arXiv.2012.01750 | arXiv non-exclusive | §4.4 depth-limited trees for failure prediction, and a metric for whether a tree explains rather than classifies |
 | `chen2004_failure-diagnosis-decision-trees.pdf` | Chen, M. et al. (2004). *Failure Diagnosis Using Decision Trees.* ICAC 2004. No DOI verified; author-hosted PDF. | IEEE copyright; author-hosted copy | §4.4 the systems-side ancestor of tree-based failure diagnosis |
+| `holte1993_simple-rules-1r.pdf` | Holte, R. C. (1993). *Very Simple Classification Rules Perform Well on Most Commonly Used Datasets.* Machine Learning 11:63-91. https://doi.org/10.1023/A:1022631118932 | not stated on the copy | §5.2 the published template for benchmarking a shallow threshold rule against a learned model |
 
 ## 05-evaluation-methods — metric choice, validity and leakage
 
@@ -89,3 +102,11 @@ layer, and the first page carries the title recorded here.
 | `jahin2026_gui-primitives.pdf` | Jahin, M. A. et al. (2026). *GUI-PRIMITIVES: Diagnosing Spatial Reasoning Failures in Vision-Language GUI Grounding.* EMNLP 2026. https://aclanthology.org/2026.emnlp-main.2620.pdf | ACL Anthology | §4.3 strict point-in-box beside a loose metric; failures are localisation, not comprehension |
 | `zhang2026_conclick-error-types.pdf` | Zhang, R. et al. (2026). *ConClick: Element-wise Contrastive Learning Improves GUI Grounding.* https://doi.org/10.48550/arXiv.2610.13268 | arXiv non-exclusive | §4.3 click accuracy hides four separable error types |
 | `kumar2026_uncertainty-computer-use.pdf` | Kumar, D. et al. (2026). *Uncertainty Quantification for Computer-Use Agents: A Benchmark across Vision-Language Models and GUI Grounding Datasets.* https://doi.org/10.48550/arXiv.2606.25760 | arXiv non-exclusive | §5.2 graded miss severity, and the limits of confidence as a signal |
+| `northcutt2021_label-errors.pdf` | Northcutt, C. G. et al. (2021). *Pervasive Label Errors in Test Sets Destabilize Machine Learning Benchmarks.* NeurIPS 2021 Datasets and Benchmarks. No DOI. | proceedings PDF; no separate licence stated | §7 benchmark labels carry a measurable error rate and can reorder model rankings |
+| `reiss2020_conll-label-errors.pdf` | Reiss, F. et al. (2020). *Identifying Incorrect Labels in the CoNLL-2003 Corpus.* CoNLL 2020. https://doi.org/10.18653/v1/2020.conll-1.16 | CC BY 4.0 | §7 the honest counterpoint: ~7.5% test-fold label errors did not reorder results |
+| `artstein2008_inter-coder-agreement.pdf` | Artstein, R. & Poesio, M. (2008). *Inter-Coder Agreement for Computational Linguistics.* Computational Linguistics 34(4):555-596. https://doi.org/10.1162/coli.07-034-r2 | ACL copyright; no open licence stated | §7 kappa methodology, and why this study cannot claim inter-annotator agreement |
+| `saito2015_precision-recall-imbalance.pdf` | Saito, T. & Rehmsmeier, M. (2015). *The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets.* PLOS ONE 10(3):e0118432. https://doi.org/10.1371/journal.pone.0118432 | CC BY 4.0 | §5.2 why accuracy and ROC-AUC mislead at an 81% base rate, and the 0.19 PR baseline |
+| `brodersen2010_balanced-accuracy.pdf` | Brodersen, K. H. et al. (2010). *The Balanced Accuracy and Its Posterior Distribution.* ICPR 2010. https://doi.org/10.1109/ICPR.2010.764 | not stated on the copy | §5.2 balanced accuracy defined, and the constant-majority failure mode |
+| `niculescu2005_probability-calibration.pdf` | Niculescu-Mizil, A. & Caruana, R. (2005). *Predicting Good Probabilities With Supervised Learning.* ICML 2005. https://doi.org/10.1145/1102351.1102430 | not stated on the copy | §5.2 single decision trees are among the weakest probability estimators — the warrant for refusing the word calibrated |
+| `brier1950_probability-verification.pdf` | Brier, G. W. (1950). *Verification of Forecasts Expressed in Terms of Probability.* Monthly Weather Review 78(1):1-3. https://doi.org/10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2 | not stated on the copy | §5.2 the score the paper states it never computed |
+| `silvafilho2023_calibration-survey.pdf` | Silva Filho, T. et al. (2023). *Classifier calibration: a survey on how to assess and improve predicted class probabilities.* Machine Learning 112(9):3211-3260. https://doi.org/10.1007/s10994-023-06336-7 | CC BY 4.0 | §5.2 the protocol that would be required to earn the word calibrated |
