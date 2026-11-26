@@ -24,6 +24,7 @@ Work that is not documentation lives outside this knowledge base by design: the 
 - **Research-focused:** `research/` → `experiments/` → the relevant phase documents.
 - **Implementation-focused:** `architecture/` → [phase 03](timeline/phases/03_architecture_planning.md) → later phase documents.
 - **Looking for a decision:** [decisions/README.md](decisions/README.md) and its index.
+- **Checking whether the work is done:** [overview/completion_criteria.md](overview/completion_criteria.md).
 
 ## Status Labels
 
