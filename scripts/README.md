@@ -9,6 +9,9 @@ gets the same behaviour as this checkout.
 | `setup_git_hooks.py` | Sets `core.hooksPath` to `scripts/git-hooks`, so the committed `pre-commit` hook runs. | Once per clone. |
 | `nbstripout_safe.py` | The clean filter itself. Strips cell outputs and execution counts, and returns `SIGPIPE` to its default so a closed pager does not print a traceback over the diff. | Never by hand — git invokes it. Preflight with `--version`. |
 | `git-hooks/pre-commit` | Blocks a commit when `ruff check .` reports errors; reports `ruff format --check` drift and lets the commit through. | Never by hand — git invokes it on `git commit`. Bypass with `--no-verify`. |
+| `fetch_literature.py` | Downloads every reference PDF listed in `docs/literature/manifest.tsv` and verifies each one: `%PDF` bytes, a text layer, and the expected title in the first three pages. Deletes any download that fails. | Once per clone, or whenever the manifest gains a row. `--check` verifies what is present without downloading. |
+| `run_grounding.py` | Runs the OCR grounding baseline and writes one JSONL record per request. | To regenerate `runs/grounding/records_all.jsonl`, which is git-ignored. |
+| `summarize_grounding.py` | Turns run records into the result tables and the summary file. | After a grounding run. |
 
 Fresh clone:
 
@@ -16,6 +19,8 @@ Fresh clone:
 uv sync
 uv run python scripts/setup_notebook_filters.py
 uv run python scripts/setup_git_hooks.py
+uv run python scripts/fetch_literature.py --check   # optional: verify, do not download
+uv run python scripts/fetch_literature.py           # fetch the 63 reference PDFs (git-ignored)
 ```
 
 ## What is clone-local and why
