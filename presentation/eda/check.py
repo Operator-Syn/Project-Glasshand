@@ -98,8 +98,20 @@ FORBIDDEN_PHRASES = (
 # HTML void elements never open a scope, so they never push onto the stack.
 VOID_ELEMENTS = frozenset(
     {
-        "area", "base", "br", "col", "embed", "hr", "img",
-        "input", "link", "meta", "param", "source", "track", "wbr",
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
     }
 )
 
@@ -174,9 +186,7 @@ class DeckParser(HTMLParser):
         if tag not in VOID_ELEMENTS:
             self._stack.append((tag, hide_inc, aria_inc, slide_inc))
 
-    def handle_startendtag(
-        self, tag: str, attrs: list[tuple[str, str | None]]
-    ) -> None:
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         """Treat a self-closing element as an open immediately followed by a close."""
         self.handle_starttag(tag, attrs)
         self.handle_endtag(tag)
@@ -219,8 +229,7 @@ def check_slide_count(parser: DeckParser) -> None:
     """Rule 2: exactly ten sections carry the 'slide' class."""
     if parser.slides != EXPECTED_SLIDES:
         raise SystemExit(
-            f"Rule 2: expected {EXPECTED_SLIDES} sections with class 'slide', "
-            f"found {parser.slides}"
+            f"Rule 2: expected {EXPECTED_SLIDES} sections with class 'slide', found {parser.slides}"
         )
 
 
@@ -229,8 +238,7 @@ def check_status(parser: DeckParser) -> None:
     actual = parser.meta.get("status")
     if actual != STATUS:
         raise SystemExit(
-            f'Rule 3: expected <meta name="status" content="{STATUS}">, '
-            f"found {actual!r}"
+            f'Rule 3: expected <meta name="status" content="{STATUS}">, found {actual!r}'
         )
 
 
@@ -245,9 +253,7 @@ def check_motion_and_print() -> None:
                 f"{label}; the print stylesheet is the static fallback."
             )
     if not re.search(r"@media\s+print\b", css):
-        raise SystemExit(
-            "Rule 4: deck.css has no '@media print' block for the static fallback."
-        )
+        raise SystemExit("Rule 4: deck.css has no '@media print' block for the static fallback.")
 
 
 def check_local_references(parser: DeckParser) -> None:
@@ -268,9 +274,7 @@ def check_local_references(parser: DeckParser) -> None:
         try:
             target.relative_to(boundary)
         except ValueError:
-            raise SystemExit(
-                f"Rule 5: local reference escapes presentation/: {ref!r}"
-            ) from None
+            raise SystemExit(f"Rule 5: local reference escapes presentation/: {ref!r}") from None
         if not target.is_file():
             raise SystemExit(f"Rule 5: broken local reference: {ref!r}")
 
@@ -293,9 +297,7 @@ def check_forbidden_phrases() -> None:
         needle = phrase.lower()
         for label, text in sources.items():
             if needle in text.lower():
-                raise SystemExit(
-                    f"Rule 7: forbidden content found in {label}: {phrase!r}"
-                )
+                raise SystemExit(f"Rule 7: forbidden content found in {label}: {phrase!r}")
 
 
 def check_sentence_length(parser: DeckParser) -> None:
@@ -357,9 +359,7 @@ def check_no_local_tokens(parser: DeckParser) -> None:
     declared anywhere in the deck stylesheet is a palette fork and fails.
     """
     if parser.has_style:
-        raise SystemExit(
-            "Rule 9: index.html contains a <style> block; styling lives in deck.css."
-        )
+        raise SystemExit("Rule 9: index.html contains a <style> block; styling lives in deck.css.")
     css = CSS.read_text(encoding="utf-8")
     blocks = _root_blocks(css)
     if blocks:
