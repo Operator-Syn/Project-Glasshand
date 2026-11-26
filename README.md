@@ -1,66 +1,64 @@
 # GUI Grounding and Failure Analysis for Desktop Automation
 
-Research project for a model-agnostic framework that perceives and operates Windows desktop applications under the control of an AI decision model.
+Research project evaluating a text-anchored OCR grounding baseline on the ScreenSpot-Pro
+Windows corpus, and analyzing the request conditions associated with its failures.
 
-**Status:** Research foundation — knowledge base, a uv-backed notebook workspace, an EDA of
-the ScreenSpot-Pro Windows corpus, and a static OCR grounding analysis with CART-based failure
-analysis on the full 1,020-request corpus. Live capture, desktop execution, closed-loop
-verification, and model integration remain unimplemented.
-
-## Purpose
-
-The framework is intended to connect four parts of one desktop interaction workflow:
-
-1. **Visual perception** — detecting and classifying GUI elements from screen images.
-2. **Text and grounding** — reading on-screen text with OCR and mapping a natural-language target to a screen location.
-3. **Decision-making** — allowing an external decision model to choose the next action from the perceived state.
-4. **Closed-loop execution** — performing the action, verifying the resulting visual state, and recording the episode for later analysis.
-
-The decision layer is deliberately model-agnostic. Jev is the baseline decision model named in the brief — a comparison point, not a fixed commitment — and its interface and capabilities have not yet been documented.
+**Status:** Research foundation — a uv-backed notebook workspace, an EDA of the ScreenSpot-Pro
+Windows corpus, and a static OCR grounding analysis with CART-based failure analysis on the full
+1,020-request corpus. Live capture, desktop execution, closed-loop verification, and model
+integration remain unimplemented.
 
 ## Research Focus
 
-This is one study of GUI grounding: evaluate how a text-anchored baseline locates instructed targets in Windows screenshots, then use the same request-level outcomes to examine and predict when grounding fails. The corpus, measurements, and failure analysis form one continuous account; course-specific mapping stays in internal notes (see [ADR 0010](docs/decisions/0010_integrated_study_narrative.md)).
+This is one study of GUI grounding: evaluate how a text-anchored baseline locates instructed
+targets in Windows screenshots, then use the same request-level outcomes to examine and predict
+when grounding fails. The corpus, measurements, and failure analysis form one continuous account;
+course-specific mapping stays in internal notes (see [ADR 0010](docs/decisions/0010_integrated_study_narrative.md)).
+
+The scope is one baseline adapter and an evaluation harness, not a model-agnostic framework.
 
 ## Repository Map
 
 | Path | Responsibility | State |
 |---|---|---|
-| `src/isdm/` | Notebook-support package: paths, environment, dataset fetch, EDA, OCR grounding baseline, evaluation harness, and CART failure models | Initialized |
-| `notebooks/` | Jupyter workspace managed by `uv`: environment check, ScreenSpot-Pro EDA, and the integrated grounding and failure analysis | Initialized |
-| `tests/` | Automated tests for the package and for notebook/module sync | Initialized |
-| `data/` | Research datasets and annotations (downloaded, never committed) | Created on first write |
-| `results/` | Evaluation outputs and derived figures | Created on first write |
-| `models/` | Model-related artifacts and local checkpoints | Created on first write |
-| `presentation/` | Proposal deck and GitHub Pages entry point | Initialized |
-| `docs/` | Project knowledge base | Initialized |
+| `src/isdm/` | Notebook-support package: paths, environment, dataset fetch, EDA, OCR grounding baseline, evaluation harness, and CART failure models | Implemented |
+| `notebooks/` | Jupyter workspace managed by `uv`: environment check, ScreenSpot-Pro EDA, and the integrated grounding and failure analysis | Implemented |
+| `tests/` | Automated tests for the package and for notebook/module sync | 13 passing |
+| `scripts/` | Run and summarise the grounding evaluation; notebook and git-hook setup | Implemented |
+| `runs/` | Executed notebooks, request records, result tables and figures for every reported number | Generated locally, git-ignored |
+| `data/` | ScreenSpot-Pro Windows benchmark (downloaded, never committed) | Git-ignored |
+| `presentation/` | Proposal and EDA decks, published through GitHub Pages | Implemented |
+| `docs/` | Project knowledge base | Current |
 
-The `experiments/` workspace was removed once the notebook workspace replaced it: run
-configurations now live beside the notebooks that produce them. Downloaded data and generated
-artifacts are git-ignored; see [`notebooks/README.md`](notebooks/README.md) for the setup and
-execution commands.
-
-Most of these workspaces hold nothing yet and are created when something first writes into
-them. Their existence does not authorize implementation.
+Downloaded data and generated artifacts are git-ignored; see
+[`notebooks/README.md`](notebooks/README.md) for the setup and execution commands.
 
 ## Presentation
 
-The proposal deck lives in [`presentation/`](presentation/index.html). It is a single-page HTML deck with keyboard and swipe navigation. The GitHub Pages workflow in [`.github/workflows/pages.yml`](.github/workflows/pages.yml) validates and publishes the `presentation/` directory; see [`presentation/README.md`](presentation/README.md) for local preview and publishing steps.
+Two single-page HTML decks with keyboard and swipe navigation:
 
-The deck is proposal-only and does not present the static OCR baseline results documented in the research notebook.
+- [`presentation/pitch/`](presentation/pitch/index.html) — the proposal deck.
+- [`presentation/eda/`](presentation/eda/index.html) — the measured EDA findings.
+
+The GitHub Pages workflow in [`.github/workflows/pages.yml`](.github/workflows/pages.yml)
+validates both decks and publishes them to one site; see
+[`presentation/README.md`](presentation/README.md) for local preview.
 
 ## Start Here
 
 - [docs/README.md](docs/README.md) — knowledge-base entry point, navigation, and documentation conventions.
 - [docs/overview/project.md](docs/overview/project.md) — project definition, scope, and planning assumptions.
+- [docs/research/combined_paper_outline.md](docs/research/combined_paper_outline.md) — the integrated study outline.
 - [docs/timeline/README.md](docs/timeline/README.md) — proposed development roadmap and phase index.
 
 ## Planning Assumptions
 
-The target platform is Windows 10/11, the primary language is Python, and the project is a solo undergraduate effort that should remain locally runnable where practical. These are planning assumptions recorded in the brief; confirmed decisions are recorded in [docs/decisions/](docs/decisions/).
+The target platform is Windows 10/11, the primary language is Python, and the project is a solo
+undergraduate effort that should remain locally runnable where practical. These are planning
+assumptions recorded in the brief; confirmed decisions are recorded in [docs/decisions/](docs/decisions/).
 
 ## Non-Claims
 
 The roadmap in `docs/timeline/` is a proposal. The EDA and the full-corpus static OCR grounding
 analysis are implemented and reported; live capture, desktop execution, closed-loop verification,
-Jev integration, and the proposed automation framework remain unimplemented. No phase is approved.
+and the proposed automation framework remain unimplemented. No phase is approved.
