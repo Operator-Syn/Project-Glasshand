@@ -7,12 +7,7 @@ import pandas as pd
 
 def label_counts(records: pd.DataFrame) -> pd.DataFrame:
     """Count outcome labels by target type."""
-    return (
-        records.groupby(["ui_type", "label"])
-        .size()
-        .unstack(fill_value=0)
-        .sort_index()
-    )
+    return records.groupby(["ui_type", "label"]).size().unstack(fill_value=0).sort_index()
 
 
 def accuracy_by(records: pd.DataFrame, by: str) -> pd.DataFrame:
@@ -38,9 +33,7 @@ def relaxed_accuracy(records: pd.DataFrame, tolerance_px: float = 50.0) -> float
     return float(success.mean())
 
 
-def relaxed_accuracy_by(
-    records: pd.DataFrame, by: str, tolerance_px: float = 50.0
-) -> pd.DataFrame:
+def relaxed_accuracy_by(records: pd.DataFrame, by: str, tolerance_px: float = 50.0) -> pd.DataFrame:
     """Near-miss accuracy per group."""
     frame = records.copy()
     frame["distance_px"] = pd.to_numeric(frame["distance_px"], errors="coerce")
@@ -60,9 +53,7 @@ def relaxed_accuracy_by(
 CORPUS_TYPE_SHARES = {"icon": 398 / 1020, "text": 622 / 1020}
 
 
-def corpus_weighted_accuracy(
-    records: pd.DataFrame, tolerance_px: float | None = None
-) -> float:
+def corpus_weighted_accuracy(records: pd.DataFrame, tolerance_px: float | None = None) -> float:
     """Estimate corpus-level accuracy by reweighting the balanced sample.
 
     Args:
