@@ -23,48 +23,99 @@ ID_COLUMNS = ("id", "img_filename")
 
 
 def requests_vs_annotations(frame: pd.DataFrame, annotation_dir: Path) -> pd.DataFrame:
-    """Compare the merged request table against the raw per-application JSON files.
+    """Compare flattened raw annotation records with the merged request table.
 
     Args:
-        frame: the loaded request table.
-        annotation_dir: directory holding ``*_windows.json`` annotation files.
+        frame: merged request table with the 14 source fields used below.
+        annotation_dir: directory containing per-application annotation JSON files.
 
     Returns:
-        One row per annotation file with its record count, plus a ``merged`` column
-        marking whether that count is measured against the merged table.
+        One row per annotation file with its raw count, exact record matches, unmatched
+        raw records, and duplicate raw identifiers. A ``DataFrame.attrs`` entry named
+        ``unmatched_merged`` records merged rows absent from the raw annotations.
 
-    The merge step that produced the table is the one place rows can silently vanish, so
-    this is checked before any analysis rather than assumed. A shortfall here invalidates
-    every later number, which is why the function reports the difference instead of only
-    an equality flag.
+    Processing:
+        1. Flatten each JSON record's ``bbox`` and ``img_size`` arrays into the merged
+           table's scalar columns, preserving all source fields in a canonical tuple.
+        2. Count those tuples in the merged table, then consume matches while visiting
+           sorted annotation files so duplicate rows cannot match the same merged row twice.
+        3. Return per-file counts and the number of merged rows left unmatched.
+
+    Side effects: reads JSON files from ``annotation_dir``; does not modify inputs.
+    Raises:
+        ValueError: a JSON file is not a list of annotation records.
+        KeyError: a source record or merged table lacks a required field.
     """
-    # 1. Count the records each raw file declares, and how many of its ids reached the
-    #    merged table. Membership is tested by id rather than inferred from the filename,
-    #    because a file's name is not evidence of which requests it contributes — the
-    #    release files MATLAB as `matlab_macos.json` while its records are Windows.
-    known_ids = set(frame["id"])
+    from collections import Counter
+
+    columns = (
+        "id",
+        "application",
+        "group",
+        "platform",
+        "ui_type",
+        "instruction",
+        "instruction_cn",
+        "img_filename",
+        "img_size_w",
+        "img_size_h",
+        "bbox_x1",
+        "bbox_y1",
+        "bbox_x2",
+        "bbox_y2",
+    )
+
+    def values(record: dict) -> tuple[str, ...]:
+        """Flatten a raw JSON record into the merged table's 14-field comparison key."""
+        flattened = {key: record[key] for key in columns[:8]}
+        flattened.update(
+            dict(
+                zip(
+                    ("img_size_w", "img_size_h"),
+                    record["img_size"],
+                    strict=True,
+                )
+            )
+        )
+        flattened.update(
+            dict(
+                zip(
+                    ("bbox_x1", "bbox_y1", "bbox_x2", "bbox_y2"),
+                    record["bbox"],
+                    strict=True,
+                )
+            )
+        )
+        return tuple(str(flattened[column]) for column in columns)
+
+    # 1. Build a multiset, not a set: multiplicity is part of proving records were neither
+    #    dropped nor silently duplicated during the merge.
+    merged = Counter(frame.loc[:, columns].astype(str).itertuples(index=False, name=None))
+    remaining = merged.copy()
     per_file = []
+
+    # 2. Consume exact source-row matches once, retaining duplicate-ID evidence per file.
     for path in sorted(annotation_dir.glob("*.json")):
         records = json.loads(path.read_text())
         if not isinstance(records, list):
-            continue
-        identifiers = [record["id"] for record in records]
+            raise ValueError(f"{path} must contain a JSON list of records")
+        raw_rows = [values(record) for record in records]
+        raw_counts = Counter(raw_rows)
+        exact_matches = sum(min(count, remaining[row]) for row, count in raw_counts.items())
+        remaining.subtract({row: min(count, remaining[row]) for row, count in raw_counts.items()})
         per_file.append(
             {
                 "file": path.name,
-                "records": len(identifiers),
-                "in_merged_csv": sum(1 for identifier in identifiers if identifier in known_ids),
+                "records": len(raw_rows),
+                "exact_matches": exact_matches,
+                "unmatched_raw": len(raw_rows) - exact_matches,
+                "duplicate_raw_ids": int(pd.Series([r[0] for r in raw_rows]).duplicated().sum()),
             }
         )
 
+    # 3. Leftover multiplicity is evidence of merged rows not represented by the source.
     table = pd.DataFrame(per_file).sort_values("records", ascending=False)
-
-    # 2. Attach the merged total to every row so a caller can print both numbers side by side.
-    table["merged_total"] = len(frame)
-
-    # 3. A file whose raw count differs from its contribution to the merged table means
-    #    the merge either dropped records or duplicated them.
-    table["difference"] = table["records"] - table["in_merged_csv"]
+    table.attrs["unmatched_merged"] = sum(remaining.values())
     return table
 
 
@@ -244,12 +295,7 @@ def resolution_support(frame: pd.DataFrame) -> pd.DataFrame:
     A resolution carried by a handful of rows cannot support a per-resolution claim, so
     the count is the support for any later statement and is read before making one.
     """
-    support = (
-        frame.groupby(["img_size_w", "img_size_h"])
-        .size()
-        .rename("requests")
-        .to_frame()
-    )
+    support = frame.groupby(["img_size_w", "img_size_h"]).size().to_frame(name="requests")
     support["share_pct"] = (support["requests"] / len(frame) * 100).round(2)
     return support.sort_index()
 
@@ -263,11 +309,15 @@ def audit_images(frame: pd.DataFrame, image_root: Path) -> tuple[pd.DataFrame, p
 
     Returns:
         A tuple of (one audit row per distinct screenshot, the request table joined to it).
+        Status ``ok`` means the full image pixel data was decoded, not just its header.
 
-    A declared ``img_size`` is not evidence of anything. Opening the file establishes
-    three facts at once: the file exists, it decodes, and its pixel dimensions match the
-    coordinate space the bounding boxes were written in. If dimensions disagreed, every
-    size measure in the analysis would be measured against the wrong denominator.
+    Processing:
+        1. Visit each distinct referenced filename and report missing files immediately.
+        2. Open each existing file, force a full pixel decode, and record its dimensions,
+           colour mode, and status; convert decode failures into an explicit unreadable row.
+        3. Join the per-file audit back to every request that uses that image.
+
+    Side effects: reads image files from ``image_root``; does not modify inputs.
     """
     records = []
     for relative in sorted(frame["img_filename"].unique()):
@@ -276,17 +326,16 @@ def audit_images(frame: pd.DataFrame, image_root: Path) -> tuple[pd.DataFrame, p
             records.append((relative, None, None, None, "missing"))
             continue
         try:
-            # PIL reads the header for size and mode, so no full decode is needed here.
+            # PIL loads lazily; explicitly decode pixels so truncated/corrupt payloads fail here.
             from PIL import Image
 
             with Image.open(path) as image:
+                image.load()
                 records.append((relative, image.width, image.height, image.mode, "ok"))
         except Exception as error:  # noqa: BLE001 - report the failure, keep auditing
             records.append((relative, None, None, None, f"unreadable: {type(error).__name__}"))
 
-    audit = pd.DataFrame(
-        records, columns=["img_filename", "file_w", "file_h", "mode", "status"]
-    )
+    audit = pd.DataFrame(records, columns=["img_filename", "file_w", "file_h", "mode", "status"])
     joined = frame.merge(audit, on="img_filename", how="left")
     return audit, joined
 
