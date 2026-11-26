@@ -19,7 +19,7 @@ and whether those conditions predict failure across applications. The EDA charac
 
 This study evaluates a static-screenshot baseline. It does **not** implement live capture, input injection,
 execution, verification, a closed loop, a from-scratch GUI detector, or a fine-tuned model. It
-does **not** evaluate Jev. It does **not** claim a resolution effect: the EDA shows 15 of 17
+does **not** claim a resolution effect: the EDA shows 15 of 17
 applications were captured at one resolution, so resolution and application are confounded.
 
 ## 1. Introduction
@@ -133,6 +133,13 @@ Reuse the EDA notebook:
   accuracy 77.5%; AUC 0.829; raw accuracy 76.5% is below the 81.0% base rate.
 - The text-only model is the strongest deployable classifier. The all-target model is best
   read as a benchmark-level ranking model (AUC 0.878), not a calibrated deployment model.
+- **Required before submission — the score comparison.** `score` is the matcher's own confidence,
+  so the highest-importance feature is the baseline grading itself. The paper must report each
+  model against a score-only threshold fitted on the same application-grouped folds, and state
+  which one is presented as the predictor. A tree that only reproduces `score < t` is an expensive
+  threshold. If the comparison is close, the interpretable rules carry the Data Mining
+  contribution, not the accuracy. No calibration measurement exists (no reliability curve, no
+  Brier score), so the models must not be described as calibrated.
 
 ## 6. Discussion
 
@@ -161,13 +168,16 @@ Reuse the EDA notebook:
   failures; the text-only model is the better classifier (74.3%).
 - OCR coverage is the ceiling; no icon-aware detector.
 - Strict point-in-box hides near misses; report distances as a secondary metric.
-- No capture/execution/verification; no Jev; no closed loop.
+- `score` is the matcher's own output, so the CART models' strongest predictor of failure is
+  self-assessment rather than independent evidence. Report the score-threshold comparison beside
+  the tree metrics; do not present the tree's accuracy as a discovery about failure conditions.
+- No capture, execution, verification, or closed loop.
 - Resolution effects cannot be identified from this corpus.
 - One baseline, one annotator set; no inter-annotator agreement analysis.
 
 ## 8. Conclusion and future work
 
-- The harness and labels are reusable; a Jev candidate-selector adapter can replace the
+- The harness and labels are reusable; a decision-model adapter can replace the
   deterministic matcher without changing the evaluator.
 - The full 1,020-request run is complete; per-application and per-type results are reported.
 - Icon-aware candidate generation only if it can be evaluated without leaking the target box.
