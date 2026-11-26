@@ -62,7 +62,7 @@ A record is never edited to reverse its decision. Write a new record and mark th
 | Record | Title | Status |
 |---|---|---|
 | [0001](0001_two_subjects_shared_foundation.md) | Two research subjects share one experimental foundation | Historical; course mapping only |
-| [0002](0002_model_agnostic_decision_boundary.md) | Model-agnostic decision boundary | Accepted |
+| [0002](0002_model_agnostic_decision_boundary.md) | Model-agnostic decision boundary | Deprecated by 0009; no model-agnostic claim |
 | [0003](0003_two_papers.md) | Two separate papers | Superseded by 0004 |
 | [0004](0004_one_combined_paper.md) | One combined paper with distinguishable contributions | Superseded by 0010 |
 | [0010](0010_integrated_study_narrative.md) | One integrated study and narrative | Accepted |
