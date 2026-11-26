@@ -71,9 +71,10 @@ The research can be called finished when every item holds:
    from `export_text`, and no rule is described in prose the model cannot produce.
 5. Each reported model keeps a distinct role — text-only as deployable, all-target as benchmark
    analysis, geometry as post-hoc explanation. None is presented as a calibrated deployment model.
-6. Every CART model is compared with a score-only threshold baseline fitted on the same
-   application-grouped folds, and the comparison is reported whichever way it falls. `score` is the
-   matcher's own output: a tree that only reproduces a threshold is an expensive threshold.
+6. The CART models are reported against the base rate they must beat. If the paper claims that the
+   tree identifies conditions beyond the matcher's own confidence, it also reports a score-only
+   threshold fitted on the same application-grouped folds. Literature justifies the method class;
+   only a comparison justifies an added-signal claim.
 7. The limitations section covers OCR coverage as the ceiling, icon targets as structural failures,
    the resolution confound, the single annotator set, strict point-in-box, and that `score` is the
    matcher's self-assessment rather than independent evidence.
