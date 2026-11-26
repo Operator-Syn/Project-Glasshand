@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="601.82pt" height="169.208pt" viewBox="0 0 601.82 169.208" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-26T08:44:05.410334</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 169.208 
+L 601.82 169.208 
+L 601.82 0 
+L 0 0 
+L 0 169.208 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 63.8 125.568 
+L 588.32 125.568 
+L 588.32 3.6 
+L 63.8 3.6 
+L 63.8 125.568 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 63.8 125.568 
+L 63.8 3.6 
+" clip-path="url(#pc43bcbbc65)" style="fill: none; stroke: #1f3a29; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m6d804c92cf" d="M 0 0 
+L 0 3.5 
+" style="stroke: #7f9a86; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m6d804c92cf" x="63.8" y="125.568" style="fill: #7f9a86; stroke: #7f9a86; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <!-- 0 -->
+      <g style="fill: #7f9a86" transform="translate(60.5 143.788) scale(0.11 -0.11)">
+       <defs>
+        <path id="JetBrainsMonoNFM-Bold-14" d="M 1920 -64 
+Q 1466 -64 1133 109 
+Q 800 282 617 595 
+Q 435 909 435 1331 
+L 435 3341 
+Q 435 3763 617 4076 
+Q 800 4390 1133 4563 
+Q 1466 4736 1920 4736 
+Q 2374 4736 2707 4563 
+Q 3040 4390 3222 4076 
+Q 3405 3763 3405 3341 
+L 3405 1331 
+Q 3405 909 3222 595 
+Q 3040 282 2707 109 
+Q 2374 -64 1920 -64 
+z
+M 1920 627 
+Q 2253 627 2451 819 
+Q 2650 1011 2650 1331 
+L 2650 3341 
+Q 2650 3661 2454 3853 
+Q 2259 4045 1920 4045 
+Q 1581 4045 1385 3853 
+Q 1190 3661 1190 3341 
+L 1190 1331 
+Q 1190 1011 1388 819 
+Q 1587 627 1920 627 
+z
+M 1920 1952 
+Q 1728 1952 1613 2057 
+Q 1498 2163 1498 2355 
+Q 1498 2547 1613 2646 
+Q 1728 2746 1920 2746 
+Q 2112 2746 2227 2646 
+Q 2342 2547 2342 2355 
+Q 2342 2163 2227 2057 
+Q 2112 1952 1920 1952 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 168.704 125.568 
+L 168.704 3.6 
+" clip-path="url(#pc43bcbbc65)" style="fill: none; stroke: #1f3a29; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m6d804c92cf" x="168.704" y="125.568" style="fill: #7f9a86; stroke: #7f9a86; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <!-- 100 -->
+      <g style="fill: #7f9a86" transform="translate(158.804 143.788) scale(0.11 -0.11)">
+       <defs>
+        <path id="JetBrainsMonoNFM-Bold-15" d="M 538 0 
+L 538 723 
+L 1754 723 
+L 1754 3898 
+L 531 3002 
+L 531 3898 
+L 1606 4672 
+L 2554 4672 
+L 2554 723 
+L 3533 723 
+L 3533 0 
+L 538 0 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(120 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 273.608 125.568 
+L 273.608 3.6 
+" clip-path="url(#pc43bcbbc65)" style="fill: none; stroke: #1f3a29; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m6d804c92cf" x="273.608" y="125.568" style="fill: #7f9a86; stroke: #7f9a86; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <!-- 200 -->
+      <g style="fill: #7f9a86" transform="translate(263.708 143.788) scale(0.11 -0.11)">
+       <defs>
+        <path id="JetBrainsMonoNFM-Bold-16" d="M 474 0 
+L 474 723 
+L 2157 2445 
+Q 2566 2874 2566 3315 
+Q 2566 3629 2384 3824 
+Q 2202 4019 1894 4019 
+Q 1581 4019 1392 3817 
+Q 1203 3616 1203 3283 
+L 403 3283 
+Q 403 3718 595 4044 
+Q 787 4371 1126 4553 
+Q 1466 4736 1914 4736 
+Q 2355 4736 2688 4563 
+Q 3021 4390 3203 4080 
+Q 3386 3770 3386 3354 
+Q 3386 2995 3216 2636 
+Q 3046 2278 2656 1894 
+L 1478 723 
+L 3443 723 
+L 3443 0 
+L 474 0 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-16"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(120 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 378.512 125.568 
+L 378.512 3.6 
+" clip-path="url(#pc43bcbbc65)" style="fill: none; stroke: #1f3a29; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m6d804c92cf" x="378.512" y="125.568" style="fill: #7f9a86; stroke: #7f9a86; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <!-- 300 -->
+      <g style="fill: #7f9a86" transform="translate(368.612 143.788) scale(0.11 -0.11)">
+       <defs>
+        <path id="JetBrainsMonoNFM-Bold-17" d="M 1875 -64 
+Q 1184 -64 781 297 
+Q 378 659 378 1280 
+L 1184 1280 
+Q 1184 986 1369 810 
+Q 1555 634 1882 634 
+Q 2202 634 2387 810 
+Q 2573 986 2573 1280 
+L 2573 1632 
+Q 2573 1946 2390 2122 
+Q 2208 2298 1882 2298 
+L 1293 2298 
+L 1293 2938 
+L 2368 3968 
+L 544 3968 
+L 544 4672 
+L 3245 4672 
+L 3245 3994 
+L 2170 2963 
+Q 2733 2886 3056 2537 
+Q 3379 2189 3379 1632 
+L 3379 1280 
+Q 3379 659 2972 297 
+Q 2566 -64 1875 -64 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-17"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(120 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 483.416 125.568 
+L 483.416 3.6 
+" clip-path="url(#pc43bcbbc65)" style="fill: none; stroke: #1f3a29; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m6d804c92cf" x="483.416" y="125.568" style="fill: #7f9a86; stroke: #7f9a86; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <!-- 400 -->
+      <g style="fill: #7f9a86" transform="translate(473.516 143.788) scale(0.11 -0.11)">
+       <defs>
+        <path id="JetBrainsMonoNFM-Bold-18" d="M 2445 0 
+L 2445 928 
+L 378 928 
+L 378 2086 
+L 2106 4672 
+L 2995 4672 
+L 1146 1875 
+L 1146 1632 
+L 2445 1632 
+L 2445 2688 
+L 3251 2688 
+L 3251 0 
+L 2445 0 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-18"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(120 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 588.32 125.568 
+L 588.32 3.6 
+" clip-path="url(#pc43bcbbc65)" style="fill: none; stroke: #1f3a29; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m6d804c92cf" x="588.32" y="125.568" style="fill: #7f9a86; stroke: #7f9a86; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <!-- 500 -->
+      <g style="fill: #7f9a86" transform="translate(578.42 143.788) scale(0.11 -0.11)">
+       <defs>
+        <path id="JetBrainsMonoNFM-Bold-19" d="M 1894 -64 
+Q 1210 -64 803 297 
+Q 397 659 397 1280 
+L 1197 1280 
+Q 1197 986 1385 810 
+Q 1574 634 1901 634 
+Q 2227 634 2409 810 
+Q 2592 986 2592 1299 
+L 2592 1606 
+Q 2592 1920 2413 2096 
+Q 2234 2272 1907 2272 
+L 557 2272 
+L 557 4672 
+L 3219 4672 
+L 3219 3949 
+L 1312 3949 
+L 1318 2976 
+L 1946 2976 
+Q 2637 2976 3014 2617 
+Q 3392 2259 3392 1606 
+L 3392 1299 
+Q 3392 666 2992 301 
+Q 2592 -64 1894 -64 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-19"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(120 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_7">
+     <!-- grounding requests -->
+     <g style="fill: #7f9a86" transform="translate(266.66 162.308) scale(0.11 -0.11)">
+      <defs>
+       <path id="JetBrainsMonoNFM-Bold-4b" d="M 973 -1152 
+L 973 -486 
+L 1965 -486 
+Q 2246 -486 2400 -336 
+Q 2554 -186 2554 70 
+L 2554 282 
+L 2566 832 
+Q 2458 538 2218 374 
+Q 1978 211 1632 211 
+Q 1094 211 777 572 
+Q 461 934 461 1555 
+L 461 2240 
+Q 461 2854 777 3219 
+Q 1094 3584 1632 3584 
+Q 1978 3584 2218 3421 
+Q 2458 3258 2566 2957 
+L 2566 3520 
+L 3347 3520 
+L 3347 51 
+Q 3347 -506 2979 -829 
+Q 2611 -1152 1978 -1152 
+L 973 -1152 
+z
+M 1901 896 
+Q 2208 896 2377 1078 
+Q 2547 1261 2547 1587 
+L 2547 2202 
+Q 2547 2528 2377 2710 
+Q 2208 2893 1901 2893 
+Q 1594 2893 1427 2717 
+Q 1261 2541 1261 2227 
+L 1261 1562 
+Q 1261 1248 1427 1072 
+Q 1594 896 1901 896 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-56" d="M 621 0 
+L 621 3520 
+L 1402 3520 
+L 1402 2835 
+Q 1466 3181 1718 3382 
+Q 1971 3584 2374 3584 
+Q 2912 3584 3213 3238 
+Q 3514 2893 3514 2272 
+L 3514 1939 
+L 2714 1939 
+L 2714 2234 
+Q 2714 2554 2547 2723 
+Q 2381 2893 2074 2893 
+Q 1754 2893 1587 2701 
+Q 1421 2509 1421 2157 
+L 1421 0 
+L 621 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-53" d="M 1920 -58 
+Q 1242 -58 845 323 
+Q 448 704 448 1350 
+L 448 2170 
+Q 448 2822 845 3200 
+Q 1242 3578 1920 3578 
+Q 2598 3578 2995 3200 
+Q 3392 2822 3392 2170 
+L 3392 1350 
+Q 3392 704 2995 323 
+Q 2598 -58 1920 -58 
+z
+M 1920 640 
+Q 2240 640 2416 816 
+Q 2592 992 2592 1325 
+L 2592 2195 
+Q 2592 2528 2416 2704 
+Q 2240 2880 1920 2880 
+Q 1600 2880 1424 2704 
+Q 1248 2528 1248 2195 
+L 1248 1325 
+Q 1248 992 1424 816 
+Q 1600 640 1920 640 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-59" d="M 1920 -64 
+Q 1248 -64 864 310 
+Q 480 685 480 1331 
+L 480 3520 
+L 1280 3520 
+L 1280 1338 
+Q 1280 1005 1446 819 
+Q 1613 634 1920 634 
+Q 2221 634 2390 819 
+Q 2560 1005 2560 1338 
+L 2560 3520 
+L 3360 3520 
+L 3360 1331 
+Q 3360 685 2969 310 
+Q 2579 -64 1920 -64 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-52" d="M 493 0 
+L 493 3520 
+L 1274 3520 
+L 1274 2861 
+Q 1338 3194 1587 3389 
+Q 1837 3584 2221 3584 
+Q 2739 3584 3049 3238 
+Q 3360 2893 3360 2310 
+L 3360 0 
+L 2560 0 
+L 2560 2214 
+Q 2560 2541 2390 2717 
+Q 2221 2893 1933 2893 
+Q 1632 2893 1462 2713 
+Q 1293 2534 1293 2202 
+L 1293 0 
+L 493 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-48" d="M 1600 -64 
+Q 1088 -64 771 301 
+Q 454 666 454 1280 
+L 454 2234 
+Q 454 2854 768 3219 
+Q 1082 3584 1600 3584 
+Q 1965 3584 2217 3398 
+Q 2470 3213 2573 2880 
+L 2547 3686 
+L 2547 4672 
+L 3347 4672 
+L 3347 0 
+L 2566 0 
+L 2566 640 
+Q 2470 307 2220 121 
+Q 1971 -64 1600 -64 
+z
+M 1901 627 
+Q 2208 627 2377 812 
+Q 2547 998 2547 1338 
+L 2547 2182 
+Q 2547 2522 2377 2707 
+Q 2208 2893 1901 2893 
+Q 1594 2893 1424 2726 
+Q 1254 2560 1254 2214 
+L 1254 1306 
+Q 1254 960 1424 793 
+Q 1594 627 1901 627 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-4d" d="M 486 0 
+L 486 723 
+L 1690 723 
+L 1690 2797 
+L 614 2797 
+L 614 3520 
+L 2490 3520 
+L 2490 723 
+L 3571 723 
+L 3571 0 
+L 486 0 
+z
+M 2035 4109 
+Q 1792 4109 1651 4233 
+Q 1510 4358 1510 4570 
+Q 1510 4781 1651 4905 
+Q 1792 5030 2035 5030 
+Q 2278 5030 2419 4905 
+Q 2560 4781 2560 4570 
+Q 2560 4358 2419 4233 
+Q 2278 4109 2035 4109 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-4" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-49" d="M 1926 -64 
+Q 1478 -64 1145 109 
+Q 813 282 630 598 
+Q 448 915 448 1344 
+L 448 2176 
+Q 448 2605 630 2921 
+Q 813 3238 1145 3411 
+Q 1478 3584 1926 3584 
+Q 2368 3584 2697 3411 
+Q 3027 3238 3209 2928 
+Q 3392 2618 3392 2202 
+L 3392 1562 
+L 1216 1562 
+L 1216 1318 
+Q 1216 960 1401 777 
+Q 1587 595 1926 595 
+Q 2176 595 2352 681 
+Q 2528 768 2560 934 
+L 3354 934 
+Q 3270 480 2880 208 
+Q 2490 -64 1926 -64 
+z
+M 1216 2202 
+L 1216 2080 
+L 2624 2086 
+L 2624 2208 
+Q 2624 2573 2445 2771 
+Q 2266 2970 1926 2970 
+Q 1574 2970 1395 2768 
+Q 1216 2566 1216 2202 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-55" d="M 2547 -1152 
+L 2547 -166 
+L 2573 634 
+L 2566 634 
+Q 2464 307 2214 121 
+Q 1965 -64 1600 -64 
+Q 1082 -64 768 301 
+Q 454 666 454 1286 
+L 454 2240 
+Q 454 2854 771 3219 
+Q 1088 3584 1600 3584 
+Q 1971 3584 2220 3398 
+Q 2470 3213 2566 2880 
+L 2566 3520 
+L 3347 3520 
+L 3347 -1152 
+L 2547 -1152 
+z
+M 1901 627 
+Q 2208 627 2377 812 
+Q 2547 998 2547 1338 
+L 2547 2182 
+Q 2547 2522 2377 2707 
+Q 2208 2893 1901 2893 
+Q 1594 2893 1424 2726 
+Q 1254 2560 1254 2227 
+L 1254 1293 
+Q 1254 960 1424 793 
+Q 1594 627 1901 627 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-57" d="M 1773 -58 
+Q 1146 -58 781 227 
+Q 416 512 416 998 
+L 1203 998 
+Q 1203 794 1353 685 
+Q 1504 576 1773 576 
+L 2054 576 
+Q 2342 576 2499 685 
+Q 2656 794 2656 998 
+Q 2656 1190 2547 1283 
+Q 2438 1376 2214 1408 
+L 1338 1523 
+Q 915 1581 688 1849 
+Q 461 2118 461 2547 
+Q 461 3046 793 3312 
+Q 1126 3578 1754 3578 
+L 2048 3578 
+Q 2637 3578 2995 3309 
+Q 3354 3040 3366 2592 
+L 2573 2592 
+Q 2566 2758 2425 2857 
+Q 2285 2957 2048 2957 
+L 1754 2957 
+Q 1498 2957 1363 2851 
+Q 1229 2746 1229 2566 
+Q 1229 2406 1328 2329 
+Q 1427 2253 1619 2234 
+L 2445 2118 
+Q 2931 2061 3177 1776 
+Q 3424 1491 3424 1011 
+Q 3424 499 3075 220 
+Q 2726 -58 2054 -58 
+L 1773 -58 
+z
+" transform="scale(0.015625)"/>
+       <path id="JetBrainsMonoNFM-Bold-58" d="M 2272 0 
+Q 1779 0 1488 285 
+Q 1197 570 1197 1056 
+L 1197 2797 
+L 224 2797 
+L 224 3520 
+L 1197 3520 
+L 1197 4512 
+L 2003 4512 
+L 2003 3520 
+L 3405 3520 
+L 3405 2797 
+L 2003 2797 
+L 2003 1075 
+Q 2003 922 2089 822 
+Q 2176 723 2330 723 
+L 3373 723 
+L 3373 0 
+L 2272 0 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-4b"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-56" transform="translate(60 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-53" transform="translate(120 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-59" transform="translate(180 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-52" transform="translate(240 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-48" transform="translate(300 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-4d" transform="translate(360 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-52" transform="translate(420 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-4b" transform="translate(480 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-4" transform="translate(540 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-56" transform="translate(600 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-49" transform="translate(660 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-55" transform="translate(720 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-59" transform="translate(780 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-49" transform="translate(840 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-57" transform="translate(900 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-58" transform="translate(960 0)"/>
+      <use xlink:href="#JetBrainsMonoNFM-Bold-57" transform="translate(1020 0)"/>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13"/>
+     <g id="text_8">
+      <!-- 2560×1440 -->
+      <g style="fill: #7f9a86" transform="translate(3.6 20.492514) scale(0.105 -0.105)">
+       <defs>
+        <path id="JetBrainsMonoNFM-Bold-1a" d="M 1920 -64 
+Q 1440 -64 1085 128 
+Q 730 320 534 669 
+Q 339 1018 339 1485 
+Q 339 1760 457 2115 
+Q 576 2470 781 2835 
+L 1792 4672 
+L 2701 4672 
+L 1498 2611 
+L 1523 2598 
+Q 1619 2733 1804 2809 
+Q 1990 2886 2208 2886 
+Q 2598 2886 2889 2710 
+Q 3181 2534 3341 2214 
+Q 3501 1894 3501 1459 
+Q 3501 998 3305 656 
+Q 3110 314 2755 125 
+Q 2400 -64 1920 -64 
+z
+M 1920 614 
+Q 2278 614 2496 841 
+Q 2714 1069 2714 1446 
+Q 2714 1830 2496 2057 
+Q 2278 2285 1920 2285 
+Q 1562 2285 1344 2057 
+Q 1126 1830 1126 1446 
+Q 1126 1069 1344 841 
+Q 1562 614 1920 614 
+z
+" transform="scale(0.015625)"/>
+        <path id="JetBrainsMonoNFM-Bold-9a" d="M 1088 736 
+L 570 1261 
+L 1389 2080 
+L 570 2912 
+L 1088 3430 
+L 1914 2605 
+L 2752 3443 
+L 3270 2918 
+L 2432 2080 
+L 3264 1261 
+L 2739 736 
+L 1914 1568 
+L 1088 736 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-16"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-19" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1a" transform="translate(120 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(180 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-9a" transform="translate(240 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(300 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-18" transform="translate(360 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-18" transform="translate(420 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(480 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_14"/>
+     <g id="text_9">
+      <!-- 3840×1080 -->
+      <g style="fill: #7f9a86" transform="translate(3.6 36.974676) scale(0.105 -0.105)">
+       <defs>
+        <path id="JetBrainsMonoNFM-Bold-1c" d="M 1920 -64 
+Q 1453 -64 1094 112 
+Q 736 288 537 598 
+Q 339 909 339 1318 
+Q 339 1747 585 2067 
+Q 832 2387 1229 2470 
+L 1229 2483 
+Q 890 2554 682 2829 
+Q 474 3104 474 3482 
+Q 474 3853 656 4134 
+Q 838 4416 1164 4576 
+Q 1491 4736 1920 4736 
+Q 2349 4736 2678 4576 
+Q 3008 4416 3190 4134 
+Q 3373 3853 3373 3482 
+Q 3373 3104 3161 2829 
+Q 2950 2554 2611 2483 
+L 2611 2470 
+Q 3008 2387 3254 2067 
+Q 3501 1747 3501 1318 
+Q 3501 909 3302 598 
+Q 3104 288 2745 112 
+Q 2387 -64 1920 -64 
+z
+M 1920 2758 
+Q 2221 2758 2406 2940 
+Q 2592 3123 2592 3411 
+Q 2592 3706 2406 3888 
+Q 2221 4070 1920 4070 
+Q 1619 4070 1433 3888 
+Q 1248 3706 1248 3411 
+Q 1248 3123 1433 2940 
+Q 1619 2758 1920 2758 
+z
+M 1920 614 
+Q 2272 614 2496 819 
+Q 2720 1024 2720 1357 
+Q 2720 1696 2496 1904 
+Q 2272 2112 1920 2112 
+Q 1568 2112 1344 1904 
+Q 1120 1696 1120 1357 
+Q 1120 1024 1344 819 
+Q 1568 614 1920 614 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-17"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1c" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-18" transform="translate(120 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(180 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-9a" transform="translate(240 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(300 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(360 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1c" transform="translate(420 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(480 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_15"/>
+     <g id="text_10">
+      <!-- 3840×2160 -->
+      <g style="fill: #7f9a86" transform="translate(3.6 53.456838) scale(0.105 -0.105)">
+       <use xlink:href="#JetBrainsMonoNFM-Bold-17"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1c" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-18" transform="translate(120 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(180 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-9a" transform="translate(240 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-16" transform="translate(300 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(360 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1a" transform="translate(420 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(480 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_16"/>
+     <g id="text_11">
+      <!-- 2160×1440 -->
+      <g style="fill: #7f9a86" transform="translate(3.6 69.939) scale(0.105 -0.105)">
+       <use xlink:href="#JetBrainsMonoNFM-Bold-16"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1a" transform="translate(120 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(180 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-9a" transform="translate(240 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(300 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-18" transform="translate(360 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-18" transform="translate(420 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(480 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_17"/>
+     <g id="text_12">
+      <!-- 2880×1800 -->
+      <g style="fill: #7f9a86" transform="translate(3.6 86.421162) scale(0.105 -0.105)">
+       <use xlink:href="#JetBrainsMonoNFM-Bold-16"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1c" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1c" transform="translate(120 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(180 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-9a" transform="translate(240 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(300 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1c" transform="translate(360 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(420 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(480 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_18"/>
+     <g id="text_13">
+      <!-- 5120×1440 -->
+      <g style="fill: #7f9a86" transform="translate(3.6 102.903324) scale(0.105 -0.105)">
+       <use xlink:href="#JetBrainsMonoNFM-Bold-19"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-16" transform="translate(120 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(180 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-9a" transform="translate(240 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(300 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-18" transform="translate(360 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-18" transform="translate(420 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(480 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_19"/>
+     <g id="text_14">
+      <!-- 1920×1080 -->
+      <g style="fill: #7f9a86" transform="translate(3.6 119.385486) scale(0.105 -0.105)">
+       <defs>
+        <path id="JetBrainsMonoNFM-Bold-1d" d="M 1120 0 
+L 2214 1888 
+Q 2138 1830 2035 1788 
+Q 1933 1747 1728 1747 
+Q 1344 1747 1027 1932 
+Q 710 2118 524 2448 
+Q 339 2778 339 3213 
+Q 339 3674 534 4016 
+Q 730 4358 1085 4547 
+Q 1440 4736 1920 4736 
+Q 2400 4736 2755 4544 
+Q 3110 4352 3305 4003 
+Q 3501 3654 3501 3187 
+Q 3501 2912 3382 2557 
+Q 3264 2202 3059 1837 
+L 2048 0 
+L 1120 0 
+z
+M 1920 2387 
+Q 2278 2387 2496 2614 
+Q 2714 2842 2714 3226 
+Q 2714 3603 2496 3830 
+Q 2278 4058 1920 4058 
+Q 1562 4058 1344 3830 
+Q 1126 3603 1126 3226 
+Q 1126 2842 1344 2614 
+Q 1562 2387 1920 2387 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1d" transform="translate(60 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-16" transform="translate(120 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(180 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-9a" transform="translate(240 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(300 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(360 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-1c" transform="translate(420 0)"/>
+       <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(480 0)"/>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 63.8 19.752519 
+L 514.8872 19.752519 
+L 514.8872 10.522508 
+L 63.8 10.522508 
+z
+" clip-path="url(#pc43bcbbc65)" style="fill: #4f9b52; opacity: 0.78"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 63.8 36.234681 
+L 253.67624 36.234681 
+L 253.67624 27.00467 
+L 63.8 27.00467 
+z
+" clip-path="url(#pc43bcbbc65)" style="fill: #4f9b52; opacity: 0.78"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 63.8 52.716843 
+L 219.05792 52.716843 
+L 219.05792 43.486832 
+L 63.8 43.486832 
+z
+" clip-path="url(#pc43bcbbc65)" style="fill: #4f9b52; opacity: 0.78"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 63.8 69.199005 
+L 167.65496 69.199005 
+L 167.65496 59.968995 
+L 63.8 59.968995 
+z
+" clip-path="url(#pc43bcbbc65)" style="fill: #4f9b52; opacity: 0.78"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 63.8 85.681168 
+L 149.82128 85.681168 
+L 149.82128 76.451157 
+L 63.8 76.451157 
+z
+" clip-path="url(#pc43bcbbc65)" style="fill: #4f9b52; opacity: 0.78"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 63.8 102.16333 
+L 127.79144 102.16333 
+L 127.79144 92.933319 
+L 63.8 92.933319 
+z
+" clip-path="url(#pc43bcbbc65)" style="fill: #4f9b52; opacity: 0.78"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 63.8 118.645492 
+L 83.73176 118.645492 
+L 83.73176 109.415481 
+L 63.8 109.415481 
+z
+" clip-path="url(#pc43bcbbc65)" style="fill: #ffb000"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 63.8 125.568 
+L 588.32 125.568 
+" style="fill: none; stroke: #1f3a29; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_15">
+    <!-- 430 -->
+    <g style="fill: #4f9b52" transform="translate(523.27952 18.917514) scale(0.105 -0.105)">
+     <use xlink:href="#JetBrainsMonoNFM-Bold-18"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-17" transform="translate(60 0)"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-14" transform="translate(120 0)"/>
+    </g>
+   </g>
+   <g id="text_16">
+    <!-- 181 -->
+    <g style="fill: #4f9b52" transform="translate(262.06856 35.399676) scale(0.105 -0.105)">
+     <use xlink:href="#JetBrainsMonoNFM-Bold-15"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-1c" transform="translate(60 0)"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(120 0)"/>
+    </g>
+   </g>
+   <g id="text_17">
+    <!-- 148 -->
+    <g style="fill: #4f9b52" transform="translate(227.45024 51.881838) scale(0.105 -0.105)">
+     <use xlink:href="#JetBrainsMonoNFM-Bold-15"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-18" transform="translate(60 0)"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-1c" transform="translate(120 0)"/>
+    </g>
+   </g>
+   <g id="text_18">
+    <!-- 99 -->
+    <g style="fill: #4f9b52" transform="translate(176.04728 68.364) scale(0.105 -0.105)">
+     <use xlink:href="#JetBrainsMonoNFM-Bold-1d"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-1d" transform="translate(60 0)"/>
+    </g>
+   </g>
+   <g id="text_19">
+    <!-- 82 -->
+    <g style="fill: #4f9b52" transform="translate(158.2136 84.846162) scale(0.105 -0.105)">
+     <use xlink:href="#JetBrainsMonoNFM-Bold-1c"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-16" transform="translate(60 0)"/>
+    </g>
+   </g>
+   <g id="text_20">
+    <!-- 61 -->
+    <g style="fill: #4f9b52" transform="translate(136.18376 101.328324) scale(0.105 -0.105)">
+     <use xlink:href="#JetBrainsMonoNFM-Bold-1a"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-15" transform="translate(60 0)"/>
+    </g>
+   </g>
+   <g id="text_21">
+    <!-- 19 -->
+    <g style="fill: #ffb000" transform="translate(92.12408 117.810486) scale(0.105 -0.105)">
+     <use xlink:href="#JetBrainsMonoNFM-Bold-15"/>
+     <use xlink:href="#JetBrainsMonoNFM-Bold-1d" transform="translate(60 0)"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc43bcbbc65">
+   <rect x="63.8" y="3.6" width="524.52" height="121.968"/>
+  </clipPath>
+ </defs>
+</svg>
