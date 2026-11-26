@@ -39,9 +39,6 @@ packages = ["src/isdm"]
 [tool.ruff]
 line-length = 100
 src = ["src", "notebooks", "scripts"]
-# The CSC 173 group-activity notebook is kept as the course handed it out; its cells are
-# not maintained here, so linting them would only produce a diff against the course copy.
-extend-exclude = ["notebooks/CSC173_FineTuning_CNN.ipynb"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
