@@ -1,6 +1,7 @@
 # 0002 — Model-Agnostic Decision Boundary
 
-**Status:** Accepted — confirmed by the project owner during repository initialization.
+**Status:** Deprecated — no model-agnostic claim is made by the current scope
+([ADR 0009](0009_december_baseline_scope.md)); retained as history.
 **Date:** 2026-11-11
 **Source:** Project brief; recorded during repository initialization.
 
@@ -34,3 +35,7 @@ Place decision models behind a single adapter boundary. The pipeline supplies an
 
 - 2026-11-11 — Recorded as a proposal during repository initialization.
 - 2026-11-11 — Confirmed as a requirement by the project owner; Jev recorded as the baseline adapter only. Status changed from Proposed to Accepted.
+- 2026-11-26 — Marked Deprecated. The December scope makes no model-agnostic claim: the paper
+  describes one baseline adapter and an evaluation harness, not a framework
+  ([ADR 0009](0009_december_baseline_scope.md)). The decision text below is unchanged; this record
+  is history, not current guidance.
