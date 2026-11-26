@@ -1,6 +1,10 @@
 # Development Roadmap
 
-**Status:** Current — a proposal. No phase is approved or complete. The ScreenSpot-Pro Windows corpus has been downloaded and characterized, and the static OCR grounding and failure analysis has been run on all 1,020 requests. These results inform the proposed research design and evaluation phases; they do not change phase status.
+**Status:** Current — a proposal, with four phases partially executed. None is complete, and no phase
+is approved as a gate. The ScreenSpot-Pro Windows corpus has been characterized, and the static OCR
+grounding and CART failure analysis have run on all 1,020 requests: phases 06, 09, 10 and 11 are
+**Active** because their static-screenshot portions have run. Capture, execution, and model
+integration are unimplemented, so phases 04, 05, 07 and 08 stay **Proposed**.
 
 ## Purpose
 
@@ -37,12 +41,12 @@ Order the project's work so that each phase has a defensible reason to come befo
 | 03 | [Architecture planning](phases/03_architecture_planning.md) | Components, contracts, decisions | 00–02 | Proposed |
 | 04 | [Windows capture](phases/04_windows_capture.md) | Screen acquisition and geometry | 02, 03 | Proposed |
 | 05 | [Perception pipeline](phases/05_perception_pipeline.md) | Element detection and classification | 02–04 | Proposed |
-| 06 | [Text and grounding](phases/06_text_and_grounding.md) | OCR and target localization | 02, 04, 05 | Proposed |
+| 06 | [Text and grounding](phases/06_text_and_grounding.md) | OCR and target localization | 02, 04, 05 | Active |
 | 07 | [Model integration](phases/07_model_integration.md) | Adapter contract and baseline model | 03, 04, 05 | Proposed |
 | 08 | [Interaction and verification](phases/08_interaction_and_verification.md) | Execution, feedback, closed loop | 04–07 | Proposed |
-| 09 | [Experimental evaluation](phases/09_experimental_evaluation.md) | Grounding outcomes and benchmark evaluation | 02, 05–08 | Proposed |
-| 10 | [Failure pattern mining](phases/10_failure_pattern_mining.md) | Failure conditions from request-level outcomes | 02, 09 | Proposed |
-| 11 | [Paper and presentation](phases/11_paper_and_presentation.md) | Integrated study, refinement, defense | 09, 10 | Proposed |
+| 09 | [Experimental evaluation](phases/09_experimental_evaluation.md) | Grounding outcomes and benchmark evaluation | 02, 05–08 | Active |
+| 10 | [Failure pattern mining](phases/10_failure_pattern_mining.md) | Failure conditions from request-level outcomes | 02, 09 | Active |
+| 11 | [Paper and presentation](phases/11_paper_and_presentation.md) | Integrated study, refinement, defense | 09, 10 | Active |
 
 ## Dependencies and Reordering
 
@@ -64,7 +68,7 @@ Phases 05–08 may overlap in practice: grounding can be prototyped against capt
 | Grounding method and outcome evaluation | 05, 06, 09 |
 | OCR and visual grounding | 06 |
 | Windows desktop capture and interaction | 04 (capture), 08 (interaction) |
-| Model-agnostic decision integration (Jev first) | 07 |
+| External decision-model integration (not implemented) | 07 |
 | Visual feedback and interaction verification | 08 |
 | Grounding outcome and failure-condition analysis | 09, 10 |
 | Failure-pattern analysis | 10 |
