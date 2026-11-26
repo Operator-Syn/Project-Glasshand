@@ -295,9 +295,9 @@ def merge_candidates(*frames: pd.DataFrame) -> pd.DataFrame:
     if not present:
         return pd.DataFrame(columns=CANDIDATE_COLUMNS)
     merged = pd.concat(present, ignore_index=True)
-    merged = merged.drop_duplicates(
-        subset=["text", "left", "top", "width", "height"]
-    ).reset_index(drop=True)
+    merged = merged.drop_duplicates(subset=["text", "left", "top", "width", "height"]).reset_index(
+        drop=True
+    )
     merged["candidate_id"] = range(len(merged))
     return merged
 
