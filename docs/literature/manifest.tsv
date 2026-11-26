@@ -1,64 +1,64 @@
-# topic	file	pdf_url
-01-gui-grounding	bunian2021_vins-ui-search.pdf	https://arxiv.org/pdf/2102.05216
-01-gui-grounding	cheng2024_seeclick.pdf	https://arxiv.org/pdf/2401.10935v2
-01-gui-grounding	deka2017_rico-dataset.pdf	https://danafergan.com/publications/deka2017rico.pdf
-01-gui-grounding	ettifouri2025_ivg-desktop-grounding.pdf	https://arxiv.org/pdf/2407.01558
-01-gui-grounding	gou2024_uground.pdf	https://arxiv.org/pdf/2410.05243v3
-01-gui-grounding	jandial2026_gui-grounders-ui-understanding.pdf	https://aclanthology.org/2026.findings-eacl.144.pdf
-01-gui-grounding	li2021_screen2vec.pdf	http://toby.li/files/li-screen2vec-chi2021.pdf
-01-gui-grounding	li2025_screenspot-pro.pdf	https://arxiv.org/pdf/2504.07981v1
-01-gui-grounding	lin2024_showui.pdf	https://arxiv.org/pdf/2411.17465v1
-01-gui-grounding	lu2024_omniparser.pdf	https://arxiv.org/pdf/2408.00203
-01-gui-grounding	wu2021_screen-parsing.pdf	https://arxiv.org/pdf/2109.08763
-01-gui-grounding	wu2024_os-atlas.pdf	https://arxiv.org/pdf/2410.23218v1
-01-gui-grounding	wu2025_gui-actor.pdf	https://arxiv.org/pdf/2506.03143v1
-01-gui-grounding	xie2025_scaling-computer-use-grounding.pdf	https://arxiv.org/pdf/2505.13227
-01-gui-grounding	you2024_ferret-ui.pdf	https://arxiv.org/pdf/2404.05719v1
-02-ocr-and-text	akyon2022_sahi-slicing.pdf	https://arxiv.org/pdf/2202.06934
-02-ocr-and-text	baek2019_craft.pdf	https://arxiv.org/pdf/1904.01941
-02-ocr-and-text	becker2026_sliced-inference-resolution.pdf	https://arxiv.org/pdf/2611.12657
-02-ocr-and-text	boubehziz2025_ocr-resolution-impact.pdf	https://www.lejeunegael.fr/papers/JCDL-LangArc2025.pdf
-02-ocr-and-text	du2020_pp-ocr.pdf	https://arxiv.org/pdf/2009.09941
-02-ocr-and-text	long2020_scene-text-survey.pdf	https://arxiv.org/pdf/1811.04256
-02-ocr-and-text	meethal2023_cascaded-zoom-in.pdf	https://arxiv.org/pdf/2303.08747
-02-ocr-and-text	smith2007_tesseract-ocr.pdf	https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/33418.pdf
-02-ocr-and-text	wang2020_textzoom-super-resolution.pdf	https://arxiv.org/pdf/2005.03341
-02-ocr-and-text	zeng2023_mixnet.pdf	https://arxiv.org/pdf/2308.12817
-02-ocr-and-text	zhang2021_screen-recognition.pdf	https://arxiv.org/pdf/2101.04893
-02-ocr-and-text	zhou2017_east.pdf	https://arxiv.org/pdf/1704.03155
-03-computer-use-agents	bonatti2024_windows-agent-arena.pdf	https://arxiv.org/pdf/2409.08264
-03-computer-use-agents	hong2024_cogagent.pdf	https://arxiv.org/pdf/2312.08914
-03-computer-use-agents	nguyen2024_gui-agents-survey.pdf	https://arxiv.org/pdf/2412.13501v3
-03-computer-use-agents	qin2025_ui-tars.pdf	https://arxiv.org/pdf/2501.12326
-03-computer-use-agents	xie2024_osworld.pdf	https://arxiv.org/pdf/2404.07972
-03-computer-use-agents	zhang2024_llm-gui-agents-survey.pdf	https://arxiv.org/pdf/2411.18279
-03-computer-use-agents	zheng2024_seeact.pdf	https://arxiv.org/pdf/2401.01614
-04-interpretable-failure	chen2004_failure-diagnosis-decision-trees.pdf	https://people.eecs.berkeley.edu/~brewer/papers/icac2004_chen_diagnosis.pdf
-04-interpretable-failure	geifman2017_selective-classification.pdf	https://arxiv.org/pdf/1705.08500v2
-04-interpretable-failure	grinsztajn2022_trees-tabular.pdf	https://arxiv.org/pdf/2207.08815v1
-04-interpretable-failure	holte1993_simple-rules-1r.pdf	https://www.mlpack.org/papers/ds.pdf
-04-interpretable-failure	liao2020_questioning-the-ai.pdf	https://arxiv.org/pdf/2001.02478v1
-04-interpretable-failure	loh2011_classification-regression-trees.pdf	https://pages.stat.wisc.edu/~loh/treeprogs/guide/wires11.pdf
-04-interpretable-failure	nushi2018_pandora-system-failure.pdf	https://arxiv.org/pdf/1809.07424
-04-interpretable-failure	perlich2003_tree-vs-logistic.pdf	http://www.jmlr.org/papers/volume4/perlich03a/perlich03a.pdf
-04-interpretable-failure	ribeiro2020_beyond-accuracy.pdf	https://arxiv.org/pdf/2005.04118v1
-04-interpretable-failure	rudin2019_stop-explaining-black-box.pdf	https://arxiv.org/pdf/1811.10154v3
-04-interpretable-failure	singla2021_failures-robust-features.pdf	https://arxiv.org/pdf/2012.01750
-05-evaluation-methods	artstein2008_inter-coder-agreement.pdf	https://aclanthology.org/J08-3003.pdf
-05-evaluation-methods	brier1950_probability-verification.pdf	https://www.shaddin.com/teaching/cs699fa17/docs/Brier50.pdf
-05-evaluation-methods	brodersen2010_balanced-accuracy.pdf	https://kaybrodersen.github.io/publications/Brodersen_2010b_ICPR.pdf
-05-evaluation-methods	gebru2021_datasheets.pdf	https://arxiv.org/pdf/1803.09010
-05-evaluation-methods	hutchinson2022_evaluation-gaps.pdf	https://arxiv.org/pdf/2205.05256
-05-evaluation-methods	jahin2026_gui-primitives.pdf	https://aclanthology.org/2026.emnlp-main.2620.pdf
-05-evaluation-methods	kapoor2023_leakage-reproducibility.pdf	https://arxiv.org/pdf/2207.07048
-05-evaluation-methods	kumar2026_uncertainty-computer-use.pdf	https://arxiv.org/pdf/2606.25760
-05-evaluation-methods	niculescu2005_probability-calibration.pdf	https://www.cs.cornell.edu/~alexn/papers/calibration.icml05.crc.rev3.pdf
-05-evaluation-methods	northcutt2021_label-errors.pdf	https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/file/f2217062e9a397a1dca429e7d70bc6ca-Paper-round1.pdf
-05-evaluation-methods	reinke2024_metric-pitfalls.pdf	https://arxiv.org/pdf/2302.01790
-05-evaluation-methods	reiss2020_conll-label-errors.pdf	https://aclanthology.org/2020.conll-1.16.pdf
-05-evaluation-methods	roberts2017_cross-validation.pdf	https://www.biom.uni-freiburg.de/mitarbeiter/dormann/roberts-et-al-2017-ecography.pdf
-05-evaluation-methods	saito2015_precision-recall-imbalance.pdf	https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0118432&type=printable
-05-evaluation-methods	silvafilho2023_calibration-survey.pdf	https://link.springer.com/content/pdf/10.1007/s10994-023-06336-7.pdf
-05-evaluation-methods	tao2025_logit-sharpness.pdf	https://arxiv.org/pdf/2506.15425
-05-evaluation-methods	yuan2026_right-click-wrong-box.pdf	https://arxiv.org/pdf/2610.36831
-05-evaluation-methods	zhang2026_conclick-error-types.pdf	https://arxiv.org/pdf/2610.13268
+# topic	file	pdf_url	title_start
+01-gui-grounding	bunian2021_vins-ui-search.pdf	https://arxiv.org/pdf/2102.05216	VINS: Visual Search for Mobile
+01-gui-grounding	cheng2024_seeclick.pdf	https://arxiv.org/pdf/2401.10935v2	SeeClick: Harnessing GUI Grounding for
+01-gui-grounding	deka2017_rico-dataset.pdf	https://danafergan.com/publications/deka2017rico.pdf	Rico: A Mobile App Dataset
+01-gui-grounding	ettifouri2025_ivg-desktop-grounding.pdf	https://arxiv.org/pdf/2407.01558	Visual Grounding Methods for Efficient
+01-gui-grounding	gou2024_uground.pdf	https://arxiv.org/pdf/2410.05243v3	Navigating the Digital World as
+01-gui-grounding	jandial2026_gui-grounders-ui-understanding.pdf	https://aclanthology.org/2026.findings-eacl.144.pdf	Do GUI Grounders Truly Understand
+01-gui-grounding	li2021_screen2vec.pdf	http://toby.li/files/li-screen2vec-chi2021.pdf	Screen2Vec: Semantic Embedding of GUI
+01-gui-grounding	li2025_screenspot-pro.pdf	https://arxiv.org/pdf/2504.07981v1	ScreenSpot-Pro: GUI Grounding for Professional
+01-gui-grounding	lin2024_showui.pdf	https://arxiv.org/pdf/2411.17465v1	ShowUI: One Vision-Language-Action Model for
+01-gui-grounding	lu2024_omniparser.pdf	https://arxiv.org/pdf/2408.00203	OmniParser for Pure Vision Based
+01-gui-grounding	wu2021_screen-parsing.pdf	https://arxiv.org/pdf/2109.08763	Screen Parsing: Towards Reverse Engineering
+01-gui-grounding	wu2024_os-atlas.pdf	https://arxiv.org/pdf/2410.23218v1	OS-ATLAS: A Foundation Action Model
+01-gui-grounding	wu2025_gui-actor.pdf	https://arxiv.org/pdf/2506.03143v1	GUI-Actor: Coordinate-Free Visual Grounding for
+01-gui-grounding	xie2025_scaling-computer-use-grounding.pdf	https://arxiv.org/pdf/2505.13227	Scaling Computer-Use Grounding via User
+01-gui-grounding	you2024_ferret-ui.pdf	https://arxiv.org/pdf/2404.05719v1	Ferret-UI: Grounded Mobile UI Understanding
+02-ocr-and-text	akyon2022_sahi-slicing.pdf	https://arxiv.org/pdf/2202.06934	Slicing Aided Hyper Inference and
+02-ocr-and-text	baek2019_craft.pdf	https://arxiv.org/pdf/1904.01941	Character Region Awareness for Text
+02-ocr-and-text	becker2026_sliced-inference-resolution.pdf	https://arxiv.org/pdf/2611.12657	When Does Sliced Inference Pay
+02-ocr-and-text	boubehziz2025_ocr-resolution-impact.pdf	https://www.lejeunegael.fr/papers/JCDL-LangArc2025.pdf	Assessing the Impact of Image
+02-ocr-and-text	du2020_pp-ocr.pdf	https://arxiv.org/pdf/2009.09941	PP-OCR: A Practical Ultra Lightweight
+02-ocr-and-text	long2020_scene-text-survey.pdf	https://arxiv.org/pdf/1811.04256	Scene Text Detection and Recognition:
+02-ocr-and-text	meethal2023_cascaded-zoom-in.pdf	https://arxiv.org/pdf/2303.08747	Cascaded Zoom-in Detector for High
+02-ocr-and-text	smith2007_tesseract-ocr.pdf	https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/33418.pdf	An Overview of the Tesseract
+02-ocr-and-text	wang2020_textzoom-super-resolution.pdf	https://arxiv.org/pdf/2005.03341	Scene Text Image Super-Resolution in
+02-ocr-and-text	zeng2023_mixnet.pdf	https://arxiv.org/pdf/2308.12817	MixNet: Toward Accurate Detection of
+02-ocr-and-text	zhang2021_screen-recognition.pdf	https://arxiv.org/pdf/2101.04893	Screen Recognition: Creating Accessibility Metadata
+02-ocr-and-text	zhou2017_east.pdf	https://arxiv.org/pdf/1704.03155	EAST: An Efficient and Accurate
+03-computer-use-agents	bonatti2024_windows-agent-arena.pdf	https://arxiv.org/pdf/2409.08264	Windows Agent Arena: Evaluating Multi-Modal
+03-computer-use-agents	hong2024_cogagent.pdf	https://arxiv.org/pdf/2312.08914	CogAgent: A Visual Language Model
+03-computer-use-agents	nguyen2024_gui-agents-survey.pdf	https://arxiv.org/pdf/2412.13501v3	GUI Agents: A Survey.
+03-computer-use-agents	qin2025_ui-tars.pdf	https://arxiv.org/pdf/2501.12326	UI-TARS: Pioneering Automated GUI Interaction
+03-computer-use-agents	xie2024_osworld.pdf	https://arxiv.org/pdf/2404.07972	OSWorld: Benchmarking Multimodal Agents for
+03-computer-use-agents	zhang2024_llm-gui-agents-survey.pdf	https://arxiv.org/pdf/2411.18279	Large Language Model-Brained GUI Agents:
+03-computer-use-agents	zheng2024_seeact.pdf	https://arxiv.org/pdf/2401.01614	GPT-4V(ision) is a Generalist Web
+04-interpretable-failure	chen2004_failure-diagnosis-decision-trees.pdf	https://people.eecs.berkeley.edu/~brewer/papers/icac2004_chen_diagnosis.pdf	Failure Diagnosis Using Decision Trees.
+04-interpretable-failure	geifman2017_selective-classification.pdf	https://arxiv.org/pdf/1705.08500v2	Selective Classification for Deep Neural
+04-interpretable-failure	grinsztajn2022_trees-tabular.pdf	https://arxiv.org/pdf/2207.08815v1	Why do tree-based models still
+04-interpretable-failure	holte1993_simple-rules-1r.pdf	https://www.mlpack.org/papers/ds.pdf	Very Simple Classification Rules Perform
+04-interpretable-failure	liao2020_questioning-the-ai.pdf	https://arxiv.org/pdf/2001.02478v1	Questioning the AI: Informing Design
+04-interpretable-failure	loh2011_classification-regression-trees.pdf	https://pages.stat.wisc.edu/~loh/treeprogs/guide/wires11.pdf	Classification and regression trees.
+04-interpretable-failure	nushi2018_pandora-system-failure.pdf	https://arxiv.org/pdf/1809.07424	Towards Accountable AI: Hybrid Human-Machine
+04-interpretable-failure	perlich2003_tree-vs-logistic.pdf	http://www.jmlr.org/papers/volume4/perlich03a/perlich03a.pdf	Tree Induction vs. Logistic Regression:
+04-interpretable-failure	ribeiro2020_beyond-accuracy.pdf	https://arxiv.org/pdf/2005.04118v1	Beyond Accuracy: Behavioral Testing of
+04-interpretable-failure	rudin2019_stop-explaining-black-box.pdf	https://arxiv.org/pdf/1811.10154v3	Stop explaining black box machine
+04-interpretable-failure	singla2021_failures-robust-features.pdf	https://arxiv.org/pdf/2012.01750	Understanding Failures of Deep Networks
+05-evaluation-methods	artstein2008_inter-coder-agreement.pdf	https://aclanthology.org/J08-4004.pdf	Survey Article Inter-Coder Agreement for
+05-evaluation-methods	brier1950_probability-verification.pdf	https://www.shaddin.com/teaching/cs699fa17/docs/Brier50.pdf	Verification of Forecasts Expressed in
+05-evaluation-methods	brodersen2010_balanced-accuracy.pdf	https://kaybrodersen.github.io/publications/Brodersen_2010b_ICPR.pdf	The Balanced Accuracy and Its
+05-evaluation-methods	gebru2021_datasheets.pdf	https://arxiv.org/pdf/1803.09010	Datasheets for Datasets.
+05-evaluation-methods	hutchinson2022_evaluation-gaps.pdf	https://arxiv.org/pdf/2205.05256	Evaluation Gaps in Machine Learning
+05-evaluation-methods	jahin2026_gui-primitives.pdf	https://aclanthology.org/2026.emnlp-main.2620.pdf	GUI-PRIMITIVES: Diagnosing Spatial Reasoning Failures
+05-evaluation-methods	kapoor2023_leakage-reproducibility.pdf	https://arxiv.org/pdf/2207.07048	Leakage and the reproducibility crisis
+05-evaluation-methods	kumar2026_uncertainty-computer-use.pdf	https://arxiv.org/pdf/2606.25760	Uncertainty Quantification for Computer-Use Agents:
+05-evaluation-methods	niculescu2005_probability-calibration.pdf	https://www.cs.cornell.edu/~alexn/papers/calibration.icml05.crc.rev3.pdf	Predicting Good Probabilities With Supervised
+05-evaluation-methods	northcutt2021_label-errors.pdf	https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/file/f2217062e9a397a1dca429e7d70bc6ca-Paper-round1.pdf	Pervasive Label Errors in Test
+05-evaluation-methods	reinke2024_metric-pitfalls.pdf	https://arxiv.org/pdf/2302.01790	Understanding metric-related pitfalls in image
+05-evaluation-methods	reiss2020_conll-label-errors.pdf	https://aclanthology.org/2020.conll-1.16.pdf	Identifying Incorrect Labels in the
+05-evaluation-methods	roberts2017_cross-validation.pdf	https://www.biom.uni-freiburg.de/mitarbeiter/dormann/roberts-et-al-2017-ecography.pdf	Cross-validation strategies for data with
+05-evaluation-methods	saito2015_precision-recall-imbalance.pdf	https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0118432&type=printable	The Precision-Recall Plot Is More
+05-evaluation-methods	silvafilho2023_calibration-survey.pdf	https://link.springer.com/content/pdf/10.1007/s10994-023-06336-7.pdf	Classifier calibration: a survey on
+05-evaluation-methods	tao2025_logit-sharpness.pdf	https://arxiv.org/pdf/2506.15425	Understanding GUI Agent Localization Biases
+05-evaluation-methods	yuan2026_right-click-wrong-box.pdf	https://arxiv.org/pdf/2610.36831	Right Click, Wrong Box: Grading
+05-evaluation-methods	zhang2026_conclick-error-types.pdf	https://arxiv.org/pdf/2610.13268	ConClick: Element-wise Contrastive Learning Improves
