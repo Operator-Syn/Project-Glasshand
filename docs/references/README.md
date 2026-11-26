@@ -12,7 +12,7 @@ Hold citations, notes on external sources, and links to standards or documentati
 - Record the source identifier, the claim it supports, and the section of the project it informs.
 - Distinguish what the source establishes from what the project infers from it.
 - Note the access date for anything that can change.
-- Do not store copyrighted material in the repository; link to it instead.
+- Do not store copyrighted material in the repository; link to it instead. **Exception (2026-11-26):** research papers and PDFs may be stored under [`literature/`](../literature/) for reading and citation work. Each stored file records its licence in `literature/INDEX.md`; a file whose licence forbids redistribution is removed before this repository is published or shared, and the citation falls back to a link.
 
 ## Entry Format (proposed)
 
