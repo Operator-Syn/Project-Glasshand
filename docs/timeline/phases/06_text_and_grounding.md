@@ -1,6 +1,6 @@
 # Phase 06 — OCR and Visual Grounding
 
-**Status:** Proposed · **Depends on:** Phases 02, 04, 05 · **Related:** [Intelligent Systems subject](../../research/intelligent_systems.md) · [Evaluation questions](../../experiments/evaluation_questions.md)
+**Status:** Active — the static-screenshot portion is implemented and evaluated on all 1,020 requests; live capture is not implemented · **Depends on:** Phases 02, 04, 05 · **Related:** [Intelligent Systems subject](../../research/intelligent_systems.md) · [Evaluation questions](../../experiments/evaluation_questions.md)
 
 ## Overview
 
