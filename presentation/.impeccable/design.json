@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-19T11:16:55+08:00",
+  "generatedAt": "2026-11-26T08:35:47+08:00",
   "title": "Design System: Glasshand Proposal Deck",
   "extensions": {
     "colorMeta": {
@@ -423,7 +423,7 @@
       "kind": "button",
       "refersTo": "button-primary",
       "description": "Square terminal control used for previous/next navigation.",
-      "html": "<button class=\"ds-btn\">[ Next → ]</button>",
+      "html": "<button class=\"ds-btn\">[ Next \u2192 ]</button>",
       "css": ".ds-btn{appearance:none;border:1px solid var(--line-strong,#2f5a3d);background:transparent;color:var(--phosphor,#8aff5a);padding:8px 13px;font:500 11px/1.2 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s,border-color .2s}.ds-btn:hover{background:var(--phosphor,#8aff5a);color:var(--void,#050806);border-color:var(--phosphor,#8aff5a)}.ds-btn:focus-visible{outline:2px solid var(--amber,#ffb000);outline-offset:4px}"
     },
     {
@@ -438,7 +438,7 @@
       "name": "Pipeline Node",
       "kind": "custom",
       "description": "One selectable stage in the six-stage perception and action loop; selecting it updates the stage readout.",
-      "html": "<button class=\"ds-node is-active\" type=\"button\" aria-pressed=\"true\"><span class=\"ds-node-id\">A.03</span><b>GROUND</b><small>Instruction → target coordinate</small></button>",
+      "html": "<button class=\"ds-node is-active\" type=\"button\" aria-pressed=\"true\"><span class=\"ds-node-id\">A.03</span><b>GROUND</b><small>Instruction \u2192 target coordinate</small></button>",
       "css": ".ds-node{position:relative;appearance:none;display:block;width:100%;text-align:left;border:1px solid var(--line,#1f3a29);background:rgba(7,16,10,.78);padding:11px 10px;min-height:122px;color:var(--cream,#eef3e8);cursor:pointer;transition:background .25s,border-color .25s,transform .25s}.ds-node .ds-node-id{display:block;margin-bottom:6px;font:400 9px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--muted,#7f9a86)}.ds-node b{display:block;margin-bottom:6px;font:600 23px/1 'Saira Condensed',sans-serif;text-transform:uppercase;color:var(--phosphor,#8aff5a)}.ds-node small{display:block;font:400 11px/1.4 'JetBrains Mono',monospace;color:var(--body,#c7d5c9)}.ds-node::after{content:'';position:absolute;right:8px;top:8px;width:5px;height:5px;background:var(--phosphor,#8aff5a);animation:nodeBlink 3.2s steps(2,end) infinite}.ds-node:hover,.ds-node:focus-visible,.ds-node.is-active{border-color:var(--phosphor,#8aff5a);background:rgba(138,255,90,.06);transform:translateY(-2px)}"
     },
     {
@@ -466,7 +466,7 @@
     {
       "name": "Favicon",
       "kind": "custom",
-      "description": "32×32 CRT reticle favicon: phosphor frame, crosshair, amber target pixel, and a boot-status strip.",
+      "description": "32\u00d732 CRT reticle favicon: phosphor frame, crosshair, amber target pixel, and a boot-status strip.",
       "html": "<img class=\"ds-favicon\" src=\"favicon.svg\" width=\"32\" height=\"32\" alt=\"Glasshand CRT reticle\">",
       "css": ".ds-favicon{display:block;width:32px;height:32px;image-rendering:auto}"
     },
@@ -481,7 +481,7 @@
       "name": "Diagram Surface",
       "kind": "custom",
       "description": "Square instrument panels for the stage loop with a stop marker, the instruction-to-screenshot-to-ground-truth record format, the CART supporting-analysis check map, the analysis-order rail, and the in-scope/out-of-scope strip. A diagram must carry a relationship already in the slide.",
-      "html": "<section class=\"ds-diagram\"><header class=\"ds-diagram-head\"><span>INFERENCE LOOP</span><span>PIXELS ONLY</span></header><div class=\"ds-diagram-body\">PERCEIVE → GROUND → ACT + VERIFY</div></section>",
+      "html": "<section class=\"ds-diagram\"><header class=\"ds-diagram-head\"><span>INFERENCE LOOP</span><span>PIXELS ONLY</span></header><div class=\"ds-diagram-body\">PERCEIVE \u2192 GROUND \u2192 ACT + VERIFY</div></section>",
       "css": ".ds-diagram{border:1px solid var(--line,#1f3a29);background:var(--panel,#07100a);color:var(--body,#c7d5c9)}.ds-diagram-head{display:flex;justify-content:space-between;gap:16px;padding:9px 12px;border-bottom:1px solid var(--line,#1f3a29);font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#7f9a86)}.ds-diagram-body{padding:14px;font:400 11px/1.6 'JetBrains Mono',monospace;color:var(--phosphor,#8aff5a)}"
     },
     {
@@ -495,7 +495,7 @@
       "name": "Channel Flow",
       "kind": "custom",
       "description": "Three equal chips joined by arrows under each contribution channel. CV reads Pixels to Target to Accuracy; DM reads Records to Conditions to CART. Summary, not a second claim.",
-      "html": "<div class=\"ds-channel-flow\"><span>Pixels</span><i>→</i><span>Target</span><i>→</i><span class=\"end\">Accuracy</span></div>",
+      "html": "<div class=\"ds-channel-flow\"><span>Pixels</span><i>\u2192</i><span>Target</span><i>\u2192</i><span class=\"end\">Accuracy</span></div>",
       "css": ".ds-channel-flow{display:flex;align-items:center;gap:6px;margin-top:14px;border-top:1px solid var(--line,#1f3a29);padding-top:11px;font:500 11px/1.3 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}.ds-channel-flow span{flex:1;text-align:center;border:1px solid var(--line-strong,#2f5a3d);padding:5px;color:var(--body,#c7d5c9);background:rgba(5,8,6,.45)}.ds-channel-flow i{color:var(--phosphor,#8aff5a);font-style:normal;font-size:12px}.ds-channel-flow .end{color:var(--phosphor,#8aff5a);border-color:var(--phosphor,#8aff5a)}"
     },
     {
@@ -511,6 +511,22 @@
       "description": "Full-width row of 1px cells or chips for contribution outputs, question basis, analysis order, and the artifact chain. A low-opacity scan crosses the strip.",
       "html": "<div class=\"ds-strip\"><div><span>CV output</span><b>Point-in-box accuracy</b><small>application / element / condition</small></div><div><span>DM output</span><b>CART failure conditions</b><small>grouped by application</small></div></div>",
       "css": ".ds-strip{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line,#1f3a29);border:1px solid var(--line,#1f3a29);font:400 11px/1.35 'JetBrains Mono',monospace;color:var(--muted,#7f9a86)}.ds-strip div{padding:9px 11px;background:var(--void,#050806)}.ds-strip span,.ds-strip small{display:block;text-transform:uppercase;letter-spacing:.08em}.ds-strip b{display:block;color:var(--phosphor,#8aff5a);font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:500}.ds-strip div:last-child b{color:var(--amber,#ffb000)}"
+    },
+    {
+      "name": "Count Row",
+      "kind": "list-item",
+      "refersTo": "count-row",
+      "description": "EDA surface: a large count, a statement, and a state tag on a 1px rule.",
+      "html": "<div class=\"ds-count\"><span class=\"n\">93</span><div><h3>Platform label</h3><p>93 records are relabelled windows.</p></div></div>",
+      "css": ".ds-count{display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:1rem;align-items:baseline;padding:.8rem 0;border-bottom:1px solid var(--line,#1f3a29)}.ds-count .n{font:400 1.35rem/1 'JetBrains Mono',monospace;color:var(--amber,#ffb000)}.ds-count h3{margin:0 0 .2rem;font:700 .95rem/1.3 'JetBrains Mono',monospace;letter-spacing:.02em;text-transform:uppercase;color:var(--cream,#eef3e8)}.ds-count p{margin:0;max-width:88ch;font-size:.96rem;color:var(--body,#c7d5c9)}"
+    },
+    {
+      "name": "Reading Order",
+      "kind": "layout",
+      "refersTo": "reading-order",
+      "description": "EDA surface: one column \u2014 heading, note, number strip, figure, caption. No side column.",
+      "html": "<section class=\"ds-ro\"><h2>Claim</h2><p class=\"note\">How to read it.</p><dl><div><dt>Median</dt><dd>0.0382%</dd></div></dl><figure><img src=\"fig.svg\" alt=\"\"><figcaption>sample / transform</figcaption></figure></section>",
+      "css": ".ds-ro h2{margin:0 0 .5rem;font:600 clamp(1.5rem,2.1vw,2.1rem)/1.02 'Saira Condensed',Arial,sans-serif;letter-spacing:-.01em;text-transform:uppercase;color:var(--cream,#eef3e8)}.ds-ro .note{margin:0 0 .7rem;max-width:96ch;font:400 1rem/1.55 'JetBrains Mono',monospace;color:var(--body,#c7d5c9)}.ds-ro dl{display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 .9rem;border-top:1px solid var(--line,#1f3a29);border-bottom:1px solid var(--line,#1f3a29)}.ds-ro dl div{padding:.45rem 1.1rem .5rem 0;border-right:1px solid var(--line,#1f3a29)}.ds-ro dt{font:400 11px/1.5 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#7f9a86)}.ds-ro dd{margin:.18rem 0 0;font:400 1.35rem/1 'JetBrains Mono',monospace;color:var(--phosphor,#8aff5a)}.ds-ro figure{margin:0;border-top:1px solid var(--line,#1f3a29);padding-top:.7rem}.ds-ro img{width:100%;height:auto}.ds-ro figcaption{margin-top:.45rem;font:400 11px/1.5 'JetBrains Mono',monospace;color:var(--muted,#7f9a86)}"
     }
   ],
   "narrative": {
