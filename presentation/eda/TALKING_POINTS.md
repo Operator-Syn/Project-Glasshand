@@ -1,26 +1,36 @@
 # Talking points — EDA deck
 
-Ten slides. About 12 minutes. Each slide has one point to make, then the number that supports it.
+Ten slides. About 12 minutes.
+
+## The measure
+
+Define this once, at slide 1. Then use the same words on every slide.
+
+**Target area** = the area of the target box, as a percentage of the screen area.
+
+Do not say "the target is small". Say "the target area is small". The target is a box. The area is the measurement.
 
 ## How to speak
 
-- Use the present tense. Say "the median is", not "the median was found to be".
-- Say the number first. Then say what the number means. Then stop.
-- Do not read the slide. The slide shows the evidence. You give the meaning.
-- Keep each sentence short. One idea in each sentence.
-- Do not claim more than the table shows. Each slide has a "Do not say" line. Obey it.
+- Speak in the present tense.
+- Say the number first.
+- Then say what the number means.
+- Then stop.
+- Do not read the slide.
+- Keep each sentence below 20 words.
+- Put one idea in each sentence.
 
 ---
 
 ## Slide 1 — Opening (60 s)
 
-**Point:** The targets in this corpus are very small.
+**Point:** The target areas are small.
 
-- Start with the headline. "The median target covers 0.0382% of the screen."
-- Give the scope. "This report covers the Windows subset of ScreenSpot-Pro. It has 1,020 requests from 17 applications."
-- Give the three questions. "What is in the table? Can we trust the table? What do the sizes mean?"
-- Name the evidence. "The counts come from the released annotations and from the screenshots."
-- Read the five counts in order. 1,020 requests. 17 applications. 6 industry groups. 1,006 distinct contents. 14 duplicate pairs.
+- Define the measure. Say: "The target area is the area of the target box, as a percentage of the screen area."
+- Give the median. Say: "The median target area is 0.0382% of the screen."
+- Give the scope. Say: "This report examines 1,020 requests from 17 Windows applications."
+- Give the three questions. Say: "What is in the table? Can we trust the table? What do the target areas show?"
+- Give the counts. Say: "The table has 1,020 requests, 17 applications and 6 industry groups." Then: "It has 1,006 distinct contents and 14 duplicate pairs."
 
 **Do not say** that the corpus is representative of all desktop work. It is one benchmark.
 
@@ -28,83 +38,87 @@ Ten slides. About 12 minutes. Each slide has one point to make, then the number 
 
 ## Slide 2 — What one row is (80 s)
 
-**Point:** One row is one request, not one screen and not one element.
+**Point:** One row is one request.
 
-- Define the row. "A row is one request. It has a screenshot, an instruction, and the box around the target."
-- Say what is absent. "The release has no outcome label, no confidence score, and no timestamp. This report describes the task, not a model's result."
-- Show the group imbalance. "Creative holds 297 requests, or 29.1%. Dev holds 45 requests, and they all come from one application."
-- Draw the consequence. "An average by group mixes very different sample sizes. Do not average by group."
-- Explain the duplicates. "Fourteen pairs of files are byte-identical. Each pair carries two different instructions. Both requests stay. They are not independent."
+- Define the row. Say: "A row has a screenshot, an instruction and the box around the target."
+- List the missing fields. Say: "The release has no outcome label, no confidence score and no timestamp."
+- State the limit. Say: "This report describes the task. It does not describe a model result."
+- Show the group sizes. Say: "Creative has 297 requests, or 29.1%." Then: "Dev has 45 requests. All 45 come from one application."
+- Give the result. Say: "Do not average by group. The groups have very different sizes."
+- Explain the duplicates. Say: "Fourteen pairs of files are byte-identical." Then: "Each pair has two different instructions. Both requests stay. They are not independent."
 
-**Do not say** that the duplicates are errors. They are real requests that share one image.
+**Do not say** that the duplicate pairs are errors. They are real requests. They share one image.
 
 ---
 
 ## Slide 3 — Verification (60 s)
 
-**Point:** The merged table matches the source files.
+**Point:** The merged table agrees with the source files.
 
-- State the method. "The merge compares 14 fields against 17 raw files."
-- Give the result. "All 1,020 rows agree. No row is missing on either side. No field is empty."
-- Give the image check. "Every image decodes as RGB at the size that the table records."
+- Give the method. Say: "The merge compares 14 fields against 17 raw files."
+- Give the result. Say: "All 1,020 rows agree. No row is missing. No field is empty."
+- Give the image check. Say: "Every image decodes as RGB at the size in the table."
 
-**Do not say** that the data is clean. Say that the merge is exact. Cleaning comes next.
+**Do not say** that the data is clean. Say that the merge is exact. The repairs come next.
 
 ---
 
 ## Slide 4 — Repairs (90 s)
 
-**Point:** Three repairs touch 102 rows. We drop no row.
+**Point:** Three repairs touch 102 rows. No row is lost.
 
-- Say the count first. "Three repairs. 102 rows. No row is lost."
-- Repair one. "The release marks 93 MATLAB captures as macOS. The screenshots show a Windows taskbar and a D: path. We change the label to Windows."
-- Repair two. "Eight instructions have extra spaces at the start, at the end, or inside. We strip and collapse the spaces before we count characters."
-- Repair three. "One box starts above the top edge of the screen, at y equal to minus one. We clamp the value to zero."
-- State the rule. "The source file does not change. The cleaned table keeps all rows and adds 15 derived columns."
+- Give the count first. Say: "Three repairs touch 102 rows. All 1,020 rows stay."
+- Repair one. Say: "The release marks 93 MATLAB captures as macOS." Then: "The screenshots show a Windows taskbar and a D: path. We change the label to Windows."
+- Repair two. Say: "Eight instructions have extra spaces. We remove the spaces before we count characters."
+- Repair three. Say: "One box starts at y equal to minus one, above the screen edge. We set the value to zero."
+- State the rule. Say: "The source file does not change. The clean table adds 15 derived columns."
 
-**Do not say** that we corrected the dataset. Say that we recorded three local repairs.
+**Do not say** that we corrected the dataset. Say that we recorded three repairs.
 
 ---
 
-## Slide 5 — Target size (90 s)
+## Slide 5 — Target area distribution (90 s)
 
-**Point:** The distribution is heavily skewed, so the median carries the finding.
+**Point:** Target area is heavily skewed. Use the median.
 
-- Give the centre. "Half of the targets cover less than 0.0382% of the screen."
-- Give the range. "Areas run from 0.0021% to 4.73%. That is more than three orders of magnitude."
-- Give the shape. "Skew is 20.3. The mean is 0.0653%, and it describes a target that few requests contain."
-- Give the spread. "The interquartile range is 0.014% to 0.081%."
-- State the consequence. "Every comparison in this report uses the median and a rank test."
+- Give the median. Say: "The median target area is 0.0382% of the screen."
+- Give the plain meaning. Say: "Half of the requests have a target area below this value."
+- Give the range. Say: "Target area runs from 0.0021% to 4.73% of the screen." Then: "That range is more than three orders of magnitude."
+- Give the skew. Say: "The skew is 20.3."
+- Give the mean for contrast. Say: "The mean target area is 0.0653% of the screen." Then: "66.5% of the requests are below the mean."
+- Give the spread. Say: "The interquartile range is 0.014% to 0.081% of the screen."
+- Give the rule. Say: "Every comparison in this report uses the median and a rank test."
 
-**Do not say** the average target size. The mean does not describe this table.
+**Do not say** the average target area as if it were typical. Two of every three requests are below it.
 
 ---
 
 ## Slide 6 — Icons and text (80 s)
 
-**Point:** An icon target is 4.7 times smaller than a text target.
+**Point:** Icon areas are much smaller than text areas.
 
-- Give both medians. "The median icon covers 0.0144%. The median text target covers 0.0684%."
-- Give the ratio. "An icon is 4.7 times smaller."
-- Give the counts. "The corpus has 622 text requests and 398 icon requests."
-- State the check. "The gap holds inside almost every application that contains both types."
-- Draw the consequence. "Report the two types apart. One coefficient across both is misleading."
+- Give both medians. Say: "The median icon area is 0.0144% of the screen." Then: "The median text area is 0.0684% of the screen."
+- Give the ratio. Say: "The median icon area is 4.7 times smaller than the median text area."
+- Give the counts. Say: "The corpus has 622 text requests and 398 icon requests."
+- Give the check. Say: "The gap is present inside almost every application that has both types."
+- Give the rule. Say: "Report the two types apart. One value for both is misleading."
 
-**Do not say** that icons are harder because they are small. This slide shows size. It does not test success.
+**Do not say** that icons fail because they are small. This slide shows target area. It does not test success.
 
 ---
 
 ## Slide 7 — Applications (80 s)
 
-**Point:** Target size changes by 11.8 times across applications.
+**Point:** Target area varies across applications.
 
-- Give the spread. "The median size varies 11.8 times across applications."
-- Give the extremes. "Origin is the smallest at 0.0067%. MATLAB is the largest at 0.0783%."
-- Give the decomposition. "16.9% of the variance in log target area sits between applications. 83.1% sits inside them."
-- Name the cause. "Part of the spread is interface style. Part is the target mix. Stata has an icon share of 84%. EViews has 14%."
-- Draw the consequence. "Keep application in every model. It explains a real share of the variation."
+- Give the spread. Say: "The median target area varies by 11.8 times across applications."
+- Give the low value. Say: "Origin has the smallest median, at 0.0067% of the screen."
+- Give the high value. Say: "MATLAB has the largest median, at 0.0783% of the screen."
+- Give the variance split. Say: "16.9% of the variance in log target area is between applications." Then: "83.1% of the variance is within applications."
+- Give the cause. Say: "Part of the spread is interface style. Part is the mix of target types." Then: "Stata has an icon share of 84%. EViews has 14%."
+- Give the rule. Say: "Keep application in every model."
 
-**Do not say** that the application causes the size. The mix of targets inside the application also matters.
+**Do not say** that the application causes the size. The mix of target types inside the application also matters.
 
 ---
 
@@ -112,11 +126,11 @@ Ten slides. About 12 minutes. Each slide has one point to make, then the number 
 
 **Point:** This corpus cannot separate resolution from application.
 
-- Give the structure. "There are seven resolutions. 15 of the 17 applications appear at only one resolution."
-- Give the thin cell. "Only 19 requests use 1920 by 1080."
-- Give the correlation. "The pooled rank correlation is minus 0.088."
-- Draw the consequence. "Resolution is locked to application here. We cannot estimate a resolution effect."
-- State the rule. "Do not use resolution as a feature. Report it as a limitation."
+- Give the structure. Say: "The corpus has seven resolutions."
+- Give the confound. Say: "15 of the 17 applications have one resolution only."
+- Give the thin cell. Say: "19 requests use 1920 by 1080."
+- State the limit. Say: "Resolution and application change together here. We cannot measure a resolution effect."
+- Give the rule. Say: "Do not use resolution as a feature. Report it as a limitation."
 
 **Do not say** that resolution has no effect. Say that this corpus cannot measure the effect.
 
@@ -124,41 +138,43 @@ Ten slides. About 12 minutes. Each slide has one point to make, then the number 
 
 ## Slide 9 — Instruction length (80 s)
 
-**Point:** Instruction length does not predict target size.
+**Point:** Instruction length has no association with target area.
 
-- Give the centre. "The median instruction is 4 words and 20 characters."
-- Give the extremes. "78 requests use one word. 25 requests name a position, which is 2.5%."
-- Give the association. "The rank correlation with target area is minus 0.023."
-- Draw the consequence. "Instruction length carries no signal about target size in this corpus. Do not use it as a size proxy."
+- Give the median. Say: "The median instruction has 4 words and 20 characters."
+- Give the short ones. Say: "78 instructions have one word only."
+- Give the position words. Say: "25 instructions name a position. That is 2.5%."
+- Give the association. Say: "The rank correlation between instruction length and target area is minus 0.023."
+- Give the rule. Say: "Do not use instruction length as a proxy for target area."
 
-**Do not say** that instruction text is useless. Length carries no signal. The words may still help a matcher. This deck does not test that.
+**Do not say** that instruction text is useless. Length has no signal. The words can still help a matcher. This deck does not test that.
 
 ---
 
 ## Slide 10 — Decisions (90 s)
 
-**Point:** The measurements set four rules for the analysis that follows.
+**Point:** These measurements set four rules for the analysis that follows.
 
-- Rule one. "Use the median, not the mean. The distribution is skewed at 20.3."
-- Rule two. "Report icons and text apart. They differ by 4.7 times."
-- Rule three. "Keep application in every model. 16.9% of the variance is between applications."
-- Rule four. "Do not use resolution as a feature. 15 of 17 applications use one resolution."
-- Close on the boundary. "This deck reports the corpus. It does not report grounding accuracy. The grounding results come next, and they use the same requests."
-- Cite the source. "ScreenSpot-Pro, Li and others, 2025. Data under the MIT licence."
+- Rule one. Say: "Use the median, not the mean. The skew is 20.3."
+- Rule two. Say: "Report icons and text apart. The median areas differ by 4.7 times."
+- Rule three. Say: "Keep application in every model. 16.9% of the variance is between applications."
+- Rule four. Say: "Do not use resolution as a feature. 15 of 17 applications have one resolution."
+- State the boundary. Say: "This deck reports the corpus. It does not report grounding accuracy."
+- Name the next step. Say: "The grounding results come next. They use the same 1,020 requests."
+- Cite the source. Say: "The data is ScreenSpot-Pro, by Li and others, 2025, under the MIT licence."
 
 ---
 
 ## If someone asks
 
-- **"Why keep the duplicate pairs?"** They are real requests. They share one image. We keep them and we treat them as dependent, so validation is grouped.
-- **"Why change the 93 macOS labels?"** The label is wrong. The screenshots show Windows. We record the repair and keep the rows.
-- **"Why the median?"** The skew is 20.3. The mean describes a target that few requests contain.
-- **"Can you claim a resolution effect?"** No. 15 of 17 applications use one resolution. The two variables move together.
-- **"Is 2.5% position words a problem?"** No. It means the instructions rarely give away the answer. The corpus does not spoon-feed the matcher.
-- **"What does this prove about the model?"** Nothing yet. This deck measures the task. The next deck measures the baseline on the same requests.
+- **Why keep the duplicate pairs?** They are real requests. They share one image. We keep them and we treat them as dependent. Validation is grouped.
+- **Why change the 93 macOS labels?** The label is wrong. The screenshots show Windows. We record the repair and keep the rows.
+- **Why the median?** The skew is 20.3. Two of every three requests are below the mean.
+- **Can you claim a resolution effect?** No. 15 of 17 applications have one resolution only.
+- **Is 2.5% position words a problem?** No. The instructions rarely give the answer. The corpus does not test the matcher on easy targets.
+- **What does this prove about the model?** Nothing yet. This deck measures the task. The next deck measures one baseline on the same requests.
 
 ## Delivery notes
 
-- Pause after each number. Let the slide do the work.
-- If you run out of time, cut slides 3 and 7. Keep 1, 5, 6, 8, and 10.
-- Never defend a number you cannot point to on the slide.
+- Pause after each number. Give the audience time to read it.
+- If you run short, cut slides 3 and 7. Keep 1, 5, 6, 8 and 10.
+- Do not defend a number that is not on the slide.
