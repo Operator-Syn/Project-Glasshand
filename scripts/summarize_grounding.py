@@ -30,9 +30,7 @@ def main() -> None:
 
     frame, categorical, numeric = features.model_frame(records)
     text_frame = features.text_only(frame)
-    geo_frame, geo_categorical, geo_numeric = features.model_frame(
-        records, include_geometry=True
-    )
+    geo_frame, geo_categorical, geo_numeric = features.model_frame(records, include_geometry=True)
 
     all_result = cart.evaluate_cart(
         frame,
@@ -72,24 +70,24 @@ def main() -> None:
         "",
     ]
     lines += ["## Near-miss accuracy", ""]
-    lines.append(
-        f"- Corpus-weighted strict: {summary.corpus_weighted_accuracy(records):.1%}"
-    )
+    lines.append(f"- Corpus-weighted strict: {summary.corpus_weighted_accuracy(records):.1%}")
     for tolerance in (25, 50, 100):
+        lines.append(f"- Within {tolerance} px: {summary.relaxed_accuracy(records, tolerance):.1%}")
         lines.append(
-            f"- Within {tolerance} px: {summary.relaxed_accuracy(records, tolerance):.1%}"
-        )
-        lines.append(
-            "  - Corpus-weighted: "
-            f"{summary.corpus_weighted_accuracy(records, tolerance):.1%}"
+            f"  - Corpus-weighted: {summary.corpus_weighted_accuracy(records, tolerance):.1%}"
         )
     lines.append("")
 
-    lines += ["## CART model comparison", "", summary.model_summary(
-        ("all targets", all_result),
-        ("text only", text_result),
-        ("geometry (post-hoc)", geo_result),
-    ).to_markdown(), ""]
+    lines += [
+        "## CART model comparison",
+        "",
+        summary.model_summary(
+            ("all targets", all_result),
+            ("text only", text_result),
+            ("geometry (post-hoc)", geo_result),
+        ).to_markdown(),
+        "",
+    ]
 
     for name, result in (
         ("All targets", all_result),
