@@ -76,9 +76,7 @@ def main() -> None:
     print("records:", output)
 
     summary_dir = output.parent
-    summary.label_counts(scored).to_csv(
-        summary_dir / "label_counts.csv", encoding="utf-8"
-    )
+    summary.label_counts(scored).to_csv(summary_dir / "label_counts.csv", encoding="utf-8")
     summary.accuracy_by(scored, "ui_type").to_csv(
         summary_dir / "accuracy_by_type.csv", encoding="utf-8"
     )
