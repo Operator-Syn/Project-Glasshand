@@ -48,6 +48,7 @@ validates both decks and publishes them to one site; see
 
 - [docs/README.md](docs/README.md) — knowledge-base entry point, navigation, and documentation conventions.
 - [docs/overview/project.md](docs/overview/project.md) — project definition, scope, and planning assumptions.
+- [docs/overview/completion_criteria.md](docs/overview/completion_criteria.md) — what the finished deliverable must contain, and when the research is done.
 - [docs/research/combined_paper_outline.md](docs/research/combined_paper_outline.md) — the integrated study outline.
 - [docs/timeline/README.md](docs/timeline/README.md) — proposed development roadmap and phase index.
 
