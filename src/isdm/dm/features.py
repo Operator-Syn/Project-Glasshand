@@ -101,9 +101,7 @@ def add_request_features(records: pd.DataFrame) -> pd.DataFrame:
             frame["img_size_h"] - frame["bbox_y2"],
         ]
     ).min(axis=1)
-    frame["edge_distance_pct"] = (
-        edge_gaps / frame[["img_size_w", "img_size_h"]].min(axis=1) * 100
-    )
+    frame["edge_distance_pct"] = edge_gaps / frame[["img_size_w", "img_size_h"]].min(axis=1) * 100
 
     for column in (
         "score",
