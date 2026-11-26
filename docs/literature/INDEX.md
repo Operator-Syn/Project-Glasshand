@@ -1,8 +1,13 @@
 # Literature index
 
-34 PDFs across five clusters, plus one book that has no open copy. Each row gives the file, the
+46 PDFs across five clusters, plus one book that has no open copy. Each row gives the file, the
 citation with a resolvable DOI, the licence printed on the copy held, and the paper section it
 supports.
+
+Every filename carries the first author printed on page one of the PDF, not the author a search
+snippet attributed it to. Four files were renamed after that check: Pandora is Nushi, not Chung;
+the robust-feature failure paper is Singla; GUI-PRIMITIVES is Jahin; the desktop IVG paper is
+Ettifouri.
 
 **Licence note.** Most arXiv files carry arXiv's non-exclusive distribution licence, which permits
 arXiv to distribute the work — it does not grant third parties a redistribution right. Storing them
@@ -24,6 +29,11 @@ layer, and the first page carries the title recorded here.
 | `lin2024_showui.pdf` | Lin, K. Q. et al. (2024). *ShowUI: One Vision-Language-Action Model for GUI Visual Agent.* CVPR 2025. https://doi.org/10.48550/arXiv.2411.17465 | arXiv non-exclusive | §2 high-resolution token-reduction strategies |
 | `you2024_ferret-ui.pdf` | You, K. et al. (2024). *Ferret-UI: Grounded Mobile UI Understanding with Multimodal LLMs.* ECCV 2024. https://doi.org/10.1007/978-3-031-73039-9_14 | arXiv non-exclusive | §2 mobile-side ancestor of box-level UI grounding |
 | `wu2025_gui-actor.pdf` | Wu, Q. et al. (2025). *GUI-Actor: Coordinate-Free Visual Grounding for GUI Agents.* NeurIPS 2025. https://doi.org/10.48550/arXiv.2506.03143 | CC BY 4.0 | §2 evidence the coordinate-generation formulation is contested |
+| `ettifouri2025_ivg-desktop-grounding.pdf` | Ettifouri, E. H. et al. (2025). *Visual Grounding Methods for Efficient Interaction with Desktop Graphical User Interfaces.* https://doi.org/10.48550/arXiv.2407.01558 | arXiv non-exclusive | §2 the closest published OCR-anchored desktop baseline, and its measured shortfall against a VLM |
+| `jandial2026_gui-grounders-ui-understanding.pdf` | Jandial, S. et al. (2026). *Do GUI Grounders Truly Understand UI Elements?* Findings of EACL 2026. https://aclanthology.org/2026.findings-eacl.144.pdf | ACL Anthology | §1 and §7 the gap: benchmarks skew to web and mobile and neglect Windows desktop |
+| `lu2024_omniparser.pdf` | Lu, Y. et al. (2024). *OmniParser for Pure Vision Based GUI Agent.* https://doi.org/10.48550/arXiv.2408.00203 | arXiv non-exclusive | §2 pixel-only screen parsing as the alternative to text anchoring |
+| `xie2025_scaling-computer-use-grounding.pdf` | Xie, T. et al. (2025). *Scaling Computer-Use Grounding via User Interface Decomposition and Synthesis.* https://doi.org/10.48550/arXiv.2505.13227 | arXiv non-exclusive | §2 separating text matching from visual reasoning as grounding capabilities |
+| `wu2021_screen-parsing.pdf` | Wu, J. et al. (2021). *Screen Parsing: Towards Reverse Engineering of UI Models from Screenshots.* UIST 2021. https://doi.org/10.1145/3472749.3474763 | ACM copyright; arXiv copy held | §2 the HCI lineage of recovering UI structure from pixels |
 
 ## 02-ocr-and-text — engines, detectors and the small-text problem
 
@@ -61,6 +71,9 @@ layer, and the first page carries the title recorded here.
 | `ribeiro2020_beyond-accuracy.pdf` | Ribeiro, M. T. et al. (2020). *Beyond Accuracy: Behavioral Testing of NLP Models with CheckList.* ACL 2020. https://doi.org/10.18653/v1/2020.acl-main.442 | arXiv non-exclusive | §4.4 classifying failures by condition, not just error rate |
 | `liao2020_questioning-the-ai.pdf` | Liao, Q. V. et al. (2020). *Questioning the AI: Informing Design Practices for Explainable AI User Experiences.* CHI 2020. https://doi.org/10.1145/3313831.3376590 | arXiv non-exclusive | §5.2 what the reader of an explanation actually needs |
 | `grinsztajn2022_trees-tabular.pdf` | Grinsztajn, L. et al. (2022). *Why do tree-based models still outperform deep learning on tabular data?* https://doi.org/10.48550/arXiv.2207.08815 | arXiv non-exclusive | §4.4 tree-based learners on small heterogeneous tabular inputs |
+| `nushi2018_pandora-system-failure.pdf` | Nushi, B., Kamar, E., & Horvitz, E. (2018). *Towards Accountable AI: Hybrid Human-Machine Analyses for Characterizing System Failure.* https://doi.org/10.48550/arXiv.1809.07424 | arXiv non-exclusive | §4.4 the closest published precedent: interpretable decision trees that summarise conditions of failure, chosen for interpretability |
+| `singla2021_failures-robust-features.pdf` | Singla, S. et al. (2021). *Understanding Failures of Deep Networks via Robust Feature Extraction.* https://doi.org/10.48550/arXiv.2012.01750 | arXiv non-exclusive | §4.4 depth-limited trees for failure prediction, and a metric for whether a tree explains rather than classifies |
+| `chen2004_failure-diagnosis-decision-trees.pdf` | Chen, M. et al. (2004). *Failure Diagnosis Using Decision Trees.* ICAC 2004. No DOI verified; author-hosted PDF. | IEEE copyright; author-hosted copy | §4.4 the systems-side ancestor of tree-based failure diagnosis |
 
 ## 05-evaluation-methods — metric choice, validity and leakage
 
@@ -72,3 +85,7 @@ layer, and the first page carries the title recorded here.
 | `gebru2021_datasheets.pdf` | Gebru, T. et al. (2021). *Datasheets for Datasets.* CACM 64(12):86-92. https://doi.org/10.1145/3458723 | ACM copyright (CACM); arXiv licence on the stored copy | §3 documenting release-derived annotations |
 | `kapoor2023_leakage-reproducibility.pdf` | Kapoor, S. & Narayanan, A. (2023). *Leakage and the reproducibility crisis in machine-learning-based science.* Patterns 4(9):100804. https://doi.org/10.1016/j.patter.2023.100804 | CC BY 4.0 | §4.4 grouped folds and the duplicate-pair treatment |
 | `roberts2017_cross-validation.pdf` | Roberts, D. R. et al. (2017). *Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure.* Ecography 40(8):913-929. https://doi.org/10.1111/ecog.02881 | Wiley VOR, author-hosted | §4.4 why folds group by application |
+| `yuan2026_right-click-wrong-box.pdf` | Yuan, X. et al. (2026). *Right Click, Wrong Box: Grading GUI Grounding by What a Click Does.* https://doi.org/10.48550/arXiv.2610.36831 | arXiv non-exclusive | §4.3 point-in-box under-counts correct clicks and biases results one-sidedly |
+| `jahin2026_gui-primitives.pdf` | Jahin, M. A. et al. (2026). *GUI-PRIMITIVES: Diagnosing Spatial Reasoning Failures in Vision-Language GUI Grounding.* EMNLP 2026. https://aclanthology.org/2026.emnlp-main.2620.pdf | ACL Anthology | §4.3 strict point-in-box beside a loose metric; failures are localisation, not comprehension |
+| `zhang2026_conclick-error-types.pdf` | Zhang, R. et al. (2026). *ConClick: Element-wise Contrastive Learning Improves GUI Grounding.* https://doi.org/10.48550/arXiv.2610.13268 | arXiv non-exclusive | §4.3 click accuracy hides four separable error types |
+| `kumar2026_uncertainty-computer-use.pdf` | Kumar, D. et al. (2026). *Uncertainty Quantification for Computer-Use Agents: A Benchmark across Vision-Language Models and GUI Grounding Datasets.* https://doi.org/10.48550/arXiv.2606.25760 | arXiv non-exclusive | §5.2 graded miss severity, and the limits of confidence as a signal |
