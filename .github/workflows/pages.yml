@@ -1,6 +1,6 @@
 name: Deploy presentation to GitHub Pages
 
-# The validation step reads only repository-controlled files. No event input
+# The validation steps read only repository-controlled files. No event input
 # is interpolated into a shell command, so this workflow does not evaluate
 # untrusted pull-request text.
 on:
@@ -30,14 +30,43 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Validate presentation
-        run: python presentation/check.py
+      - name: Validate pitch deck
+        run: python3 presentation/pitch/check.py
 
-      - name: Stage deck
+      - name: Validate EDA deck
+        run: python3 presentation/eda/check.py
+
+      # Builds the published tree. _site/ is throwaway output, so it mirrors
+      # only what both decks need at runtime:
+      #   /                 redirect to ./pitch/ (keeps the old root URL working)
+      #   /tokens.css, /favicon.svg   shared by both decks
+      #   /pitch/           index.html + assets/
+      #   /eda/             index.html + deck.css + assets/
+      # Design context (PRODUCT.md, DESIGN.md, README.md), .impeccable/,
+      # scripts/, and check.py stay in the repository and are never published.
+      - name: Stage site
         run: |
-          mkdir -p _site
-          cp presentation/index.html presentation/tokens.css presentation/favicon.svg _site/
-          cp -R presentation/assets _site/
+          set -euo pipefail
+          mkdir -p _site/pitch _site/eda
+          cp presentation/tokens.css presentation/favicon.svg _site/
+          cp presentation/pitch/index.html _site/pitch/
+          cp -R presentation/pitch/assets _site/pitch/
+          cp presentation/eda/index.html presentation/eda/deck.css _site/eda/
+          cp -R presentation/eda/assets _site/eda/
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta http-equiv="refresh" content="0; url=./pitch/">
+              <title>Presentation</title>
+              <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+            </head>
+            <body>
+              <p>Redirecting to the <a href="./pitch/">pitch deck</a>.</p>
+            </body>
+          </html>
+          HTML
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
