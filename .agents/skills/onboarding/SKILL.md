@@ -69,10 +69,10 @@ Run commands from the repository root unless a step says otherwise.
 - **Decisions are binding; plans are not.** Check status in `docs/decisions/README.md`. A superseded record is history, not current guidance.
 - **The data layer is file-first.** JSONL is the source of truth, DuckDB queries it, Parquet holds derived tables, and Arrow is only an in-memory handoff. Postgres is not adopted for the research loop; see ADR 0008 for the condition that would reopen it.
 - **Browser is a first-class target, not a DOM pipeline.** The vision pipeline never receives DOM data; the DOM is a baseline and an offline label source.
-- **Jev is a baseline adapter, not the contract.** Keep the model boundary model-agnostic.
-- **One combined paper.** The CV and DM contributions stay distinguishable inside it.
+- **No decision-model integration, and no model-agnostic claim.** ADR 0009 scopes the work to one baseline adapter and an evaluation harness; [ADR 0002](../../../docs/decisions/0002_model_agnostic_decision_boundary.md) is deprecated.
+- **One integrated study.** ADR 0010: one research question and one narrative, not two course-labelled contributions.
 - **Roadmap phase 00 is project definition**, not the repository-initialization task.
-- **Workspaces are created on first write.** `data/`, `runs/`, `results/` and `models/` carry no placeholder files, so a clone legitimately lacks them and the checker reports them as deferred rather than missing. `notebooks/README.md` governs the notebook tree: cells configure and call `src/isdm/`, committed notebooks stay output-free, and generated artifacts go to `runs/`.
+- **Workspaces are created on first write.** `data/` and `runs/` carry no placeholder files, so a clone legitimately lacks them and the checker reports them as deferred rather than missing. There is no separate results or models directory; result tables and figures live under `runs/`. `notebooks/README.md` governs the notebook tree: cells configure and call `src/isdm/`, committed notebooks stay output-free, and generated artifacts go to `runs/`.
 
 ## When to update this skill
 
