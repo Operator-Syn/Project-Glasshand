@@ -44,6 +44,20 @@ The GitHub Pages workflow in [`.github/workflows/pages.yml`](.github/workflows/p
 validates both decks and publishes them to one site; see
 [`presentation/README.md`](presentation/README.md) for local preview.
 
+## Getting the repository running
+
+```bash
+uv sync                                              # create the environment
+uv run python scripts/setup_git_hooks.py             # enable the committed pre-commit hook
+uv run python scripts/setup_notebook_filters.py      # route notebooks through the output stripper
+uv run python scripts/fetch_literature.py            # download the 63 reference PDFs (git-ignored)
+uv run pytest -q                                     # 21 tests
+```
+
+The reference PDFs are git-ignored because they are large binaries under mixed licences.
+`docs/literature/manifest.tsv` is the tracked record of them, and
+`docs/literature/INDEX.md` gives each one a DOI, a licence and the section it supports.
+
 ## Start Here
 
 - [docs/README.md](docs/README.md) — knowledge-base entry point, navigation, and documentation conventions.
