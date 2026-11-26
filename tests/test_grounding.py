@@ -26,10 +26,30 @@ def test_parse_tesseract_tsv_keeps_words_only() -> None:
 def test_build_candidates_adds_words_lines_and_phrases() -> None:
     words = pd.DataFrame(
         [
-            {"text": "Recycle", "conf": 90.0, "left": 10, "top": 10, "width": 50,
-             "height": 12, "block_num": 1, "par_num": 1, "line_num": 1, "word_num": 1},
-            {"text": "Bin", "conf": 80.0, "left": 65, "top": 10, "width": 30,
-             "height": 12, "block_num": 1, "par_num": 1, "line_num": 1, "word_num": 2},
+            {
+                "text": "Recycle",
+                "conf": 90.0,
+                "left": 10,
+                "top": 10,
+                "width": 50,
+                "height": 12,
+                "block_num": 1,
+                "par_num": 1,
+                "line_num": 1,
+                "word_num": 1,
+            },
+            {
+                "text": "Bin",
+                "conf": 80.0,
+                "left": 65,
+                "top": 10,
+                "width": 30,
+                "height": 12,
+                "block_num": 1,
+                "par_num": 1,
+                "line_num": 1,
+                "word_num": 2,
+            },
         ]
     )
     candidates = ocr.build_candidates(words)
