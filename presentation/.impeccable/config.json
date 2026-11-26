@@ -66,6 +66,42 @@
         ],
         "createdAt": "2026-11-12T15:05:47.094Z",
         "reason": "The only marquee findings are the 1px pipeline signal beam and the shared-bus data pulse. They are decorative, pointer-events:none, and carry no content; the traveling signal is part of the chosen CRT presentation motion."
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(17, 17, 17)",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-26T00:10:37.000Z",
+        "reason": "Print ink for the white print stylesheet; never a screen colour."
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(187, 187, 187)",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-26T00:10:37.000Z",
+        "reason": "Print rule colour for the white print stylesheet; never a screen colour."
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(153, 153, 153)",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-26T00:10:37.000Z",
+        "reason": "Print border colour for the white print stylesheet; never a screen colour."
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-26T00:10:37.000Z",
+        "reason": "The CRT scanline field is the recorded visual world; a fixed atmospheric layer, not decorative page chrome."
       }
     ]
   }
