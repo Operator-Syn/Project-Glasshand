@@ -133,13 +133,14 @@ Reuse the EDA notebook:
   accuracy 77.5%; AUC 0.829; raw accuracy 76.5% is below the 81.0% base rate.
 - The text-only model is the strongest deployable classifier. The all-target model is best
   read as a benchmark-level ranking model (AUC 0.878), not a calibrated deployment model.
-- **Required before submission — the score comparison.** `score` is the matcher's own confidence,
-  so the highest-importance feature is the baseline grading itself. The paper must report each
-  model against a score-only threshold fitted on the same application-grouped folds, and state
-  which one is presented as the predictor. A tree that only reproduces `score < t` is an expensive
-  threshold. If the comparison is close, the interpretable rules carry the Data Mining
-  contribution, not the accuracy. No calibration measurement exists (no reliability curve, no
-  Brier score), so the models must not be described as calibrated.
+- **If the paper claims added signal, run the score comparison.** `score` is the matcher's own
+  confidence, so the highest-importance feature is the baseline grading itself. A method-class
+  justification — an interpretable model audited by rule, cited to the interpretability and
+  tree-induction literature — needs no experiment. A claim that the tree finds conditions beyond
+  the matcher's confidence does. In that case report each model against a score-only threshold on
+  the same application-grouped folds. If the comparison is close, the interpretable rules carry the
+  Data Mining contribution, not the accuracy. No calibration measurement exists (no reliability
+  curve, no Brier score), so the models must not be described as calibrated.
 
 ## 6. Discussion
 
