@@ -1,6 +1,10 @@
 # Proposed Component Model
 
-**Status:** Proposed — a provisional decomposition for discussion. It is not an approved architecture, and no component exists in code. Architecture decisions are scheduled in [phase 03](../timeline/phases/03_architecture_planning.md).
+**Status:** Proposed — a provisional decomposition for discussion, not an approved architecture. Two
+responsibilities exist in a limited static form: text extraction and grounding over fixed screenshots
+(`src/isdm/grounding/`), recorded through the evaluation harness. Capture, decision, execution and
+verification do not exist in any form. Architecture decisions are scheduled in
+[phase 03](../timeline/phases/03_architecture_planning.md); the decision component is out of scope.
 
 ## Purpose
 
@@ -55,6 +59,5 @@ These are architecture decisions for phase 03 and are not implied by this decomp
 
 ## Related
 
-- [Model interface](model_interface.md)
 - [Phase 03 — Architecture planning](../timeline/phases/03_architecture_planning.md)
 - [Reproducibility](../experiments/reproducibility.md)
