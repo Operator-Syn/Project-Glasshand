@@ -156,9 +156,7 @@ def check_local_references(parser: DeckParser) -> None:
         try:
             target.relative_to(PRESENTATION)
         except ValueError as err:
-            raise SystemExit(
-                f"Local reference escapes the presentation directory: {ref}"
-            ) from err
+            raise SystemExit(f"Local reference escapes the presentation directory: {ref}") from err
         if not target.is_file():
             raise SystemExit(f"Broken local reference: {ref}")
 
