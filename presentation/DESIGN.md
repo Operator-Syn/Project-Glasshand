@@ -251,3 +251,39 @@ Everything is square. Borders are 1px; panels have no radius. The only clipped f
 - **Don't** add pointer-following reticles or custom cursor effects. This deck is presented, not browsed.
 - **Don't** fill white space with icon cards or decorative illustrations. If the content has no relationship to draw, leave the breathing room.
 - **Don't** imply measured results, completed implementation, or benchmark performance. The deck is a proposal.
+
+## Second surface: the EDA report deck
+
+`eda/index.html` is the same world at a different job: a **Read** surface that reports measured findings instead of proposing work. `eda/deck.css` inherits every rule above and adds only the compositions below. It declares no colour, face, or shape of its own; `tokens.css` at the parent directory supplies the palette to both decks.
+
+**Status language.** Phosphor marks a measured or verified value. Dim phosphor (`--phosphor-dim`) marks bulk data in a chart. Amber marks a limit: a confounded factor, a claim the corpus cannot support, or a count that invalidates a comparison. The limit is written into the sentence that would otherwise imply the finding. There is no banner, badge or callout block: the reader meets the constraint as a fact, not as a warning label.
+
+### Reading order
+- **Shape:** one column, top to bottom — heading, a one-line note, the number strip, the figure, the caption. Numbers come before the picture, because the numbers are the claim and the chart is the evidence for it.
+- **No side column.** The earlier chart-and-sidebar split was retired: it made every finding read as a magazine spread, and it left the figure too small for its own labels.
+- **Number strip:** four `dt/dd` cells on a 1px rule, mono values at 1.35rem. Use it for the numbers the chart argues, never as a second copy of the prose.
+- **Figure:** full column width, aspect set by the figure itself so nothing is squashed. The 1px scan that travels across it is the slide's component loop.
+- **Caption:** sentence case, 11px, muted. It names the sample and the transform, not the conclusion.
+
+### Stage
+- **Desktop is a fixed stage.** At 901px and wider the deck shows one slide per viewport, the page never scrolls, and no scrollbar appears. A presentation that scrolls mid-slide is a presentation that lost its place.
+- **The chart takes the height the window leaves.** Its cap is `clamp(200px, 100svh - 330px, 330px)` below 680px tall, and 300px between 680 and 800, so a laptop window fits without pushing the caption under the control bar.
+- **Below 900px the stage is released.** The page scrolls normally there, because a phone cannot show a full slide and hiding content would be worse than a scrollbar.
+
+### Count rows
+- **Shape:** `count · title · statement` on a 1px rule. No state tag: the sentence already says what the row is. The count carries phosphor for a repair of that size, amber when the count is the reason to distrust something.
+- **Use:** corpus facts, the three cleaning repairs, and the four closing rules. Not for generic lists.
+
+### Corpus check panel
+- **Shape:** the Terminal Panel above, on the cover.
+- **Content:** five counted lines over a fill bar, then the merge footer.
+- **Replay:** `[ RUN ]` replays the line sequence; returning to the cover restarts it. The lines are the deck's own numbers, so a replay can never show a value the data does not hold.
+
+### Print
+Every ink is set explicitly inside `@media print`, including the phosphor and amber roles, so the white sheet never inherits a dark-ground colour. The figure SVGs invert to grayscale.
+
+### Do's and Don'ts for this surface
+- **Do** keep one finding per slide, with its chart and its four numbers.
+- **Do** put the blocked claim on the slide that would otherwise imply it.
+- **Don't** introduce a second accent, a card grid, or an eyebrow above a heading.
+- **Don't** restyle the pitch deck to match; both inherit the same system and neither leads it.
