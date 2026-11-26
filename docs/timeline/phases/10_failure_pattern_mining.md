@@ -1,6 +1,6 @@
 # Phase 10 — Failure Condition Analysis
 
-**Status:** Proposed · **Depends on:** Phases 02, 09 · **Related:** [Integrated study outline](../../research/combined_paper_outline.md) · [Evaluation questions](../../experiments/evaluation_questions.md)
+**Status:** Active — CART failure analysis run with application-grouped folds; stability checks not complete · **Depends on:** Phases 02, 09 · **Related:** [Integrated study outline](../../research/combined_paper_outline.md) · [Evaluation questions](../../experiments/evaluation_questions.md)
 
 ## Overview
 
