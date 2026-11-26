@@ -1,6 +1,6 @@
 # Phase 03 — Architecture and Interface Planning
 
-**Status:** Proposed · **Depends on:** Phases 00–02 · **Related:** [Components](../../architecture/components.md) · [Model interface](../../architecture/model_interface.md) · [Decisions](../../decisions/)
+**Status:** Proposed · **Depends on:** Phases 00–02 · **Related:** [Components](../../architecture/components.md) · [Decisions](../../decisions/)
 
 ## Overview
 
@@ -60,7 +60,7 @@ Turn the provisional component model into reviewed contracts. No production code
 
 - **Risk:** over-abstracting before evidence.
 - **Risk:** the contract settles on a lowest common denominator and blocks capable models.
-- **Assumption:** Jev's interface will be documented before phase 07.
+- **Assumption:** the external model's interface will be documented before phase 07.
 
 ## Revision Notes
 
