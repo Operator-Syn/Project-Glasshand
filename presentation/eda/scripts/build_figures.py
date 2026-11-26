@@ -145,15 +145,18 @@ def area_histogram(frame: pd.DataFrame) -> None:
     and the shaded IQR band sit on the same axis as those counts.
     """
     values = frame["target_area_pct"].dropna()
-    bins = np.logspace(
-        math.log10(values.min()) - 0.05, math.log10(values.max()) + 0.05, 58
-    )
+    bins = np.logspace(math.log10(values.min()) - 0.05, math.log10(values.max()) + 0.05, 58)
 
     fig, ax = plt.subplots(figsize=(9.4, 2.5))
     counts, edges = np.histogram(values, bins=bins)
     ax.bar(
-        edges[:-1], counts, width=np.diff(edges), align="edge",
-        color=TEAL, alpha=0.9, linewidth=0,
+        edges[:-1],
+        counts,
+        width=np.diff(edges),
+        align="edge",
+        color=TEAL,
+        alpha=0.9,
+        linewidth=0,
     )
 
     q1, med, q3 = values.quantile([0.25, 0.5, 0.75])
@@ -261,7 +264,9 @@ def application_dots(frame: pd.DataFrame) -> None:
     )
 
     fig, (left, right) = plt.subplots(
-        1, 2, figsize=(9.4, 3.0),
+        1,
+        2,
+        figsize=(9.4, 3.0),
         gridspec_kw={"width_ratios": [1.55, 1], "wspace": 0.06},
     )
     y = np.arange(len(stats))
@@ -272,17 +277,29 @@ def application_dots(frame: pd.DataFrame) -> None:
     low = stats["median"].idxmin()
     for name in (peak, low):
         left.scatter(
-            [stats.loc[name, "median"]], [stats.index.get_loc(name)],
-            s=58, color=INK, zorder=4,
+            [stats.loc[name, "median"]],
+            [stats.index.get_loc(name)],
+            s=58,
+            color=INK,
+            zorder=4,
         )
     for i, (name, row) in enumerate(stats.iterrows()):
         left.text(
-            0.0048, i, name.replace("_", " "),
-            ha="right", va="center", fontsize=9.5, color=INK,
+            0.0048,
+            i,
+            name.replace("_", " "),
+            ha="right",
+            va="center",
+            fontsize=9.5,
+            color=INK,
         )
         left.text(
-            row["median"] * 1.16, i, f"{row['median']:.4f}%",
-            va="center", fontsize=9, color=INK_SOFT,
+            row["median"] * 1.16,
+            i,
+            f"{row['median']:.4f}%",
+            va="center",
+            fontsize=9,
+            color=INK_SOFT,
         )
 
     left.set_xscale("log")
@@ -299,8 +316,12 @@ def application_dots(frame: pd.DataFrame) -> None:
     right.barh(y, stats["icon"], height=0.52, color=TEAL, alpha=0.75, linewidth=0)
     for i, (_app, row) in enumerate(stats.iterrows()):
         right.text(
-            row["icon"] + 2.5, i, f"{row['icon']:.0f}%",
-            va="center", fontsize=8.5, color=INK_SOFT,
+            row["icon"] + 2.5,
+            i,
+            f"{row['icon']:.0f}%",
+            va="center",
+            fontsize=8.5,
+            color=INK_SOFT,
         )
     right.set_xlim(0, 104)
     right.set_ylim(-0.7, len(stats) - 0.3)
@@ -327,9 +348,7 @@ def resolution_bars(frame: pd.DataFrame) -> None:
     colours = [ACCENT if label == "1920×1080" else TEAL for label in counts.index]
     alphas = [1.0 if label == "1920×1080" else 0.78 for label in counts.index]
 
-    for yi, (_label, value), colour, alpha in zip(
-        y, counts.items(), colours, alphas, strict=True
-    ):
+    for yi, (_label, value), colour, alpha in zip(y, counts.items(), colours, alphas, strict=True):
         ax.barh(yi, value, height=0.56, color=colour, alpha=alpha, linewidth=0)
         ax.text(value + 8, yi, f"{value}", va="center", fontsize=10.5, color=colour)
 
