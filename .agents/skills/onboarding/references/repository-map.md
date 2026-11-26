@@ -12,18 +12,18 @@ This is a navigation aid, not a specification or a status snapshot. Each route n
 | Change scope or a subject boundary | `docs/overview/project.md` | `docs/timeline/phases/00_project_definition.md`, `docs/research/intelligent_systems.md`, `docs/research/data_mining.md`; record the decision through `docs/decisions/README.md`. |
 | Roadmap, phase order, or dependencies | `docs/timeline/README.md` | `docs/timeline/phases/`; keep numbering stable and append a revision note. |
 | Add or revise a phase plan | `docs/timeline/README.md` | `docs/timeline/phases/00_project_definition.md` for the ten-section template; then run `.agents/skills/onboarding/scripts/check_repository_map.py`. |
-| Architecture boundaries or component flow | `docs/architecture/components.md` | `docs/architecture/model_interface.md`, `docs/timeline/phases/03_architecture_planning.md`. |
-| Model adapter, Jev baseline, or model swapping | `docs/architecture/model_interface.md` | `docs/decisions/0002_model_agnostic_decision_boundary.md`, `docs/timeline/phases/07_model_integration.md`. |
+| Architecture boundaries or component flow | `docs/architecture/components.md` | `docs/timeline/phases/03_architecture_planning.md`. |
+| Model adapter or model swapping | `docs/overview/completion_criteria.md` | Out of scope; `docs/timeline/phases/07_model_integration.md` is a proposal and ADR 0002 is deprecated. |
 | Accessibility tree or browser DOM boundary | `docs/decisions/0006_accessibility_boundary.md` | `docs/research/intelligent_systems.md`, `docs/timeline/phases/06_text_and_grounding.md`, `docs/timeline/phases/08_interaction_and_verification.md`. |
 | Windows screen capture | `docs/timeline/phases/04_windows_capture.md` | `docs/architecture/components.md`, `docs/timeline/phases/03_architecture_planning.md`; source belongs under `src/isdm/`. |
 | GUI element detection or classification | `docs/timeline/phases/05_perception_pipeline.md` | `docs/research/intelligent_systems.md`, `docs/timeline/phases/04_windows_capture.md`; source belongs under `src/isdm/`. |
 | OCR or visual grounding | `docs/timeline/phases/06_text_and_grounding.md` | `docs/research/intelligent_systems.md`, `docs/experiments/evaluation_questions.md`, `docs/timeline/phases/05_perception_pipeline.md`. |
 | Action execution or visual verification | `docs/timeline/phases/08_interaction_and_verification.md` | `docs/architecture/components.md`, `docs/decisions/0006_accessibility_boundary.md`, `docs/experiments/reproducibility.md`. |
-| Experiments, metrics, or evaluation | `docs/timeline/phases/09_experimental_evaluation.md` | `docs/experiments/reproducibility.md`, `docs/experiments/evaluation_questions.md`; outputs belong under `results/`. |
-| Data Mining analysis or failure patterns | `docs/timeline/phases/10_failure_pattern_mining.md` | `docs/research/data_mining.md`, `docs/decisions/0005_analysis_unit.md`; inputs belong under `data/`, generated artifacts under `runs/`, outputs under `results/`. |
+| Experiments, metrics, or evaluation | `docs/timeline/phases/09_experimental_evaluation.md` | `docs/experiments/reproducibility.md`, `docs/experiments/evaluation_questions.md`; run outputs and records belong under `runs/` (git-ignored). |
+| Data Mining analysis or failure patterns | `docs/timeline/phases/10_failure_pattern_mining.md` | `docs/research/data_mining.md`, `docs/decisions/0005_analysis_unit.md`; inputs belong under `data/`, generated artifacts and records under `runs/`. |
 | Dataset sourcing or annotation | `docs/timeline/phases/02_research_design.md` | `docs/research/intelligent_systems.md`, `docs/research/data_mining.md`; datasets belong under `data/`. What the current candidate corpus actually contains, measured: `notebooks/EDA_Beira_John-Ronan.ipynb`. |
 | Record format, storage, or retention | `docs/experiments/reproducibility.md` | `docs/decisions/0008_duckdb_parquet.md`, `docs/timeline/phases/02_research_design.md`. |
-| Paper structure or writing | `docs/timeline/phases/11_paper_and_presentation.md` | `docs/decisions/0004_one_combined_paper.md`, `docs/research/intelligent_systems.md`, `docs/research/data_mining.md`. |
+| Paper structure or writing | `docs/research/combined_paper_outline.md` | `docs/decisions/0004_one_combined_paper.md`, `docs/decisions/0010_integrated_study_narrative.md`, `docs/research/intelligent_systems.md`, `docs/research/data_mining.md`. |
 | External sources or citation rules | `docs/references/README.md` | `docs/timeline/phases/01_research_foundations.md`; do not cite an unread source. |
 | Workspace layout | `README.md` | The workspace table below; verify contents before assuming an implementation. |
 | Notebook environment, execution, or export | `notebooks/README.md` | `pyproject.toml`, `scripts/README.md`; committed notebooks stay output-free and generated artifacts land in `runs/`. |
@@ -40,6 +40,8 @@ Status lives in `docs/decisions/README.md`; read it rather than copying a status
 - `docs/decisions/0006_accessibility_boundary.md` — accessibility and browser DOM boundary.
 - `docs/decisions/0007_record_format.md` — record format; superseded, retained as history.
 - `docs/decisions/0008_duckdb_parquet.md` — DuckDB and Parquet analysis layer.
+- `docs/decisions/0009_december_baseline_scope.md` — December static-baseline scope: one adapter, CART mandatory, no framework claim.
+- `docs/decisions/0010_integrated_study_narrative.md` — one integrated study and narrative; course mapping stays in internal notes.
 
 ## Phase index
 
@@ -54,7 +56,7 @@ Phase status lives in `docs/timeline/README.md` and in each phase document. This
 | 04 | `docs/timeline/phases/04_windows_capture.md` | Windows desktop capture |
 | 05 | `docs/timeline/phases/05_perception_pipeline.md` | GUI element detection and classification |
 | 06 | `docs/timeline/phases/06_text_and_grounding.md` | OCR and visual grounding |
-| 07 | `docs/timeline/phases/07_model_integration.md` | Model-agnostic decision integration |
+| 07 | `docs/timeline/phases/07_model_integration.md` | External decision-model integration (proposed) |
 | 08 | `docs/timeline/phases/08_interaction_and_verification.md` | Interaction execution and visual verification |
 | 09 | `docs/timeline/phases/09_experimental_evaluation.md` | Controlled experiments and CV evaluation |
 | 10 | `docs/timeline/phases/10_failure_pattern_mining.md` | Data Mining and failure pattern analysis |
@@ -68,19 +70,17 @@ Phase status lives in `docs/timeline/README.md` and in each phase document. This
 | `notebooks/` | uv-backed Jupyter workspace; cells configure and call `src/isdm/`. |
 | `tests/` | Automated tests. |
 | `data/` | Datasets and annotations. Created on first write; downloaded data is git-ignored and reproducible with `uv run python -m isdm.data.fetch`. |
-| `runs/` | Generated artifacts (executed notebooks, figures). Created on first write and git-ignored. |
-| `results/` | Metrics, aggregates, and figures. Created on first write. |
-| `models/` | Model artifacts and checkpoints. Created on first write. |
+| `runs/` | Every generated artifact: executed notebooks, JSONL records, result tables, figures. Created on first write and git-ignored. |
 | `docs/` | Knowledge base and planning documents. |
 
 ## Boundaries and pitfalls
 
 - **Planning documents are intent, not evidence.** A phase document does not prove an implementation. Check `src/isdm/`, `tests/`, and `git ls-files`.
 - **No AGENTS.md or CLAUDE.md exists.** If either appears it outranks this map. The per-tree READMEs — `notebooks/README.md` and `scripts/README.md` — govern their own areas and are part of this map's routes rather than a separate layer.
-- **Workspaces appear on first write.** `data/`, `runs/`, `results/` and `models/` carry no placeholder files, so a fresh clone legitimately lacks them. An absent `results/` means nothing has been produced, not that the checkout is broken; the checker reports these as deferred rather than missing.
+- **Workspaces appear on first write.** `data/` and `runs/` carry no placeholder files, so a fresh clone legitimately lacks them. An absent `runs/` means nothing has been produced, not that the checkout is broken; the checker reports these as deferred rather than missing. There is no separate results or models directory: result tables and figures live under `runs/`.
 - **Decisions are binding.** A superseded ADR is history. Read status in `docs/decisions/README.md`.
 - **File-first data layer.** JSONL is the source of truth, DuckDB queries it, Parquet holds derived tables, Arrow is only an in-memory handoff. Do not introduce Postgres for the research loop.
 - **Browser is a target, not a DOM input.** The vision pipeline never receives DOM data; the DOM is a baseline and an offline label source.
-- **Jev is a baseline adapter.** Keep the model boundary model-agnostic.
-- **One combined paper.** The CV and DM contributions remain distinguishable inside it.
+- **No decision-model integration, and no model-agnostic claim.** ADR 0009 scopes the work to one baseline adapter and an evaluation harness; ADR 0002 is deprecated.
+- **One integrated study.** ADR 0010: one research question and one narrative, not two course-labelled contributions.
 - **Roadmap phase 00 is project definition**, not the repository-initialization task.
