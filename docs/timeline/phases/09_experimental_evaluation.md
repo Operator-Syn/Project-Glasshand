@@ -1,6 +1,6 @@
 # Phase 09 — Grounding Outcome Evaluation
 
-**Status:** Proposed · **Depends on:** Phases 02, 05, 06, 07, 08 · **Related:** [Reproducibility](../../experiments/reproducibility.md) · [Evaluation questions](../../experiments/evaluation_questions.md) · [Integrated study outline](../../research/combined_paper_outline.md)
+**Status:** Active — grounding outcomes measured on all 1,020 requests; robustness and ablation breakdowns not run · **Depends on:** Phases 02, 05, 06, 07, 08 · **Related:** [Reproducibility](../../experiments/reproducibility.md) · [Evaluation questions](../../experiments/evaluation_questions.md) · [Integrated study outline](../../research/combined_paper_outline.md)
 
 ## Overview
 
@@ -31,7 +31,7 @@ Evaluate grounding on the benchmark and produce request-level outcomes for the i
 
 ## Potential Deliverables
 
-- Result tables and figures in `results/`.
+- Result tables and figures under `runs/grounding/`.
 - Evaluation report.
 - Ablation and robustness breakdowns.
 - Reproducibility check report.
