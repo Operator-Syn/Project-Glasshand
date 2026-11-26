@@ -1,6 +1,6 @@
 # Phase 11 — Paper Preparation, Refinement, and Presentation
 
-**Status:** Proposed · **Depends on:** Phases 09, 10 · **Related:** [Integrated paper outline](../../research/combined_paper_outline.md) · [References](../../references/README.md)
+**Status:** Active — both decks built; paper prose, related work and tables outstanding · **Depends on:** Phases 09, 10 · **Related:** [Integrated paper outline](../../research/combined_paper_outline.md) · [References](../../references/README.md)
 
 ## Overview
 
