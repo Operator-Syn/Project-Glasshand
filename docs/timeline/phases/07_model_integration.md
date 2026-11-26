@@ -1,14 +1,14 @@
 # Phase 07 — Model-Agnostic Decision Integration
 
-**Status:** Proposed · **Depends on:** Phases 03, 04, 05 · **Related:** [Model interface](../../architecture/model_interface.md) · [ADR 0002](../../decisions/0002_model_agnostic_decision_boundary.md)
+**Status:** Proposed · **Depends on:** Phases 03, 04, 05 · **Related:** [Components](../../architecture/components.md) · [Completion criteria](../../overview/completion_criteria.md) · [ADR 0002](../../decisions/0002_model_agnostic_decision_boundary.md)
 
 ## Overview
 
-Connect the pipeline to an external decision model without letting one model define the architecture. Jev is the baseline adapter, not a commitment; a scripted adapter is the second implementation, so that the contract is tested against more than one model.
+Connect the pipeline to an external decision model without letting one model define the architecture. A scripted adapter is the first implementation, so the contract is tested without depending on any one vendor's interface.
 
 ## Objectives
 
-- Document Jev's actual interface and capabilities.
+- Document the external model's actual interface and capabilities.
 - Keep the contract independent of the baseline model's limitations.
 - Finalize the observation package and action schema.
 - Implement the adapter boundary with typed failures.
@@ -17,7 +17,7 @@ Connect the pipeline to an external decision model without letting one model def
 
 ## Proposed Activities
 
-- Collect Jev's documentation, limits, input modes, and output format.
+- Collect the model's documentation, limits, input modes, and output format.
 - Define a scripted baseline adapter that performs fixed actions for conformance testing.
 - Specify prompt or observation serialization and where it is stored.
 - Handle timeouts, refusals, malformed output, and unavailable models explicitly.
@@ -33,7 +33,7 @@ Connect the pipeline to an external decision model without letting one model def
 ## Potential Deliverables
 
 - Documented adapter contract.
-- Jev adapter and scripted baseline adapter.
+- Model adapter and scripted baseline adapter.
 - Conformance checklist.
 - Model comparison protocol.
 
@@ -45,7 +45,7 @@ Connect the pipeline to an external decision model without letting one model def
 
 ## Open Questions
 
-- What can Jev actually accept and return?
+- What can the external model actually accept and return?
 - Is the action schema shared or adapter-specific?
 - How is free-form output validated?
 - Are hosted models permitted, given the local-runnable assumption?
@@ -59,7 +59,7 @@ Connect the pipeline to an external decision model without letting one model def
 
 ## Risks and Assumptions
 
-- **Risk:** Jev is undocumented or unavailable, blocking the phase.
+- **Risk:** the model is undocumented or unavailable, blocking the phase.
 - **Risk:** the contract becomes a lowest common denominator.
 - **Assumption:** at least two adapters can be built, even if one is trivial.
 
