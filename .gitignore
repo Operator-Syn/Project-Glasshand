@@ -36,3 +36,8 @@ Thumbs.db
 # Downloaded benchmark data (841 MB): reproducible with `uv run python -m isdm.data.fetch`.
 # No placeholder keeps this directory in the repository; it is created on first write.
 data/screenspot_pro_windows/
+
+# Reference PDFs: large binaries under mixed licences. The tracked manifest
+# (docs/literature/manifest.tsv) plus `uv run python scripts/fetch_literature.py` rebuilds them,
+# and docs/literature/INDEX.md records every citation. The bytes stay out of history.
+docs/literature/*/*.pdf
