@@ -266,9 +266,7 @@ def plot_resolution_relationship(frame: pd.DataFrame, medians: pd.DataFrame) -> 
     axes[0].set_xlabel("Screen resolution (megapixels)")
     axes[0].set_ylabel("Target area (% of screen area, log scale)")
 
-    sns.barplot(
-        data=medians, x="screen_label", y="target_area_pct", ax=axes[1], color="steelblue"
-    )
+    sns.barplot(data=medians, x="screen_label", y="target_area_pct", ax=axes[1], color="steelblue")
     axes[1].set_title("Median target area by native resolution")
     axes[1].set_xlabel("Native screen resolution (pixels)")
     axes[1].set_ylabel("Median target area (% of screen area)")
@@ -295,9 +293,7 @@ def plot_type_share(frame: pd.DataFrame) -> plt.Figure:
     shares = shares.sort_values("icon")
 
     figure, axis = plt.subplots(figsize=(11, 5.4))
-    shares.plot(
-        kind="barh", stacked=True, ax=axis, color=["indianred", "steelblue"], width=0.8
-    )
+    shares.plot(kind="barh", stacked=True, ax=axis, color=["indianred", "steelblue"], width=0.8)
     axis.set_title("Share of icon vs text targets within each application (row percentages)")
     axis.set_xlabel("Share of requests within the application (%)")
     axis.set_ylabel("Application")
@@ -323,9 +319,7 @@ def plot_instruction_length(frame: pd.DataFrame) -> plt.Figure:
     """
     figure, axes = plt.subplots(1, 2, figsize=(12, 4.2))
 
-    sns.histplot(
-        frame["instruction_words"], bins=range(1, 18), ax=axes[0], color="steelblue"
-    )
+    sns.histplot(frame["instruction_words"], bins=range(1, 18), ax=axes[0], color="steelblue")
     axes[0].set_title("Instruction length in words")
     axes[0].set_xlabel("Words per instruction")
     axes[0].set_ylabel("Grounding requests (count)")
@@ -355,9 +349,7 @@ def plot_top_terms(terms: pd.DataFrame) -> plt.Figure:
         A horizontal bar figure ordered from least to most frequent.
     """
     figure, axis = plt.subplots(figsize=(8, 5))
-    sns.barplot(
-        data=terms.sort_values("count"), x="count", y="term", color="steelblue", ax=axis
-    )
+    sns.barplot(data=terms.sort_values("count"), x="count", y="term", color="steelblue", ax=axis)
     axis.set_title("Most frequent instruction terms after stop-word removal")
     axis.set_xlabel("Occurrences (count)")
     axis.set_ylabel("Term")
@@ -387,9 +379,7 @@ def plot_target_crops(
     """
     from PIL import Image
 
-    figure, axes = plt.subplots(
-        len(applications), n, figsize=(7 * n, 3.6 * len(applications))
-    )
+    figure, axes = plt.subplots(len(applications), n, figsize=(7 * n, 3.6 * len(applications)))
     axes = np.atleast_2d(axes)
 
     for row, application in enumerate(applications):
