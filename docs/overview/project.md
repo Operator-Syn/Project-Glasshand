@@ -12,7 +12,7 @@ The title is descriptive, not final. A permanent project name has not been chose
 
 Desktop applications present their interfaces as pixels. A decision model that can only read structured APIs or text cannot operate them; a model that reasons over screenshots must first solve detection, text extraction, and localization. Those perception problems are difficult to separate from the decision problem when the whole loop is evaluated end to end.
 
-This project studies GUI grounding as one connected problem: how accurately an OCR-based method locates an instructed target, and which request conditions are associated with its successes and failures. A reusable, model-agnostic perception and execution framework remains the longer-term goal; the current evidence comes from a static screenshot baseline.
+This project studies GUI grounding as one connected problem: how accurately an OCR-based method locates an instructed target, and which request conditions are associated with its successes and failures. A broader perception and execution framework remains the longer-term goal, but it is not claimed here; the current evidence comes from a static screenshot baseline.
 
 ## Intended Capabilities
 
@@ -22,7 +22,7 @@ This project studies GUI grounding as one connected problem: how accurately an O
 | Optical character recognition | Extract visible text with positions. | Supplies text for grounding and state checks. |
 | Visual grounding | Map a natural-language target to a screen coordinate or element. | Central outcome measured and analyzed in the study. |
 | Visual state verification | Compare the screen before and after an action to confirm an expected change. | Turns open-loop actions into a closed loop. |
-| Model-agnostic decision integration | Accept action decisions from an interchangeable external model. | Allows model comparison without rewriting the pipeline. |
+| Decision integration | Accept action decisions from an external model. | Enables model comparison if the pipeline is extended; not implemented. |
 | Closed-loop desktop interaction | Execute actions and feed the resulting state back to the decision layer. | Produces the episodes that experiments analyze. |
 | Reproducible experiment recording | Capture every input, decision, action, and outcome needed to reconstruct a run. | Preserves the evidence needed to reproduce and analyze outcomes. |
 
@@ -63,8 +63,7 @@ These are working assumptions from the brief. Most are not approved architectura
 |---|---|---|
 | Target platform | Windows 10/11 | To be confirmed against the evaluation environment. |
 | Primary language | Python | To be confirmed in architecture planning. |
-| Decision model | Jev as baseline only; model-agnostic interface | Jev is a comparison baseline, not a commitment. Interface and capabilities undocumented; see [ADR 0002](../decisions/0002_model_agnostic_decision_boundary.md). |
-| Architecture | Model-agnostic boundary accepted ([ADR 0002](../decisions/0002_model_agnostic_decision_boundary.md)); modular decomposition proposed | The boundary is a requirement; the component split is still a design proposal. |
+| Architecture | Modular package: OCR grounding baseline, evaluation harness, CART failure models; component decomposition proposed | The static baseline is implemented. No model-agnostic boundary is claimed ([ADR 0009](../decisions/0009_december_baseline_scope.md)); the component split is still a design proposal. |
 | Execution model | Locally runnable where practical | Degree of offline operation unresolved. |
 | Project scale | Individual undergraduate development and research | Fixed constraint. |
 | Evaluation corpus | ScreenSpot-Pro, Windows subset — 1,020 requests across 17 applications. The release labels MATLAB as `macos`, but its screenshots show Windows; the cleaning log corrects those 93 rows. The reported analysis uses this benchmark subset, not self-collected captures. | The dataset card declares MIT, while screenshots remain subject to application vendors' rights. |
@@ -75,7 +74,7 @@ The repository directory is `intelligent_system_data_mining_final_project`, a le
 
 ## Non-Claims
 
-- No capture, execution, verification, closed-loop pipeline, or Jev integration exists.
+- No capture, execution, verification, closed-loop pipeline, or decision-model integration exists.
 - The ScreenSpot-Pro Windows subset has been downloaded and characterized: see the
   [EDA notebook](../../notebooks/EDA_Beira_John-Ronan.ipynb).
 - The static OCR grounding baseline and CART failure analysis have been run on all 1,020
