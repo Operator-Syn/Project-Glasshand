@@ -1,6 +1,9 @@
 # Reproducibility Requirements
 
-**Status:** Proposed — requirements for any future experiment, not an implemented protocol. The record format is decided ([ADR 0008](../decisions/0008_duckdb_parquet.md)); the schema and tooling are undefined.
+**Status:** Partially implemented. The static OCR grounding run and the CART failure analysis store
+request-level records as JSONL under `runs/`, and every number in the integrated study traces back to
+them. The capture, execution, and verification record groups below have no records yet, and the
+DuckDB/Parquet query layer is decided but not built ([ADR 0008](../decisions/0008_duckdb_parquet.md)).
 
 ## Principle
 
@@ -27,13 +30,15 @@ Any number reported from an experiment must be reconstructable from stored recor
 | Location | Holds | Does not hold |
 |---|---|---|
 | `data/` | Source images, annotations, dataset versions. | Run outputs. |
-| `runs/` | Generated artifacts: executed notebooks, figures, exports. Git-ignored and reproducible by re-running the notebook. | Source inputs, or anything a decision cites as evidence. |
-| `results/` | Metrics tables, aggregates, figures derived from records. | Source inputs. |
-| `models/` | Weights, checkpoints, model metadata. | Run records. |
+| `runs/` | Every generated artifact: executed notebooks, JSONL request records, result tables, figures, OCR cache. Git-ignored. | Source inputs. |
 
-No directory in this repository is kept alive by a placeholder file. Each one is created when
-something first writes into it, so a fresh clone contains only tracked files — an absent
-`results/` or `models/` means nothing has been produced yet, not that the checkout is broken.
+`runs/` is the evidence store as much as the artifact store. The reported grounding numbers and CART
+metrics are computed from `runs/grounding/records_all.jsonl`, so the directory is cited by results
+rather than treated as disposable scratch — and because it is git-ignored, a fresh clone carries no
+evidence and must regenerate it by re-running the runner.
+
+No directory is kept alive by a placeholder file; each is created when something first writes into
+it. `results/` and `models/` are not used: derived tables and figures live under `runs/`.
 
 ## Record Format and Retention
 
