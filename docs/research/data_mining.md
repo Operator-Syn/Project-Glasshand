@@ -58,6 +58,11 @@ Method selection depends on the unit of analysis, sample size, and label quality
 - Label quality assessment and inter-annotation agreement.
 - Class-imbalance strategy.
 - Stability and validation protocol.
+- A score-only threshold baseline for every CART model, fitted on the same application-grouped
+  folds and reported as a direct comparison. `score` is the matcher's own confidence, so without
+  this the model's top feature is the baseline grading itself.
+- Calibration evidence (reliability curve, Brier score). The models are currently described as
+  uncalibrated, which is a disclaimer rather than a measurement.
 
 ## Related
 
