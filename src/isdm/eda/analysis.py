@@ -59,7 +59,7 @@ def rank_comparison(left: pd.Series, right: pd.Series, left_label: str, right_la
 
     A rank test rather than a t-test because target area spans three orders of magnitude
     and is strongly skewed; the median ratio is reported beside the p value because a
-    significant difference on 927 rows can be trivially small in practice, and the ratio
+    significant difference on 1,020 requests can be trivially small in practice, and the ratio
     is what says whether the gap matters.
     """
     statistic, p_value = stats.mannwhitneyu(left, right, alternative="two-sided")
